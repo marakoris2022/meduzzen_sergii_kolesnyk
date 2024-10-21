@@ -18,7 +18,7 @@ npm run dev
 
 ```
 
-_Or, for production:_
+_Or, for production.:_
 
 ```bash
 
