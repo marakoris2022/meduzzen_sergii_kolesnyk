@@ -3,9 +3,23 @@
 import { createTheme, responsiveFontSizes } from "@mui/material";
 import { blue, green, orange, purple, red } from "@mui/material/colors";
 
+declare module "@mui/material/styles" {
+  interface Palette {
+    menuGray: Palette["primary"];
+  }
+
+  interface PaletteOptions {
+    menuGray?: PaletteOptions["primary"];
+  }
+}
+
 const theme = createTheme({
   palette: {
     mode: "dark",
+    menuGray: {
+      main: "#15141a",
+      light: "#221f26",
+    },
     primary: {
       main: blue[500],
     },
@@ -20,6 +34,13 @@ const theme = createTheme({
     },
     warning: {
       main: orange[500],
+    },
+  },
+  components: {
+    MuiLink: {
+      defaultProps: {
+        underline: "none",
+      },
     },
   },
 });

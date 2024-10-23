@@ -1,9 +1,10 @@
-import { Container, Typography, Box } from "@mui/material";
-import OpenModalTest from "./components/OpenModalTest";
+import OpenModalTest from "@/app/components/OpenModalTest";
+import { Box, Container, Typography } from "@mui/material";
+import React from "react";
 
-export default function Home() {
+const ProfilePage = () => {
   return (
-    <Container component="main">
+    <Container>
       <Box
         sx={{
           display: "flex",
@@ -15,16 +16,18 @@ export default function Home() {
         }}
       >
         <Typography color="primary" variant="h1">
-          Welcome!
+          Profile
         </Typography>
         <Typography color="secondary" variant="h3">
-          Meduzzen Intern project
+          Some data what we will add in future
         </Typography>
         <OpenModalTest
-          title={"Main"}
-          description={"modal is opened from main"}
+          title={"Profile"}
+          description={"and this from Profile"}
         />
       </Box>
     </Container>
   );
-}
+};
+
+export default ProfilePage;
