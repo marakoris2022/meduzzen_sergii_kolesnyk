@@ -2,9 +2,14 @@ import { Box, Link, Typography } from "@mui/material";
 import React from "react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
-const GithubLink = () => {
+type GithubLinkProps = {
+  url: string;
+  title: string;
+};
+
+const GithubLink = ({ url, title }: GithubLinkProps) => {
   return (
-    <Link href={"https://github.com/marakoris2022"} target="_blank">
+    <Link href={url} target="_blank">
       <Box
         sx={{
           display: "flex",
@@ -16,7 +21,7 @@ const GithubLink = () => {
       >
         <GitHubIcon fontSize="small" color="success" />
         <Typography color="primary" component="span">
-          SergiiK
+          {title}
         </Typography>
       </Box>
     </Link>

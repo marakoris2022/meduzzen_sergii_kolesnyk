@@ -29,7 +29,7 @@ const Footer = () => {
           <Typography sx={{ display: { xs: "block", md: "none", lg: "none" } }}>
             Meduzzen
           </Typography>
-          <GithubLink />
+          <GithubLink url="https://github.com/marakoris2022" title="SergiiK" />
           <Typography>2024 Oct</Typography>
         </Box>
       </Container>
