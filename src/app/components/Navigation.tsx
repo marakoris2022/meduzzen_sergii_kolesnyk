@@ -5,16 +5,11 @@ import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { usePathname } from "next/navigation";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-
-import React from "react";
-import { navigationRoutes } from "../constants/navigationRoutes";
-
-const MenuItemsArr = navigationRoutes.sort(
-  (curNavItem, nextNavItem) => curNavItem.id - nextNavItem.id
-);
+import { useTranslations } from "next-intl";
 
 function MenuLinkItem({ path, title }: { path: string; title: string }) {
   const pathname = usePathname();
+
   return (
     <ListItem>
       <Link
@@ -33,6 +28,20 @@ function MenuLinkItem({ path, title }: { path: string; title: string }) {
 }
 
 const Navigation = () => {
+  const t = useTranslations("NavigationRoutes");
+
+  const navigationRoutes = [
+    { id: 0, name: t("main"), url: "/" },
+    { id: 1, name: t("profile"), url: "/profile" },
+    { id: 2, name: t("users"), url: "/users" },
+    { id: 3, name: t("companies"), url: "/companies" },
+    { id: 4, name: t("about"), url: "/about" },
+  ];
+
+  const MenuItemsArr = navigationRoutes.sort(
+    (curNavItem, nextNavItem) => curNavItem.id - nextNavItem.id
+  );
+
   return (
     <>
       <Box

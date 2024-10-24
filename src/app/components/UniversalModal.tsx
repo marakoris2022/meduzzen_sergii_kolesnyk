@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Modal, Box, Typography, Button } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 type UniversalModalProps = {
   open: boolean;
@@ -30,6 +31,8 @@ const UniversalModal = ({
   children,
   footerActions,
 }: UniversalModalProps) => {
+  const t = useTranslations("UniversalModal");
+
   return (
     <Modal
       open={open}
@@ -57,7 +60,7 @@ const UniversalModal = ({
         ) : (
           <Box mt={3}>
             <Button variant="contained" color="primary" onClick={handleClose}>
-              Close
+              {t("close")}
             </Button>
           </Box>
         )}

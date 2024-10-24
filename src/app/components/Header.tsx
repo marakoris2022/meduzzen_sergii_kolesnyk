@@ -1,6 +1,9 @@
-import { Box, Container, Typography } from "@mui/material";
-import { themeConstants } from "../constants/themeConstants";
+import { Box, Container } from "@mui/material";
+import { themeConstants } from "../../constants/themeConstants";
 import Navigation from "./Navigation";
+import LocaleSwitcher from "./LocaleSwitcher";
+import LogoIcon from "./LogoIcon";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -21,7 +24,10 @@ const Header = () => {
             padding: "0 20px",
           }}
         >
-          <Typography>Header</Typography>
+          <Link href={"/"}>
+            <LogoIcon />
+          </Link>
+          <LocaleSwitcher />
           <Navigation />
         </Box>
       </Container>

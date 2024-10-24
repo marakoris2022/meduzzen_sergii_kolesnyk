@@ -1,0 +1,38 @@
+{
+  "HomePage": {
+    "title": "Welcome!",
+    "sub-title": "Meduzzen Intern project"
+  },
+  "LocalSwitcher": {
+    "language": "Lang.",
+    "en": "Eng.",
+    "ua": "Ukr."
+  },
+  "NavigationRoutes": {
+    "main": "Main",
+    "profile": "Profile",
+    "users": "Users",
+    "companies": "Companies",
+    "about": "About"
+  },
+  "Footer": {
+    "title": "Meduzzen Intern project",
+    "month": "Oct"
+  },
+  "UniversalModal": {
+    "close": "Close"
+  },
+  "AboutPage": {
+    "about": "About"
+  },
+  "CompaniesPage": {
+    "companies": "Companies Page"
+  },
+  "ProfilePage": {
+    "title": "Profile",
+    "description": "Some data what we will add in future"
+  },
+  "UsersPage": {
+    "title": "Users Page"
+  }
+}

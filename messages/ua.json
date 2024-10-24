@@ -1,0 +1,38 @@
+{
+  "HomePage": {
+    "title": "Ласкаво просимо!",
+    "sub-title": "Стажерський проект Meduzzen"
+  },
+  "LocalSwitcher": {
+    "language": "Мова",
+    "en": "Агл",
+    "ua": "Укр"
+  },
+  "NavigationRoutes": {
+    "main": "Основна",
+    "profile": "Профіль",
+    "users": "Користувачі",
+    "companies": "Компанії",
+    "about": "Про нас"
+  },
+  "Footer": {
+    "title": "Стажерський проект Meduzzen",
+    "month": "Жовтн."
+  },
+  "UniversalModal": {
+    "close": "Закрити"
+  },
+  "AboutPage": {
+    "about": "Про нас"
+  },
+  "CompaniesPage": {
+    "companies": "Сторінка компаній"
+  },
+  "ProfilePage": {
+    "title": "Профіль",
+    "description": "Деякі дані, які ми додамо в майбутньому"
+  },
+  "UsersPage": {
+    "title": "Сторінка користувачів"
+  }
+}
