@@ -1,5 +1,4 @@
 import { Box, Link, Typography } from "@mui/material";
-import React from "react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 type GithubLinkProps = {

@@ -1,6 +1,5 @@
 import OpenModalTest from "@/app/components/OpenModalTest";
 import { Box, Container, Typography } from "@mui/material";
-import React from "react";
 
 const ProfilePage = () => {
   return (

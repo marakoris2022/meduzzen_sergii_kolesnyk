@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import UniversalModal from "./UniversalModal";
 
 type OpenModalTestProps = {

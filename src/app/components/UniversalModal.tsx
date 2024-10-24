@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Modal, Box, Typography, Button } from "@mui/material";
 
 type UniversalModalProps = {
@@ -29,7 +29,7 @@ const UniversalModal = ({
   description,
   children,
   footerActions,
-} : UniversalModalProps) => {
+}: UniversalModalProps) => {
   return (
     <Modal
       open={open}
