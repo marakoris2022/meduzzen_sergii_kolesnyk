@@ -7,17 +7,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import React from "react";
+import { navigationRoutes } from "../constants/navigationRoutes";
 
-enum MenuItem {
-  Menu = "/",
-  Profile = "/profile",
-  Users = "/users",
-  Companies = "/companies",
-  About = "/about",
-}
-
-const MenuItemsArr: [string, string][] = Object.entries(
-  Object.assign(MenuItem)
+const MenuItemsArr = navigationRoutes.sort(
+  (curNavItem, nextNavItem) => curNavItem.id - nextNavItem.id
 );
 
 function MenuLinkItem({ path, title }: { path: string; title: string }) {
@@ -49,9 +42,9 @@ const Navigation = () => {
         <List sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
           {MenuItemsArr.map((MenuItem) => (
             <MenuLinkItem
-              key={MenuItem[1]}
-              path={MenuItem[1]}
-              title={MenuItem[0]}
+              key={MenuItem.id}
+              path={MenuItem.url}
+              title={MenuItem.name}
             />
           ))}
         </List>
@@ -69,9 +62,9 @@ const Navigation = () => {
               <Menu sx={{ mt: "8px" }} {...bindMenu(popupState)}>
                 {MenuItemsArr.map((MenuItem) => (
                   <MenuLinkItem
-                    key={MenuItem[1]}
-                    path={MenuItem[1]}
-                    title={MenuItem[0]}
+                    key={MenuItem.id}
+                    path={MenuItem.url}
+                    title={MenuItem.name}
                   />
                 ))}
               </Menu>
