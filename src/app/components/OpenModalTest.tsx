@@ -4,7 +4,12 @@ import { Button } from "@mui/material";
 import React, { useState } from "react";
 import UniversalModal from "./UniversalModal";
 
-const OpenModalTest = (props: { title: string; description: string }) => {
+type OpenModalTestProps = {
+  title: string;
+  description: string;
+};
+
+const OpenModalTest = ({ title, description }: OpenModalTestProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
@@ -13,7 +18,8 @@ const OpenModalTest = (props: { title: string; description: string }) => {
         Open Modal
       </Button>
       <UniversalModal
-        {...props}
+        title={title}
+        description={description}
         open={isModalOpen}
         handleClose={() => {
           setIsModalOpen(false);

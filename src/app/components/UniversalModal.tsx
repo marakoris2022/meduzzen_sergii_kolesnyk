@@ -22,14 +22,14 @@ const style = {
   p: 4,
 };
 
-const UniversalModal: React.FC<UniversalModalProps> = ({
+const UniversalModal = ({
   open,
   handleClose,
   title,
   description,
   children,
   footerActions,
-}) => {
+} : UniversalModalProps) => {
   return (
     <Modal
       open={open}
