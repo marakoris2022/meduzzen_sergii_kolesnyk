@@ -8,13 +8,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import React from "react";
 
-const MenuItems = [
-  ["/", "Menu"],
-  ["/profile", "Profile"],
-  ["/users", "Users"],
-  ["/companies", "Companies"],
-  ["/about", "About"],
-];
+enum MenuItem {
+  Menu = "/",
+  Profile = "/profile",
+  Users = "/users",
+  Companies = "/companies",
+  About = "/about",
+}
+
+const MenuItemsArr: [string, string][] = Object.entries(
+  Object.assign(MenuItem)
+);
 
 function MenuLinkItem({ path, title }: { path: string; title: string }) {
   const pathname = usePathname();
@@ -43,11 +47,11 @@ const Navigation = () => {
         sx={{ display: { xs: "none", md: "block", lg: "block" } }}
       >
         <List sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-          {MenuItems.map((MenuItem) => (
+          {MenuItemsArr.map((MenuItem) => (
             <MenuLinkItem
-              key={MenuItem[0]}
-              path={MenuItem[0]}
-              title={MenuItem[1]}
+              key={MenuItem[1]}
+              path={MenuItem[1]}
+              title={MenuItem[0]}
             />
           ))}
         </List>
@@ -63,11 +67,11 @@ const Navigation = () => {
                 {popupState.isOpen ? <CloseIcon /> : <MenuIcon />}
               </Button>
               <Menu sx={{ mt: "8px" }} {...bindMenu(popupState)}>
-                {MenuItems.map((MenuItem) => (
+                {MenuItemsArr.map((MenuItem) => (
                   <MenuLinkItem
-                    key={MenuItem[0]}
-                    path={MenuItem[0]}
-                    title={MenuItem[1]}
+                    key={MenuItem[1]}
+                    path={MenuItem[1]}
+                    title={MenuItem[0]}
                   />
                 ))}
               </Menu>
