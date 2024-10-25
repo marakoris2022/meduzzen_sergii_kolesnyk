@@ -1,9 +1,11 @@
 import { Box, Container, Typography } from "@mui/material";
-import React from "react";
 import GithubLink from "./GithubLink";
-import { themeConstants } from "../constants/themeConstants";
+import { themeConstants } from "../../constants/themeConstants";
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
+  const t = useTranslations("Footer");
+
   return (
     <Box component="footer">
       <Container>
@@ -24,13 +26,13 @@ const Footer = () => {
           <Typography
             sx={{ display: { xs: "none", md: "block", lg: "block" } }}
           >
-            Meduzzen Intern project
+            {t("title")}
           </Typography>
           <Typography sx={{ display: { xs: "block", md: "none", lg: "none" } }}>
             Meduzzen
           </Typography>
           <GithubLink url="https://github.com/marakoris2022" title="SergiiK" />
-          <Typography>2024 Oct</Typography>
+          <Typography>2024 {t("month")}</Typography>
         </Box>
       </Container>
     </Box>

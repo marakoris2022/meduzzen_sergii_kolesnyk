@@ -1,7 +1,9 @@
 import { Container, Typography, Box } from "@mui/material";
-import OpenModalTest from "./components/OpenModalTest";
+import { useTranslations } from "next-intl";
 
-export default function Home() {
+export default function HomePage() {
+  const t = useTranslations("HomePage");
+
   return (
     <Container component="main">
       <Box
@@ -14,16 +16,12 @@ export default function Home() {
           paddingTop: "60px",
         }}
       >
-        <Typography color="primary" variant="h1">
-          Welcome!
+        <Typography textAlign={"center"} color="primary" variant="h1">
+          {t("title")}
         </Typography>
-        <Typography color="secondary" variant="h3">
-          Meduzzen Intern project
+        <Typography textAlign={"center"} color="secondary" variant="h3">
+          {t("sub-title")}
         </Typography>
-        <OpenModalTest
-          title={"Main"}
-          description={"modal is opened from main"}
-        />
       </Box>
     </Container>
   );

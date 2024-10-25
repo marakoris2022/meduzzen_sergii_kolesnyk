@@ -1,10 +1,12 @@
 import { Container, Typography } from "@mui/material";
-import React from "react";
+import { useTranslations } from "next-intl";
 
 const AboutPage = () => {
+  const t = useTranslations("AboutPage");
+
   return (
     <Container>
-      <Typography>About</Typography>
+      <Typography>{t("about")}</Typography>
     </Container>
   );
 };

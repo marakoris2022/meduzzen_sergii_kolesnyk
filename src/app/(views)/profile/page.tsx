@@ -1,8 +1,9 @@
-import OpenModalTest from "@/app/components/OpenModalTest";
 import { Box, Container, Typography } from "@mui/material";
-import React from "react";
+import { useTranslations } from "next-intl";
 
 const ProfilePage = () => {
+  const t = useTranslations("ProfilePage");
+
   return (
     <Container>
       <Box
@@ -16,15 +17,11 @@ const ProfilePage = () => {
         }}
       >
         <Typography color="primary" variant="h1">
-          Profile
+          {t("title")}
         </Typography>
         <Typography color="secondary" variant="h3">
-          Some data what we will add in future
+          {t("description")}
         </Typography>
-        <OpenModalTest
-          title={"Profile"}
-          description={"and this from Profile"}
-        />
       </Box>
     </Container>
   );

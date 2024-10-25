@@ -5,23 +5,12 @@ import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { usePathname } from "next/navigation";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-
-import React from "react";
-
-enum MenuItem {
-  Menu = "/",
-  Profile = "/profile",
-  Users = "/users",
-  Companies = "/companies",
-  About = "/about",
-}
-
-const MenuItemsArr: [string, string][] = Object.entries(
-  Object.assign(MenuItem)
-);
+import { useTranslations } from "next-intl";
+import { PATHS } from "@/interface/interface";
 
 function MenuLinkItem({ path, title }: { path: string; title: string }) {
   const pathname = usePathname();
+
   return (
     <ListItem>
       <Link
@@ -40,6 +29,20 @@ function MenuLinkItem({ path, title }: { path: string; title: string }) {
 }
 
 const Navigation = () => {
+  const t = useTranslations("NavigationRoutes");
+
+  const navigationRoutes = [
+    { id: 0, name: t("main"), url: PATHS.MAIN },
+    { id: 1, name: t("profile"), url: PATHS.PROFILE },
+    { id: 2, name: t("users"), url: PATHS.USERS },
+    { id: 3, name: t("companies"), url: PATHS.COMPANIES },
+    { id: 4, name: t("about"), url: PATHS.ABOUT },
+  ];
+
+  const MenuItemsArr = navigationRoutes.sort(
+    (curNavItem, nextNavItem) => curNavItem.id - nextNavItem.id
+  );
+
   return (
     <>
       <Box
@@ -49,9 +52,9 @@ const Navigation = () => {
         <List sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
           {MenuItemsArr.map((MenuItem) => (
             <MenuLinkItem
-              key={MenuItem[1]}
-              path={MenuItem[1]}
-              title={MenuItem[0]}
+              key={MenuItem.id}
+              path={MenuItem.url}
+              title={MenuItem.name}
             />
           ))}
         </List>
@@ -69,9 +72,9 @@ const Navigation = () => {
               <Menu sx={{ mt: "8px" }} {...bindMenu(popupState)}>
                 {MenuItemsArr.map((MenuItem) => (
                   <MenuLinkItem
-                    key={MenuItem[1]}
-                    path={MenuItem[1]}
-                    title={MenuItem[0]}
+                    key={MenuItem.id}
+                    path={MenuItem.url}
+                    title={MenuItem.name}
                   />
                 ))}
               </Menu>
