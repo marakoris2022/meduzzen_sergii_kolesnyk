@@ -4,6 +4,7 @@ import Navigation from "./Navigation";
 import LocaleSwitcher from "./LocaleSwitcher";
 import LogoIcon from "./LogoIcon";
 import Link from "next/link";
+import { PATHS } from "@/interface/interface";
 
 const Header = () => {
   return (
@@ -24,7 +25,7 @@ const Header = () => {
             padding: "0 20px",
           }}
         >
-          <Link href={"/"}>
+          <Link href={PATHS.MAIN}>
             <LogoIcon />
           </Link>
           <LocaleSwitcher />

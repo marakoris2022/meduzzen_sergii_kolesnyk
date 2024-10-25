@@ -16,10 +16,10 @@ export default function HomePage() {
           paddingTop: "60px",
         }}
       >
-        <Typography color="primary" variant="h1">
+        <Typography textAlign={"center"} color="primary" variant="h1">
           {t("title")}
         </Typography>
-        <Typography color="secondary" variant="h3">
+        <Typography textAlign={"center"} color="secondary" variant="h3">
           {t("sub-title")}
         </Typography>
       </Box>

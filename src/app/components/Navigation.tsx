@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTranslations } from "next-intl";
+import { PATHS } from "@/interface/interface";
 
 function MenuLinkItem({ path, title }: { path: string; title: string }) {
   const pathname = usePathname();
@@ -31,11 +32,11 @@ const Navigation = () => {
   const t = useTranslations("NavigationRoutes");
 
   const navigationRoutes = [
-    { id: 0, name: t("main"), url: "/" },
-    { id: 1, name: t("profile"), url: "/profile" },
-    { id: 2, name: t("users"), url: "/users" },
-    { id: 3, name: t("companies"), url: "/companies" },
-    { id: 4, name: t("about"), url: "/about" },
+    { id: 0, name: t("main"), url: PATHS.MAIN },
+    { id: 1, name: t("profile"), url: PATHS.PROFILE },
+    { id: 2, name: t("users"), url: PATHS.USERS },
+    { id: 3, name: t("companies"), url: PATHS.COMPANIES },
+    { id: 4, name: t("about"), url: PATHS.ABOUT },
   ];
 
   const MenuItemsArr = navigationRoutes.sort(
