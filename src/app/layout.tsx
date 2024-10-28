@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Box } from "@mui/material";
 import { themeConstants } from "../constants/themeConstants";
+import StoreProvider from "./StoreProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,23 +36,25 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <html lang={locale}>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NextIntlClientProvider messages={messages}>
-          <ThemeRegistry>
-            <Header />
-            <Box
-              component="main"
-              sx={{
-                minHeight: `calc(100vh - ${themeConstants.headerHeight} - ${themeConstants.footerHeight}
-              - ${themeConstants.headerMarginTop})`,
-              }}
-            >
-              {children}
-            </Box>
-            <Footer />
-          </ThemeRegistry>
-        </NextIntlClientProvider>
-      </body>
+      <StoreProvider>
+        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+          <NextIntlClientProvider messages={messages}>
+            <ThemeRegistry>
+              <Header />
+              <Box
+                component="main"
+                sx={{
+                  minHeight: `calc(100vh - ${themeConstants.headerHeight} - ${themeConstants.footerHeight}
+                - ${themeConstants.headerMarginTop})`,
+                }}
+              >
+                {children}
+              </Box>
+              <Footer />
+            </ThemeRegistry>
+          </NextIntlClientProvider>
+        </body>
+      </StoreProvider>
     </html>
   );
 }
