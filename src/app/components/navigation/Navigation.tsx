@@ -8,6 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useTranslations } from "next-intl";
 import { PATHS } from "@/interface/interface";
 import Link from "next/link";
+import styles from "./navigation.module.css";
 
 function MenuLinkItem({ path, title }: { path: string; title: string }) {
   const pathname = usePathname();
@@ -15,13 +16,9 @@ function MenuLinkItem({ path, title }: { path: string; title: string }) {
   return (
     <ListItem>
       <Link
-        // Need to move all to separate module.css !!!!!!!!!!!!!!
-        // sx={{
-        //   "&:hover": {
-        //     color: "secondary.light",
-        //   },
-        // }}
-        color={pathname === path ? "secondary" : "primary"}
+        className={`${styles.navLink} ${
+          pathname === path ? styles.active : ""
+        }`}
         href={path}
       >
         {title}
@@ -47,11 +44,8 @@ const Navigation = () => {
 
   return (
     <>
-      <Box
-        component="nav"
-        sx={{ display: { xs: "none", md: "block", lg: "block" } }}
-      >
-        <List sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+      <Box component="nav" className={styles.menuWrapper}>
+        <List className={styles.menuItems}>
           {MenuItemsArr.map((MenuItem) => (
             <MenuLinkItem
               key={MenuItem.id}
@@ -61,17 +55,14 @@ const Navigation = () => {
           ))}
         </List>
       </Box>
-      <Box
-        component="nav"
-        sx={{ display: { xs: "block", md: "none", lg: "none" } }}
-      >
+      <Box component="nav" className={styles.dropDownMenuWrapper}>
         <PopupState variant="popover" popupId="demo-popup-menu">
           {(popupState) => (
             <>
               <Button variant="outlined" {...bindTrigger(popupState)}>
                 {popupState.isOpen ? <CloseIcon /> : <MenuIcon />}
               </Button>
-              <Menu sx={{ mt: "8px" }} {...bindMenu(popupState)}>
+              <Menu className="test" {...bindMenu(popupState)}>
                 {MenuItemsArr.map((MenuItem) => (
                   <MenuLinkItem
                     key={MenuItem.id}

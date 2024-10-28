@@ -1,30 +1,13 @@
-import TestInput from "@/app/components/TestInput";
-import { Box, Container, Typography } from "@mui/material";
-import { useTranslations } from "next-intl";
+import { Box, Container } from "@mui/material";
+import styles from "./profile.module.css";
+// import { useTranslations } from "next-intl";
 
 const ProfilePage = () => {
-  const t = useTranslations("ProfilePage");
+  // const t = useTranslations("ProfilePage");
 
   return (
     <Container>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-          justifyContent: "center",
-          alignItems: "center",
-          paddingTop: "60px",
-        }}
-      >
-        <Typography color="primary" variant="h1">
-          {t("title")}
-        </Typography>
-        <Typography color="secondary" variant="h3">
-          {t("description")}
-        </Typography>
-        <TestInput />
-      </Box>
+      <Box className={styles.wrapper}></Box>
     </Container>
   );
 };

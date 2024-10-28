@@ -1,5 +1,6 @@
 import { Box, Link, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import styles from "./githubLink.module.css";
 
 type GithubLinkProps = {
   url: string;
@@ -9,15 +10,7 @@ type GithubLinkProps = {
 const GithubLink = ({ url, title }: GithubLinkProps) => {
   return (
     <Link href={url} target="_blank">
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "1rem",
-          border: "1px solid primary",
-        }}
-      >
+      <Box className={styles.wrapper}>
         <GitHubIcon fontSize="small" color="success" />
         <Typography color="primary" component="span">
           {title}
