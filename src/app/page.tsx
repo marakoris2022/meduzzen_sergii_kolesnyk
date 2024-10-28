@@ -1,5 +1,6 @@
 import { Container, Typography, Box } from "@mui/material";
 import { useTranslations } from "next-intl";
+import TestInput from "./components/TestInput";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
@@ -16,12 +17,13 @@ export default function HomePage() {
           paddingTop: "60px",
         }}
       >
-        <Typography textAlign={"center"} color="primary" variant="h1">
+        <Typography sx={{ textAlign: "center" }} color="primary" variant="h1">
           {t("title")}
         </Typography>
-        <Typography textAlign={"center"} color="secondary" variant="h3">
+        <Typography sx={{ textAlign: "center" }} color="secondary" variant="h3">
           {t("sub-title")}
         </Typography>
+        <TestInput />
       </Box>
     </Container>
   );
