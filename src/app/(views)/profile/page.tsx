@@ -1,3 +1,4 @@
+import TestInput from "@/app/components/TestInput";
 import { Box, Container, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 
@@ -22,6 +23,7 @@ const ProfilePage = () => {
         <Typography color="secondary" variant="h3">
           {t("description")}
         </Typography>
+        <TestInput />
       </Box>
     </Container>
   );

@@ -1,5 +1,6 @@
 import { Container, Typography, Box } from "@mui/material";
 import { useTranslations } from "next-intl";
+import TestInput from "./components/TestInput";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
@@ -22,6 +23,7 @@ export default function HomePage() {
         <Typography sx={{ textAlign: "center" }} color="secondary" variant="h3">
           {t("sub-title")}
         </Typography>
+        <TestInput />
       </Box>
     </Container>
   );

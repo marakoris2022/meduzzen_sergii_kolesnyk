@@ -1,12 +1,13 @@
 "use client";
 
-import { Box, Button, Link, List, ListItem, Menu } from "@mui/material";
+import { Box, Button, List, ListItem, Menu } from "@mui/material";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { usePathname } from "next/navigation";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTranslations } from "next-intl";
 import { PATHS } from "@/interface/interface";
+import Link from "next/link";
 
 function MenuLinkItem({ path, title }: { path: string; title: string }) {
   const pathname = usePathname();
@@ -14,11 +15,12 @@ function MenuLinkItem({ path, title }: { path: string; title: string }) {
   return (
     <ListItem>
       <Link
-        sx={{
-          "&:hover": {
-            color: "secondary.light",
-          },
-        }}
+        // Need to move all to separate module.css !!!!!!!!!!!!!!
+        // sx={{
+        //   "&:hover": {
+        //     color: "secondary.light",
+        //   },
+        // }}
         color={pathname === path ? "secondary" : "primary"}
         href={path}
       >
