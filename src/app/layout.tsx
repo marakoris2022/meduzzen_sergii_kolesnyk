@@ -8,7 +8,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Box } from "@mui/material";
 import { themeConstants } from "../constants/themeConstants";
-import StoreProvider from "./StoreProvider";
+import StoreProvider from "./components/StoreProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
