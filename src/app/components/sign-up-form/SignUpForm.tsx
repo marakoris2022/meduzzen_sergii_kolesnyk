@@ -8,6 +8,7 @@ import {
   nameValidation,
   passwordValidation,
 } from "../../../constants/validationSchemas";
+import { useTranslations } from "next-intl";
 
 type RegistrationFromProps = {
   firstName: string;
@@ -28,6 +29,7 @@ const SignUpForm = () => {
   } = useForm<RegistrationFromProps>({
     defaultValues: {},
   });
+  const t = useTranslations("SignUpForm");
 
   const submitForm: SubmitHandler<RegistrationFromProps> = (data) => {
     console.log("Submitted", data);
@@ -43,50 +45,50 @@ const SignUpForm = () => {
         onSubmit={handleSubmit(submitForm)}
       >
         <Typography className={styles.formTitle} component={"h1"}>
-          Registration Form
+          {t("title")}
         </Typography>
         <Stack gap={3} direction={{ sm: "column", md: "row" }}>
           <TextField
-            {...register("firstName", nameValidation)}
+            {...register("firstName", nameValidation(t))}
             fullWidth
             error={!!errors.firstName}
-            label="First Name"
+            label={t("First Name")}
             helperText={errors.firstName ? errors.firstName.message : ""}
           />
           <TextField
-            {...register("lastName", nameValidation)}
+            {...register("lastName", nameValidation(t))}
             fullWidth
             error={!!errors.lastName}
-            label="Last Name"
+            label={t("Last Name")}
             helperText={errors.lastName ? errors.lastName.message : ""}
           />
         </Stack>
         <TextField
-          {...register("email", emailValidation)}
+          {...register("email", emailValidation(t))}
           fullWidth
           error={!!errors.email}
-          label="Email"
+          label={t("Email")}
           helperText={errors.email ? errors.email.message : ""}
         />
         <Stack gap={3} direction={{ sm: "column", md: "row" }}>
           <TextField
-            {...register("password", passwordValidation)}
+            {...register("password", passwordValidation(t))}
             fullWidth
             type="password"
             error={!!errors.password}
-            label="Password"
+            label={t("Password")}
             helperText={errors.password ? errors.password.message : ""}
           />
           <TextField
             {...register("confirmPassword", {
-              required: "Confirm Password is required.",
+              required: t("Confirm Required"),
               validate: (value) =>
-                value === getValues("password") || "Passwords do not match.",
+                value === getValues("password") || t('"Passwords Match"'),
             })}
             fullWidth
             type="password"
             error={!!errors.confirmPassword}
-            label="Confirm Password"
+            label={t("Confirm Password")}
             helperText={
               errors.confirmPassword ? errors.confirmPassword.message : ""
             }
@@ -94,7 +96,7 @@ const SignUpForm = () => {
         </Stack>
         <Stack gap={3} direction={{ sm: "column", md: "row" }}>
           <Button type="submit" variant="outlined" fullWidth>
-            Sign up
+            {t("Sign_up")}
           </Button>
           <Button
             onClick={() => {
@@ -105,7 +107,7 @@ const SignUpForm = () => {
             color="warning"
             fullWidth
           >
-            Reset
+            {t("Reset")}
           </Button>
         </Stack>
       </Stack>

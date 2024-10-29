@@ -1,31 +1,31 @@
-export const nameValidation = {
-  required: "Field is required.",
+// validation.ts
+export const nameValidation = (t: (key: string) => string) => ({
+  required: t("required"),
   pattern: {
     value: /^[A-Za-z]+$/i,
-    message: "Only Latin symbols.",
+    message: t("onlyLatinSymbols"),
   },
   validate: (value: string) =>
-    value[0] === value[0].toUpperCase() || "First letter must be uppercase.",
-};
+    value[0] === value[0].toUpperCase() || t("firstLetterUppercase"),
+});
 
-export const emailValidation = {
-  required: "Email is required.",
+export const emailValidation = (t: (key: string) => string) => ({
+  required: t("emailRequired"),
   pattern: {
     value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    message: "Invalid email address.",
+    message: t("invalidEmail"),
   },
-};
+});
 
-export const passwordValidation = {
-  required: "Password is required.",
+export const passwordValidation = (t: (key: string) => string) => ({
+  required: t("passwordRequired"),
   minLength: {
     value: 8,
-    message: "Password must be at least 8 characters.",
+    message: t("passwordMinLength"),
   },
   pattern: {
     value:
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    message:
-      "Must include uppercase, lowercase, number, and special character.",
+    message: t("passwordComplexity"),
   },
-};
+});

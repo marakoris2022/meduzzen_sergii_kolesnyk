@@ -35,5 +35,40 @@
   },
   "UsersPage": {
     "title": "Users Page"
+  },
+  "SignInForm": {
+    "title": "Sign In Form",
+    "Sign_in": "Sign in",
+    "Reset": "Reset",
+    "Email": "Email",
+    "Password": "Password",
+    "required": "Name is required.",
+    "onlyLatinSymbols": "Only Latin symbols",
+    "firstLetterUppercase": "First letter must be uppercase.",
+    "emailRequired": "Email is required.",
+    "invalidEmail": "Invalid email address.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters.",
+    "passwordComplexity": "Must include uppercase, lowercase, number, and special character."
+  },
+  "SignUpForm": {
+    "title": "Registration Form",
+    "Sign_up": "Sign up",
+    "Reset": "Reset",
+    "First Name": "First Name",
+    "Last Name": "Last Name",
+    "Email": "Email",
+    "Password": "Password",
+    "required": "Name is required.",
+    "onlyLatinSymbols": "Only Latin symbols",
+    "firstLetterUppercase": "First letter must be uppercase.",
+    "emailRequired": "Email is required.",
+    "invalidEmail": "Invalid email address.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters.",
+    "passwordComplexity": "Must include uppercase, lowercase, number, and special character.",
+    "Confirm Password": "Confirm Password",
+    "Confirm Required": "Confirm Password is required.",
+    "Passwords Match": "Passwords do not match."
   }
 }

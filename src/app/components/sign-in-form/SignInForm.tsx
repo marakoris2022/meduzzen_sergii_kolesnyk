@@ -7,6 +7,7 @@ import {
   emailValidation,
   passwordValidation,
 } from "../../../constants/validationSchemas";
+import { useTranslations } from "next-intl";
 
 type LoginFromProps = {
   email: string;
@@ -24,6 +25,8 @@ const SignInForm = () => {
     defaultValues: {},
   });
 
+  const t = useTranslations("SignInForm");
+
   const submitForm: SubmitHandler<LoginFromProps> = (data) => {
     console.log("Submitted", data);
   };
@@ -38,27 +41,27 @@ const SignInForm = () => {
         onSubmit={handleSubmit(submitForm)}
       >
         <Typography className={styles.formTitle} component={"h1"}>
-          Sign In Form
+          {t("title")}
         </Typography>
 
         <TextField
-          {...register("email", emailValidation)}
+          {...register("email", emailValidation(t))}
           fullWidth
           error={!!errors.email}
-          label="Email"
+          label={t("Email")}
           helperText={errors.email ? errors.email.message : ""}
         />
         <TextField
-          {...register("password", passwordValidation)}
+          {...register("password", passwordValidation(t))}
           fullWidth
           type="password"
           error={!!errors.password}
-          label="Password"
+          label={t("Password")}
           helperText={errors.password ? errors.password.message : ""}
         />
         <Stack gap={3} direction={{ sm: "column", md: "row" }}>
           <Button type="submit" variant="outlined" fullWidth>
-            Sign in
+            {t("Sign_in")}
           </Button>
           <Button
             onClick={() => {
@@ -69,7 +72,7 @@ const SignInForm = () => {
             color="warning"
             fullWidth
           >
-            Reset
+            {t("Reset")}
           </Button>
         </Stack>
       </Stack>
