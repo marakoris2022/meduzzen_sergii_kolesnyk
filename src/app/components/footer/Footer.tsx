@@ -19,7 +19,9 @@ const Footer = () => {
           }}
         >
           <Typography className={styles.titleLong}>{t("title")}</Typography>
-          <Typography className={styles.titleShort}>Meduzzen</Typography>
+          <Typography className={styles.titleShort}>
+            {t("title_short")}
+          </Typography>
 
           <GithubLink url="https://github.com/marakoris2022" title="SergiiK" />
           <Typography>2024 {t("month")}</Typography>
