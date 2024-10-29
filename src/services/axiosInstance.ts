@@ -1,4 +1,6 @@
 import axios from "axios";
+import { TOKEN } from "@/interface/interface";
+import { storeRef } from "@/app/components/StoreProvider";
 
 const BASE_URL = process.env.BASE_URL || "http://51.20.210.187";
 
@@ -12,8 +14,12 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
-    const token = localStorage.getItem("authToken");
-    if (token) {
+    const token = storeRef.current?.getState().auth.token;
+
+    if (!token) {
+      const localToken = localStorage.getItem(TOKEN.NAME);
+      if (localToken) config.headers.Authorization = `Bearer ${localToken}`;
+    } else {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;

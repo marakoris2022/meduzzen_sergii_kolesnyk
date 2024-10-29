@@ -5,3 +5,7 @@ export enum PATHS {
   COMPANIES = "/companies",
   ABOUT = "/about",
 }
+
+export enum TOKEN {
+  NAME = "authToken",
+}
