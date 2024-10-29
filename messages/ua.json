@@ -1,7 +1,9 @@
 {
   "HomePage": {
-    "title": "Ласкаво просимо!",
-    "sub-title": "Стажерський проект Meduzzen"
+    "title": "Ласкаво просимо до програми Quiz!",
+    "account": "У вас є обліковий запис?",
+    "signin": "УВІЙТИ",
+    "signup": "ЗАРЕЄСТРУВАТИСЯ"
   },
   "LocalSwitcher": {
     "language": "Мова",

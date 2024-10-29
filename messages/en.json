@@ -1,7 +1,9 @@
 {
   "HomePage": {
-    "title": "Welcome!",
-    "sub-title": "Meduzzen Intern project"
+    "title": "Welcome to the Quiz Application!",
+    "account": "Have you an account?",
+    "signin": "SIGN IN",
+    "signup": "SIGN UP"
   },
   "LocalSwitcher": {
     "language": "Lang.",
