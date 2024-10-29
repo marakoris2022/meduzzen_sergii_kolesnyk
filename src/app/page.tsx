@@ -1,7 +1,14 @@
+"use client";
+
 import { Container, Box, Typography, Button } from "@mui/material";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { getMe } from "@/services/axios-api-methods/axiosGet";
+
+async function handleClick() {
+  console.log(await getMe());
+}
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
@@ -21,6 +28,7 @@ export default function HomePage() {
             {t("signup")}
           </Button>
         </Link>
+        <Button onClick={handleClick}>Get Me</Button>
       </Box>
     </Container>
   );

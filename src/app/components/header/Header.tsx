@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import { themeConstants } from "../../../constants/themeConstants";
 import Navigation from "../navigation/Navigation";
 import LocaleSwitcher from "../LocaleSwitcher";
@@ -6,6 +6,7 @@ import LogoIcon from "../LogoIcon";
 import Link from "next/link";
 import { PATHS } from "@/interface/interface";
 import styles from "./header.module.css";
+import ExitButton from "../ExitButton";
 
 const Header = () => {
   return (
@@ -24,7 +25,10 @@ const Header = () => {
             <LogoIcon />
           </Link>
           <LocaleSwitcher />
-          <Navigation />
+          <Stack direction={"row"} gap={2}>
+            <Navigation />
+            <ExitButton />
+          </Stack>
         </Box>
       </Container>
     </Box>

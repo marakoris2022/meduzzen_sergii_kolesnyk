@@ -16,6 +16,7 @@ import { useAppDispatch } from "@/state/hooks";
 import { setToken } from "@/state/auth/authSlice";
 import { PATHS, TOKEN } from "@/interface/interface";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 type LoginFromProps = {
   email: string;
@@ -71,6 +72,11 @@ const SignInForm = () => {
       if (token) {
         dispatch(setToken(res.result.access_token));
         localStorage.setItem(TOKEN.NAME, token);
+        Cookies.set(TOKEN.NAME, token, {
+          expires: 7,
+          secure: true,
+          sameSite: "Strict",
+        });
       }
 
       setModalData({

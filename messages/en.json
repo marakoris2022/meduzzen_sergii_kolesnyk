@@ -84,5 +84,11 @@
     "validationFailed": "Validation failed.",
     "emailExists": "User email already exists.",
     "registrationFailedTitle": "Registration Failed"
+  },
+  "ExitButton": {
+    "Leave": "Leave",
+    "Cancel": "Cancel",
+    "leaveApp": "Leave Application?",
+    "sureExit": "Are you sure you want to Exit?"
   }
 }
