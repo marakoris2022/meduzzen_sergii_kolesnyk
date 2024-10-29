@@ -71,6 +71,12 @@
     "passwordComplexity": "Must include uppercase, lowercase, number, and special character.",
     "Confirm Password": "Confirm Password",
     "Confirm Required": "Confirm Password is required.",
-    "Passwords Match": "Passwords do not match."
+    "Passwords Match": "Passwords do not match.",
+    "LoginBtn": "To Login Page",
+    "registrationSuccessTitle": "Registration Success",
+    "registrationSuccessText": "You will be redirected to the Login Page",
+    "validationFailed": "Validation failed.",
+    "emailExists": "User email already exists.",
+    "registrationFailedTitle": "Registration Failed"
   }
 }

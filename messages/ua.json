@@ -71,6 +71,12 @@
     "passwordMinLength": "Пароль має бути не менше 8 символів.",
     "passwordComplexity": "Пароль повинен містити велику та малу літери, цифру та спеціальний символ.",
     "Confirm Required": "Потрібно підтвердити пароль.",
-    "Passwords Match": "Паролі не збігаються."
+    "Passwords Match": "Паролі не збігаються.",
+    "LoginBtn": "До сторінки входу",
+    "registrationSuccessTitle": "Реєстрація пройшла успішно",
+    "registrationSuccessText": "Вас буде перенаправлено на сторінку входу",
+    "validationFailed": "Помилка перевірки.",
+    "emailExists": "Електронна адреса користувача вже існує.",
+    "registrationFailedTitle": "Помилка реєстрації"
   }
 }

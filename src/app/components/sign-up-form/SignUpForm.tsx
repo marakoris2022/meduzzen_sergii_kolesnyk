@@ -26,10 +26,11 @@ type RegistrationFromProps = {
 
 const SuccessRegistrationAction = () => {
   const router = useRouter();
+  const t = useTranslations("SignUpForm");
 
   return (
     <Stack direction={"column"} alignItems={"center"}>
-      <Button onClick={() => router.push(PATHS.SIGNIN)}>To Login Page</Button>
+      <Button onClick={() => router.push(PATHS.SIGNIN)}>{t("LoginBtn")}</Button>
     </Stack>
   );
 };
@@ -67,22 +68,22 @@ const SignUpForm = () => {
 
       setModalData({
         isModal: true,
-        modalTitle: "Registration Success",
-        modalText: "You will be redirected to the Login Page",
+        modalTitle: t("registrationSuccessTitle"),
+        modalText: t("registrationSuccessText"),
         modalAction: <SuccessRegistrationAction />,
       });
     } catch (error) {
       let errorMessage = "";
       if (error instanceof AxiosError && error.status === 422) {
-        errorMessage = "Validation filed.";
+        errorMessage = t("validationFailed");
       } else if (error instanceof AxiosError && error.status === 400) {
-        errorMessage = "User email already exists.";
+        errorMessage = t("emailExists");
       } else {
         errorMessage = (error as Error).message;
       }
       setModalData({
         isModal: true,
-        modalTitle: "Registration Failed",
+        modalTitle: t("registrationFailedTitle"),
         modalText: errorMessage,
         modalAction: null,
       });
