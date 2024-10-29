@@ -4,6 +4,8 @@ export enum PATHS {
   USERS = "/users",
   COMPANIES = "/companies",
   ABOUT = "/about",
+  SIGNIN = "/signin",
+  SIGNUP = "/signup",
 }
 
 export enum TOKEN {

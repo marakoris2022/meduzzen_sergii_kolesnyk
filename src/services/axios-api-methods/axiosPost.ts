@@ -16,14 +16,14 @@ export const loginUser = async (email: string, password: string) => {
 export const registerUser = async (
   email: string,
   password: string,
-  passwordRepeat: string,
+  confirmPassword: string,
   firstName: string,
   lastName: string
 ) => {
   try {
     const response = await axiosInstance.post("/user/", {
       user_password: password,
-      user_password_repeat: passwordRepeat,
+      user_password_repeat: confirmPassword,
       user_email: email,
       user_firstname: firstName,
       user_lastname: lastName,

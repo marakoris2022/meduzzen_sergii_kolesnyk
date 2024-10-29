@@ -9,6 +9,12 @@ import {
   passwordValidation,
 } from "../../../constants/validationSchemas";
 import { useTranslations } from "next-intl";
+import { registerUser } from "@/services/axios-api-methods/axiosPost";
+import { useState } from "react";
+import UniversalModal from "../universal-modal/UniversalModal";
+import { AxiosError } from "axios";
+import { PATHS } from "@/interface/interface";
+import { useRouter } from "next/navigation";
 
 type RegistrationFromProps = {
   firstName: string;
@@ -16,6 +22,23 @@ type RegistrationFromProps = {
   email: string;
   password: string;
   confirmPassword: string;
+};
+
+const SuccessRegistrationAction = () => {
+  const router = useRouter();
+
+  return (
+    <Stack direction={"column"} alignItems={"center"}>
+      <Button onClick={() => router.push(PATHS.SIGNIN)}>To Login Page</Button>
+    </Stack>
+  );
+};
+
+type ModalDataProps = {
+  isModal: boolean;
+  modalTitle: string;
+  modalText: string;
+  modalAction: null | JSX.Element;
 };
 
 const SignUpForm = () => {
@@ -30,13 +53,53 @@ const SignUpForm = () => {
     defaultValues: {},
   });
   const t = useTranslations("SignUpForm");
+  const [modalData, setModalData] = useState<ModalDataProps>({
+    isModal: false,
+    modalTitle: "",
+    modalText: "",
+    modalAction: null,
+  });
 
-  const submitForm: SubmitHandler<RegistrationFromProps> = (data) => {
-    console.log("Submitted", data);
+  const submitForm: SubmitHandler<RegistrationFromProps> = async (data) => {
+    const { email, password, confirmPassword, firstName, lastName } = data;
+    try {
+      await registerUser(email, password, confirmPassword, firstName, lastName);
+
+      setModalData({
+        isModal: true,
+        modalTitle: "Registration Success",
+        modalText: "You will be redirected to the Login Page",
+        modalAction: <SuccessRegistrationAction />,
+      });
+    } catch (error) {
+      let errorMessage = "";
+      if (error instanceof AxiosError && error.status === 422) {
+        errorMessage = "Validation filed.";
+      } else if (error instanceof AxiosError && error.status === 400) {
+        errorMessage = "User email already exists.";
+      } else {
+        errorMessage = (error as Error).message;
+      }
+      setModalData({
+        isModal: true,
+        modalTitle: "Registration Failed",
+        modalText: errorMessage,
+        modalAction: null,
+      });
+    }
   };
 
   return (
     <Box className={styles.formWrapper}>
+      <UniversalModal
+        open={modalData.isModal}
+        handleClose={() =>
+          setModalData((state) => ({ ...state, isModal: false }))
+        }
+        title={modalData.modalTitle}
+        description={modalData.modalText}
+        footerActions={modalData.modalAction}
+      />
       <Stack
         gap={3}
         className={styles.formWrapper}

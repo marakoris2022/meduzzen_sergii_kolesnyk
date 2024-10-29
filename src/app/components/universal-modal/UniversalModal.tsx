@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Modal, Box, Typography, Button } from "@mui/material";
+import { Modal, Box, Typography, Button, Stack } from "@mui/material";
 import { useTranslations } from "next-intl";
 import styles from "./universalModal.module.css";
 
@@ -8,8 +8,8 @@ type UniversalModalProps = {
   handleClose: () => void;
   title?: string;
   description?: string;
-  children?: ReactNode;
-  footerActions?: ReactNode;
+  children?: ReactNode | JSX.Element;
+  footerActions?: ReactNode | JSX.Element;
 };
 
 const UniversalModal = ({
@@ -47,11 +47,11 @@ const UniversalModal = ({
         {footerActions ? (
           footerActions
         ) : (
-          <Box mt={3}>
+          <Stack justifyContent={"center"} mt={3}>
             <Button variant="contained" color="primary" onClick={handleClose}>
               {t("close")}
             </Button>
-          </Box>
+          </Stack>
         )}
       </Box>
     </Modal>

@@ -9,4 +9,8 @@
   box-shadow: 24;
   padding: 4rem;
   background-color: #15141a;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
