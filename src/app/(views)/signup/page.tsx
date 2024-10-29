@@ -1,5 +1,12 @@
+import SignUpForm from "@/app/components/sign-up-form/SignUpForm";
+import { Container } from "@mui/material";
+
 const SignUpPage = () => {
-  return <div>SignUpPage</div>;
+  return (
+    <Container>
+      <SignUpForm />
+    </Container>
+  );
 };
 
 export default SignUpPage;

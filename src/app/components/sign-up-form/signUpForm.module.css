@@ -1,0 +1,10 @@
+.formWrapper {
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 0 auto;
+}
+
+.formTitle {
+  text-align: center;
+}

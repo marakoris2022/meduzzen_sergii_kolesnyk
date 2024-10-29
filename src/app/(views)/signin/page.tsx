@@ -1,11 +1,7 @@
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 
 const SignInPage = () => {
-  return (
-    <Container>
-      <Box>FORM WILL BE HERE</Box>
-    </Container>
-  );
+  return <Container>Hello</Container>;
 };
 
 export default SignInPage;
