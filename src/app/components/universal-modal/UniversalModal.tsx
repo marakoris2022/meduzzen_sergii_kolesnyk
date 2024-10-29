@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Modal, Box, Typography, Button } from "@mui/material";
 import { useTranslations } from "next-intl";
+import styles from "./universalModal.module.css";
 
 type UniversalModalProps = {
   open: boolean;
@@ -11,17 +12,17 @@ type UniversalModalProps = {
   footerActions?: ReactNode;
 };
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   border: "2px solid #000",
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 const UniversalModal = ({
   open,
@@ -40,7 +41,7 @@ const UniversalModal = ({
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
-      <Box sx={style}>
+      <Box className={styles.wrapper}>
         {title && (
           <Typography id="modal-title" variant="h6" component="h2" mb={2}>
             {title}

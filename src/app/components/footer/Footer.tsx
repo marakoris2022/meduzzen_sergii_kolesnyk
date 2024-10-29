@@ -1,7 +1,8 @@
 import { Box, Container, Typography } from "@mui/material";
-import GithubLink from "./GithubLink";
-import { themeConstants } from "../../constants/themeConstants";
+import GithubLink from "../github-link/GithubLink";
+import { themeConstants } from "../../../constants/themeConstants";
 import { useTranslations } from "next-intl";
+import styles from "./footer.module.css";
 
 const Footer = () => {
   const t = useTranslations("Footer");
@@ -10,27 +11,16 @@ const Footer = () => {
     <Box component="footer">
       <Container>
         <Box
+          className={styles.footerWrapper}
           sx={{
             height: themeConstants.headerHeight,
             backgroundColor: "menuGray.main",
-            border: "1px solid",
             borderColor: "menuGray.light",
-            borderRadius: "20px",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-            padding: "0 20px",
           }}
         >
-          <Typography
-            sx={{ display: { xs: "none", md: "block", lg: "block" } }}
-          >
-            {t("title")}
-          </Typography>
-          <Typography sx={{ display: { xs: "block", md: "none", lg: "none" } }}>
-            Meduzzen
-          </Typography>
+          <Typography className={styles.titleLong}>{t("title")}</Typography>
+          <Typography className={styles.titleShort}>Meduzzen</Typography>
+
           <GithubLink url="https://github.com/marakoris2022" title="SergiiK" />
           <Typography>2024 {t("month")}</Typography>
         </Box>

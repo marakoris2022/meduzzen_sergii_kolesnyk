@@ -1,0 +1,26 @@
+.footerWrapper {
+  border: 1px solid;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+.footerWrapper > * {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.titleShort {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .titleLong {
+    display: none;
+  }
+  .titleShort {
+    display: block;
+  }
+}

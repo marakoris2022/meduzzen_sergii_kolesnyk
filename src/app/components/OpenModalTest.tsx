@@ -2,7 +2,7 @@
 
 import { Button } from "@mui/material";
 import { useState } from "react";
-import UniversalModal from "./UniversalModal";
+import UniversalModal from "./universal-modal/UniversalModal";
 
 type OpenModalTestProps = {
   title: string;

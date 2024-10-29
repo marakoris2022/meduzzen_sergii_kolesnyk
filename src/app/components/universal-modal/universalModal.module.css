@@ -1,0 +1,12 @@
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  border: 2px solid blanchedalmond;
+  border-radius: 15px;
+  box-shadow: 24;
+  padding: 4rem;
+  background-color: #15141a;
+}
