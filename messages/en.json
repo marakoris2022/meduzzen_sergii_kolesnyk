@@ -51,7 +51,13 @@
     "invalidEmail": "Invalid email address.",
     "passwordRequired": "Password is required.",
     "passwordMinLength": "Password must be at least 8 characters.",
-    "passwordComplexity": "Must include uppercase, lowercase, number, and special character."
+    "passwordComplexity": "Must include uppercase, lowercase, number, and special character.",
+    "LoginBtn": "To Main Page",
+    "loggedSuccessfully": "Logged in Successfully",
+    "welcomeBack": "Welcome back!",
+    "validationFailed": "Validation failed.",
+    "incorrectUserPass": "Incorrect username or password",
+    "authFailed": "Authorization Failed"
   },
   "SignUpForm": {
     "title": "Registration Form",

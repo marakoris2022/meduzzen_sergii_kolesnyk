@@ -1,4 +1,3 @@
-// validation.ts
 export const nameValidation = (t: (key: string) => string) => ({
   required: t("required"),
   pattern: {
