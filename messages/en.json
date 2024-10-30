@@ -96,5 +96,19 @@
   },
   "Loading": {
     "loading": "Fetching user data..."
+  },
+  "UserAccordion": {
+    "Status": "Status",
+    "online": "online",
+    "offline": "offline",
+    "City": "City",
+    "Phone": "Phone",
+    "Links": "Links",
+    "empty": "empty",
+    "Email": "Email",
+    "Id": "Id",
+    "Name": "First Name",
+    "LastName": "Last Name",
+    "Load_Data": "Load Data"
   }
 }

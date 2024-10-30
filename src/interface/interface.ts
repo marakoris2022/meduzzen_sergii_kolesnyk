@@ -22,7 +22,7 @@ export type UserProps = {
   user_city: string;
   user_phone: string;
   user_links: string[];
-  is_superuser: true;
+  is_superuser: boolean;
 };
 
 export type UsersProps = {

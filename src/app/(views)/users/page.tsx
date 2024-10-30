@@ -1,24 +1,13 @@
 "use client";
 
 import { getUsers } from "@/services/axios-api-methods/axiosGet";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Container,
-  Pagination,
-  Stack,
-  Typography,
-} from "@mui/material";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import { Box, Container, Pagination, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import styles from "./users.module.css";
 import { UsersProps } from "@/interface/interface";
-import RandomAvatar from "@/app/components/RandomAvatar/RandomAvatar";
-import Image from "next/image";
 import Loading from "@/app/components/Loading";
+import UserAccordion from "@/app/components/user-accordion/UserAccordion";
 
 const UsersPage = () => {
   const t = useTranslations("UsersPage");
@@ -26,54 +15,9 @@ const UsersPage = () => {
   const [pagesCount, setPagesCount] = useState<number>(1);
   const [usersData, setUsersData] = useState<null | UsersProps>(null);
 
-  const UserAccordion = (userData: UserAccordionProps) => {
-    return (
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ArrowDownwardIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <Stack className={styles.accordionHeadingWrapper} direction={"row"}>
-            <Typography>{userData.user_email}</Typography>
-            <Typography>{userData.user_id}</Typography>
-          </Stack>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Stack direction={"row"} gap={3}>
-            <Box>
-              {userData.user_avatar ? (
-                <Image
-                  src={userData.user_avatar}
-                  alt={"Avatar"}
-                  height={120}
-                  width={100}
-                />
-              ) : (
-                <RandomAvatar />
-              )}
-            </Box>
-            <Stack>
-              <Typography>{userData.user_firstname}</Typography>
-              <Typography>{userData.user_lastname}</Typography>
-            </Stack>
-          </Stack>
-        </AccordionDetails>
-      </Accordion>
-    );
-  };
-
   function handleChange(currentPage: number) {
     setPage(currentPage);
   }
-
-  type UserAccordionProps = {
-    user_id: number;
-    user_email: string;
-    user_firstname: string;
-    user_lastname: string;
-    user_avatar: string | null;
-  };
 
   useEffect(() => {
     getUsers(page).then((data) => {

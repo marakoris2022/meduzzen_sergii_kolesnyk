@@ -32,3 +32,13 @@ export const getUsers = async (page: number = 1, page_size: number = 10) => {
     throw error;
   }
 };
+
+export const getUserById = async (userId: number) => {
+  try {
+    const response = await axiosInstance.get(`/user/${userId}/`);
+    return response.data as UserProps;
+  } catch (error) {
+    console.error("Error in Get User Data:", error);
+    throw error;
+  }
+};
