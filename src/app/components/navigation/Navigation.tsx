@@ -61,6 +61,7 @@ const Navigation = () => {
           {userData ? <PrivateMenuList /> : <PublicMenuList />}
         </List>
       </Box>
+
       <Box component="nav" className={styles.dropDownMenuWrapper}>
         <PopupState variant="popover" popupId="demo-popup-menu">
           {(popupState) => (

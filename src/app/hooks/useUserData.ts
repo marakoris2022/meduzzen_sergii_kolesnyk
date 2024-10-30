@@ -5,13 +5,13 @@ import { fetchUserData } from "@/state/user/userSlice";
 
 export function useUserData() {
   const dispatch = useAppDispatch();
-  const data = useAppSelector((state) => state.user.data);
-  const loading = useAppSelector((state) => state.user.loading);
+  const userData = useAppSelector((state) => state.user.data);
+  const isUserDataLoading = useAppSelector((state) => state.user.loading);
 
-  const [isLoading, setIsLoading] = useState<boolean>(Boolean(!data));
+  const [isLoading, setIsLoading] = useState<boolean>(Boolean(!userData));
 
   useEffect(() => {
-    if (!data && !loading) {
+    if (!userData && !isUserDataLoading) {
       const token = localStorage.getItem(TOKEN.NAME);
       if (token) {
         dispatch(fetchUserData()).then(() => setIsLoading(false));
@@ -19,7 +19,7 @@ export function useUserData() {
         setIsLoading(false);
       }
     }
-  }, [data, loading, dispatch]);
+  }, [userData, isUserDataLoading, dispatch]);
 
-  return { userData: data, isLoading };
+  return { userData, isLoading };
 }
