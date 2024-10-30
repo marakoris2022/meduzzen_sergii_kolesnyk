@@ -5,8 +5,8 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useUserData } from "./hooks/useUserData";
-import FetchingUserData from "./components/FetchingUserData";
 import { PATHS } from "@/interface/interface";
+import Loading from "./components/Loading";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
@@ -15,7 +15,7 @@ export default function HomePage() {
   if (isLoading)
     return (
       <Container component="main">
-        <FetchingUserData />
+        <Loading />
       </Container>
     );
 

@@ -94,7 +94,7 @@
     "leaveApp": "Leave Application?",
     "sureExit": "Are you sure you want to Exit?"
   },
-  "FetchingUserData": {
+  "Loading": {
     "loading": "Fetching user data..."
   }
 }

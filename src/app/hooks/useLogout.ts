@@ -1,7 +1,7 @@
-import { clearUserDataAndRedirect } from "@/utils/clearUserDataAndRedirect";
+import { logout } from "@/utils/logout";
 
 export const useLogout = () => {
   return () => {
-    clearUserDataAndRedirect();
+    logout();
   };
 };

@@ -4,7 +4,7 @@ import { clearToken } from "@/state/auth/authSlice";
 import { TOKEN, PATHS } from "@/interface/interface";
 import Cookies from "js-cookie";
 
-export const clearUserDataAndRedirect = () => {
+export const logout = () => {
   const dispatch = storeRef.current?.dispatch;
 
   if (dispatch) {

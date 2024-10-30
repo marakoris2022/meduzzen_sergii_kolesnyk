@@ -1,7 +1,7 @@
 import axios from "axios";
 import { TOKEN } from "@/interface/interface";
 import { storeRef } from "@/app/components/StoreProvider";
-import { clearUserDataAndRedirect } from "@/utils/clearUserDataAndRedirect";
+import { logout } from "@/utils/logout";
 
 const BASE_URL = process.env.BASE_URL || "http://51.20.210.187";
 
@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      clearUserDataAndRedirect();
+      logout();
     }
 
     return Promise.reject(error);

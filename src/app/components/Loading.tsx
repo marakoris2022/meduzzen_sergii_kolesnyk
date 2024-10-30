@@ -1,8 +1,8 @@
 import { CircularProgress, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 
-const FetchingUserData = () => {
-  const t = useTranslations("FetchingUserData");
+const Loading = () => {
+  const t = useTranslations("Loading");
 
   return (
     <Stack direction={"column"} gap={3} alignItems={"center"} padding={"60px"}>
@@ -12,4 +12,4 @@ const FetchingUserData = () => {
   );
 };
 
-export default FetchingUserData;
+export default Loading;
