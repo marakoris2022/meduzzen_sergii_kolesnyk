@@ -1,8 +1,7 @@
 import axios from "axios";
-import { PATHS, TOKEN } from "@/interface/interface";
+import { TOKEN } from "@/interface/interface";
 import { storeRef } from "@/app/components/StoreProvider";
-import { clearUserData } from "@/state/user/userSlice";
-import { clearToken } from "@/state/auth/authSlice";
+import { clearUserDataAndRedirect } from "@/utils/clearUserDataAndRedirect";
 
 const BASE_URL = process.env.BASE_URL || "http://51.20.210.187";
 
@@ -35,13 +34,7 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      const dispatch = storeRef.current?.dispatch;
-
-      if (dispatch) {
-        dispatch(clearUserData());
-        dispatch(clearToken());
-        window.location.href = PATHS.SIGNIN;
-      }
+      clearUserDataAndRedirect();
     }
 
     return Promise.reject(error);

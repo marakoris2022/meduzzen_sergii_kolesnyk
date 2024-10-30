@@ -1,30 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import Cookies from "js-cookie";
-import { clearToken } from "../../state/auth/authSlice";
-import { useAppDispatch } from "@/state/hooks";
-import { PATHS, TOKEN } from "@/interface/interface";
-import { useRouter } from "next/navigation";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
-import {  Button, Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import UniversalModal from "./universal-modal/UniversalModal";
 import { useTranslations } from "next-intl";
-import { clearUserData } from "@/state/user/userSlice";
+import { useLogout } from "../hooks/useLogout";
 
 const ExitButton = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useRouter();
   const [isModal, setIsModal] = useState<boolean>(false);
   const t = useTranslations("ExitButton");
+  const logout = useLogout();
 
   const handleLogout = () => {
-    dispatch(clearToken());
-    dispatch(clearUserData());
-    localStorage.removeItem(TOKEN.NAME);
-    Cookies.remove(TOKEN.NAME);
+    logout();
     setIsModal(false);
-    navigate.push(PATHS.MAIN);
   };
 
   function LeaveApplicationAction() {
