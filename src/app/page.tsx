@@ -1,10 +1,12 @@
 "use client";
 
-import { Container, Box, Typography, Button } from "@mui/material";
+import { Container, Box, Typography, Button, Stack } from "@mui/material";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useUserData } from "./hooks/useUserData";
+import FetchingUserData from "./components/FetchingUserData";
+import { PATHS } from "@/interface/interface";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
@@ -13,9 +15,7 @@ export default function HomePage() {
   if (isLoading)
     return (
       <Container component="main">
-        <Box className={styles.mainWrapper}>
-          <Typography>Loading...</Typography>
-        </Box>
+        <FetchingUserData />
       </Container>
     );
 
@@ -23,17 +23,27 @@ export default function HomePage() {
     <Container component="main">
       <Box className={styles.mainWrapper}>
         {userData ? (
-          <Typography>Welcome: {userData.user_email}</Typography>
+          <Stack gap={3} alignContent={"center"}>
+            <Box className={styles.videoWrapper}>
+              <Box className={styles.videoWrapperHeigh} />
+            </Box>
+            <Typography className={styles.mainTitle} component={"h2"}>
+              {t("title")}
+            </Typography>
+            <Typography className={styles.mainUser} component={"h3"}>
+              {userData.user_email}
+            </Typography>
+          </Stack>
         ) : (
           <>
-            <Typography className={styles.title}>{t("title")}</Typography>
+            <Typography className={styles.title}>{t("title2")}</Typography>
             <Typography>{t("account")}</Typography>
-            <Link className={styles.link} href={"/signin"}>
+            <Link className={styles.link} href={PATHS.SIGNIN}>
               <Button variant="outlined" fullWidth>
                 {t("signin")}
               </Button>
             </Link>
-            <Link className={styles.link} href={"/signup"}>
+            <Link className={styles.link} href={PATHS.SIGNUP}>
               <Button variant="outlined" fullWidth>
                 {t("signup")}
               </Button>

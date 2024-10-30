@@ -1,6 +1,7 @@
 {
   "HomePage": {
-    "title": "Welcome to the Quiz Application!",
+    "title": "Welcome back, my friend!",
+    "title2": "Welcome my friend!",
     "account": "Have you an account?",
     "signin": "SIGN IN",
     "signup": "SIGN UP"
@@ -92,5 +93,8 @@
     "Cancel": "Cancel",
     "leaveApp": "Leave Application?",
     "sureExit": "Are you sure you want to Exit?"
+  },
+  "FetchingUserData": {
+    "loading": "Fetching user data..."
   }
 }
