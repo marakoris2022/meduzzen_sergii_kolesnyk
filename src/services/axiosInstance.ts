@@ -1,12 +1,14 @@
 import axios from "axios";
-import { TOKEN } from "@/interface/interface";
+import { PATHS, TOKEN } from "@/interface/interface";
 import { storeRef } from "@/app/components/StoreProvider";
+import { clearUserData } from "@/state/user/userSlice";
+import { clearToken } from "@/state/auth/authSlice";
 
 const BASE_URL = process.env.BASE_URL || "http://51.20.210.187";
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 3000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -25,6 +27,23 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   function (error) {
+    return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      const dispatch = storeRef.current?.dispatch;
+
+      if (dispatch) {
+        dispatch(clearUserData());
+        dispatch(clearToken());
+        window.location.href = PATHS.SIGNIN;
+      }
+    }
+
     return Promise.reject(error);
   }
 );

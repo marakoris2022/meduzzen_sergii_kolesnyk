@@ -11,8 +11,14 @@
   display: none;
 }
 
-.menuItems {
+.menuItems_row {
   display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.menuItems_col {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
