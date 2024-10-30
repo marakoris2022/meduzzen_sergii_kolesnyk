@@ -1,7 +1,10 @@
 {
   "HomePage": {
-    "title": "Welcome!",
-    "sub-title": "Meduzzen Intern project"
+    "title": "Welcome back, my friend!",
+    "title2": "Welcome my friend!",
+    "account": "Have you an account?",
+    "signin": "SIGN IN",
+    "signup": "SIGN UP"
   },
   "LocalSwitcher": {
     "language": "Lang.",
@@ -13,10 +16,13 @@
     "profile": "Profile",
     "users": "Users",
     "companies": "Companies",
-    "about": "About"
+    "about": "About",
+    "signin": "SignIn",
+    "signup": "SignUp"
   },
   "Footer": {
     "title": "Meduzzen Intern project",
+    "title_short": "Meduzzen",
     "month": "Oct"
   },
   "UniversalModal": {
@@ -34,5 +40,61 @@
   },
   "UsersPage": {
     "title": "Users Page"
+  },
+  "SignInForm": {
+    "title": "Sign In Form",
+    "Sign_in": "Sign in",
+    "Reset": "Reset",
+    "Email": "Email",
+    "Password": "Password",
+    "required": "Name is required.",
+    "onlyLatinSymbols": "Only Latin symbols",
+    "firstLetterUppercase": "First letter must be uppercase.",
+    "emailRequired": "Email is required.",
+    "invalidEmail": "Invalid email address.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters.",
+    "passwordComplexity": "Must include uppercase, lowercase, number, and special character.",
+    "LoginBtn": "To Main Page",
+    "loggedSuccessfully": "Logged in Successfully",
+    "welcomeBack": "Welcome back!",
+    "validationFailed": "Validation failed.",
+    "incorrectUserPass": "Incorrect username or password",
+    "authFailed": "Authorization Failed"
+  },
+  "SignUpForm": {
+    "title": "Registration Form",
+    "Sign_up": "Sign up",
+    "Reset": "Reset",
+    "First Name": "First Name",
+    "Last Name": "Last Name",
+    "Email": "Email",
+    "Password": "Password",
+    "required": "Name is required.",
+    "onlyLatinSymbols": "Only Latin symbols",
+    "firstLetterUppercase": "First letter must be uppercase.",
+    "emailRequired": "Email is required.",
+    "invalidEmail": "Invalid email address.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters.",
+    "passwordComplexity": "Must include uppercase, lowercase, number, and special character.",
+    "Confirm Password": "Confirm Password",
+    "Confirm Required": "Confirm Password is required.",
+    "Passwords Match": "Passwords do not match.",
+    "LoginBtn": "To Login Page",
+    "registrationSuccessTitle": "Registration Success",
+    "registrationSuccessText": "You will be redirected to the Login Page",
+    "validationFailed": "Validation failed.",
+    "emailExists": "User email already exists.",
+    "registrationFailedTitle": "Registration Failed"
+  },
+  "ExitButton": {
+    "Leave": "Leave",
+    "Cancel": "Cancel",
+    "leaveApp": "Leave Application?",
+    "sureExit": "Are you sure you want to Exit?"
+  },
+  "FetchingUserData": {
+    "loading": "Fetching user data..."
   }
 }

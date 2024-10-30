@@ -1,7 +1,10 @@
 {
   "HomePage": {
-    "title": "Ласкаво просимо!",
-    "sub-title": "Стажерський проект Meduzzen"
+    "title": "Ласкаво просимо назад, мій друже!",
+    "title2": "Ласкаво просимо, друже!",
+    "account": "У вас є обліковий запис?",
+    "signin": "УВІЙТИ",
+    "signup": "ЗАРЕЄСТРУВАТИСЯ"
   },
   "LocalSwitcher": {
     "language": "Мова",
@@ -13,10 +16,13 @@
     "profile": "Профіль",
     "users": "Користувачі",
     "companies": "Компанії",
-    "about": "Про нас"
+    "about": "Про нас",
+    "signin": "Увійти",
+    "signup": "Зареєструватися"
   },
   "Footer": {
     "title": "Стажерський проект Meduzzen",
+    "title_short": "Meduzzen",
     "month": "Жовтн."
   },
   "UniversalModal": {
@@ -34,5 +40,61 @@
   },
   "UsersPage": {
     "title": "Сторінка користувачів"
+  },
+  "SignInForm": {
+    "title": "Форма Входу",
+    "Sign_in": "Увійти",
+    "Reset": "Скинути",
+    "Email": "Електронна пошта",
+    "Password": "Пароль",
+    "required": "Ім'я є обов'язковим.",
+    "onlyLatinSymbols": "Тільки латинські символи.",
+    "firstLetterUppercase": "Перша літера повинна бути великою.",
+    "emailRequired": "Електронна адреса є обов'язковою.",
+    "invalidEmail": "Невірна електронна адреса.",
+    "passwordRequired": "Пароль є обов'язковим.",
+    "passwordMinLength": "Пароль має бути не менше 8 символів.",
+    "passwordComplexity": "Пароль повинен містити велику та малу літери, цифру та спеціальний символ.",
+    "LoginBtn": "На головну сторінку",
+    "loggedSuccessfully": "Успішно ввійшли",
+    "welcomeBack": "Ласкаво просимо назад!",
+    "validationFailed": "Помилка перевірки.",
+    "incorrectUserPass": "Неправильне ім'я користувача або пароль",
+    "authFailed": "Помилка авторизації"
+  },
+  "SignUpForm": {
+    "title": "Форма реєстрації",
+    "Sign_up": "Зареєструватися",
+    "Reset": "Скинути",
+    "First Name": "Ім'я",
+    "Last Name": "Прізвищ",
+    "Email": "Електронна пошта",
+    "Password": "Пароль",
+    "Confirm Password": "Підтвердити пароль",
+    "required": "Ім'я є обов'язковим.",
+    "onlyLatinSymbols": "Тільки латинські символи.",
+    "firstLetterUppercase": "Перша літера повинна бути великою.",
+    "emailRequired": "Електронна адреса є обов'язковою.",
+    "invalidEmail": "Невірна електронна адреса.",
+    "passwordRequired": "Пароль є обов'язковим.",
+    "passwordMinLength": "Пароль має бути не менше 8 символів.",
+    "passwordComplexity": "Пароль повинен містити велику та малу літери, цифру та спеціальний символ.",
+    "Confirm Required": "Потрібно підтвердити пароль.",
+    "Passwords Match": "Паролі не збігаються.",
+    "LoginBtn": "До сторінки входу",
+    "registrationSuccessTitle": "Реєстрація пройшла успішно",
+    "registrationSuccessText": "Вас буде перенаправлено на сторінку входу",
+    "validationFailed": "Помилка перевірки.",
+    "emailExists": "Електронна адреса користувача вже існує.",
+    "registrationFailedTitle": "Помилка реєстрації"
+  },
+  "ExitButton": {
+    "Leave": "Залишити",
+    "Cancel": "Скасувати",
+    "leaveApp": "Залишити програму?",
+    "sureExit": "Ви впевнені, що хочете вийти?"
+  },
+  "FetchingUserData": {
+    "loading": "Отримання даних користувача..."
   }
 }

@@ -1,8 +1,39 @@
 .mainWrapper {
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   justify-content: center;
   align-items: center;
   padding-top: 60px;
+  margin: 0 auto;
+}
+
+.link {
+  display: inline-block;
+  width: 100%;
+}
+
+.videoWrapper {
+  width: 40vw;
+  min-width: 300px;
+  max-width: 400px;
+  position: relative;
+  overflow: hidden;
+  height: fit-content;
+  border-radius: 15px;
+  border: 2px solid #9c29b0;
+}
+
+.videoWrapperHeigh {
+  background-image: url("/dancing_guys.webp");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-top: 52.25%;
+}
+
+.mainTitle,
+.mainUser {
+  text-align: center;
 }

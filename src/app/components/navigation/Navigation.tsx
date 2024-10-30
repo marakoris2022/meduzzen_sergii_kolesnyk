@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { PATHS } from "@/interface/interface";
 import Link from "next/link";
 import styles from "./navigation.module.css";
+import { useUserData } from "@/app/hooks/useUserData";
 
 function MenuLinkItem({ path, title }: { path: string; title: string }) {
   const pathname = usePathname();
@@ -29,32 +30,38 @@ function MenuLinkItem({ path, title }: { path: string; title: string }) {
 
 const Navigation = () => {
   const t = useTranslations("NavigationRoutes");
+  const { userData } = useUserData();
 
-  const navigationRoutes = [
-    { id: 0, name: t("main"), url: PATHS.MAIN },
-    { id: 1, name: t("profile"), url: PATHS.PROFILE },
-    { id: 2, name: t("users"), url: PATHS.USERS },
-    { id: 3, name: t("companies"), url: PATHS.COMPANIES },
-    { id: 4, name: t("about"), url: PATHS.ABOUT },
-  ];
+  function PublicMenuList() {
+    return (
+      <>
+        <MenuLinkItem path={PATHS.MAIN} title={t("main")} />
+        <MenuLinkItem path={PATHS.SIGNIN} title={t("signin")} />
+        <MenuLinkItem path={PATHS.SIGNUP} title={t("signup")} />
+      </>
+    );
+  }
 
-  const MenuItemsArr = navigationRoutes.sort(
-    (curNavItem, nextNavItem) => curNavItem.id - nextNavItem.id
-  );
+  function PrivateMenuList() {
+    return (
+      <>
+        <MenuLinkItem path={PATHS.MAIN} title={t("main")} />
+        <MenuLinkItem path={PATHS.PROFILE} title={t("profile")} />
+        <MenuLinkItem path={PATHS.USERS} title={t("users")} />
+        <MenuLinkItem path={PATHS.COMPANIES} title={t("companies")} />
+        <MenuLinkItem path={PATHS.ABOUT} title={t("about")} />
+      </>
+    );
+  }
 
   return (
     <>
       <Box component="nav" className={styles.menuWrapper}>
-        <List className={styles.menuItems}>
-          {MenuItemsArr.map((MenuItem) => (
-            <MenuLinkItem
-              key={MenuItem.id}
-              path={MenuItem.url}
-              title={MenuItem.name}
-            />
-          ))}
+        <List className={styles.menuItems_row}>
+          {userData ? <PrivateMenuList /> : <PublicMenuList />}
         </List>
       </Box>
+
       <Box component="nav" className={styles.dropDownMenuWrapper}>
         <PopupState variant="popover" popupId="demo-popup-menu">
           {(popupState) => (
@@ -63,13 +70,9 @@ const Navigation = () => {
                 {popupState.isOpen ? <CloseIcon /> : <MenuIcon />}
               </Button>
               <Menu className="test" {...bindMenu(popupState)}>
-                {MenuItemsArr.map((MenuItem) => (
-                  <MenuLinkItem
-                    key={MenuItem.id}
-                    path={MenuItem.url}
-                    title={MenuItem.name}
-                  />
-                ))}
+                <List className={styles.menuItems_col}>
+                  {userData ? <PrivateMenuList /> : <PublicMenuList />}
+                </List>
               </Menu>
             </>
           )}
