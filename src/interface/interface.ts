@@ -24,3 +24,26 @@ export type UserProps = {
   user_links: string[];
   is_superuser: true;
 };
+
+export type UsersProps = {
+  status_code: number;
+  detail: string;
+  result: {
+    users: UserItem[];
+    pagination: Pagination;
+  };
+};
+
+type UserItem = {
+  user_id: number;
+  user_email: string;
+  user_firstname: string;
+  user_lastname: string;
+  user_avatar: string | null;
+};
+
+type Pagination = {
+  current_page: number;
+  total_page: number;
+  total_results: number;
+};
