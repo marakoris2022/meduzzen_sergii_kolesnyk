@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Container, Stack } from "@mui/material";
 import { themeConstants } from "../../../constants/themeConstants";
 import Navigation from "../navigation/Navigation";
@@ -7,8 +9,10 @@ import Link from "next/link";
 import { PATHS } from "@/interface/interface";
 import styles from "./header.module.css";
 import ExitButton from "../ExitButton";
+import { useUserData } from "@/app/hooks/useUserData";
 
 const Header = () => {
+  const { userData } = useUserData();
   return (
     <Box component="header">
       <Container>
@@ -27,7 +31,7 @@ const Header = () => {
           <LocaleSwitcher />
           <Stack direction={"row"} gap={2}>
             <Navigation />
-            <ExitButton />
+            {userData && <ExitButton />}
           </Stack>
         </Box>
       </Container>

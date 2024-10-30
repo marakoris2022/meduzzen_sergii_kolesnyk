@@ -17,6 +17,8 @@ import { setToken } from "@/state/auth/authSlice";
 import { PATHS, TOKEN } from "@/interface/interface";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { setUserData } from "@/state/user/userSlice";
+import { getMe } from "@/services/axios-api-methods/axiosGet";
 
 type LoginFromProps = {
   email: string;
@@ -77,6 +79,8 @@ const SignInForm = () => {
           secure: true,
           sameSite: "Strict",
         });
+        const userData = await getMe();
+        dispatch(setUserData(userData));
       }
 
       setModalData({

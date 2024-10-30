@@ -9,6 +9,8 @@ import { useTranslations } from "next-intl";
 import { PATHS } from "@/interface/interface";
 import Link from "next/link";
 import styles from "./navigation.module.css";
+import { useUserData } from "@/app/hooks/useUserData";
+import { useEffect, useState } from "react";
 
 function MenuLinkItem({ path, title }: { path: string; title: string }) {
   const pathname = usePathname();
@@ -27,18 +29,39 @@ function MenuLinkItem({ path, title }: { path: string; title: string }) {
   );
 }
 
+type NavigationRoutesProps = {
+  id: number;
+  name: string;
+  url: PATHS;
+};
+
 const Navigation = () => {
   const t = useTranslations("NavigationRoutes");
 
-  const navigationRoutes = [
+  const navigationRoutesPrivate = [
     { id: 0, name: t("main"), url: PATHS.MAIN },
     { id: 1, name: t("profile"), url: PATHS.PROFILE },
     { id: 2, name: t("users"), url: PATHS.USERS },
     { id: 3, name: t("companies"), url: PATHS.COMPANIES },
     { id: 4, name: t("about"), url: PATHS.ABOUT },
   ];
+  const navigationRoutesPublic = [
+    { id: 0, name: t("main"), url: PATHS.MAIN },
+    { id: 1, name: t("signin"), url: PATHS.SIGNIN },
+    { id: 2, name: t("signup"), url: PATHS.SIGNUP },
+  ];
 
-  const MenuItemsArr = navigationRoutes.sort(
+  const [menuData, setMenuData] = useState<NavigationRoutesProps[]>(
+    navigationRoutesPublic
+  );
+  const { userData } = useUserData();
+
+  useEffect(() => {
+    if (userData) setMenuData(navigationRoutesPrivate);
+    else setMenuData(navigationRoutesPublic);
+  }, [userData]);
+
+  const MenuItemsArr = menuData.sort(
     (curNavItem, nextNavItem) => curNavItem.id - nextNavItem.id
   );
 

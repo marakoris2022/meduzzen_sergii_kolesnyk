@@ -10,6 +10,7 @@ import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import { Box, Button, Stack } from "@mui/material";
 import UniversalModal from "./universal-modal/UniversalModal";
 import { useTranslations } from "next-intl";
+import { clearUserData } from "@/state/user/userSlice";
 
 const ExitButton = () => {
   const dispatch = useAppDispatch();
@@ -19,8 +20,10 @@ const ExitButton = () => {
 
   const handleLogout = () => {
     dispatch(clearToken());
+    dispatch(clearUserData());
     localStorage.removeItem(TOKEN.NAME);
     Cookies.remove(TOKEN.NAME);
+    setIsModal(false);
     navigate.push(PATHS.MAIN);
   };
 

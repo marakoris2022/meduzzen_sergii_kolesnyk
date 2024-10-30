@@ -15,7 +15,9 @@
     "profile": "Profile",
     "users": "Users",
     "companies": "Companies",
-    "about": "About"
+    "about": "About",
+    "signin": "SignIn",
+    "signup": "SignUp"
   },
   "Footer": {
     "title": "Meduzzen Intern project",
