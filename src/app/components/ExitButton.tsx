@@ -7,7 +7,7 @@ import { useAppDispatch } from "@/state/hooks";
 import { PATHS, TOKEN } from "@/interface/interface";
 import { useRouter } from "next/navigation";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
-import { Box, Button, Stack } from "@mui/material";
+import {  Button, Stack } from "@mui/material";
 import UniversalModal from "./universal-modal/UniversalModal";
 import { useTranslations } from "next-intl";
 import { clearUserData } from "@/state/user/userSlice";

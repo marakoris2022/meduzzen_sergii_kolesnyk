@@ -20,7 +20,7 @@ export const fetchUserData = createAsyncThunk(
     try {
       const response = await getMe();
       return response;
-    } catch (error) {
+    } catch {
       return rejectWithValue("Failed to fetch user data");
     }
   }
