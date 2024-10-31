@@ -1,0 +1,9 @@
+.pageWrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pageTitle {
+  padding: 20px 0;
+  text-align: center;
+}

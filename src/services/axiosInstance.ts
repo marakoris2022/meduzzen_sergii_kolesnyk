@@ -35,7 +35,9 @@ axiosInstance.interceptors.response.use(
   (error) => {
     const logout = useLogout();
     if (error.response && error.response.status === 401) {
-      logout();
+      if (error.response.data?.detail?.includes("Token")) {
+        logout();
+      }
     }
 
     return Promise.reject(error);

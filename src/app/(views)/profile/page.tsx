@@ -12,9 +12,19 @@ import styles from "./profile.module.css";
 import { useUserData } from "@/app/hooks/useUserData";
 import Loading from "@/app/components/Loading";
 import Image from "next/image";
-import { UserProps } from "@/interface/interface";
+import { PATHS, UserProps } from "@/interface/interface";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
+import UniversalModal from "@/app/components/universal-modal/UniversalModal";
+import { useState } from "react";
+import { deleteUser } from "@/services/axios-api-methods/axiosDelete";
+import { useLogout } from "@/app/hooks/useLogout";
+import { useRouter } from "next/navigation";
+
+type ModalActionsProps = {
+  handleDeleteUser: () => void;
+  handleCloseModal: () => void;
+};
 
 function UserDataTable({ userData }: { userData: UserProps }) {
   return (
@@ -37,8 +47,27 @@ function UserDataTable({ userData }: { userData: UserProps }) {
   );
 }
 
+function ModalActions({
+  handleDeleteUser,
+  handleCloseModal,
+}: ModalActionsProps) {
+  return (
+    <Stack gap={2} direction={"row"}>
+      <Button onClick={handleDeleteUser} color="error" variant={"outlined"}>
+        Delete
+      </Button>
+      <Button onClick={handleCloseModal} color={"success"} variant={"outlined"}>
+        Close
+      </Button>
+    </Stack>
+  );
+}
+
 const ProfilePage = () => {
   const { userData, isLoading } = useUserData();
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const router = useRouter();
+  const logout = useLogout();
 
   if (isLoading)
     return (
@@ -47,8 +76,35 @@ const ProfilePage = () => {
       </Container>
     );
 
+  async function handleDeleteUser() {
+    try {
+      await deleteUser(userData!.user_id);
+      logout();
+    } catch {
+      setIsModal(false);
+    }
+  }
+
+  function handleCloseModal() {
+    setIsModal(false);
+  }
+
   return (
     <Container>
+      <UniversalModal
+        open={isModal}
+        handleClose={() => {
+          setIsModal(false);
+        }}
+        title="Delete Profile?"
+        description="Are you sure, you want to delete your profile? All data will be lost!"
+        footerActions={
+          <ModalActions
+            handleDeleteUser={handleDeleteUser}
+            handleCloseModal={handleCloseModal}
+          />
+        }
+      />
       <Box className={styles.wrapper}>
         <Stack className={styles.photoCardWrapper} direction={"column"} gap={1}>
           <Box className={styles.photoWrapper}>
@@ -86,6 +142,9 @@ const ProfilePage = () => {
               color={"warning"}
               variant={"outlined"}
               endIcon={<SettingsOutlinedIcon />}
+              onClick={() => {
+                router.push(PATHS.PROFILE_EDIT);
+              }}
             >
               Edit Data
             </Button>
@@ -93,6 +152,9 @@ const ProfilePage = () => {
               color={"error"}
               variant={"text"}
               endIcon={<WarningAmberOutlinedIcon />}
+              onClick={() => {
+                setIsModal(true);
+              }}
             >
               Delete Profile
             </Button>

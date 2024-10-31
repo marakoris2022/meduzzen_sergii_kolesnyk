@@ -1,6 +1,7 @@
 export enum PATHS {
   MAIN = "/",
   PROFILE = "/profile",
+  PROFILE_EDIT = "/profile/edit",
   USERS = "/users",
   COMPANIES = "/companies",
   ABOUT = "/about",
