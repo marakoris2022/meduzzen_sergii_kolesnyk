@@ -5,6 +5,11 @@ import styles from "./editProfile.module.css";
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { useRouter } from "next/navigation";
+import { PATHS } from "@/interface/interface";
+import General from "./panels/General";
+import Avatar from "./panels/Avatar";
+import Password from "./panels/Password";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -37,6 +42,7 @@ function a11yProps(index: number) {
 
 const ProfileEditPage = () => {
   const [value, setValue] = React.useState(0);
+  const router = useRouter();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -49,8 +55,8 @@ const ProfileEditPage = () => {
           Edit Profile
         </Typography>
 
-        <Box sx={{ width: "100%" }}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box className={styles.tabContainer}>
+          <Box className={styles.tabWrapper}>
             <Tabs
               value={value}
               onChange={handleChange}
@@ -59,16 +65,23 @@ const ProfileEditPage = () => {
               <Tab label="General" {...a11yProps(0)} />
               <Tab label="Password" {...a11yProps(1)} />
               <Tab label="Avatar" {...a11yProps(2)} />
+              <Tab
+                className={styles.backBtn}
+                onClick={() => {
+                  router.push(PATHS.PROFILE);
+                }}
+                label="Back to Profile"
+              />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
-            Item One
+            <General />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            Item Two
+            <Password />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
-            Item Three
+            <Avatar />
           </CustomTabPanel>
         </Box>
       </Box>

@@ -1,9 +1,25 @@
 .pageWrapper {
   max-width: 900px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
-
 .pageTitle {
   padding: 20px 0;
   text-align: center;
+}
+
+.tabContainer {
+  width: 100%;
+}
+
+.tabWrapper {
+  border-bottom: 1px solid #221f26;
+  padding-bottom: 5px;
+}
+.tabContainer {
+  flex-grow: 1;
+}
+.backBtn {
+  color: orangered !important;
 }

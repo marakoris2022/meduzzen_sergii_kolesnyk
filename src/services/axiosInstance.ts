@@ -34,8 +34,10 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const logout = useLogout();
+    console.log(error);
+
     if (error.response && error.response.status === 401) {
-      if (error.response.data?.detail?.includes("Token")) {
+      if (error.response.data?.detail?.msg?.includes("signing key")) {
         logout();
       }
     }
