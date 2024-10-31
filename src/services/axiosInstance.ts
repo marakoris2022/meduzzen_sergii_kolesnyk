@@ -1,7 +1,7 @@
 import axios from "axios";
 import { TOKEN } from "@/interface/interface";
 import { storeRef } from "@/app/components/StoreProvider";
-import { logout } from "@/utils/logout";
+import { useLogout } from "../app/hooks/useLogout";
 
 const BASE_URL = process.env.BASE_URL || "http://51.20.210.187";
 
@@ -33,6 +33,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+    const logout = useLogout();
     if (error.response && error.response.status === 401) {
       logout();
     }
