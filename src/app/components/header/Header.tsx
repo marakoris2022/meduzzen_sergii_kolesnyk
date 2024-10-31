@@ -3,7 +3,7 @@
 import { Box, Container, Stack } from "@mui/material";
 import { themeConstants } from "../../../constants/themeConstants";
 import Navigation from "../navigation/Navigation";
-import LocaleSwitcher from "../LocaleSwitcher";
+import LocaleSwitcher from "../local-switcher/LocaleSwitcher";
 import LogoIcon from "../LogoIcon";
 import Link from "next/link";
 import { PATHS } from "@/interface/interface";
