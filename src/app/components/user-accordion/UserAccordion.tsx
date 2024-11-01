@@ -44,20 +44,12 @@ function AdditionalUserPropsCard({
   is_superuser,
 }: AdditionalUserPropsCardProps) {
   const t = useTranslations("UserAccordion");
+
   return (
     <Stack direction={"row"} gap={5}>
       <Stack>
         <Typography variant="body1" fontWeight="bold">
-          {t("Status")}:
-          {user_status ? (
-            <Typography component="span" color="success">
-              {t("online")}
-            </Typography>
-          ) : (
-            <Typography component="span" color="error">
-              {t("offline")}
-            </Typography>
-          )}
+          <strong>{t("Status")}</strong>:{user_status || t("empty")}
         </Typography>
         <Typography variant="body1">
           <strong>{t("City")}:</strong> {user_city || t("empty")}
@@ -149,6 +141,7 @@ const UserAccordion = (userData: UserAccordionProps) => {
             />
           ) : (
             <Button
+              fullWidth
               onClick={() => handleLoadData(userData.user_id)}
               variant="outlined"
             >

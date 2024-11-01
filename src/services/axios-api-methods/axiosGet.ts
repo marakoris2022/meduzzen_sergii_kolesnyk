@@ -20,5 +20,5 @@ export const getUsers = async (page: number = 1, page_size: number = 10) => {
 
 export const getUserById = async (userId: number) => {
   const response = await axiosInstance.get(`/user/${userId}/`);
-  return response.data as UserProps;
+  return response.data.result as UserProps;
 };

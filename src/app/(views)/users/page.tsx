@@ -21,8 +21,6 @@ const UsersPage = () => {
 
   useEffect(() => {
     getUsers(page).then((data) => {
-      console.log(data);
-
       setPagesCount(data.result.pagination.total_page);
       setUsersData(data);
     });

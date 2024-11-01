@@ -13,13 +13,7 @@ export const updateUserGeneralData = async (
   data: UpdateUserGeneralProps,
   userId: number
 ) => {
-  try {
-    const response = await axiosInstance.put(`/user/${userId}/update_info/`, {
-      ...data,
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Login error:", error);
-    throw error;
-  }
+  return await axiosInstance.put(`/user/${userId}/update_info/`, {
+    ...data,
+  });
 };

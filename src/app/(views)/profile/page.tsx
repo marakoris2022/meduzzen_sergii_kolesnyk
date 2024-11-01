@@ -29,6 +29,9 @@ type ModalActionsProps = {
 function UserDataTable({ userData }: { userData: UserProps }) {
   return (
     <Grid2 container spacing={2} columns={12}>
+      <Grid2 size={6}>Status: </Grid2>
+      <Grid2 size={6}>{userData?.user_status || "none"}</Grid2>
+
       <Grid2 size={6}>Super User: </Grid2>
       <Grid2 size={6}>{userData?.is_superuser ? "Yes" : "No"}</Grid2>
 
@@ -41,8 +44,25 @@ function UserDataTable({ userData }: { userData: UserProps }) {
       <Grid2 size={6}>Phone: </Grid2>
       <Grid2 size={6}>{userData?.user_phone || "none"}</Grid2>
 
-      <Grid2 size={6}>Social : </Grid2>
-      <Grid2 size={6}>{userData?.user_links || "none"}</Grid2>
+      {Boolean(userData?.user_links.length) ? (
+        userData?.user_links.map((link) => {
+          return (
+            <>
+              <Grid2 key={link} size={6}>
+                Social Link:
+              </Grid2>
+              <Grid2 key={`${link}_`} size={6}>
+                {link}
+              </Grid2>
+            </>
+          );
+        })
+      ) : (
+        <>
+          <Grid2 size={6}>Social Link: </Grid2>
+          <Grid2 size={6}>{"none"}</Grid2>
+        </>
+      )}
     </Grid2>
   );
 }
@@ -130,9 +150,6 @@ const ProfilePage = () => {
           >
             <Typography>{userData?.user_firstname}</Typography>
             <Typography>{userData?.user_lastname}</Typography>
-            <Typography color={userData?.user_status ? "success" : "error"}>
-              {userData?.user_status ? "online" : "offline"}
-            </Typography>
           </Stack>
           <Box className={styles.tableWrapper}>
             <UserDataTable userData={userData!} />
