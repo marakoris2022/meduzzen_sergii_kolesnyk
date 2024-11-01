@@ -33,11 +33,9 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    const logout = useLogout();
-    console.log(error);
-
     if (error.response && error.response.status === 401) {
       if (error.response.data?.detail?.msg?.includes("signing key")) {
+        const logout = useLogout();
         logout();
       }
     }

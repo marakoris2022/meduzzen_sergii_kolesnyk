@@ -7,9 +7,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useRouter } from "next/navigation";
 import { PATHS } from "@/interface/interface";
-import General from "./panels/General";
-import Avatar from "./panels/Avatar";
-import Password from "./panels/Password";
+import General from "../../../components/edit-page-panels/GeneralEditPanel";
+import Avatar from "../../../components/edit-page-panels/AvatarEditPanel";
+import Password from "../../../components/edit-page-panels/PasswordEditPanel";
 
 interface TabPanelProps {
   children?: React.ReactNode;

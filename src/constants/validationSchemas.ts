@@ -28,3 +28,48 @@ export const passwordValidation = (t: (key: string) => string) => ({
     message: t("passwordComplexity"),
   },
 });
+
+export const statusValidation = (t: (key: string) => string) => ({
+  maxLength: {
+    value: 100,
+    message: t("statusMaxLength"),
+  },
+});
+
+export const cityValidation = (t: (key: string) => string) => ({
+  maxLength: {
+    value: 50,
+    message: t("cityMaxLength"),
+  },
+  pattern: {
+    value: /^[A-Za-z\s]+$/i,
+    message: t("onlyLatinSymbols"),
+  },
+});
+
+export const phoneValidation = (t: (key: string) => string) => ({
+  pattern: {
+    value: /^[+()0-9]+$/,
+    message: t("phoneInvalid"),
+  },
+  maxLength: {
+    value: 15,
+    message: t("phoneMaxLength"),
+  },
+});
+
+export const linksValidation = (t: (key: string) => string) => ({
+  validate: (text: string) => {
+    const arrayText = text.length > 0 ? text.split("\n") : "";
+
+    if (arrayText) {
+      for (let i = 0; i < arrayText.length; i++) {
+        const regEx =
+          /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+        if (!arrayText[i].match(regEx)) return t("invalidLink");
+      }
+    }
+
+    return true;
+  },
+});
