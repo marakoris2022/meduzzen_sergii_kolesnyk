@@ -119,6 +119,40 @@
     "cityMaxLength": "Maximum length is 50 symbols.",
     "phoneInvalid": "Wrongs phone number format.",
     "phoneMaxLength": "Maximum length is 15 symbols.",
-    "invalidLink": "Wrong link format."
+    "invalidLink": "Wrong link format.",
+    "updated": "Profile data is updated.",
+    "wrong": "Something wrong.",
+    "fName": "First Name",
+    "lName": "Last Name",
+    "Status": "Status",
+    "City": "City",
+    "Phone": "Phone",
+    "Links": "User Links",
+    "Submit": "Submit",
+    "Clear": "Clear"
+  },
+  "ProfilePage": {
+    "delete": "Delete Profile?",
+    "confirm_delete": "Are you sure, you want to delete your profile? All data will be lost!",
+    "edit": "Edit Data",
+    "del_user": "Delete Profile",
+    "delete_confirm": "Delete",
+    "close": "Close",
+    "status": "Status: ",
+    "none": "none",
+    "yes": "Yes",
+    "no": "No",
+    "super": "Super User: ",
+    "id": "User Id: ",
+    "city": "City : ",
+    "phone": "Phone: ",
+    "link": "Social Link:"
+  },
+  "ProfileEditPage": {
+    "edit": "Edit Profile",
+    "General": "General",
+    "Password": "Password",
+    "Avatar": "Avatar",
+    "back": "Back to Profile"
   }
 }

@@ -26,17 +26,22 @@ type EditGeneralFromProps = {
   user_links: string;
 };
 
+type UpdateStatusType = {
+  text: string;
+  color: "success" | "error";
+};
+
+const updateStatusInit: UpdateStatusType = {
+  text: "",
+  color: "success",
+};
+
 const General = () => {
   const t = useTranslations("EditProfileGeneral");
-  const [updateStatus, setUpdateStatus] = useState<{
-    text: string;
-    color: "success" | "error";
-  }>({
-    text: "",
-    color: "success",
-  });
   const dispatch = useAppDispatch();
   const { userData } = useUserData();
+  const [updateStatus, setUpdateStatus] =
+    useState<UpdateStatusType>(updateStatusInit);
   const {
     register,
     handleSubmit,
@@ -44,14 +49,7 @@ const General = () => {
     reset,
     formState: { errors },
   } = useForm<EditGeneralFromProps>({
-    defaultValues: {
-      user_firstname: userData?.user_firstname,
-      user_lastname: userData?.user_lastname,
-      user_status: userData?.user_status,
-      user_city: userData?.user_city,
-      user_phone: userData?.user_phone,
-      user_links: userData?.user_links.join("\n"),
-    },
+    defaultValues: { ...userData, user_links: userData?.user_links.join("\n") },
   });
 
   async function submit(data: EditGeneralFromProps) {
@@ -66,9 +64,9 @@ const General = () => {
 
       await updateUserGeneralData(requestData, userData!.user_id);
       dispatch(setUserData({ ...userData, ...requestData }));
-      setUpdateStatus({ text: "Profile data is updated.", color: "success" });
+      setUpdateStatus({ text: t("updated"), color: "success" });
     } catch {
-      setUpdateStatus({ text: "Something wrong.", color: "error" });
+      setUpdateStatus({ text: t("wrong"), color: "error" });
     }
   }
 
@@ -78,46 +76,41 @@ const General = () => {
     setUpdateStatus((state) => ({ ...state, text: "" }));
   }
 
+  const editInputFields = [
+    { name: "user_firstname", label: t("fName"), validation: nameValidation },
+    { name: "user_lastname", label: t("lName"), validation: nameValidation },
+    { name: "user_status", label: t("Status"), validation: statusValidation },
+    { name: "user_city", label: t("City"), validation: cityValidation },
+    { name: "user_phone", label: t("Phone"), validation: phoneValidation },
+    {
+      name: "user_links",
+      label: t("Links"),
+      validation: linksValidation,
+      multiline: true,
+      minRows: 3,
+    },
+  ];
+
+  type NameProps =
+    | "user_firstname"
+    | "user_lastname"
+    | "user_status"
+    | "user_city"
+    | "user_phone"
+    | "user_links";
+
   return userData ? (
     <Stack component={"form"} onSubmit={handleSubmit(submit)} gap={3}>
-      <TextField
-        error={!!errors.user_firstname}
-        {...register("user_firstname", nameValidation(t))}
-        label={"First Name"}
-        helperText={errors.user_firstname ? errors.user_firstname.message : ""}
-      />
-      <TextField
-        error={!!errors.user_lastname}
-        {...register("user_lastname", nameValidation(t))}
-        label={"Last Name"}
-        helperText={errors.user_lastname ? errors.user_lastname.message : ""}
-      />
-      <TextField
-        error={!!errors.user_status}
-        {...register("user_status", statusValidation(t))}
-        label={"Status"}
-        helperText={errors.user_status ? errors.user_status.message : ""}
-      />
-      <TextField
-        error={!!errors.user_city}
-        {...register("user_city", cityValidation(t))}
-        label={"City"}
-        helperText={errors.user_city ? errors.user_city.message : ""}
-      />
-      <TextField
-        error={!!errors.user_phone}
-        {...register("user_phone", phoneValidation(t))}
-        label={"Phone"}
-        helperText={errors.user_phone ? errors.user_phone.message : ""}
-      />
-      <TextField
-        error={!!errors.user_links}
-        multiline
-        minRows={3}
-        {...register("user_links", linksValidation(t))}
-        label={"User Links"}
-        helperText={errors.user_links ? errors.user_links.message : ""}
-      />
+      {editInputFields.map(({ name, label, validation, ...props }) => (
+        <TextField
+          key={name}
+          error={!!errors[name as keyof typeof errors]}
+          {...register(name as NameProps, validation(t))}
+          label={label}
+          helperText={errors[name as keyof typeof errors]?.message || ""}
+          {...props}
+        />
+      ))}
 
       <Typography textAlign={"center"} color={updateStatus.color}>
         {updateStatus.text}
@@ -129,16 +122,14 @@ const General = () => {
         gap={3}
       >
         <Button type="submit" variant="outlined" color="success">
-          Submit
+          {t("Submit")}
         </Button>
         <Button onClick={handleReset} variant="outlined" color="warning">
-          Clear
+          {t("Clear")}
         </Button>
       </Stack>
     </Stack>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default General;

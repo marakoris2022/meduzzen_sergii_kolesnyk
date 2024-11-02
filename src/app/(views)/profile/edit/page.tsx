@@ -1,18 +1,19 @@
 "use client";
 
 import { Box, Container, Typography } from "@mui/material";
-import styles from "./editProfile.module.css";
-import * as React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import { ReactNode, SyntheticEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PATHS } from "@/interface/interface";
+import styles from "./editProfile.module.css";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import General from "../../../components/edit-page-panels/GeneralEditPanel";
 import Avatar from "../../../components/edit-page-panels/AvatarEditPanel";
 import Password from "../../../components/edit-page-panels/PasswordEditPanel";
+import { useTranslations } from "next-intl";
 
 interface TabPanelProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   index: number;
   value: number;
 }
@@ -41,10 +42,11 @@ function a11yProps(index: number) {
 }
 
 const ProfileEditPage = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const router = useRouter();
+  const t = useTranslations("ProfileEditPage");
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
@@ -52,7 +54,7 @@ const ProfileEditPage = () => {
     <Container>
       <Box className={styles.pageWrapper}>
         <Typography className={styles.pageTitle} variant={"h4"}>
-          Edit Profile
+          {t("edit")}
         </Typography>
 
         <Box className={styles.tabContainer}>
@@ -62,15 +64,15 @@ const ProfileEditPage = () => {
               onChange={handleChange}
               aria-label="basic tabs example"
             >
-              <Tab label="General" {...a11yProps(0)} />
-              <Tab label="Password" {...a11yProps(1)} />
-              <Tab label="Avatar" {...a11yProps(2)} />
+              <Tab label={t("General")} {...a11yProps(0)} />
+              <Tab label={t("Password")} {...a11yProps(1)} />
+              <Tab label={t("Avatar")} {...a11yProps(2)} />
               <Tab
                 className={styles.backBtn}
                 onClick={() => {
                   router.push(PATHS.PROFILE);
                 }}
-                label="Back to Profile"
+                label={t("back")}
               />
             </Tabs>
           </Box>

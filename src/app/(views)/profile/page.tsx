@@ -16,10 +16,11 @@ import { PATHS, UserProps } from "@/interface/interface";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
 import UniversalModal from "@/app/components/universal-modal/UniversalModal";
-import { useState } from "react";
+import React, { useState } from "react";
 import { deleteUser } from "@/services/axios-api-methods/axiosDelete";
 import { useLogout } from "@/app/hooks/useLogout";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 type ModalActionsProps = {
   handleDeleteUser: () => void;
@@ -27,40 +28,37 @@ type ModalActionsProps = {
 };
 
 function UserDataTable({ userData }: { userData: UserProps }) {
+  const t = useTranslations("ProfilePage");
   return (
-    <Grid2 container spacing={2} columns={12}>
-      <Grid2 size={6}>Status: </Grid2>
-      <Grid2 size={6}>{userData?.user_status || "none"}</Grid2>
+    <Grid2 key={userData.user_id} container spacing={2} columns={12}>
+      <Grid2 size={6}>{t("status")}</Grid2>
+      <Grid2 size={6}>{userData?.user_status || t("none")}</Grid2>
 
-      <Grid2 size={6}>Super User: </Grid2>
-      <Grid2 size={6}>{userData?.is_superuser ? "Yes" : "No"}</Grid2>
+      <Grid2 size={6}>{t("super")}</Grid2>
+      <Grid2 size={6}>{userData?.is_superuser ? t("yes") : t("no")}</Grid2>
 
-      <Grid2 size={6}>User Id: </Grid2>
-      <Grid2 size={6}>{userData?.user_id || "none"}</Grid2>
+      <Grid2 size={6}>{t("id")}</Grid2>
+      <Grid2 size={6}>{userData?.user_id || t("none")}</Grid2>
 
-      <Grid2 size={6}>City : </Grid2>
-      <Grid2 size={6}>{userData?.user_city || "none"}</Grid2>
+      <Grid2 size={6}>{t("city")}</Grid2>
+      <Grid2 size={6}>{userData?.user_city || t("none")}</Grid2>
 
-      <Grid2 size={6}>Phone: </Grid2>
-      <Grid2 size={6}>{userData?.user_phone || "none"}</Grid2>
+      <Grid2 size={6}>{t("phone")}</Grid2>
+      <Grid2 size={6}>{userData?.user_phone || t("none")}</Grid2>
 
       {Boolean(userData?.user_links.length) ? (
-        userData?.user_links.map((link) => {
+        userData?.user_links.map((link, index) => {
           return (
-            <>
-              <Grid2 key={link} size={6}>
-                Social Link:
-              </Grid2>
-              <Grid2 key={`${link}_`} size={6}>
-                {link}
-              </Grid2>
-            </>
+            <React.Fragment key={`${index}_fragment`}>
+              <Grid2 size={6}>{t("link")}</Grid2>
+              <Grid2 size={6}>{link}</Grid2>
+            </React.Fragment>
           );
         })
       ) : (
         <>
-          <Grid2 size={6}>Social Link: </Grid2>
-          <Grid2 size={6}>{"none"}</Grid2>
+          <Grid2 size={6}>{t("link")}</Grid2>
+          <Grid2 size={6}>{t("none")}</Grid2>
         </>
       )}
     </Grid2>
@@ -71,19 +69,21 @@ function ModalActions({
   handleDeleteUser,
   handleCloseModal,
 }: ModalActionsProps) {
+  const t = useTranslations("ProfilePage");
   return (
     <Stack gap={2} direction={"row"}>
       <Button onClick={handleDeleteUser} color="error" variant={"outlined"}>
-        Delete
+        {t("delete_confirm")}
       </Button>
       <Button onClick={handleCloseModal} color={"success"} variant={"outlined"}>
-        Close
+        {t("close")}
       </Button>
     </Stack>
   );
 }
 
 const ProfilePage = () => {
+  const t = useTranslations("ProfilePage");
   const { userData, isLoading } = useUserData();
   const [isModal, setIsModal] = useState<boolean>(false);
   const router = useRouter();
@@ -116,8 +116,8 @@ const ProfilePage = () => {
         handleClose={() => {
           setIsModal(false);
         }}
-        title="Delete Profile?"
-        description="Are you sure, you want to delete your profile? All data will be lost!"
+        title={t("delete")}
+        description={t("confirm_delete")}
         footerActions={
           <ModalActions
             handleDeleteUser={handleDeleteUser}
@@ -136,7 +136,7 @@ const ProfilePage = () => {
                   ? userData?.user_avatar
                   : "/no_avatar_main.webp"
               }
-              alt={""}
+              alt={"User_Avatar"}
             />
           </Box>
           <Typography>{userData?.user_email}</Typography>
@@ -163,7 +163,7 @@ const ProfilePage = () => {
                 router.push(PATHS.PROFILE_EDIT);
               }}
             >
-              Edit Data
+              {t("edit")}
             </Button>
             <Button
               color={"error"}
@@ -173,7 +173,7 @@ const ProfilePage = () => {
                 setIsModal(true);
               }}
             >
-              Delete Profile
+              {t("del_user")}
             </Button>
           </Box>
         </Stack>
