@@ -1,30 +1,34 @@
 "use client";
 
-import { getUsers } from "@/services/axios-api-methods/axiosGet";
+// import { getUsers } from "@/services/axios-api-methods/axiosGet";
 import { Box, Container, Pagination, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from "./users.module.css";
-import { UsersProps } from "@/interface/interface";
+// import { UsersProps } from "@/interface/interface";
 import Loading from "@/app/components/Loading";
 import UserAccordion from "@/app/components/user-accordion/UserAccordion";
+import { useAppDispatch, useAppSelector } from "@/state/hooks";
+import { fetchUsersData, setPageNumber } from "@/state/users/usersSlice";
 
 const UsersPage = () => {
   const t = useTranslations("UsersPage");
-  const [page, setPage] = useState<number>(1);
-  const [pagesCount, setPagesCount] = useState<number>(1);
-  const [usersData, setUsersData] = useState<null | UsersProps>(null);
+  // const [page, setPage] = useState<number>(1);
+  // const [pagesCount, setPagesCount] = useState<number>(1);
+  // const [usersData, setUsersData] = useState<null | UsersProps>(null);
+
+  const { usersData, pageCount, pageNumber } = useAppSelector(
+    (state) => state.users
+  );
+  const dispath = useAppDispatch();
 
   function handleChange(currentPage: number) {
-    setPage(currentPage);
+    dispath(setPageNumber(currentPage));
   }
 
   useEffect(() => {
-    getUsers(page).then((data) => {
-      setPagesCount(data.result.pagination.total_page);
-      setUsersData(data);
-    });
-  }, [page]);
+    dispath(fetchUsersData(pageNumber));
+  }, [pageNumber]);
 
   if (!usersData) {
     return <Loading />;
@@ -35,27 +39,17 @@ const UsersPage = () => {
       <Stack alignItems={"center"}>
         <Typography className={styles.title} component={"h1"}>
           {t("title")}
-          {usersData && ` : ( ${usersData.result.pagination.total_results} )`}
         </Typography>
         <Stack direction={"column"} gap={2} width={"80%"}>
           {usersData &&
-            usersData.result.users.map((user) => {
-              return (
-                <UserAccordion
-                  key={user.user_id}
-                  user_id={user.user_id}
-                  user_email={user.user_email}
-                  user_firstname={user.user_firstname}
-                  user_lastname={user.user_lastname}
-                  user_avatar={user.user_avatar}
-                />
-              );
+            usersData.map((user) => {
+              return <UserAccordion key={user.user_id} user={user} />;
             })}
         </Stack>
         <Box className={styles.paginationWrapper}>
           <Pagination
-            count={pagesCount}
-            page={page}
+            count={pageCount}
+            page={pageNumber}
             variant="outlined"
             color="secondary"
             onChange={(_, b) => handleChange(b)}

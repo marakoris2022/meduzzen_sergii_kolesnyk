@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import stringReducer from "./string/stringSlice";
 import authReducer from "./auth/authSlice";
 import userReducer from "./user/userSlice";
+import usersSlice from "./users/usersSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -9,6 +10,7 @@ export const makeStore = () => {
       string: stringReducer,
       auth: authReducer,
       user: userReducer,
+      users: usersSlice,
     },
   });
 };

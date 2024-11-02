@@ -1,5 +1,4 @@
 import { UserProps } from "@/interface/interface";
-import { getUserById } from "@/services/axios-api-methods/axiosGet";
 import {
   Accordion,
   AccordionSummary,
@@ -7,25 +6,21 @@ import {
   Typography,
   AccordionDetails,
   Box,
-  Button,
   Chip,
   List,
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { useState } from "react";
 import RandomAvatar from "../RandomAvatar/RandomAvatar";
 import Image from "next/image";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import styles from "./userAccordion.module.css";
 import { useTranslations } from "next-intl";
+import { useAppDispatch } from "@/state/hooks";
+import { fetchUserDataById } from "@/state/users/usersSlice";
 
 type UserAccordionProps = {
-  user_id: number;
-  user_email: string;
-  user_firstname: string;
-  user_lastname: string;
-  user_avatar: string | null;
+  user: UserProps;
 };
 
 type AdditionalUserPropsCardProps = {
@@ -83,18 +78,16 @@ function AdditionalUserPropsCard({
   );
 }
 
-const UserAccordion = (userData: UserAccordionProps) => {
-  const [addUserData, setAddUserData] = useState<null | UserProps>(null);
+const UserAccordion = ({ user }: UserAccordionProps) => {
   const t = useTranslations("UserAccordion");
+  const dispath = useAppDispatch();
 
-  async function handleLoadData(id: number) {
-    getUserById(id).then((data) => {
-      setAddUserData(data);
-    });
+  async function handleLoadData() {
+    dispath(fetchUserDataById(user.user_id));
   }
 
   return (
-    <Accordion>
+    <Accordion onChange={handleLoadData}>
       <AccordionSummary
         expandIcon={<ArrowDownwardIcon />}
         aria-controls="panel1-content"
@@ -102,19 +95,19 @@ const UserAccordion = (userData: UserAccordionProps) => {
       >
         <Stack className={styles.accordionHeadingWrapper} direction={"row"}>
           <Typography>
-            {t("Email")}: {userData.user_email}
+            {t("Email")}: {user.user_email}
           </Typography>
           <Typography>
-            {t("Id")}: {userData.user_id}
+            {t("Id")}: {user.user_id}
           </Typography>
         </Stack>
       </AccordionSummary>
       <AccordionDetails>
         <Stack direction={"row"} gap={3}>
           <Box>
-            {userData.user_avatar ? (
+            {user.user_avatar ? (
               <Image
-                src={userData.user_avatar}
+                src={user.user_avatar}
                 alt={"Avatar"}
                 height={120}
                 width={100}
@@ -125,29 +118,19 @@ const UserAccordion = (userData: UserAccordionProps) => {
           </Box>
           <Stack>
             <Typography>
-              {t("Name")}: {userData.user_firstname}
+              {t("Name")}: {user.user_firstname}
             </Typography>
             <Typography>
-              {t("LastName")}: {userData.user_lastname}
+              {t("LastName")}: {user.user_lastname}
             </Typography>
           </Stack>
-          {addUserData ? (
-            <AdditionalUserPropsCard
-              user_status={addUserData.user_status}
-              user_city={addUserData.user_city}
-              user_phone={addUserData.user_phone}
-              user_links={addUserData.user_links}
-              is_superuser={addUserData.is_superuser}
-            />
-          ) : (
-            <Button
-              fullWidth
-              onClick={() => handleLoadData(userData.user_id)}
-              variant="outlined"
-            >
-              {t("Load_Data")}
-            </Button>
-          )}
+          <AdditionalUserPropsCard
+            user_status={user.user_status}
+            user_city={user.user_city}
+            user_phone={user.user_phone}
+            user_links={user.user_links}
+            is_superuser={user.is_superuser}
+          />
         </Stack>
       </AccordionDetails>
     </Accordion>

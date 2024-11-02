@@ -18,7 +18,7 @@ export type UserProps = {
   user_email: string;
   user_firstname: string;
   user_lastname: string;
-  user_avatar: string;
+  user_avatar: string | null;
   user_status: string;
   user_city: string;
   user_phone: string;

@@ -7,10 +7,14 @@ import { useTranslations } from "next-intl";
 import { useUserData } from "./hooks/useUserData";
 import { PATHS } from "@/interface/interface";
 import Loading from "./components/Loading";
+import { useAppDispatch, useAppSelector } from "@/state/hooks";
+import { fetchUserDataById, fetchUsersData } from "@/state/users/usersSlice";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
   const { userData, isLoading } = useUserData();
+  const dispath = useAppDispatch();
+  const users = useAppSelector((state) => state.users);
 
   if (isLoading)
     return (
@@ -33,6 +37,15 @@ export default function HomePage() {
             <Typography className={styles.mainUser} component={"h3"}>
               {userData.user_email}
             </Typography>
+            <Button
+              onClick={async () => {
+                await dispath(fetchUsersData(1));
+                await dispath(fetchUserDataById(1));
+                console.log(users);
+              }}
+            >
+              Data
+            </Button>
           </Stack>
         ) : (
           <>
