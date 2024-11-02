@@ -154,5 +154,18 @@
     "Password": "Password",
     "Avatar": "Avatar",
     "back": "Back to Profile"
+  },
+  "EditProfilePassword": {
+    "Submit": "Submit",
+    "Clear": "Clear",
+    "Confirm Required": "Confirm Password is required.",
+    "Passwords Match": "Passwords do not match.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters.",
+    "passwordComplexity": "Must include uppercase, lowercase, number, and special character.",
+    "nPassword": "New Password",
+    "cPassword": "Confirm Password",
+    "updated": "Profile data is updated.",
+    "wrong": "Something wrong."
   }
 }
