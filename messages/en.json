@@ -34,10 +34,7 @@
   "CompaniesPage": {
     "companies": "Companies Page"
   },
-  "ProfilePage": {
-    "title": "Profile",
-    "description": "Some data what we will add in future"
-  },
+
   "UsersPage": {
     "title": "Our Users"
   },
@@ -132,6 +129,8 @@
     "Clear": "Clear"
   },
   "ProfilePage": {
+    "title": "Profile",
+    "description": "Some data what we will add in future",
     "delete": "Delete Profile?",
     "confirm_delete": "Are you sure, you want to delete your profile? All data will be lost!",
     "edit": "Edit Data",
