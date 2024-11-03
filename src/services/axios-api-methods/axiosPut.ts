@@ -31,3 +31,15 @@ export const updateUserPassword = async (data: UpdateUserPasswordProps) => {
     user_password_repeat,
   });
 };
+
+export const updateUserAvatar = async (file: File, userId: number) => {
+  return await axiosInstance.put(
+    `/user/${userId}/update_avatar/`,
+    { file },
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+};

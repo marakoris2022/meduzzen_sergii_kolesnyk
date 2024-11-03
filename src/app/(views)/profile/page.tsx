@@ -129,8 +129,8 @@ const ProfilePage = () => {
         <Stack className={styles.photoCardWrapper} direction={"column"} gap={1}>
           <Box className={styles.photoWrapper}>
             <Image
-              width={200}
-              height={250}
+              fill={true}
+              objectFit="cover"
               src={
                 userData?.user_avatar
                   ? userData?.user_avatar

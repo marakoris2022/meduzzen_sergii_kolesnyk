@@ -19,10 +19,11 @@
   text-overflow: ellipsis;
 }
 .photoWrapper {
-  border-radius: 15px;
+  position: relative;
   overflow: hidden;
-  height: 250px;
-  width: fit-content;
+  border-radius: 15px;
+  height: 300px;
+  width: 300px;
 }
 
 .contentWrapper {

@@ -1,11 +1,9 @@
 "use client";
 
-// import { getUsers } from "@/services/axios-api-methods/axiosGet";
 import { Box, Container, Pagination, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import styles from "./users.module.css";
-// import { UsersProps } from "@/interface/interface";
 import Loading from "@/app/components/Loading";
 import UserAccordion from "@/app/components/user-accordion/UserAccordion";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
@@ -13,9 +11,6 @@ import { fetchUsersData, setPageNumber } from "@/state/users/usersSlice";
 
 const UsersPage = () => {
   const t = useTranslations("UsersPage");
-  // const [page, setPage] = useState<number>(1);
-  // const [pagesCount, setPagesCount] = useState<number>(1);
-  // const [usersData, setUsersData] = useState<null | UsersProps>(null);
 
   const { usersData, pageCount, pageNumber } = useAppSelector(
     (state) => state.users
