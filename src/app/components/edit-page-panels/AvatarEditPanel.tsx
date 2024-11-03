@@ -9,6 +9,7 @@ import { updateUserAvatar } from "@/services/axios-api-methods/axiosPut";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchUserData } from "@/state/user/userSlice";
 import { AxiosError } from "axios";
+import { useTranslations } from "next-intl";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -23,6 +24,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const Avatar = () => {
+  const t = useTranslations("AvatarProfileGeneral");
   const { userData } = useUserData();
   const [errorText, setErrorText] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<null | File>(null);
@@ -32,11 +34,11 @@ const Avatar = () => {
 
   function validateFile(file: File) {
     if (file.name.length > 20) {
-      setErrorText("File name is to long. Maximum 20 letters.");
+      setErrorText(t("long"));
       return false;
     }
     if (file.size > 600000) {
-      setErrorText("File size it to big. Maximum 600Kb.");
+      setErrorText(t("size"));
       return false;
     }
     return true;
@@ -62,7 +64,7 @@ const Avatar = () => {
       } catch (error) {
         setErrorText((error as AxiosError).message);
       }
-    } else setErrorText("You need to choose file.");
+    } else setErrorText(t("choose"));
   }
 
   return (
@@ -75,8 +77,16 @@ const Avatar = () => {
           alt={"No_Avatar"}
         />
       </div>
-      <p>File selected: {selectedFile?.name}</p>
-      {errorText && <Typography color="error">Error : {errorText}</Typography>}
+      <p>
+        {t("file")}
+        {selectedFile?.name}
+      </p>
+      {errorText && (
+        <Typography color="error">
+          {t("error")}
+          {errorText}
+        </Typography>
+      )}
       <div className={styles.btnWrapper}>
         <Button
           className={styles.uploadBtn}
@@ -86,7 +96,7 @@ const Avatar = () => {
           tabIndex={-1}
           startIcon={<AccountBoxIcon />}
         >
-          Select an Avatar
+          {t("select")}
           <VisuallyHiddenInput
             type="file"
             accept="image/png, image/jpeg, image/webp"
@@ -94,7 +104,7 @@ const Avatar = () => {
           />
         </Button>
         <Button onClick={handleSubmit} variant="outlined" color="success">
-          Submit
+          {t("submit")}
         </Button>
       </div>
     </div>

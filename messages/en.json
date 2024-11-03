@@ -166,5 +166,14 @@
     "cPassword": "Confirm Password",
     "updated": "Profile data is updated.",
     "wrong": "Something wrong."
+  },
+  "AvatarProfileGeneral": {
+    "long": "File name is to long. Maximum 20 letters.",
+    "size": "File size it to big. Maximum 600Kb.",
+    "choose": "You need to choose file.",
+    "error": "Error : ",
+    "file": "File selected: ",
+    "select": "Select an Avatar",
+    "submit": "Submit"
   }
 }
