@@ -1,6 +1,5 @@
 "use client";
 
-import { Box, Stack } from "@mui/material";
 import { themeConstants } from "../../../constants/themeConstants";
 import Navigation from "../navigation/Navigation";
 import LocaleSwitcher from "../local-switcher/LocaleSwitcher";
@@ -8,16 +7,16 @@ import LogoIcon from "../LogoIcon";
 import Link from "next/link";
 import { PATHS } from "@/interface/interface";
 import styles from "./header.module.css";
-import ExitButton from "../ExitButton";
+import ExitButton from "../exit-button/ExitButton";
 import { useUserData } from "@/app/hooks/useUserData";
 
 const Header = () => {
   const { userData } = useUserData();
   return (
     <header className="container">
-      <Box
+      <div
         className={styles.headerWrapper}
-        sx={{
+        style={{
           marginTop: themeConstants.headerMarginTop,
           height: themeConstants.headerHeight,
           backgroundColor: "menuGray.main",
@@ -28,11 +27,11 @@ const Header = () => {
           <LogoIcon />
         </Link>
         <LocaleSwitcher />
-        <Stack direction={"row"} gap={2}>
+        <div className={styles.navigationWrapper}>
           <Navigation />
           {userData && <ExitButton />}
-        </Stack>
-      </Box>
+        </div>
+      </div>
     </header>
   );
 };

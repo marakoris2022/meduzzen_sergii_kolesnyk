@@ -2,10 +2,11 @@
 
 import React, { useState } from "react";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
-import { Button, Stack } from "@mui/material";
-import UniversalModal from "./universal-modal/UniversalModal";
+import { Button } from "@mui/material";
+import UniversalModal from "../universal-modal/UniversalModal";
 import { useTranslations } from "next-intl";
-import { useLogout } from "../hooks/useLogout";
+import { useLogout } from "../../hooks/useLogout";
+import styles from "./exitButton.module.css";
 
 const ExitButton = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -19,7 +20,7 @@ const ExitButton = () => {
 
   function LeaveApplicationAction() {
     return (
-      <Stack direction={"row"} gap={3}>
+      <div className={styles.actionWrapper}>
         <Button onClick={handleLogout} color="error" variant="outlined">
           {t("Leave")}
         </Button>
@@ -30,7 +31,7 @@ const ExitButton = () => {
         >
           {t("Cancel")}
         </Button>
-      </Stack>
+      </div>
     );
   }
 

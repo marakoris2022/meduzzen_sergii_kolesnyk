@@ -12,10 +12,11 @@ import {
 } from "@/services/axios-api-methods/axiosPut";
 import { useAppDispatch } from "@/state/hooks";
 import { setUserData } from "@/state/user/userSlice";
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import styles from "./generalEditPanel.module.css";
 
 type EditGeneralFromProps = {
   user_firstname: string;
@@ -28,12 +29,12 @@ type EditGeneralFromProps = {
 
 type UpdateStatusType = {
   text: string;
-  color: "success" | "error";
+  color: "green" | "red";
 };
 
 const updateStatusInit: UpdateStatusType = {
   text: "",
-  color: "success",
+  color: "green",
 };
 
 const General = () => {
@@ -64,9 +65,9 @@ const General = () => {
 
       await updateUserGeneralData(requestData, userData!.user_id);
       dispatch(setUserData({ ...userData, ...requestData }));
-      setUpdateStatus({ text: t("updated"), color: "success" });
+      setUpdateStatus({ text: t("updated"), color: "green" });
     } catch {
-      setUpdateStatus({ text: t("wrong"), color: "error" });
+      setUpdateStatus({ text: t("wrong"), color: "red" });
     }
   }
 
@@ -100,7 +101,7 @@ const General = () => {
     | "user_links";
 
   return userData ? (
-    <Stack component={"form"} onSubmit={handleSubmit(submit)} gap={3}>
+    <form className={styles.formWrapper} onSubmit={handleSubmit(submit)}>
       {editInputFields.map(({ name, label, validation, ...props }) => (
         <TextField
           key={name}
@@ -112,23 +113,18 @@ const General = () => {
         />
       ))}
 
-      <Typography textAlign={"center"} color={updateStatus.color}>
+      <p className={styles.updateText} style={{ color: updateStatus.color }}>
         {updateStatus.text}
-      </Typography>
-      <Stack
-        justifyContent={"center"}
-        alignItems={"center"}
-        direction={"row"}
-        gap={3}
-      >
+      </p>
+      <div className={styles.btnWrapper}>
         <Button type="submit" variant="outlined" color="success">
           {t("Submit")}
         </Button>
         <Button onClick={handleReset} variant="outlined" color="warning">
           {t("Clear")}
         </Button>
-      </Stack>
-    </Stack>
+      </div>
+    </form>
   ) : null;
 };
 

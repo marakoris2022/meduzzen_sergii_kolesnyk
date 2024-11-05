@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Pagination, Stack, Typography } from "@mui/material";
+import { Button, Pagination } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import styles from "./users.module.css";
@@ -57,17 +57,15 @@ const UsersPage = () => {
 
   return (
     <main className="container">
-      <Stack alignItems={"center"}>
-        <Typography className={styles.title} component={"h1"}>
-          {t("title")}
-        </Typography>
-        <Stack direction={"column"} gap={2} width={"80%"}>
+      <div className={styles.pageWrapper}>
+        <h1 className={styles.title}>{t("title")}</h1>
+        <div className={styles.cardsWrapper}>
           {usersData &&
             usersData.map((user) => {
               return <UserAccordion key={user.user_id} user={user} />;
             })}
-        </Stack>
-        <Box className={styles.paginationWrapper}>
+        </div>
+        <div className={styles.paginationWrapper}>
           <Pagination
             count={pageCount}
             page={pageNumber}
@@ -75,8 +73,8 @@ const UsersPage = () => {
             color="secondary"
             onChange={(_, b) => handleChange(b)}
           />
-        </Box>
-      </Stack>
+        </div>
+      </div>
     </main>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import styles from "./signInForm.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
@@ -37,9 +37,9 @@ const SuccessLoginAction = () => {
   const t = useTranslations("SignInForm");
 
   return (
-    <Stack direction={"column"} alignItems={"center"}>
+    <div className={styles.actionWrapper}>
       <Button onClick={() => router.push(PATHS.MAIN)}>{t("LoginBtn")}</Button>
-    </Stack>
+    </div>
   );
 };
 
@@ -110,7 +110,7 @@ const SignInForm = () => {
   };
 
   return (
-    <Box className={styles.formWrapper}>
+    <div className={styles.formWrapper}>
       <UniversalModal
         open={modalData.isModal}
         handleClose={() =>
@@ -120,16 +120,12 @@ const SignInForm = () => {
         description={modalData.modalText}
         footerActions={modalData.modalAction}
       />
-      <Stack
-        gap={3}
-        className={styles.formWrapper}
-        component={"form"}
+      <form
         autoComplete="off"
+        className={styles.formWrapper}
         onSubmit={handleSubmit(submitForm)}
       >
-        <Typography className={styles.formTitle} component={"h1"}>
-          {t("title")}
-        </Typography>
+        <h1 className={styles.formTitle}>{t("title")}</h1>
 
         <TextField
           {...register("email", emailValidation(t))}
@@ -146,7 +142,7 @@ const SignInForm = () => {
           label={t("Password")}
           helperText={errors.password ? errors.password.message : ""}
         />
-        <Stack gap={3} direction={{ sm: "column", md: "row" }}>
+        <div className={styles.btnWrapper}>
           <Button type="submit" variant="outlined" fullWidth>
             {t("Sign_in")}
           </Button>
@@ -161,9 +157,9 @@ const SignInForm = () => {
           >
             {t("Reset")}
           </Button>
-        </Stack>
-      </Stack>
-    </Box>
+        </div>
+      </form>
+    </div>
   );
 };
 

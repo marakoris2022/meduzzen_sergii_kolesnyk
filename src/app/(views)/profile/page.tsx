@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
+import { Button, Grid2 } from "@mui/material";
 import styles from "./profile.module.css";
 import { useUserData } from "@/app/hooks/useUserData";
 import Loading from "@/app/components/loading/Loading";
@@ -67,14 +67,14 @@ function ModalActions({
 }: ModalActionsProps) {
   const t = useTranslations("ProfilePage");
   return (
-    <Stack gap={2} direction={"row"}>
+    <div className={styles.modalActionsWrapper}>
       <Button onClick={handleDeleteUser} color="error" variant={"outlined"}>
         {t("delete_confirm")}
       </Button>
       <Button onClick={handleCloseModal} color={"success"} variant={"outlined"}>
         {t("close")}
       </Button>
-    </Stack>
+    </div>
   );
 }
 
@@ -112,9 +112,9 @@ const ProfilePage = () => {
           />
         }
       />
-      <Box className={styles.wrapper}>
-        <Stack className={styles.photoCardWrapper} direction={"column"} gap={1}>
-          <Box className={styles.photoWrapper}>
+      <div className={styles.wrapper}>
+        <div className={styles.photoCardWrapper}>
+          <div className={styles.photoWrapper}>
             <Image
               fill={true}
               objectFit="cover"
@@ -125,23 +125,18 @@ const ProfilePage = () => {
               }
               alt={"User_Avatar"}
             />
-          </Box>
-          <Typography>{userData?.user_email}</Typography>
-        </Stack>
-        <Stack className={styles.contentWrapper}>
-          <Stack
-            className={styles.userNameTitle}
-            direction={"row"}
-            justifyContent={"center"}
-            gap={3}
-          >
-            <Typography>{userData?.user_firstname}</Typography>
-            <Typography>{userData?.user_lastname}</Typography>
-          </Stack>
-          <Box className={styles.tableWrapper}>
+          </div>
+          <p>{userData?.user_email}</p>
+        </div>
+        <div className={styles.contentWrapper}>
+          <div className={styles.userNameTitle}>
+            <p>{userData?.user_firstname}</p>
+            <p>{userData?.user_lastname}</p>
+          </div>
+          <div className={styles.tableWrapper}>
             <UserDataTable userData={userData!} />
-          </Box>
-          <Box className={styles.buttonWrapper}>
+          </div>
+          <div className={styles.buttonWrapper}>
             <Button
               color={"warning"}
               variant={"outlined"}
@@ -162,9 +157,9 @@ const ProfilePage = () => {
             >
               {t("del_user")}
             </Button>
-          </Box>
-        </Stack>
-      </Box>
+          </div>
+        </div>
+      </div>
     </main>
   );
 };

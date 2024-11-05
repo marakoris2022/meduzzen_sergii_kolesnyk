@@ -5,4 +5,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+
+  background-color: #15141a;
+  border-color: #221f26;
+}
+.navigationWrapper {
+  display: flex;
+  flex-direction: row;
+  row-gap: 20px;
 }

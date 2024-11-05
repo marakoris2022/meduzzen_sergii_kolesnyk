@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, List, ListItem, Menu } from "@mui/material";
+import { Button, Menu } from "@mui/material";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { usePathname } from "next/navigation";
 import CloseIcon from "@mui/icons-material/Close";
@@ -15,7 +15,7 @@ function MenuLinkItem({ path, title }: { path: string; title: string }) {
   const pathname = usePathname();
 
   return (
-    <ListItem>
+    <li>
       <Link
         className={`${styles.navLink} ${
           pathname === path ? styles.active : ""
@@ -24,7 +24,7 @@ function MenuLinkItem({ path, title }: { path: string; title: string }) {
       >
         {title}
       </Link>
-    </ListItem>
+    </li>
   );
 }
 
@@ -56,13 +56,13 @@ const Navigation = () => {
 
   return (
     <>
-      <Box component="nav" className={styles.menuWrapper}>
-        <List className={styles.menuItems_row}>
+      <nav className={styles.menuWrapper}>
+        <ul className={styles.menuItems_row}>
           {userData ? <PrivateMenuList /> : <PublicMenuList />}
-        </List>
-      </Box>
+        </ul>
+      </nav>
 
-      <Box component="nav" className={styles.dropDownMenuWrapper}>
+      <nav className={styles.dropDownMenuWrapper}>
         <PopupState variant="popover" popupId="demo-popup-menu">
           {(popupState) => (
             <>
@@ -70,14 +70,14 @@ const Navigation = () => {
                 {popupState.isOpen ? <CloseIcon /> : <MenuIcon />}
               </Button>
               <Menu className="test" {...bindMenu(popupState)}>
-                <List className={styles.menuItems_col}>
+                <ul className={styles.menuItems_col}>
                   {userData ? <PrivateMenuList /> : <PublicMenuList />}
-                </List>
+                </ul>
               </Menu>
             </>
           )}
         </PopupState>
-      </Box>
+      </nav>
     </>
   );
 };

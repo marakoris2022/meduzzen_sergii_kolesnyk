@@ -1,13 +1,22 @@
 .wrapper {
-  padding-top: 20px;
   display: flex;
   flex-direction: row;
+  padding-top: 20px;
   gap: 35px;
   max-width: 80%;
   margin: 0 auto;
 }
 
+.modalActionsWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
 .photoCardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   width: 200px;
   min-width: 200px;
   align-items: center;
@@ -31,6 +40,10 @@
 }
 .userNameTitle {
   border-bottom: 1px dashed darkblue;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: center;
 }
 .userNameTitle p {
   font-size: 2.5vw;

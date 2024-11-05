@@ -2,14 +2,8 @@ import { UserProps } from "@/interface/interface";
 import {
   Accordion,
   AccordionSummary,
-  Stack,
-  Typography,
   AccordionDetails,
-  Box,
   Chip,
-  List,
-  ListItem,
-  ListItemText,
 } from "@mui/material";
 import RandomAvatar from "../RandomAvatar/RandomAvatar";
 import Image from "next/image";
@@ -41,40 +35,40 @@ function AdditionalUserPropsCard({
   const t = useTranslations("UserAccordion");
 
   return (
-    <Stack direction={"row"} gap={5}>
-      <Stack>
-        <Typography variant="body1" fontWeight="bold">
+    <div className={styles.propsWrapper}>
+      <ul>
+        <li>
           <strong>{t("Status")}</strong>:{user_status || t("empty")}
-        </Typography>
-        <Typography variant="body1">
+        </li>
+        <li>
           <strong>{t("City")}:</strong> {user_city || t("empty")}
-        </Typography>
-        <Typography variant="body1">
+        </li>
+        <li>
           <strong>{t("Phone")}:</strong> {user_phone || t("empty")}
-        </Typography>
-      </Stack>
-      <Typography variant="body1" sx={{ marginTop: 1 }}>
+        </li>
+      </ul>
+      <p>
         <strong>{t("Links")}:</strong>
-      </Typography>
-      <List dense>
+      </p>
+      <ul>
         {user_links ? (
           user_links.map((link, index) => (
-            <ListItem key={index}>
-              <ListItemText primary={link} />
-            </ListItem>
+            <li key={index}>
+              <p>{link}</p>
+            </li>
           ))
         ) : (
-          <Typography variant="body1">
+          <p>
             <strong>{t("empty")}</strong>
-          </Typography>
+          </p>
         )}
-      </List>
+      </ul>
       {is_superuser && (
-        <Box sx={{ marginTop: 2 }}>
+        <div>
           <Chip label="Superuser" color="secondary" variant="outlined" />
-        </Box>
+        </div>
       )}
-    </Stack>
+    </div>
   );
 }
 
@@ -93,18 +87,18 @@ const UserAccordion = ({ user }: UserAccordionProps) => {
         aria-controls="panel1-content"
         id="panel1-header"
       >
-        <Stack className={styles.accordionHeadingWrapper} direction={"row"}>
-          <Typography>
+        <div className={styles.accordionHeadingWrapper}>
+          <p>
             {t("Email")}: {user.user_email}
-          </Typography>
-          <Typography>
+          </p>
+          <p>
             {t("Id")}: {user.user_id}
-          </Typography>
-        </Stack>
+          </p>
+        </div>
       </AccordionSummary>
       <AccordionDetails>
-        <Stack direction={"row"} gap={3}>
-          <Box>
+        <div className={styles.accordionWrapper}>
+          <div>
             {user.user_avatar ? (
               <Image
                 src={user.user_avatar}
@@ -115,15 +109,15 @@ const UserAccordion = ({ user }: UserAccordionProps) => {
             ) : (
               <RandomAvatar />
             )}
-          </Box>
-          <Stack>
-            <Typography>
+          </div>
+          <div>
+            <p>
               {t("Name")}: {user.user_firstname}
-            </Typography>
-            <Typography>
+            </p>
+            <p>
               {t("LastName")}: {user.user_lastname}
-            </Typography>
-          </Stack>
+            </p>
+          </div>
           <AdditionalUserPropsCard
             user_status={user.user_status}
             user_city={user.user_city}
@@ -131,7 +125,7 @@ const UserAccordion = ({ user }: UserAccordionProps) => {
             user_links={user.user_links}
             is_superuser={user.is_superuser}
           />
-        </Stack>
+        </div>
       </AccordionDetails>
     </Accordion>
   );

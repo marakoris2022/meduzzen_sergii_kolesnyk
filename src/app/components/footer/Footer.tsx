@@ -1,4 +1,3 @@
-import { Box, Typography } from "@mui/material";
 import GithubLink from "../github-link/GithubLink";
 import { themeConstants } from "../../../constants/themeConstants";
 import { useTranslations } from "next-intl";
@@ -9,22 +8,20 @@ const Footer = () => {
 
   return (
     <footer className="container">
-      <Box
+      <div
         className={styles.footerWrapper}
-        sx={{
+        style={{
           height: themeConstants.headerHeight,
           backgroundColor: "menuGray.main",
           borderColor: "menuGray.light",
         }}
       >
-        <Typography className={styles.titleLong}>{t("title")}</Typography>
-        <Typography className={styles.titleShort}>
-          {t("title_short")}
-        </Typography>
+        <p className={styles.titleLong}>{t("title")}</p>
+        <p className={styles.titleShort}>{t("title_short")}</p>
 
         <GithubLink url="https://github.com/marakoris2022" title="SergiiK" />
-        <Typography>2024 {t("month")}</Typography>
-      </Box>
+        <p>2024 {t("month")}</p>
+      </div>
     </footer>
   );
 };

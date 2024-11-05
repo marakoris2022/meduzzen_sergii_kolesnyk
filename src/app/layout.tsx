@@ -6,7 +6,6 @@ import "./globals.css";
 import ThemeRegistry from "./components/ThemeRegistry";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import { Box } from "@mui/material";
 import { themeConstants } from "../constants/themeConstants";
 import StoreProvider from "./components/StoreProvider";
 
@@ -41,15 +40,14 @@ export default async function RootLayout({
           <NextIntlClientProvider messages={messages}>
             <ThemeRegistry>
               <Header />
-              <Box
-                component="main"
-                sx={{
+              <main
+                style={{
                   minHeight: `calc(100vh - ${themeConstants.headerHeight} - ${themeConstants.footerHeight}
                 - ${themeConstants.headerMarginTop})`,
                 }}
               >
                 {children}
-              </Box>
+              </main>
               <Footer />
             </ThemeRegistry>
           </NextIntlClientProvider>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Typography, Button, Stack } from "@mui/material";
+import { Button } from "@mui/material";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -16,23 +16,19 @@ export default function HomePage() {
 
   return (
     <main className="container">
-      <Box className={styles.mainWrapper}>
+      <div className={styles.mainWrapper}>
         {userData ? (
-          <Stack gap={3} alignContent={"center"}>
-            <Box className={styles.videoWrapper}>
-              <Box className={styles.videoWrapperHeigh} />
-            </Box>
-            <Typography className={styles.mainTitle} component={"h2"}>
-              {t("title")}
-            </Typography>
-            <Typography className={styles.mainUser} component={"h3"}>
-              {userData.user_email}
-            </Typography>
-          </Stack>
+          <>
+            <div className={styles.videoWrapper}>
+              <div className={styles.videoWrapperHeigh} />
+            </div>
+            <h2 className={styles.mainTitle}>{t("title")}</h2>
+            <h3 className={styles.mainUser}>{userData.user_email}</h3>
+          </>
         ) : (
           <>
-            <Typography className={styles.title}>{t("title2")}</Typography>
-            <Typography>{t("account")}</Typography>
+            <h2 className={styles.title}>{t("title2")}</h2>
+            <h3>{t("account")}</h3>
             <Link className={styles.link} href={PATHS.SIGNIN}>
               <Button variant="outlined" fullWidth>
                 {t("signin")}
@@ -45,7 +41,7 @@ export default function HomePage() {
             </Link>
           </>
         )}
-      </Box>
+      </div>
     </main>
   );
 }

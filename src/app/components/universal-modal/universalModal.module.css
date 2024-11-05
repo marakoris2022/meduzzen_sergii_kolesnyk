@@ -7,10 +7,30 @@
   border: 2px solid blanchedalmond;
   border-radius: 15px;
   box-shadow: 24;
-  padding: 4rem;
+  padding: 3rem;
   background-color: #15141a;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.wrapper h2 {
+  margin-bottom: 16px;
+}
+.wrapper p {
+  margin-bottom: 24px;
+}
+.btnWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 750px) {
+  .wrapper {
+    width: 360px;
+    padding: 2rem;
+  }
 }

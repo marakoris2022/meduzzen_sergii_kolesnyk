@@ -1,5 +1,5 @@
 import { passwordValidation } from "@/constants/validationSchemas";
-import { Button, Stack, Switch, TextField, Typography } from "@mui/material";
+import { Button, Switch, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { updateUserPassword } from "@/services/axios-api-methods/axiosPut";
 import { useUserData } from "@/app/hooks/useUserData";
+import styles from "./passwordEdit.module.css";
 
 type EditPasswordFromProps = {
   password: string;
@@ -15,12 +16,12 @@ type EditPasswordFromProps = {
 
 type UpdateStatusType = {
   text: string;
-  color: "success" | "error";
+  color: "green" | "red";
 };
 
 const updateStatusInit: UpdateStatusType = {
   text: "",
-  color: "success",
+  color: "green",
 };
 
 const Password = () => {
@@ -54,9 +55,9 @@ const Password = () => {
         user_password_repeat: data.confirmPassword,
         user_id: userData!.user_id,
       });
-      setUpdateStatus({ text: t("updated"), color: "success" });
+      setUpdateStatus({ text: t("updated"), color: "green" });
     } catch {
-      setUpdateStatus({ text: t("wrong"), color: "error" });
+      setUpdateStatus({ text: t("wrong"), color: "red" });
     }
   }
 
@@ -65,12 +66,12 @@ const Password = () => {
   }
 
   return (
-    <Stack onSubmit={handleSubmit(submit)} component={"form"} gap={3}>
-      <Stack direction={"row"} alignItems={"center"}>
+    <form className={styles.formWrapper} onSubmit={handleSubmit(submit)}>
+      <div className={styles.visibilityWrapper}>
         <VisibilityOffOutlinedIcon color={!isHidden ? "disabled" : "primary"} />
         <Switch onChange={handleSwitch} />
         <VisibilityOutlinedIcon color={isHidden ? "disabled" : "primary"} />
-      </Stack>
+      </div>
 
       <TextField
         autoComplete="false"
@@ -93,23 +94,18 @@ const Password = () => {
         helperText={errors.confirmPassword?.message || ""}
       ></TextField>
 
-      <Typography textAlign={"center"} color={updateStatus.color}>
+      <p className={styles.updateText} style={{ color: updateStatus.color }}>
         {updateStatus.text}
-      </Typography>
-      <Stack
-        justifyContent={"center"}
-        alignItems={"center"}
-        direction={"row"}
-        gap={3}
-      >
+      </p>
+      <div className={styles.btnWrapper}>
         <Button type="submit" variant="outlined" color="success">
           {t("Submit")}
         </Button>
         <Button onClick={handleReset} variant="outlined" color="warning">
           {t("Clear")}
         </Button>
-      </Stack>
-    </Stack>
+      </div>
+    </form>
   );
 };
 

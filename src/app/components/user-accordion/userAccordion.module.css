@@ -1,3 +1,11 @@
+.accordionWrapper,
+.accordionHeadingWrapper,
+.propsWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
 .accordionHeadingWrapper {
   width: 100%;
   justify-content: space-between;

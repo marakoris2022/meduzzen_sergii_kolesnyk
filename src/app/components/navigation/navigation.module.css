@@ -11,15 +11,21 @@
   display: none;
 }
 
-.menuItems_row {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
+.menuItems_row,
 .menuItems_col {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  gap: 20px;
+}
+.menuItems_col {
   flex-direction: column;
-  gap: 10px;
+}
+.menuItems_row li,
+.menuItems_col li {
+  list-style: none;
 }
 
 @media screen and (max-width: 900px) {
