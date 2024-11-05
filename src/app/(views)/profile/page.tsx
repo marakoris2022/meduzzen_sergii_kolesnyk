@@ -96,10 +96,6 @@ const ProfilePage = () => {
     }
   }
 
-  function handleCloseModal() {
-    setIsModal(false);
-  }
-
   return (
     <main className="container">
       <UniversalModal
@@ -112,7 +108,7 @@ const ProfilePage = () => {
         footerActions={
           <ModalActions
             handleDeleteUser={handleDeleteUser}
-            handleCloseModal={handleCloseModal}
+            handleCloseModal={() => setIsModal(false)}
           />
         }
       />
