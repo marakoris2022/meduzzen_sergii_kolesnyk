@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Pagination, Stack, Typography } from "@mui/material";
+import { Box, Button, Pagination, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import styles from "./users.module.css";
@@ -8,22 +8,50 @@ import Loading from "@/app/components/loading/Loading";
 import UserAccordion from "@/app/components/user-accordion/UserAccordion";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { fetchUsersData, setPageNumber } from "@/state/users/usersSlice";
+import { useRouter } from "next/navigation";
+import { PATHS } from "@/interface/interface";
 
 const UsersPage = () => {
   const t = useTranslations("UsersPage");
+  const router = useRouter();
 
-  const { usersData, pageCount, pageNumber } = useAppSelector(
+  const { usersData, pageCount, pageNumber, error } = useAppSelector(
     (state) => state.users
   );
-  const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   function handleChange(currentPage: number) {
-    dispath(setPageNumber(currentPage));
+    dispatch(setPageNumber(currentPage));
   }
 
   useEffect(() => {
-    dispath(fetchUsersData(pageNumber));
+    dispatch(fetchUsersData(pageNumber));
   }, [pageNumber]);
+
+  if (error) {
+    return (
+      <main className="container">
+        <div className={styles.errorWrapper}>
+          <h6>{t("errorOccurred")}</h6>
+          <p>{t("tryAgain")}</p>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => dispatch(fetchUsersData(pageNumber))}
+          >
+            {t("retry")}
+          </Button>
+          <Button
+            variant="outlined"
+            color="warning"
+            onClick={() => router.push(PATHS.MAIN)}
+          >
+            {t("toMain")}
+          </Button>
+        </div>
+      </main>
+    );
+  }
 
   if (!usersData) <Loading />;
 

@@ -36,7 +36,11 @@
   },
 
   "UsersPage": {
-    "title": "Our Users"
+    "title": "Our Users",
+    "errorOccurred": "Fetching data goes wrong :(",
+    "tryAgain": "Maybe better to try one more time.",
+    "retry": "Retry",
+    "toMain": "Main Page"
   },
   "SignInForm": {
     "title": "Sign In Form",
