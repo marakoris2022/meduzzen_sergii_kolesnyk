@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { ReactNode, SyntheticEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PATHS } from "@/interface/interface";
@@ -19,26 +19,13 @@ interface TabPanelProps {
 }
 
 function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index } = props;
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    <div>
+      {value === index && <div className={styles.panelWrapper}>{children}</div>}
     </div>
   );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
 }
 
 const ProfileEditPage = () => {
@@ -52,21 +39,15 @@ const ProfileEditPage = () => {
 
   return (
     <Container>
-      <Box className={styles.pageWrapper}>
-        <Typography className={styles.pageTitle} variant={"h4"}>
-          {t("edit")}
-        </Typography>
+      <div className={styles.pageWrapper}>
+        <h4 className={styles.pageTitle}>{t("edit")}</h4>
 
-        <Box className={styles.tabContainer}>
-          <Box className={styles.tabWrapper}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="basic tabs example"
-            >
-              <Tab label={t("General")} {...a11yProps(0)} />
-              <Tab label={t("Password")} {...a11yProps(1)} />
-              <Tab label={t("Avatar")} {...a11yProps(2)} />
+        <div className={styles.tabContainer}>
+          <div className={styles.tabWrapper}>
+            <Tabs value={value} onChange={handleChange}>
+              <Tab label={t("General")} />
+              <Tab label={t("Password")} />
+              <Tab label={t("Avatar")} />
               <Tab
                 className={styles.backBtn}
                 onClick={() => {
@@ -75,7 +56,7 @@ const ProfileEditPage = () => {
                 label={t("back")}
               />
             </Tabs>
-          </Box>
+          </div>
           <CustomTabPanel value={value} index={0}>
             <General />
           </CustomTabPanel>
@@ -85,8 +66,8 @@ const ProfileEditPage = () => {
           <CustomTabPanel value={value} index={2}>
             <Avatar />
           </CustomTabPanel>
-        </Box>
-      </Box>
+        </div>
+      </div>
     </Container>
   );
 };
