@@ -14,9 +14,7 @@ const RandomAvatar = () => {
   const randomAvatar = avatars[randomIndex];
 
   return (
-    <div>
-      <Image src={randomAvatar} alt="Random Avatar" width={100} height={120} />
-    </div>
+    <Image src={randomAvatar} alt="Random Avatar" width={100} height={120} />
   );
 };
 
