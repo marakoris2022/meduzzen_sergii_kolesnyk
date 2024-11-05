@@ -1,7 +1,8 @@
-"use client"; // Error boundaries must be Client Components
+"use client";
 
 import { useEffect } from "react";
 import styles from "./error.module.css";
+import { useTranslations } from "next-intl";
 
 export default function Error({
   error,
@@ -14,11 +15,13 @@ export default function Error({
     console.error(error);
   }, [error]);
 
+  const t = useTranslations("Error");
+
   return (
     <div className="container">
       <div className={styles.errorWrapper}>
-        <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <h2>{t("title")}</h2>
+        <button onClick={() => reset()}>{t("button")}</button>
       </div>
     </div>
   );

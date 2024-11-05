@@ -179,5 +179,14 @@
     "file": "File selected: ",
     "select": "Select an Avatar",
     "submit": "Submit"
+  },
+  "NotFound": {
+    "title": "Not Found",
+    "text": "Could not find requested resource",
+    "button": "Return Home"
+  },
+  "Error": {
+    "title": "Something went wrong!",
+    "button": "Try again"
   }
 }
