@@ -2,6 +2,8 @@ import axios from "axios";
 import { TOKEN } from "@/interface/interface";
 import { storeRef } from "@/app/components/StoreProvider";
 import { useLogout } from "../app/hooks/useLogout";
+import { setToken } from "@/state/auth/authSlice";
+import { isTokenExpired } from "@/utils/isTokenExpired";
 
 const BASE_URL = process.env.BASE_URL || "http://51.20.210.187";
 
@@ -15,14 +17,27 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
-    const token = storeRef.current?.getState().auth.token;
+    const store = storeRef.current;
+    let token = store?.getState().auth.token;
 
     if (!token) {
       const localToken = localStorage.getItem(TOKEN.NAME);
-      if (localToken) config.headers.Authorization = `Bearer ${localToken}`;
-    } else {
+      if (localToken) {
+        token = localToken;
+        store?.dispatch(setToken(localToken));
+      }
+    }
+
+    if (token) {
+      if (isTokenExpired(token)) {
+        const logout = useLogout();
+        logout();
+        return Promise.reject("Token expired.");
+      }
+
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
   function (error) {
