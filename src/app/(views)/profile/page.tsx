@@ -1,16 +1,9 @@
 "use client";
 
-import {
-  Box,
-  Button,
-  Container,
-  Grid2,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
 import styles from "./profile.module.css";
 import { useUserData } from "@/app/hooks/useUserData";
-import Loading from "@/app/components/Loading";
+import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
 import { PATHS, UserProps } from "@/interface/interface";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
@@ -92,12 +85,7 @@ const ProfilePage = () => {
   const router = useRouter();
   const logout = useLogout();
 
-  if (isLoading)
-    return (
-      <Container component="main">
-        <Loading />
-      </Container>
-    );
+  if (isLoading) return <Loading />;
 
   async function handleDeleteUser() {
     try {
@@ -113,7 +101,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <Container>
+    <main className="container">
       <UniversalModal
         open={isModal}
         handleClose={() => {
@@ -181,7 +169,7 @@ const ProfilePage = () => {
           </Box>
         </Stack>
       </Box>
-    </Container>
+    </main>
   );
 };
 

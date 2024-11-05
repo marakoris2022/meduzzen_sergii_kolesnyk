@@ -1,6 +1,5 @@
 "use client";
 
-import { Container } from "@mui/material";
 import { ReactNode, SyntheticEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PATHS } from "@/interface/interface";
@@ -38,7 +37,7 @@ const ProfileEditPage = () => {
   };
 
   return (
-    <Container>
+    <div className="container">
       <div className={styles.pageWrapper}>
         <h4 className={styles.pageTitle}>{t("edit")}</h4>
 
@@ -68,7 +67,7 @@ const ProfileEditPage = () => {
           </CustomTabPanel>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 

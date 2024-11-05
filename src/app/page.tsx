@@ -1,26 +1,21 @@
 "use client";
 
-import { Container, Box, Typography, Button, Stack } from "@mui/material";
+import { Box, Typography, Button, Stack } from "@mui/material";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useUserData } from "./hooks/useUserData";
 import { PATHS } from "@/interface/interface";
-import Loading from "./components/Loading";
+import Loading from "./components/loading/Loading";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
   const { userData, isLoading } = useUserData();
 
-  if (isLoading)
-    return (
-      <Container component="main">
-        <Loading />
-      </Container>
-    );
+  if (isLoading) return <Loading />;
 
   return (
-    <Container component="main">
+    <main className="container">
       <Box className={styles.mainWrapper}>
         {userData ? (
           <Stack gap={3} alignContent={"center"}>
@@ -51,6 +46,6 @@ export default function HomePage() {
           </>
         )}
       </Box>
-    </Container>
+    </main>
   );
 }

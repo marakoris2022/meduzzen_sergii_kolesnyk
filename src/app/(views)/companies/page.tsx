@@ -1,13 +1,13 @@
-import { Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 
 const CompaniesPage = () => {
   const t = useTranslations("CompaniesPage");
 
   return (
-    <Container>
+    <div className="container">
       <Typography>{t("companies")}</Typography>
-    </Container>
+    </div>
   );
 };
 

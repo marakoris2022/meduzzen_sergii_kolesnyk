@@ -1,10 +1,10 @@
 "use client";
 
-import { Box, Container, Pagination, Stack, Typography } from "@mui/material";
+import { Box, Pagination, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import styles from "./users.module.css";
-import Loading from "@/app/components/Loading";
+import Loading from "@/app/components/loading/Loading";
 import UserAccordion from "@/app/components/user-accordion/UserAccordion";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { fetchUsersData, setPageNumber } from "@/state/users/usersSlice";
@@ -25,12 +25,10 @@ const UsersPage = () => {
     dispath(fetchUsersData(pageNumber));
   }, [pageNumber]);
 
-  if (!usersData) {
-    return <Loading />;
-  }
+  if (!usersData) <Loading />;
 
   return (
-    <Container>
+    <main className="container">
       <Stack alignItems={"center"}>
         <Typography className={styles.title} component={"h1"}>
           {t("title")}
@@ -51,7 +49,7 @@ const UsersPage = () => {
           />
         </Box>
       </Stack>
-    </Container>
+    </main>
   );
 };
 
