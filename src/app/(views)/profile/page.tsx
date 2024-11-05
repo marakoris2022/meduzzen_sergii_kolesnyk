@@ -29,25 +29,28 @@ type ModalActionsProps = {
 
 function UserDataTable({ userData }: { userData: UserProps }) {
   const t = useTranslations("ProfilePage");
+
+  if (!userData) return null;
+
+  const userStats = [
+    { label: t("status"), value: userData.user_status || t("none") },
+    { label: t("super"), value: userData.is_superuser ? t("yes") : t("no") },
+    { label: t("id"), value: userData.user_id || t("none") },
+    { label: t("city"), value: userData.user_city || t("none") },
+    { label: t("phone"), value: userData.user_phone || t("none") },
+  ];
+
   return (
     <Grid2 key={userData.user_id} container spacing={2} columns={12}>
-      <Grid2 size={6}>{t("status")}</Grid2>
-      <Grid2 size={6}>{userData?.user_status || t("none")}</Grid2>
+      {userStats.map((item, index) => (
+        <React.Fragment key={index}>
+          <Grid2 size={6}>{item.label}</Grid2>
+          <Grid2 size={6}>{item.value}</Grid2>
+        </React.Fragment>
+      ))}
 
-      <Grid2 size={6}>{t("super")}</Grid2>
-      <Grid2 size={6}>{userData?.is_superuser ? t("yes") : t("no")}</Grid2>
-
-      <Grid2 size={6}>{t("id")}</Grid2>
-      <Grid2 size={6}>{userData?.user_id || t("none")}</Grid2>
-
-      <Grid2 size={6}>{t("city")}</Grid2>
-      <Grid2 size={6}>{userData?.user_city || t("none")}</Grid2>
-
-      <Grid2 size={6}>{t("phone")}</Grid2>
-      <Grid2 size={6}>{userData?.user_phone || t("none")}</Grid2>
-
-      {Boolean(userData?.user_links.length) ? (
-        userData?.user_links.map((link, index) => {
+      {Boolean(userData.user_links.length) ? (
+        userData.user_links.map((link, index) => {
           return (
             <React.Fragment key={`${index}_fragment`}>
               <Grid2 size={6}>{t("link")}</Grid2>
