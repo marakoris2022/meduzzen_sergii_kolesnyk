@@ -27,3 +27,6 @@
 .uploadBtn {
   min-width: 100%;
 }
+.errorMsg {
+  color: red;
+}

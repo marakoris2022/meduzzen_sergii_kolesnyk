@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import styles from "./avatar.module.css";
@@ -87,10 +87,10 @@ const Avatar = () => {
         {selectedFile?.name}
       </p>
       {errorText && (
-        <Typography color="error">
+        <p className={styles.errorMsg}>
           {t("error")}
           {errorText}
-        </Typography>
+        </p>
       )}
       <div className={styles.btnWrapper}>
         <Button
