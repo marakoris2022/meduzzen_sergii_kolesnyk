@@ -23,6 +23,11 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
+const maxFileSize = 600000;
+const maxNameLength = 20;
+const noImagePath = "/no_image.webp";
+const accepterFileTypes = "image/png, image/jpeg, image/webp";
+
 const Avatar = () => {
   const t = useTranslations("AvatarProfileGeneral");
   const { userData } = useUserData();
@@ -33,11 +38,11 @@ const Avatar = () => {
   if (!userData) return null;
 
   function validateFile(file: File) {
-    if (file.name.length > 20) {
+    if (file.name.length > maxNameLength) {
       setErrorText(t("long"));
       return false;
     }
-    if (file.size > 600000) {
+    if (file.size > maxFileSize) {
       setErrorText(t("size"));
       return false;
     }
@@ -73,7 +78,7 @@ const Avatar = () => {
         <Image
           fill={true}
           objectFit="cover"
-          src={userData.user_avatar || "/no_image.webp"}
+          src={userData.user_avatar || noImagePath}
           alt={"No_Avatar"}
         />
       </div>
@@ -99,7 +104,7 @@ const Avatar = () => {
           {t("select")}
           <VisuallyHiddenInput
             type="file"
-            accept="image/png, image/jpeg, image/webp"
+            accept={accepterFileTypes}
             onChange={handleChange}
           />
         </Button>
