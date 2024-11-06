@@ -59,17 +59,15 @@ export const phoneValidation = (t: (key: string) => string) => ({
 });
 
 export const linksValidation = (t: (key: string) => string) => ({
+  required: t("required"),
+  pattern: {
+    value:
+      /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/,
+    message: t("invalidLink"),
+  },
   validate: (text: string) => {
-    const arrayText = text.length > 0 ? text.split("\n") : "";
-
-    if (arrayText) {
-      for (let i = 0; i < arrayText.length; i++) {
-        const regEx =
-          /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
-        if (!arrayText[i].match(regEx)) return t("invalidLink");
-      }
-    }
-
-    return true;
+    const regEx =
+      /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+    return regEx.test(text) ? true : t("invalidLink");
   },
 });
