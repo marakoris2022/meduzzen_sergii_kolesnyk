@@ -126,7 +126,7 @@ const General = () => {
       setFieldList(initialFields);
       linksCount.current = userData.user_links.length;
     }
-  }, [userData, setValue, linksCount]);
+  }, [userData, setValue, linksCount, t]);
 
   async function submit(data: FormProps) {
     const {
@@ -206,7 +206,7 @@ const General = () => {
 
       <div className={styles.linksBtnWrapper}>
         <Button startIcon={<AddIcon />} size="small" onClick={addLinkField}>
-        {t('Social')}
+          {t("Social")}
         </Button>
         <Button
           startIcon={<RemoveIcon />}
@@ -214,7 +214,7 @@ const General = () => {
           onClick={removeLinkField}
           color="warning"
         >
-          {t('Social')}
+          {t("Social")}
         </Button>
       </div>
       <p className={styles.updateText} style={{ color: updateStatus.color }}>
