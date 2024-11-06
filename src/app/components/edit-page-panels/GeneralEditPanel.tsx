@@ -206,7 +206,7 @@ const General = () => {
 
       <div className={styles.linksBtnWrapper}>
         <Button startIcon={<AddIcon />} size="small" onClick={addLinkField}>
-          Social
+        {t('Social')}
         </Button>
         <Button
           startIcon={<RemoveIcon />}
@@ -214,7 +214,7 @@ const General = () => {
           onClick={removeLinkField}
           color="warning"
         >
-          Social
+          {t('Social')}
         </Button>
       </div>
       <p className={styles.updateText} style={{ color: updateStatus.color }}>
