@@ -1,8 +1,75 @@
+.wrapper,
+.modalActionsWrapper,
+.userNameTitle,
+.buttonWrapper {
+  display: flex;
+  flex-direction: row;
+}
+.wrapper,
+.tableWrapper {
+  padding-top: 20px;
+  max-width: 80%;
+}
 .wrapper {
+  gap: 35px;
+  margin: 0 auto;
+}
+.tableWrapper {
+  margin: 0 auto;
+}
+
+.modalActionsWrapper {
+  gap: 15px;
+}
+
+.photoCardWrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  justify-content: center;
+  gap: 15px;
+  width: 200px;
+  min-width: 200px;
   align-items: center;
-  padding-top: 60px;
+  padding: 20px 0;
+
+  overflow: hidden;
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+.photoWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  height: 300px;
+  width: 300px;
+}
+
+.contentWrapper {
+  flex-grow: 1;
+}
+.userNameTitle {
+  border-bottom: 1px dashed darkblue;
+  gap: 40px;
+  justify-content: center;
+}
+.userNameTitle p {
+  font-size: 2.5vw;
+}
+
+.buttonWrapper {
+  gap: 20px;
+  padding: 50px 0;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 750px) {
+  .userNameTitle p {
+    font-size: 20px;
+  }
+  .wrapper {
+    flex-direction: column;
+  }
+  .photoCardWrapper {
+    margin: 0 auto;
+  }
 }

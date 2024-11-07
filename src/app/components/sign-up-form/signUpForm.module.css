@@ -1,10 +1,37 @@
+.formWrapper,
+.formMiddleWrapper,
+.modalActionWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .formWrapper {
-  max-width: 800px;
-  padding: 20px;
+  gap: 20px;
+  padding: 20px 0;
   border-radius: 15px;
   margin: 0 auto;
+  width: 600px;
+}
+
+.formMiddleWrapper {
+  flex-direction: row;
+
+  gap: 20px;
 }
 
 .formTitle {
   text-align: center;
+}
+
+.modalActionWrapper {
+  align-items: center;
+}
+
+@media screen and (max-width: 750px) {
+  .formMiddleWrapper {
+    flex-direction: column;
+  }
+  .formWrapper {
+    width: 360px;
+  }
 }

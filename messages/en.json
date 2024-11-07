@@ -4,7 +4,8 @@
     "title2": "Welcome my friend!",
     "account": "Have you an account?",
     "signin": "SIGN IN",
-    "signup": "SIGN UP"
+    "signup": "SIGN UP",
+    "fetchUserError": "Failed to fetch User Data."
   },
   "LocalSwitcher": {
     "language": "Lang.",
@@ -22,7 +23,7 @@
   },
   "Footer": {
     "title": "Meduzzen Intern project",
-    "title_short": "Meduzzen",
+    "titleShort": "Meduzzen",
     "month": "Oct"
   },
   "UniversalModal": {
@@ -34,19 +35,22 @@
   "CompaniesPage": {
     "companies": "Companies Page"
   },
-  "ProfilePage": {
-    "title": "Profile",
-    "description": "Some data what we will add in future"
-  },
+
   "UsersPage": {
-    "title": "Users Page"
+    "title": "Our Users",
+    "errorUsersData": "Fetching data goes wrong :("
+  },
+  "PageError": {
+    "tryAgain": "Maybe better to try one more time.",
+    "retry": "Retry",
+    "toMain": "Main Page"
   },
   "SignInForm": {
     "title": "Sign In Form",
-    "Sign_in": "Sign in",
-    "Reset": "Reset",
-    "Email": "Email",
-    "Password": "Password",
+    "signIn": "Sign in",
+    "reset": "Reset",
+    "email": "Email",
+    "password": "Password",
     "required": "Name is required.",
     "onlyLatinSymbols": "Only Latin symbols",
     "firstLetterUppercase": "First letter must be uppercase.",
@@ -55,7 +59,7 @@
     "passwordRequired": "Password is required.",
     "passwordMinLength": "Password must be at least 8 characters.",
     "passwordComplexity": "Must include uppercase, lowercase, number, and special character.",
-    "LoginBtn": "To Main Page",
+    "loginBtn": "To Main Page",
     "loggedSuccessfully": "Logged in Successfully",
     "welcomeBack": "Welcome back!",
     "validationFailed": "Validation failed.",
@@ -64,12 +68,12 @@
   },
   "SignUpForm": {
     "title": "Registration Form",
-    "Sign_up": "Sign up",
-    "Reset": "Reset",
-    "First Name": "First Name",
-    "Last Name": "Last Name",
-    "Email": "Email",
-    "Password": "Password",
+    "signUp": "Sign up",
+    "reset": "Reset",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
     "required": "Name is required.",
     "onlyLatinSymbols": "Only Latin symbols",
     "firstLetterUppercase": "First letter must be uppercase.",
@@ -78,10 +82,9 @@
     "passwordRequired": "Password is required.",
     "passwordMinLength": "Password must be at least 8 characters.",
     "passwordComplexity": "Must include uppercase, lowercase, number, and special character.",
-    "Confirm Password": "Confirm Password",
-    "Confirm Required": "Confirm Password is required.",
-    "Passwords Match": "Passwords do not match.",
-    "LoginBtn": "To Login Page",
+    "confirmPassword": "Confirm Password is required.",
+    "passwordsMatch": "Passwords do not match.",
+    "loginBtn": "To Login Page",
     "registrationSuccessTitle": "Registration Success",
     "registrationSuccessText": "You will be redirected to the Login Page",
     "validationFailed": "Validation failed.",
@@ -89,12 +92,104 @@
     "registrationFailedTitle": "Registration Failed"
   },
   "ExitButton": {
-    "Leave": "Leave",
-    "Cancel": "Cancel",
+    "leave": "Leave",
+    "cancel": "Cancel",
     "leaveApp": "Leave Application?",
     "sureExit": "Are you sure you want to Exit?"
   },
-  "FetchingUserData": {
+  "Loading": {
     "loading": "Fetching user data..."
+  },
+  "UserAccordion": {
+    "status": "Status",
+    "online": "online",
+    "offline": "offline",
+    "city": "City",
+    "phone": "Phone",
+    "links": "Links",
+    "empty": "empty",
+    "email": "Email",
+    "Id": "Id",
+    "name": "First Name",
+    "firstName": "Last Name",
+    "loadData": "Load Data"
+  },
+  "EditProfileGeneral": {
+    "required": "Field is required.",
+    "onlyLatinSymbols": "Only Latin symbols",
+    "firstLetterUppercase": "First letter must be uppercase.",
+    "statusMaxLength": "Maximum length is 100 symbols.",
+    "cityMaxLength": "Maximum length is 50 symbols.",
+    "phoneInvalid": "Wrongs phone number format.",
+    "phoneMaxLength": "Maximum length is 15 symbols.",
+    "invalidLink": "Wrong link format.",
+    "updated": "Profile data is updated.",
+    "wrong": "Something wrong.",
+    "fName": "First Name",
+    "lName": "Last Name",
+    "status": "Status",
+    "city": "City",
+    "phone": "Phone",
+    "links": "User Links",
+    "submit": "Submit",
+    "clear": "Clear",
+    "social": "Social"
+  },
+  "ProfilePage": {
+    "title": "Profile",
+    "description": "Some data what we will add in future",
+    "delete": "Delete Profile?",
+    "confirmDelete": "Are you sure, you want to delete your profile? All data will be lost!",
+    "edit": "Edit Data",
+    "delUser": "Delete Profile",
+    "deleteConfirm": "Delete",
+    "close": "Close",
+    "status": "Status: ",
+    "none": "none",
+    "yes": "Yes",
+    "no": "No",
+    "super": "Super User: ",
+    "id": "User Id: ",
+    "city": "City : ",
+    "phone": "Phone: ",
+    "link": "Social Link:"
+  },
+  "ProfileEditPage": {
+    "edit": "Edit Profile",
+    "general": "General",
+    "password": "Password",
+    "avatar": "Avatar",
+    "back": "Back to Profile"
+  },
+  "EditProfilePassword": {
+    "submit": "Submit",
+    "clear": "Clear",
+    "confirmPassword": "Confirm Password is required.",
+    "passwordsMatch": "Passwords do not match.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters.",
+    "passwordComplexity": "Must include uppercase, lowercase, number, and special character.",
+    "nPassword": "New Password",
+    "cPassword": "Confirm Password",
+    "updated": "Profile data is updated.",
+    "wrong": "Something wrong."
+  },
+  "AvatarProfileGeneral": {
+    "long": "File name is to long. Maximum 20 letters.",
+    "size": "File size it to big. Maximum 600Kb.",
+    "choose": "You need to choose file.",
+    "error": "Error : ",
+    "file": "File selected: ",
+    "select": "Select an Avatar",
+    "submit": "Submit"
+  },
+  "NotFound": {
+    "title": "Not Found",
+    "text": "Could not find requested resource",
+    "button": "Return Home"
+  },
+  "Error": {
+    "title": "Something went wrong!",
+    "button": "Try again"
   }
 }

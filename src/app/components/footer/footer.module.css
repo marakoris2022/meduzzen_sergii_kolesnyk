@@ -1,13 +1,17 @@
 .footerWrapper {
-  border: 1px solid;
-  border-radius: 20px;
   display: flex;
   align-items: center;
+
+  border: 1px solid;
+  border-radius: 20px;
   padding: 20px;
+  background-color: #15141a;
+  border-color: #221f26;
 }
 .footerWrapper > * {
   display: flex;
   justify-content: center;
+
   text-align: center;
   width: 100%;
 }

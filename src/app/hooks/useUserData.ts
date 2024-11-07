@@ -1,25 +1,20 @@
-import { TOKEN } from "@/interface/interface";
+"use client";
+
 import { useAppSelector, useAppDispatch } from "@/state/hooks";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchUserData } from "@/state/user/userSlice";
+import { TOKEN } from "@/interface/interface";
 
 export function useUserData() {
   const dispatch = useAppDispatch();
-  const userData = useAppSelector((state) => state.user.data);
-  const isUserDataLoading = useAppSelector((state) => state.user.loading);
-
-  const [isLoading, setIsLoading] = useState<boolean>(Boolean(!userData));
+  const { data, error, loading } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (!userData && !isUserDataLoading) {
-      const token = localStorage.getItem(TOKEN.NAME);
-      if (token) {
-        dispatch(fetchUserData()).then(() => setIsLoading(false));
-      } else {
-        setIsLoading(false);
-      }
+    const token = Boolean(localStorage.getItem(TOKEN.NAME));
+    if (!data && !loading && !error && token) {
+      dispatch(fetchUserData());
     }
-  }, [userData, isUserDataLoading, dispatch]);
+  }, [data, loading, dispatch, error]);
 
-  return { userData, isLoading };
+  return { userData: data, isLoading: loading, userDataError: error };
 }

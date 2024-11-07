@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import styles from "./signInForm.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
@@ -37,9 +37,9 @@ const SuccessLoginAction = () => {
   const t = useTranslations("SignInForm");
 
   return (
-    <Stack direction={"column"} alignItems={"center"}>
-      <Button onClick={() => router.push(PATHS.MAIN)}>{t("LoginBtn")}</Button>
-    </Stack>
+    <div className={styles.actionWrapper}>
+      <Button onClick={() => router.push(PATHS.MAIN)}>{t("loginBtn")}</Button>
+    </div>
   );
 };
 
@@ -110,7 +110,7 @@ const SignInForm = () => {
   };
 
   return (
-    <Box className={styles.formWrapper}>
+    <div className={styles.formWrapper}>
       <UniversalModal
         open={modalData.isModal}
         handleClose={() =>
@@ -120,22 +120,18 @@ const SignInForm = () => {
         description={modalData.modalText}
         footerActions={modalData.modalAction}
       />
-      <Stack
-        gap={3}
-        className={styles.formWrapper}
-        component={"form"}
+      <form
         autoComplete="off"
+        className={styles.formWrapper}
         onSubmit={handleSubmit(submitForm)}
       >
-        <Typography className={styles.formTitle} component={"h1"}>
-          {t("title")}
-        </Typography>
+        <h3 className={styles.formTitle}>{t("title")}</h3>
 
         <TextField
           {...register("email", emailValidation(t))}
           fullWidth
           error={!!errors.email}
-          label={t("Email")}
+          label={t("email")}
           helperText={errors.email ? errors.email.message : ""}
         />
         <TextField
@@ -143,12 +139,12 @@ const SignInForm = () => {
           fullWidth
           type="password"
           error={!!errors.password}
-          label={t("Password")}
+          label={t("password")}
           helperText={errors.password ? errors.password.message : ""}
         />
-        <Stack gap={3} direction={{ sm: "column", md: "row" }}>
+        <div className={styles.btnWrapper}>
           <Button type="submit" variant="outlined" fullWidth>
-            {t("Sign_in")}
+            {t("signIn")}
           </Button>
           <Button
             onClick={() => {
@@ -159,11 +155,11 @@ const SignInForm = () => {
             color="warning"
             fullWidth
           >
-            {t("Reset")}
+            {t("reset")}
           </Button>
-        </Stack>
-      </Stack>
-    </Box>
+        </div>
+      </form>
+    </div>
   );
 };
 

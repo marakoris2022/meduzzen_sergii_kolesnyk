@@ -1,0 +1,23 @@
+.pageWrapper,
+.cardsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pageWrapper {
+  margin: 0 auto;
+}
+
+.cardsWrapper {
+  align-items: normal;
+  gap: 15px;
+}
+
+.title {
+  padding: 20px;
+}
+
+.paginationWrapper {
+  padding: 20px 0;
+}

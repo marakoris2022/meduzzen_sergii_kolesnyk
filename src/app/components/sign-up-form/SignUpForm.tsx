@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import styles from "./signUpForm.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
@@ -29,9 +29,9 @@ const SuccessRegistrationAction = () => {
   const t = useTranslations("SignUpForm");
 
   return (
-    <Stack direction={"column"} alignItems={"center"}>
-      <Button onClick={() => router.push(PATHS.SIGNIN)}>{t("LoginBtn")}</Button>
-    </Stack>
+    <div className={styles.modalActionWrapper}>
+      <Button onClick={() => router.push(PATHS.SIGNIN)}>{t("loginBtn")}</Button>
+    </div>
   );
 };
 
@@ -91,7 +91,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <Box className={styles.formWrapper}>
+    <div className={styles.formWrapper}>
       <UniversalModal
         open={modalData.isModal}
         handleClose={() =>
@@ -101,66 +101,62 @@ const SignUpForm = () => {
         description={modalData.modalText}
         footerActions={modalData.modalAction}
       />
-      <Stack
-        gap={3}
+      <form
         className={styles.formWrapper}
-        component={"form"}
         autoComplete="off"
         onSubmit={handleSubmit(submitForm)}
       >
-        <Typography className={styles.formTitle} component={"h1"}>
-          {t("title")}
-        </Typography>
-        <Stack gap={3} direction={{ sm: "column", md: "row" }}>
+        <h3 className={styles.formTitle}>{t("title")}</h3>
+        <div className={styles.formMiddleWrapper}>
           <TextField
             {...register("firstName", nameValidation(t))}
             fullWidth
             error={!!errors.firstName}
-            label={t("First Name")}
+            label={t("firstName")}
             helperText={errors.firstName ? errors.firstName.message : ""}
           />
           <TextField
             {...register("lastName", nameValidation(t))}
             fullWidth
             error={!!errors.lastName}
-            label={t("Last Name")}
+            label={t("lastName")}
             helperText={errors.lastName ? errors.lastName.message : ""}
           />
-        </Stack>
+        </div>
         <TextField
           {...register("email", emailValidation(t))}
           fullWidth
           error={!!errors.email}
-          label={t("Email")}
+          label={t("email")}
           helperText={errors.email ? errors.email.message : ""}
         />
-        <Stack gap={3} direction={{ sm: "column", md: "row" }}>
+        <div className={styles.formMiddleWrapper}>
           <TextField
             {...register("password", passwordValidation(t))}
             fullWidth
             type="password"
             error={!!errors.password}
-            label={t("Password")}
+            label={t("password")}
             helperText={errors.password ? errors.password.message : ""}
           />
           <TextField
             {...register("confirmPassword", {
-              required: t("Confirm Required"),
+              required: t("confirmPassword"),
               validate: (value) =>
-                value === getValues("password") || t('"Passwords Match"'),
+                value === getValues("password") || t('"passwordsMatch"'),
             })}
             fullWidth
             type="password"
             error={!!errors.confirmPassword}
-            label={t("Confirm Password")}
+            label={t("confirmPassword")}
             helperText={
               errors.confirmPassword ? errors.confirmPassword.message : ""
             }
           />
-        </Stack>
-        <Stack gap={3} direction={{ sm: "column", md: "row" }}>
+        </div>
+        <div className={styles.formMiddleWrapper}>
           <Button type="submit" variant="outlined" fullWidth>
-            {t("Sign_up")}
+            {t("signUp")}
           </Button>
           <Button
             onClick={() => {
@@ -171,11 +167,11 @@ const SignUpForm = () => {
             color="warning"
             fullWidth
           >
-            {t("Reset")}
+            {t("reset")}
           </Button>
-        </Stack>
-      </Stack>
-    </Box>
+        </div>
+      </form>
+    </div>
   );
 };
 

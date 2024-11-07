@@ -1,4 +1,4 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Link } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import styles from "./githubLink.module.css";
 
@@ -10,12 +10,10 @@ type GithubLinkProps = {
 const GithubLink = ({ url, title }: GithubLinkProps) => {
   return (
     <Link href={url} target="_blank">
-      <Box className={styles.wrapper}>
+      <div className={styles.wrapper}>
         <GitHubIcon fontSize="small" color="success" />
-        <Typography color="primary" component="span">
-          {title}
-        </Typography>
-      </Box>
+        <span>{title}</span>
+      </div>
     </Link>
   );
 };

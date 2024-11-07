@@ -1,0 +1,24 @@
+.formWrapper,
+.btnWrapper,
+.linksBtnWrapper {
+  display: flex;
+  flex-direction: row;
+}
+.formWrapper {
+  flex-direction: column;
+  gap: 24px;
+}
+
+.updateText {
+  text-align: center;
+}
+
+.btnWrapper {
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.linksBtnWrapper {
+  gap: 10px;
+}

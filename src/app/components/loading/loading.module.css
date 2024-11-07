@@ -1,0 +1,11 @@
+.loadingWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding: 60px;
+}
+
+.loadingWrapper p {
+  color: darkorange;
+}

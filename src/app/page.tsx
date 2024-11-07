@@ -1,56 +1,52 @@
 "use client";
 
-import { Container, Box, Typography, Button, Stack } from "@mui/material";
+import { Button } from "@mui/material";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useUserData } from "./hooks/useUserData";
-import FetchingUserData from "./components/FetchingUserData";
 import { PATHS } from "@/interface/interface";
+import Loading from "./components/loading/Loading";
+import PageError from "./components/users-page-error/PageError";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
-  const { userData, isLoading } = useUserData();
+  const { userData, isLoading, userDataError } = useUserData();
 
-  if (isLoading)
-    return (
-      <Container component="main">
-        <FetchingUserData />
-      </Container>
-    );
+  if (isLoading) return <Loading />;
 
   return (
-    <Container component="main">
-      <Box className={styles.mainWrapper}>
-        {userData ? (
-          <Stack gap={3} alignContent={"center"}>
-            <Box className={styles.videoWrapper}>
-              <Box className={styles.videoWrapperHeigh} />
-            </Box>
-            <Typography className={styles.mainTitle} component={"h2"}>
-              {t("title")}
-            </Typography>
-            <Typography className={styles.mainUser} component={"h3"}>
-              {userData.user_email}
-            </Typography>
-          </Stack>
-        ) : (
-          <>
-            <Typography className={styles.title}>{t("title2")}</Typography>
-            <Typography>{t("account")}</Typography>
-            <Link className={styles.link} href={PATHS.SIGNIN}>
-              <Button variant="outlined" fullWidth>
-                {t("signin")}
-              </Button>
-            </Link>
-            <Link className={styles.link} href={PATHS.SIGNUP}>
-              <Button variant="outlined" fullWidth>
-                {t("signup")}
-              </Button>
-            </Link>
-          </>
-        )}
-      </Box>
-    </Container>
+    <main className="container">
+      {Boolean(userDataError) ? (
+        <PageError errorTitle={t(userDataError)} />
+      ) : (
+        <div className={styles.mainWrapper}>
+          {userData ? (
+            <>
+              <div className={styles.videoWrapper}>
+                <div className={styles.videoWrapperHeigh} />
+              </div>
+              <h2 className={styles.mainTitle}>{t("title")}</h2>
+              <h3 className={styles.mainUser}>{userData.user_email}</h3>
+            </>
+          ) : (
+            <>
+              <h2 className={styles.title}>{t("title2")}</h2>
+              <h3>{t("account")}</h3>
+              <Link className={styles.link} href={PATHS.SIGNIN}>
+                <Button variant="outlined" fullWidth>
+                  {t("signin")}
+                </Button>
+              </Link>
+              <Link className={styles.link} href={PATHS.SIGNUP}>
+                <Button variant="outlined" fullWidth>
+                  {t("signup")}
+                </Button>
+              </Link>
+            </>
+          )}
+        </div>
+      )}
+    </main>
   );
 }

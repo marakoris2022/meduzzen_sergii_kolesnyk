@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Modal, Box, Typography, Button, Stack } from "@mui/material";
+import { Modal, Button } from "@mui/material";
 import { useTranslations } from "next-intl";
 import styles from "./universalModal.module.css";
 
@@ -29,31 +29,23 @@ const UniversalModal = ({
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
-      <Box className={styles.wrapper}>
-        {title && (
-          <Typography id="modal-title" variant="h6" component="h2" mb={2}>
-            {title}
-          </Typography>
-        )}
+      <div className={styles.wrapper}>
+        {Boolean(title) && <h2 id="modal-title">{title}</h2>}
 
-        {description && (
-          <Typography id="modal-description" variant="body2" mb={2}>
-            {description}
-          </Typography>
-        )}
+        {Boolean(description) && <p id="modal-description">{description}</p>}
 
         {children}
 
         {footerActions ? (
           footerActions
         ) : (
-          <Stack justifyContent={"center"} mt={3}>
+          <div className={styles.btnWrapper}>
             <Button variant="contained" color="primary" onClick={handleClose}>
               {t("close")}
             </Button>
-          </Stack>
+          </div>
         )}
-      </Box>
+      </div>
     </Modal>
   );
 };

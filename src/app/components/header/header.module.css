@@ -1,8 +1,21 @@
-.headerWrapper {
-  border: 1px solid;
-  border-radius: 20px;
+.headerWrapper,
+.navigationWrapper {
   display: flex;
+}
+
+.headerWrapper {
   justify-content: space-between;
   align-items: center;
+
+  border: 1px solid;
+  border-radius: 20px;
+
   padding: 20px;
+
+  background-color: #15141a;
+  border-color: #221f26;
+}
+.navigationWrapper {
+  flex-direction: row;
+  row-gap: 20px;
 }
