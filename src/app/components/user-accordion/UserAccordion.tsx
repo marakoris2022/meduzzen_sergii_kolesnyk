@@ -1,4 +1,4 @@
-import { UserProps } from "@/interface/interface";
+import { AdditionalUserPropsCardProps, UserProps } from "@/interface/interface";
 import {
   Accordion,
   AccordionSummary,
@@ -17,14 +17,6 @@ type UserAccordionProps = {
   user: UserProps;
 };
 
-type AdditionalUserPropsCardProps = {
-  user_status: string;
-  user_city: string;
-  user_phone: string;
-  user_links: string[];
-  is_superuser: boolean;
-};
-
 function AdditionalUserPropsCard({
   user_status,
   user_city,
@@ -34,21 +26,23 @@ function AdditionalUserPropsCard({
 }: AdditionalUserPropsCardProps) {
   const t = useTranslations("UserAccordion");
 
+  const userInfo = [
+    { label: t("status"), value: user_status },
+    { label: t("city"), value: user_city },
+    { label: t("phone"), value: user_phone },
+  ];
+
   return (
     <div className={styles.propsWrapper}>
       <ul>
-        <li>
-          <strong>{t("Status")}</strong>:{user_status || t("empty")}
-        </li>
-        <li>
-          <strong>{t("City")}:</strong> {user_city || t("empty")}
-        </li>
-        <li>
-          <strong>{t("Phone")}:</strong> {user_phone || t("empty")}
-        </li>
+        {userInfo.map((info) => (
+          <li key={info.label}>
+            <strong>{info.label}:</strong> {info.value || t("empty")}
+          </li>
+        ))}
       </ul>
       <p>
-        <strong>{t("Links")}:</strong>
+        <strong>{t("links")}:</strong>
       </p>
       <ul>
         {user_links ? (
@@ -89,7 +83,7 @@ const UserAccordion = ({ user }: UserAccordionProps) => {
       >
         <div className={styles.accordionHeadingWrapper}>
           <p>
-            {t("Email")}: {user.user_email}
+            {t("email")}: {user.user_email}
           </p>
           <p>
             {t("Id")}: {user.user_id}
@@ -102,7 +96,7 @@ const UserAccordion = ({ user }: UserAccordionProps) => {
             {user.user_avatar ? (
               <Image
                 src={user.user_avatar}
-                alt={"Avatar"}
+                alt="Avatar"
                 height={120}
                 width={100}
               />
@@ -112,10 +106,10 @@ const UserAccordion = ({ user }: UserAccordionProps) => {
           </div>
           <div>
             <p>
-              {t("Name")}: {user.user_firstname}
+              {t("name")}: {user.user_firstname}
             </p>
             <p>
-              {t("LastName")}: {user.user_lastname}
+              {t("firstName")}: {user.user_lastname}
             </p>
           </div>
           <AdditionalUserPropsCard

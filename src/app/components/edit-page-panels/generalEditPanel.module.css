@@ -1,5 +1,10 @@
-.formWrapper {
+.formWrapper,
+.btnWrapper,
+.linksBtnWrapper {
   display: flex;
+  flex-direction: row;
+}
+.formWrapper {
   flex-direction: column;
   gap: 24px;
 }
@@ -9,15 +14,11 @@
 }
 
 .btnWrapper {
-  display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
   gap: 24px;
 }
 
 .linksBtnWrapper {
-  display: flex;
-  flex-direction: row;
   gap: 10px;
 }

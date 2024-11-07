@@ -80,29 +80,29 @@ const Password = () => {
         label={t("nPassword")}
         error={!!errors.password}
         helperText={errors.password?.message || ""}
-      ></TextField>
+      />
       <TextField
         autoComplete="false"
         type={isHidden ? "password" : "text"}
         {...register("confirmPassword", {
-          required: t("Confirm Required"),
+          required: t("confirmPassword"),
           validate: (value) =>
-            value === getValues("password") || t("Passwords Match"),
+            value === getValues("password") || t("passwordsMatch"),
         })}
         label={t("cPassword")}
         error={!!errors.confirmPassword}
         helperText={errors.confirmPassword?.message || ""}
-      ></TextField>
+      />
 
       <p className={styles.updateText} style={{ color: updateStatus.color }}>
         {updateStatus.text}
       </p>
       <div className={styles.btnWrapper}>
         <Button type="submit" variant="outlined" color="success">
-          {t("Submit")}
+          {t("submit")}
         </Button>
         <Button onClick={handleReset} variant="outlined" color="warning">
-          {t("Clear")}
+          {t("clear")}
         </Button>
       </div>
     </form>

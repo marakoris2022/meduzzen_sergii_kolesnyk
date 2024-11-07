@@ -1,8 +1,11 @@
-.errorWrapper {
+.errorWrapper,
+.pageWrapper,
+.cardsWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+}
+.errorWrapper {
   gap: 30px;
   margin: 0 auto;
   padding-top: 40px;
@@ -10,15 +13,11 @@
 }
 
 .pageWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0 auto;
 }
 
 .cardsWrapper {
-  display: flex;
-  flex-direction: column;
+  align-items: normal;
   gap: 15px;
 }
 

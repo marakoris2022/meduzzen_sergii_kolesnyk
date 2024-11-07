@@ -22,14 +22,14 @@ const ExitButton = () => {
     return (
       <div className={styles.actionWrapper}>
         <Button onClick={handleLogout} color="error" variant="outlined">
-          {t("Leave")}
+          {t("leave")}
         </Button>
         <Button
           onClick={() => setIsModal(false)}
           color="success"
           variant="outlined"
         >
-          {t("Cancel")}
+          {t("cancel")}
         </Button>
       </div>
     );

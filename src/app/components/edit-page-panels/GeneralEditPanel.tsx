@@ -17,21 +17,19 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { updateUserGeneralData } from "@/services/axios-api-methods/axiosPut";
 import { setUserData } from "@/state/user/userSlice";
 
-type EditGeneralFromProps = {
+type BaseUserProps = {
   user_firstname: string;
   user_lastname: string;
   user_status: string;
   user_city: string;
   user_phone: string;
+};
+
+type EditGeneralFromProps = BaseUserProps & {
   user_links: string[];
 };
 
-type FormProps = {
-  user_firstname: string;
-  user_lastname: string;
-  user_status: string;
-  user_city: string;
-  user_phone: string;
+type FormProps = BaseUserProps & {
   user_links: string;
 };
 
@@ -106,18 +104,18 @@ const General = () => {
         },
         {
           name: "user_status",
-          label: t("Status"),
+          label: t("status"),
           validation: statusValidation,
         },
-        { name: "user_city", label: t("City"), validation: cityValidation },
-        { name: "user_phone", label: t("Phone"), validation: phoneValidation },
+        { name: "user_city", label: t("city"), validation: cityValidation },
+        { name: "user_phone", label: t("phone"), validation: phoneValidation },
       ];
 
       userData.user_links.forEach((value, index) => {
         const linkFieldName = `user_links_${index + 1}`;
         initialFields.push({
           name: linkFieldName,
-          label: t("Links"),
+          label: t("links"),
           validation: linksValidation,
         });
         setValue(linkFieldName as keyof FormProps, value);
@@ -175,7 +173,7 @@ const General = () => {
       ...state,
       {
         name: `user_links_${linksCount.current}`,
-        label: t("Links"),
+        label: t("links"),
         validation: linksValidation,
       },
     ]);
@@ -206,7 +204,7 @@ const General = () => {
 
       <div className={styles.linksBtnWrapper}>
         <Button startIcon={<AddIcon />} size="small" onClick={addLinkField}>
-          {t("Social")}
+          {t("social")}
         </Button>
         <Button
           startIcon={<RemoveIcon />}
@@ -214,7 +212,7 @@ const General = () => {
           onClick={removeLinkField}
           color="warning"
         >
-          {t("Social")}
+          {t("social")}
         </Button>
       </div>
       <p className={styles.updateText} style={{ color: updateStatus.color }}>
@@ -222,10 +220,10 @@ const General = () => {
       </p>
       <div className={styles.btnWrapper}>
         <Button type="submit" variant="outlined" color="success">
-          {t("Submit")}
+          {t("submit")}
         </Button>
         <Button onClick={handleReset} variant="outlined" color="warning">
-          {t("Clear")}
+          {t("clear")}
         </Button>
       </div>
     </form>

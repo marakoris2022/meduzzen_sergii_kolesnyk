@@ -53,13 +53,13 @@ export const fetchUsersData = createAsyncThunk(
   "users/fetchUsersData",
   async (pageNumber: number, { rejectWithValue, dispatch }) => {
     try {
-      const response = await getUsers(pageNumber);
-      const usersData = response.result.users.map((user) => ({
+      const { result } = await getUsers(pageNumber);
+      const usersData = result.users.map((user) => ({
         ...MockUserData,
         ...user,
       }));
       dispatch(setPageNumber(pageNumber));
-      dispatch(setPageCount(response.result.pagination.total_page));
+      dispatch(setPageCount(result.pagination.total_page));
       return usersData;
     } catch {
       return rejectWithValue("Failed to fetch user data");

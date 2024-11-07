@@ -10,18 +10,18 @@ import { PATHS } from "@/interface/interface";
 import Link from "next/link";
 import styles from "./navigation.module.css";
 import { useUserData } from "@/app/hooks/useUserData";
+import classNames from "classnames";
 
 function MenuLinkItem({ path, title }: { path: string; title: string }) {
   const pathname = usePathname();
 
+  const linkClass = classNames(styles.navLink, {
+    [styles.active]: pathname === path,
+  });
+
   return (
     <li>
-      <Link
-        className={`${styles.navLink} ${
-          pathname === path ? styles.active : ""
-        }`}
-        href={path}
-      >
+      <Link className={linkClass} href={path}>
         {title}
       </Link>
     </li>

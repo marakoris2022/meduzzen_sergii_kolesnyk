@@ -44,9 +44,9 @@ const ProfileEditPage = () => {
         <div className={styles.tabContainer}>
           <div className={styles.tabWrapper}>
             <Tabs value={value} onChange={handleChange}>
-              <Tab label={t("General")} />
-              <Tab label={t("Password")} />
-              <Tab label={t("Avatar")} />
+              <Tab label={t("general")} />
+              <Tab label={t("password")} />
+              <Tab label={t("avatar")} />
               <Tab
                 className={styles.backBtn}
                 onClick={() => {

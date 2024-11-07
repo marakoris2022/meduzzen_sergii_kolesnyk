@@ -35,8 +35,8 @@ function UserDataTable({ userData }: { userData: UserProps }) {
 
   return (
     <Grid2 key={userData.user_id} container spacing={2} columns={12}>
-      {userStats.map((item, index) => (
-        <React.Fragment key={index}>
+      {userStats.map((item) => (
+        <React.Fragment key={item.label}>
           <Grid2 size={6}>{item.label}</Grid2>
           <Grid2 size={6}>{item.value}</Grid2>
         </React.Fragment>
@@ -45,7 +45,7 @@ function UserDataTable({ userData }: { userData: UserProps }) {
       {Boolean(userData.user_links.length) ? (
         userData.user_links.map((link, index) => {
           return (
-            <React.Fragment key={`${index}_fragment`}>
+            <React.Fragment key={index}>
               <Grid2 size={6}>{t("link")}</Grid2>
               <Grid2 size={6}>{link}</Grid2>
             </React.Fragment>
@@ -68,10 +68,10 @@ function ModalActions({
   const t = useTranslations("ProfilePage");
   return (
     <div className={styles.modalActionsWrapper}>
-      <Button onClick={handleDeleteUser} color="error" variant={"outlined"}>
-        {t("delete_confirm")}
+      <Button onClick={handleDeleteUser} color="error" variant="outlined">
+        {t("deleteConfirm")}
       </Button>
-      <Button onClick={handleCloseModal} color={"success"} variant={"outlined"}>
+      <Button onClick={handleCloseModal} color="success" variant="outlined">
         {t("close")}
       </Button>
     </div>
@@ -104,7 +104,7 @@ const ProfilePage = () => {
           setIsModal(false);
         }}
         title={t("delete")}
-        description={t("confirm_delete")}
+        description={t("confirmDelete")}
         footerActions={
           <ModalActions
             handleDeleteUser={handleDeleteUser}
@@ -116,14 +116,14 @@ const ProfilePage = () => {
         <div className={styles.photoCardWrapper}>
           <div className={styles.photoWrapper}>
             <Image
-              fill={true}
+              fill
               objectFit="cover"
               src={
                 userData?.user_avatar
                   ? userData?.user_avatar
                   : "/no_avatar_main.webp"
               }
-              alt={"User_Avatar"}
+              alt="User_Avatar"
             />
           </div>
           <p>{userData?.user_email}</p>
@@ -138,8 +138,8 @@ const ProfilePage = () => {
           </div>
           <div className={styles.buttonWrapper}>
             <Button
-              color={"warning"}
-              variant={"outlined"}
+              color="warning"
+              variant="outlined"
               endIcon={<SettingsOutlinedIcon />}
               onClick={() => {
                 router.push(PATHS.PROFILE_EDIT);
@@ -148,14 +148,14 @@ const ProfilePage = () => {
               {t("edit")}
             </Button>
             <Button
-              color={"error"}
-              variant={"text"}
+              color="error"
+              variant="text"
               endIcon={<WarningAmberOutlinedIcon />}
               onClick={() => {
                 setIsModal(true);
               }}
             >
-              {t("del_user")}
+              {t("delUser")}
             </Button>
           </div>
         </div>

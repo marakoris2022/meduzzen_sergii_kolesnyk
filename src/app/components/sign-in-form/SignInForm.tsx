@@ -38,7 +38,7 @@ const SuccessLoginAction = () => {
 
   return (
     <div className={styles.actionWrapper}>
-      <Button onClick={() => router.push(PATHS.MAIN)}>{t("LoginBtn")}</Button>
+      <Button onClick={() => router.push(PATHS.MAIN)}>{t("loginBtn")}</Button>
     </div>
   );
 };
@@ -125,13 +125,13 @@ const SignInForm = () => {
         className={styles.formWrapper}
         onSubmit={handleSubmit(submitForm)}
       >
-        <h1 className={styles.formTitle}>{t("title")}</h1>
+        <h3 className={styles.formTitle}>{t("title")}</h3>
 
         <TextField
           {...register("email", emailValidation(t))}
           fullWidth
           error={!!errors.email}
-          label={t("Email")}
+          label={t("email")}
           helperText={errors.email ? errors.email.message : ""}
         />
         <TextField
@@ -139,12 +139,12 @@ const SignInForm = () => {
           fullWidth
           type="password"
           error={!!errors.password}
-          label={t("Password")}
+          label={t("password")}
           helperText={errors.password ? errors.password.message : ""}
         />
         <div className={styles.btnWrapper}>
           <Button type="submit" variant="outlined" fullWidth>
-            {t("Sign_in")}
+            {t("signIn")}
           </Button>
           <Button
             onClick={() => {
@@ -155,7 +155,7 @@ const SignInForm = () => {
             color="warning"
             fullWidth
           >
-            {t("Reset")}
+            {t("reset")}
           </Button>
         </div>
       </form>

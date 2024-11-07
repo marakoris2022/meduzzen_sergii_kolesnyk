@@ -1,6 +1,11 @@
-.formWrapper {
+.formWrapper,
+.formMiddleWrapper,
+.modalActionWrapper {
   display: flex;
   flex-direction: column;
+}
+
+.formWrapper {
   gap: 20px;
   padding: 20px 0;
   border-radius: 15px;
@@ -9,8 +14,8 @@
 }
 
 .formMiddleWrapper {
-  display: flex;
   flex-direction: row;
+
   gap: 20px;
 }
 
@@ -19,8 +24,6 @@
 }
 
 .modalActionWrapper {
-  display: flex;
-  flex-direction: column;
   align-items: center;
 }
 

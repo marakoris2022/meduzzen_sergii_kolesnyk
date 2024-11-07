@@ -30,7 +30,7 @@ const SuccessRegistrationAction = () => {
 
   return (
     <div className={styles.modalActionWrapper}>
-      <Button onClick={() => router.push(PATHS.SIGNIN)}>{t("LoginBtn")}</Button>
+      <Button onClick={() => router.push(PATHS.SIGNIN)}>{t("loginBtn")}</Button>
     </div>
   );
 };
@@ -106,20 +106,20 @@ const SignUpForm = () => {
         autoComplete="off"
         onSubmit={handleSubmit(submitForm)}
       >
-        <h1 className={styles.formTitle}>{t("title")}</h1>
+        <h3 className={styles.formTitle}>{t("title")}</h3>
         <div className={styles.formMiddleWrapper}>
           <TextField
             {...register("firstName", nameValidation(t))}
             fullWidth
             error={!!errors.firstName}
-            label={t("First Name")}
+            label={t("firstName")}
             helperText={errors.firstName ? errors.firstName.message : ""}
           />
           <TextField
             {...register("lastName", nameValidation(t))}
             fullWidth
             error={!!errors.lastName}
-            label={t("Last Name")}
+            label={t("lastName")}
             helperText={errors.lastName ? errors.lastName.message : ""}
           />
         </div>
@@ -127,7 +127,7 @@ const SignUpForm = () => {
           {...register("email", emailValidation(t))}
           fullWidth
           error={!!errors.email}
-          label={t("Email")}
+          label={t("email")}
           helperText={errors.email ? errors.email.message : ""}
         />
         <div className={styles.formMiddleWrapper}>
@@ -136,19 +136,19 @@ const SignUpForm = () => {
             fullWidth
             type="password"
             error={!!errors.password}
-            label={t("Password")}
+            label={t("password")}
             helperText={errors.password ? errors.password.message : ""}
           />
           <TextField
             {...register("confirmPassword", {
-              required: t("Confirm Required"),
+              required: t("confirmPassword"),
               validate: (value) =>
-                value === getValues("password") || t('"Passwords Match"'),
+                value === getValues("password") || t('"passwordsMatch"'),
             })}
             fullWidth
             type="password"
             error={!!errors.confirmPassword}
-            label={t("Confirm Password")}
+            label={t("confirmPassword")}
             helperText={
               errors.confirmPassword ? errors.confirmPassword.message : ""
             }
@@ -156,7 +156,7 @@ const SignUpForm = () => {
         </div>
         <div className={styles.formMiddleWrapper}>
           <Button type="submit" variant="outlined" fullWidth>
-            {t("Sign_up")}
+            {t("signUp")}
           </Button>
           <Button
             onClick={() => {
@@ -167,7 +167,7 @@ const SignUpForm = () => {
             color="warning"
             fullWidth
           >
-            {t("Reset")}
+            {t("reset")}
           </Button>
         </div>
       </form>

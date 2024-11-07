@@ -17,7 +17,7 @@ const Footer = () => {
         }}
       >
         <p className={styles.titleLong}>{t("title")}</p>
-        <p className={styles.titleShort}>{t("title_short")}</p>
+        <p className={styles.titleShort}>{t("titleShort")}</p>
 
         <GithubLink url="https://github.com/marakoris2022" title="SergiiK" />
         <p>2024 {t("month")}</p>

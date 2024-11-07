@@ -1,15 +1,24 @@
-.wrapper {
+.wrapper,
+.modalActionsWrapper,
+.userNameTitle,
+.buttonWrapper {
   display: flex;
   flex-direction: row;
+}
+.wrapper,
+.tableWrapper {
   padding-top: 20px;
-  gap: 35px;
   max-width: 80%;
+}
+.wrapper {
+  gap: 35px;
+  margin: 0 auto;
+}
+.tableWrapper {
   margin: 0 auto;
 }
 
 .modalActionsWrapper {
-  display: flex;
-  flex-direction: row;
   gap: 15px;
 }
 
@@ -40,26 +49,19 @@
 }
 .userNameTitle {
   border-bottom: 1px dashed darkblue;
-  display: flex;
-  flex-direction: row;
   gap: 40px;
   justify-content: center;
 }
 .userNameTitle p {
   font-size: 2.5vw;
 }
-.tableWrapper {
-  padding-top: 20px;
-  width: 80%;
-  margin: 0 auto;
-}
+
 .buttonWrapper {
-  display: flex;
-  flex-direction: row;
   gap: 20px;
   padding: 50px 0;
   margin: 0 auto;
 }
+
 @media screen and (max-width: 750px) {
   .userNameTitle p {
     font-size: 20px;

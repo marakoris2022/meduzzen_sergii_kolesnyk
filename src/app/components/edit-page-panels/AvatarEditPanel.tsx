@@ -76,10 +76,10 @@ const Avatar = () => {
     <div className={styles.wrapper}>
       <div className={styles.avatarContainer}>
         <Image
-          fill={true}
+          fill
           objectFit="cover"
           src={userData.user_avatar || noImagePath}
-          alt={"No_Avatar"}
+          alt="No_Avatar"
         />
       </div>
       <p>
