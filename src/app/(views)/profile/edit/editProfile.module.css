@@ -19,6 +19,7 @@
 .tabWrapper {
   border-bottom: 1px solid #221f26;
   padding-bottom: 5px;
+  margin-bottom: 20px;
 }
 .tabContainer {
   flex-grow: 1;

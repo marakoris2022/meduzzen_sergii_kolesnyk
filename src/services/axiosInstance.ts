@@ -5,7 +5,7 @@ import { useLogout } from "../app/hooks/useLogout";
 import { setToken } from "@/state/auth/authSlice";
 import { isTokenExpired } from "@/utils/isTokenExpired";
 
-const BASE_URL = process.env.BASE_URL || "http://51.20.210.187";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,

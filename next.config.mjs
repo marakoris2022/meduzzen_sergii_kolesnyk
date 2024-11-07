@@ -2,10 +2,8 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
-const IMG_PROTOCOL = process.env.IMG_PROTOCOL || "http";
-const IMG_HOSTNAME = process.env.IMG_HOSTNAME || "51.20.210.187";
-
-console.log("next.config", IMG_PROTOCOL, IMG_HOSTNAME);
+const IMG_SERVER_PROTOCOL = process.env.IMG_SERVER_PROTOCOL;
+const IMG_SERVER_HOSTNAME = process.env.IMG_SERVER_HOSTNAME;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -13,8 +11,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: IMG_PROTOCOL,
-        hostname: IMG_HOSTNAME,
+        protocol: IMG_SERVER_PROTOCOL,
+        hostname: IMG_SERVER_HOSTNAME,
       },
     ],
   },

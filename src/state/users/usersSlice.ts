@@ -44,7 +44,7 @@ export const fetchUserDataById = createAsyncThunk(
 
       return updateData;
     } catch {
-      return rejectWithValue("Failed to fetch user data");
+      return rejectWithValue("errorUsersData");
     }
   }
 );
@@ -62,7 +62,7 @@ export const fetchUsersData = createAsyncThunk(
       dispatch(setPageCount(result.pagination.total_page));
       return usersData;
     } catch {
-      return rejectWithValue("Failed to fetch user data");
+      return rejectWithValue("errorUsersData");
     }
   }
 );

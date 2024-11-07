@@ -1,15 +1,8 @@
-.errorWrapper,
 .pageWrapper,
 .cardsWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.errorWrapper {
-  gap: 30px;
-  margin: 0 auto;
-  padding-top: 40px;
-  max-width: 260px;
 }
 
 .pageWrapper {

@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PATHS } from "@/interface/interface";
 import styles from "./editProfile.module.css";
@@ -10,22 +10,6 @@ import General from "../../../components/edit-page-panels/GeneralEditPanel";
 import Avatar from "../../../components/edit-page-panels/AvatarEditPanel";
 import Password from "../../../components/edit-page-panels/PasswordEditPanel";
 import { useTranslations } from "next-intl";
-
-interface TabPanelProps {
-  children?: ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index } = props;
-
-  return (
-    <div>
-      {value === index && <div className={styles.panelWrapper}>{children}</div>}
-    </div>
-  );
-}
 
 const ProfileEditPage = () => {
   const [value, setValue] = useState(0);
@@ -56,15 +40,9 @@ const ProfileEditPage = () => {
               />
             </Tabs>
           </div>
-          <CustomTabPanel value={value} index={0}>
-            <General />
-          </CustomTabPanel>
-          <CustomTabPanel value={value} index={1}>
-            <Password />
-          </CustomTabPanel>
-          <CustomTabPanel value={value} index={2}>
-            <Avatar />
-          </CustomTabPanel>
+          {value === 0 && <General />}
+          {value === 1 && <Password />}
+          {value === 2 && <Avatar />}
         </div>
       </div>
     </div>

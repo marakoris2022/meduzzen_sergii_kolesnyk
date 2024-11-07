@@ -4,7 +4,8 @@
     "title2": "Welcome my friend!",
     "account": "Have you an account?",
     "signin": "SIGN IN",
-    "signup": "SIGN UP"
+    "signup": "SIGN UP",
+    "fetchUserError": "Failed to fetch User Data."
   },
   "LocalSwitcher": {
     "language": "Lang.",
@@ -37,7 +38,9 @@
 
   "UsersPage": {
     "title": "Our Users",
-    "errorOccurred": "Fetching data goes wrong :(",
+    "errorUsersData": "Fetching data goes wrong :("
+  },
+  "PageError": {
     "tryAgain": "Maybe better to try one more time.",
     "retry": "Retry",
     "toMain": "Main Page"

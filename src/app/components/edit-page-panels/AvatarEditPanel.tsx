@@ -86,7 +86,7 @@ const Avatar = () => {
         {t("file")}
         {selectedFile?.name}
       </p>
-      {errorText && (
+      {Boolean(errorText) && (
         <p className={styles.errorMsg}>
           {t("error")}
           {errorText}

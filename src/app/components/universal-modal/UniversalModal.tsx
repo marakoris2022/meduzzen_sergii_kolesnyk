@@ -30,9 +30,9 @@ const UniversalModal = ({
       aria-describedby="modal-description"
     >
       <div className={styles.wrapper}>
-        {title && <h2 id="modal-title">{title}</h2>}
+        {Boolean(title) && <h2 id="modal-title">{title}</h2>}
 
-        {description && <p id="modal-description">{description}</p>}
+        {Boolean(description) && <p id="modal-description">{description}</p>}
 
         {children}
 

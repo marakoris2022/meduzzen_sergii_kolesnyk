@@ -9,8 +9,7 @@ export function isTokenExpired(token: string): boolean {
     }
 
     return false;
-  } catch (error) {
-    console.error("Token decode error: ", error);
+  } catch {
     return true;
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Pagination } from "@mui/material";
+import { Pagination } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import styles from "./users.module.css";
@@ -8,12 +8,10 @@ import Loading from "@/app/components/loading/Loading";
 import UserAccordion from "@/app/components/user-accordion/UserAccordion";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { fetchUsersData, setPageNumber } from "@/state/users/usersSlice";
-import { useRouter } from "next/navigation";
-import { PATHS } from "@/interface/interface";
+import PageError from "@/app/components/users-page-error/PageError";
 
 const UsersPage = () => {
   const t = useTranslations("UsersPage");
-  const router = useRouter();
 
   const { usersData, pageCount, pageNumber, error } = useAppSelector(
     (state) => state.users
@@ -33,24 +31,10 @@ const UsersPage = () => {
   return (
     <main className="container">
       {error ? (
-        <div className={styles.errorWrapper}>
-          <h6>{t("errorOccurred")}</h6>
-          <p>{t("tryAgain")}</p>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => dispatch(fetchUsersData(pageNumber))}
-          >
-            {t("retry")}
-          </Button>
-          <Button
-            variant="outlined"
-            color="warning"
-            onClick={() => router.push(PATHS.MAIN)}
-          >
-            {t("toMain")}
-          </Button>
-        </div>
+        <PageError
+          errorTitle={t(error)}
+          errorAction={() => dispatch(fetchUsersData(pageNumber))}
+        />
       ) : (
         <div className={styles.pageWrapper}>
           <h1 className={styles.title}>{t("title")}</h1>

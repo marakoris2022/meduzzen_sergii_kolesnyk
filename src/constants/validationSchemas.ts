@@ -1,7 +1,16 @@
+const nameRegex = /^[A-Za-z]+$/i;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const passwordRegex =
+  /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]$/;
+const cityRegex = /^[A-Za-z\s]+$/i;
+const phoneRegex = /^[+()0-9]+$/;
+const linkValidationRegex =
+  /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+
 export const nameValidation = (t: (key: string) => string) => ({
   required: t("required"),
   pattern: {
-    value: /^[A-Za-z]+$/i,
+    value: nameRegex,
     message: t("onlyLatinSymbols"),
   },
   validate: (value: string) =>
@@ -11,7 +20,7 @@ export const nameValidation = (t: (key: string) => string) => ({
 export const emailValidation = (t: (key: string) => string) => ({
   required: t("emailRequired"),
   pattern: {
-    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+    value: emailRegex,
     message: t("invalidEmail"),
   },
 });
@@ -23,8 +32,7 @@ export const passwordValidation = (t: (key: string) => string) => ({
     message: t("passwordMinLength"),
   },
   pattern: {
-    value:
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    value: passwordRegex,
     message: t("passwordComplexity"),
   },
 });
@@ -42,14 +50,14 @@ export const cityValidation = (t: (key: string) => string) => ({
     message: t("cityMaxLength"),
   },
   pattern: {
-    value: /^[A-Za-z\s]+$/i,
+    value: cityRegex,
     message: t("onlyLatinSymbols"),
   },
 });
 
 export const phoneValidation = (t: (key: string) => string) => ({
   pattern: {
-    value: /^[+()0-9]+$/,
+    value: phoneRegex,
     message: t("phoneInvalid"),
   },
   maxLength: {
@@ -61,13 +69,9 @@ export const phoneValidation = (t: (key: string) => string) => ({
 export const linksValidation = (t: (key: string) => string) => ({
   required: t("required"),
   pattern: {
-    value:
-      /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/,
+    value: linkValidationRegex,
     message: t("invalidLink"),
   },
-  validate: (text: string) => {
-    const regEx =
-      /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
-    return regEx.test(text) ? true : t("invalidLink");
-  },
+  validate: (text: string) =>
+    linkValidationRegex.test(text) ? true : t("invalidLink"),
 });
