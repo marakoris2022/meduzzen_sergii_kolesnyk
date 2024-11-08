@@ -30,7 +30,7 @@ const CompaniesPage = () => {
   }
 
   if (error) {
-    return <PageError errorTitle={"Ooops Error!"} />;
+    return <PageError errorTitle={t("error")} />;
   }
 
   if (loading) {
@@ -40,30 +40,42 @@ const CompaniesPage = () => {
   return (
     <main className="container">
       <div className={styles.pageWrapper}>
-        <h1>List of Companies</h1>
-        {companiesData &&
-          companiesData.map((company) => {
-            return (
-              <div
-                className={styles.companyCardWrapper}
-                key={company.company_id}
-              >
-                <div className={styles.imgWrapper}>
-                  <Image
-                    fill
-                    sizes="100%"
-                    src={company.company_avatar || companiesNoAvatarImgPath}
-                    alt=""
-                  ></Image>
+        <h1>{t("companiesList")}</h1>
+
+        <div className={styles.cardsListWrapper}>
+          {companiesData &&
+            companiesData.map((company) => {
+              return (
+                <div
+                  className={styles.companyCardWrapper}
+                  key={company.company_id}
+                >
+                  <div className={styles.imgWrapper}>
+                    <Image
+                      fill
+                      sizes="100%"
+                      src={company.company_avatar || companiesNoAvatarImgPath}
+                      alt={t("avatarAlt")}
+                    ></Image>
+                  </div>
+                  <div className={styles.contentWrapper}>
+                    <div className={styles.textWrapper}>
+                      <h2 className={styles.companyName}>
+                        {company.company_name}
+                      </h2>
+                      <p className={styles.companyTitle}>
+                        {company.company_title}
+                      </p>
+                    </div>
+                    <Button variant="outlined" onClick={() => {}}>
+                      {t("open")}
+                    </Button>
+                  </div>
                 </div>
-                <div className={styles.contentWrapper}>
-                  <h2 className={styles.companyName}>{company.company_name}</h2>
-                  <p className={styles.companyTitle}>{company.company_title}</p>
-                </div>
-                <Button onClick={() => {}}>Open</Button>
-              </div>
-            );
-          })}
+              );
+            })}
+        </div>
+
         <div className={styles.paginationWrapper}>
           <Pagination
             count={pageCount}

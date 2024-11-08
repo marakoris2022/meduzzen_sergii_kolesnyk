@@ -33,7 +33,11 @@
     "about": "Про нас"
   },
   "CompaniesPage": {
-    "companies": "Сторінка компаній"
+    "companies": "Сторінка компаній",
+    "errorCompaniesData": "На жаль! Не вдається отримати список компаній.",
+    "companiesList": "Список компаній",
+    "avatarAlt": "Логотип_компанії",
+    "open": "Відкрити"
   },
   "UsersPage": {
     "title": "Наші Користувачі",

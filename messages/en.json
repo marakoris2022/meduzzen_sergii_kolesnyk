@@ -33,7 +33,11 @@
     "about": "About"
   },
   "CompaniesPage": {
-    "companies": "Companies Page"
+    "companies": "Companies Page",
+    "errorCompaniesData": "Oops! Can't get list of companies.",
+    "companiesList": "List of Companies",
+    "avatarAlt": "Company_Logo",
+    "open": "Open"
   },
 
   "UsersPage": {

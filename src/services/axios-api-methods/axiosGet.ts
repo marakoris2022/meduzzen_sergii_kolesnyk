@@ -25,7 +25,7 @@ export const getUserById = async (userId: number) => {
 
 export const getAllCompanies = async (
   page: number = 1,
-  page_size: number = 9
+  page_size: number = 8
 ) => {
   const { data } = await axiosInstance.get("/companies/", {
     params: { page, page_size },

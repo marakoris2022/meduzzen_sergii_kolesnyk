@@ -1,16 +1,66 @@
+.pageWrapper h1 {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.cardsListWrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 .companyCardWrapper {
   display: flex;
   flex-direction: row;
   gap: 12px;
 
+  overflow: hidden;
+
   padding: 12px;
   border: 1px solid darkmagenta;
   border-radius: 12px;
+
+  max-width: fit-content;
 }
 
 .imgWrapper {
   position: relative;
-  width: 200px;
-  height: 200px;
+  min-width: 200px;
+  min-height: 200px;
   overflow: hidden;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+.companyName {
+  margin-bottom: 8px;
+}
+
+.textWrapper {
+  text-align: center;
+}
+
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+@media screen and (max-width: 750px) {
+  .imgWrapper {
+    min-width: 120px;
+    min-height: 120px;
+  }
+  .contentWrapper {
+    width: 180px;
+  }
+  .companyName {
+    font-size: 20px;
+  }
 }
