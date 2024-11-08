@@ -122,7 +122,7 @@ const ProfilePage = () => {
         </div>
       </div>
       <div className={styles.companiesWrapper}>
-        <h3 className={styles.companiesTitle}>Companies</h3>
+        <h3 className={styles.companiesTitle}>{t("companies")}</h3>
         <ProfileCompanies userId={userData.user_id} />
       </div>
     </main>

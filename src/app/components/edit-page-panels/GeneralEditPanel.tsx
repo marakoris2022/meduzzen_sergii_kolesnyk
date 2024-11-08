@@ -16,6 +16,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { updateUserGeneralData } from "@/services/axios-api-methods/axiosPut";
 import { setUserData } from "@/state/user/userSlice";
+import { UpdateStatusType } from "@/interface/interface";
 
 type BaseUserProps = {
   user_firstname: string;
@@ -31,11 +32,6 @@ type EditGeneralFromProps = BaseUserProps & {
 
 type FormProps = BaseUserProps & {
   user_links: string;
-};
-
-type UpdateStatusType = {
-  text: string;
-  color: "green" | "red";
 };
 
 type ValidationProps = (t: (key: string) => string) => {

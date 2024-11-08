@@ -1,22 +1,17 @@
 import { passwordValidation } from "@/constants/validationSchemas";
-import { Button, Switch, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { updateUserPassword } from "@/services/axios-api-methods/axiosPut";
 import { useUserData } from "@/app/hooks/useUserData";
 import styles from "./passwordEdit.module.css";
+import CustomSwitch from "../custom-switch/CustomSwitch";
+import { UpdateStatusType } from "@/interface/interface";
 
 type EditPasswordFromProps = {
   password: string;
   confirmPassword: string;
-};
-
-type UpdateStatusType = {
-  text: string;
-  color: "green" | "red";
 };
 
 const updateStatusInit: UpdateStatusType = {
@@ -67,12 +62,7 @@ const Password = () => {
 
   return (
     <form className={styles.formWrapper} onSubmit={handleSubmit(submit)}>
-      <div className={styles.visibilityWrapper}>
-        <VisibilityOffOutlinedIcon color={!isHidden ? "disabled" : "primary"} />
-        <Switch onChange={handleSwitch} />
-        <VisibilityOutlinedIcon color={isHidden ? "disabled" : "primary"} />
-      </div>
-
+      <CustomSwitch handleSwitch={handleSwitch} isActive={isHidden} />
       <TextField
         autoComplete="false"
         type={isHidden ? "password" : "text"}

@@ -30,9 +30,11 @@ const UniversalModal = ({
       aria-describedby="modal-description"
     >
       <div className={styles.wrapper}>
-        {Boolean(title) && <h2 id="modal-title">{title}</h2>}
+        {title && <h2 id="modal-title">{title}</h2>}
 
-        {Boolean(description) && <p id="modal-description">{description}</p>}
+        {description && (
+          <p className={styles.modalDescription}>{description}</p>
+        )}
 
         {children}
 
@@ -40,7 +42,7 @@ const UniversalModal = ({
           footerActions
         ) : (
           <div className={styles.btnWrapper}>
-            <Button variant="contained" color="primary" onClick={handleClose}>
+            <Button variant="outlined" color="warning" onClick={handleClose}>
               {t("close")}
             </Button>
           </div>

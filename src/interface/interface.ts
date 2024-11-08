@@ -13,6 +13,11 @@ export enum TOKEN {
   NAME = "authToken",
 }
 
+export type UpdateStatusType = {
+  text: string;
+  color: "green" | "red";
+};
+
 export type UserProps = UserItem & AdditionalUserPropsCardProps;
 
 export type AdditionalUserPropsCardProps = {

@@ -8,3 +8,8 @@
 .emptyListNotice {
   text-align: center;
 }
+
+.modalBtnsWrapper {
+  display: flex;
+  gap: 12px;
+}

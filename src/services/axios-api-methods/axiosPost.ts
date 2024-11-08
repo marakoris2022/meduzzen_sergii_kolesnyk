@@ -24,3 +24,14 @@ export const registerUser = async (
   });
   return data;
 };
+
+export const createCompany = async (
+  company_name: string,
+  is_visible: boolean
+) => {
+  const { data } = await axiosInstance.post("/company/", {
+    company_name,
+    is_visible,
+  });
+  return data;
+};

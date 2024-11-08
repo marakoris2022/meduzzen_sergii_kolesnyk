@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding-bottom: 12px;
+}
+
+.wrapper {
+  margin: 0;
+}
+
+.createBtn {
+  width: fit-content;
+}
+
+.nameField {
+  width: 300px;
+}

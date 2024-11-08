@@ -6,42 +6,51 @@ import { AxiosError } from "axios";
 import PageError from "../users-page-error/PageError";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { Button } from "@mui/material";
+import UniversalModal from "../universal-modal/UniversalModal";
+import CreateCompanyBody from "../create-company-body/CreateCompanyBody";
+import { useAppDispatch, useAppSelector } from "@/state/hooks";
+import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
+import { useTranslations } from "next-intl";
 
 const ProfileCompanies = ({ userId }: { userId: number }) => {
-  const [companies, setCompanies] = useState<CompanyPropsInList[]>([]);
-  const [error, setError] = useState<null | AxiosError>(null);
+  const t = useTranslations("ProfileCompanies");
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const { companies, error } = useAppSelector((state) => state.userCompanies);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getCompanyListByUserId(userId)
-      .then((data) => {
-        setCompanies(data);
-      })
-      .catch((error) => {
-        setError(error as AxiosError);
-      });
+    dispatch(fetchUserCompanies(userId));
   }, [userId]);
 
-  if (error) return <PageError errorTitle={"Can't fetch companies."} />;
+  if (error) return <PageError errorTitle={t("cantFetch")} />;
 
   return (
-    <div>
-      {companies.length ? (
-        <div>Companies List</div>
-      ) : (
-        <p className={styles.emptyListNotice}>
-          You don&apos;t have own companies.
-        </p>
-      )}
-      <div className={styles.crateBtnWrapper}>
-        <Button
-          startIcon={<PlaylistAddIcon />}
-          variant="outlined"
-          color="success"
-        >
-          Add Company
-        </Button>
+    <>
+      <UniversalModal open={isModal} handleClose={() => setIsModal(false)}>
+        <CreateCompanyBody userId={userId} />
+      </UniversalModal>
+      <div>
+        {companies.length ? (
+          <div>
+            {companies.map((company) => {
+              return <p key={company.company_id}>{company.company_name}</p>;
+            })}
+          </div>
+        ) : (
+          <p className={styles.emptyListNotice}>{t("noCompanies")}</p>
+        )}
+        <div className={styles.crateBtnWrapper}>
+          <Button
+            startIcon={<PlaylistAddIcon />}
+            variant="outlined"
+            color="success"
+            onClick={() => setIsModal(true)}
+          >
+            {t("add")}
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

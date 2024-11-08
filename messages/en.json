@@ -156,7 +156,8 @@
     "id": "User Id: ",
     "city": "City : ",
     "phone": "Phone: ",
-    "link": "Social Link:"
+    "link": "Social Link:",
+    "companies": "My Companies"
   },
   "ProfileEditPage": {
     "edit": "Edit Profile",
@@ -212,5 +213,19 @@
     "phone": "Phone",
     "link": "Link",
     "back": "Back"
+  },
+  "CreateCompanyBody": {
+    "newCompany": "New Company",
+    "nameLength": "Company name length need to be between 3 and 15 symbols",
+    "create": "Company created.",
+    "failed": "Failed to create.",
+    "companyName": "Company Name",
+    "visible": "Company Visible ?",
+    "createBtn": "Create"
+  },
+  "ProfileCompanies": {
+    "cantFetch": "Can't fetch companies.",
+    "noCompanies": "You don't have own companies.",
+    "add": "Add Company"
   }
 }
