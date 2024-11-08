@@ -1,0 +1,75 @@
+.pageWrapper,
+.authorWrapper,
+.asideWrapper,
+.authorNameWrapper,
+.companyInfoWrapper,
+.backBtnWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.pageTitle {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.pageWrapper {
+  flex-direction: row;
+}
+
+.asideWrapper {
+  align-items: center;
+  width: 360px;
+  min-width: 360px;
+
+  gap: 20px;
+  padding-bottom: 20px;
+
+  text-align: center;
+}
+
+.authorWrapper {
+  align-items: center;
+  gap: 12px;
+}
+.authorNameWrapper {
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sectionWrapper {
+  width: 100%;
+}
+
+.backBtnWrapper {
+  justify-content: center;
+  flex-direction: row;
+  padding: 26px 0;
+}
+
+.companyTitle {
+  text-align: center;
+  padding: 16px;
+}
+
+.companyInfoWrapper {
+  gap: 8px;
+  padding: 0;
+}
+.companyInfoWrapper li {
+  list-style: none;
+}
+
+@media screen and (max-width: 750px) {
+  .pageWrapper {
+    flex-direction: column;
+  }
+  .asideWrapper {
+    width: 100%;
+  }
+  .companyInfoWrapper {
+    align-items: center;
+  }
+}

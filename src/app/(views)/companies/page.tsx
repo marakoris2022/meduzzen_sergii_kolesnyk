@@ -11,11 +11,9 @@ import {
 import Loading from "@/app/components/loading/Loading";
 import PageError from "@/app/components/users-page-error/PageError";
 import { Button, Pagination } from "@mui/material";
-import Image from "next/image";
 import { PATHS } from "@/interface/interface";
 import { useRouter } from "next/navigation";
-
-const companiesNoAvatarImgPath = "/companiesNoImg300.webp";
+import CompanyAvatar from "@/app/components/company-avatar/CompanyAvatar";
 
 const CompaniesPage = () => {
   const t = useTranslations("CompaniesPage");
@@ -57,14 +55,7 @@ const CompaniesPage = () => {
                   className={styles.companyCardWrapper}
                   key={company.company_id}
                 >
-                  <div className={styles.imgWrapper}>
-                    <Image
-                      fill
-                      sizes="100%"
-                      src={company.company_avatar || companiesNoAvatarImgPath}
-                      alt={t("avatarAlt")}
-                    ></Image>
-                  </div>
+                  <CompanyAvatar avatarSrc={company.company_avatar} />
                   <div className={styles.contentWrapper}>
                     <div className={styles.textWrapper}>
                       <h2 className={styles.companyName}>

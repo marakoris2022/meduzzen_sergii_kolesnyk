@@ -195,5 +195,22 @@
   "Error": {
     "title": "Something went wrong!",
     "button": "Try again"
+  },
+  "Avatar": {
+    "avatarAlt": "Avatar Image"
+  },
+  "CompanyIdPage": {
+    "fetchError": "Can't fetch Data by Company Id",
+    "backToCompanies": "Back to Companies",
+    "companyAuthor": "Company Author",
+    "company": "Company ",
+    "info": "Info",
+    "description": "Description:",
+    "notProvided": "Description is not provide.",
+    "city": "City",
+    "unknown": "unknown",
+    "phone": "Phone",
+    "link": "Link",
+    "back": "Back"
   }
 }

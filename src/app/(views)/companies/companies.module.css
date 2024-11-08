@@ -24,13 +24,6 @@
   max-width: fit-content;
 }
 
-.imgWrapper {
-  position: relative;
-  min-width: 200px;
-  min-height: 200px;
-  overflow: hidden;
-}
-
 .contentWrapper {
   display: flex;
   flex-direction: column;
@@ -53,10 +46,6 @@
 }
 
 @media screen and (max-width: 750px) {
-  .imgWrapper {
-    min-width: 120px;
-    min-height: 120px;
-  }
   .contentWrapper {
     width: 180px;
   }

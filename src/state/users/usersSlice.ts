@@ -8,7 +8,7 @@ const MockUserData = {
   user_email: "",
   user_firstname: "",
   user_lastname: "",
-  user_avatar: null,
+  user_avatar: "",
   user_status: "",
   user_city: "",
   user_phone: "",

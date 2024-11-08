@@ -8,8 +8,13 @@ import { CompanyIdProps, PATHS } from "@/interface/interface";
 import { AxiosError } from "axios";
 import PageError from "@/app/components/users-page-error/PageError";
 import Loading from "@/app/components/loading/Loading";
+import CompanyAvatar from "@/app/components/company-avatar/CompanyAvatar";
+import UserAvatar from "@/app/components/user-avatar/UserAvatar";
+import { Button, TextField } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 const CompanyIdPage = () => {
+  const t = useTranslations("CompanyIdPage");
   const router = useRouter();
   const { companyId } = useParams();
   const [error, setError] = useState<null | AxiosError>(null);
@@ -31,8 +36,8 @@ const CompanyIdPage = () => {
   if (error) {
     return (
       <PageError
-        errorTitle="Can't fetch Data by Company Id"
-        actionTitle="Back to Companies"
+        errorTitle={t("fetchError")}
+        actionTitle={t("backToCompanies")}
         errorAction={() => router.push(PATHS.COMPANIES)}
       />
     );
@@ -42,12 +47,58 @@ const CompanyIdPage = () => {
     <Loading />
   ) : (
     <main className="container">
-      <h1>Company ID: {companyId}</h1>
-      <div className={styles.contentWrapper}>
-        <aside className="">{companyIdData.company_name}</aside>
-        <section className="">
-          {companyIdData.company_owner.user_firstname}
+      <h1 className={styles.pageTitle}>{companyIdData.company_name}</h1>
+      <div className={styles.pageWrapper}>
+        <aside className={styles.asideWrapper}>
+          <CompanyAvatar avatarSrc={companyIdData.company_avatar} />
+          <div className={styles.authorWrapper}>
+            <h3>{t("companyAuthor")}</h3>
+            <UserAvatar avatarSrc={companyIdData.company_owner.user_avatar} />
+            <div className={styles.authorNameWrapper}>
+              <p>{companyIdData.company_owner.user_firstname}</p>
+              <p>{companyIdData.company_owner.user_lastname}</p>
+            </div>
+            <p>{companyIdData.company_owner.user_email}</p>
+          </div>
+        </aside>
+        <section className={styles.sectionWrapper}>
+          <h4 className={styles.companyTitle}>{`${
+            companyIdData.company_title || t("company")
+          } ${t("info")}`}</h4>
+          <TextField
+            label={t("description")}
+            multiline
+            fullWidth
+            disabled
+            rows={4}
+            defaultValue={companyIdData.company_description || t("notProvided")}
+          />
+          <ul className={styles.companyInfoWrapper}>
+            <li>
+              {t("city")}: {companyIdData.company_city || t("unknown")}
+            </li>
+            <li>
+              {t("phone")}: {companyIdData.company_phone || t("unknown")}
+            </li>
+            {companyIdData.company_links &&
+              companyIdData.company_links.map((link) => {
+                return (
+                  <li key={link}>
+                    {t("link")}: {link}
+                  </li>
+                );
+              })}
+          </ul>
         </section>
+      </div>
+      <div className={styles.backBtnWrapper}>
+        <Button
+          variant="outlined"
+          color="warning"
+          onClick={() => router.push(PATHS.COMPANIES)}
+        >
+          {t("back")}
+        </Button>
       </div>
     </main>
   );

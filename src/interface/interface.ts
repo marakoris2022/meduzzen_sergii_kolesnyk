@@ -23,12 +23,12 @@ export type AdditionalUserPropsCardProps = {
   is_superuser: boolean;
 };
 
-type UserItem = {
+export type UserItem = {
   user_id: number;
   user_email: string;
   user_firstname: string;
   user_lastname: string;
-  user_avatar: string | null;
+  user_avatar: string;
 };
 
 export type UsersProps = {
