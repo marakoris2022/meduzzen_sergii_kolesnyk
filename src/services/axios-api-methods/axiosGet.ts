@@ -1,4 +1,9 @@
-import { CompaniesProps, UserProps, UsersProps } from "@/interface/interface";
+import {
+  CompaniesProps,
+  CompanyIdProps,
+  UserProps,
+  UsersProps,
+} from "@/interface/interface";
 import { axiosInstance } from "../axiosInstance";
 
 export const getHealthStatus = async () => {
@@ -31,4 +36,9 @@ export const getAllCompanies = async (
     params: { page, page_size },
   });
   return data as CompaniesProps;
+};
+
+export const getCompanyById = async (companyId: number) => {
+  const { data } = await axiosInstance.get(`/company/${companyId}/`);
+  return data.result as CompanyIdProps;
 };

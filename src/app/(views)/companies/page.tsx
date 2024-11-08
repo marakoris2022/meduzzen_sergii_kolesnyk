@@ -12,6 +12,8 @@ import Loading from "@/app/components/loading/Loading";
 import PageError from "@/app/components/users-page-error/PageError";
 import { Button, Pagination } from "@mui/material";
 import Image from "next/image";
+import { PATHS } from "@/interface/interface";
+import { useRouter } from "next/navigation";
 
 const companiesNoAvatarImgPath = "/companiesNoImg300.webp";
 
@@ -20,14 +22,11 @@ const CompaniesPage = () => {
   const { companiesData, pageCount, pageNumber, loading, error } =
     useAppSelector((state) => state.companies);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     dispatch(fetchCompaniesData(pageNumber));
   }, [dispatch, pageNumber]);
-
-  function handleChange(chosenPage: number) {
-    dispatch(setCompaniesPageNumber(chosenPage));
-  }
 
   if (error) {
     return <PageError errorTitle={t("error")} />;
@@ -35,6 +34,14 @@ const CompaniesPage = () => {
 
   if (loading) {
     return <Loading />;
+  }
+
+  function handleChange(chosenPage: number) {
+    dispatch(setCompaniesPageNumber(chosenPage));
+  }
+
+  function handleClick(id: number) {
+    router.push(`${PATHS.COMPANIES}/${id}`);
   }
 
   return (
@@ -67,7 +74,10 @@ const CompaniesPage = () => {
                         {company.company_title}
                       </p>
                     </div>
-                    <Button variant="outlined" onClick={() => {}}>
+                    <Button
+                      variant="outlined"
+                      onClick={() => handleClick(company.company_id)}
+                    >
                       {t("open")}
                     </Button>
                   </div>

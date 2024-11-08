@@ -9,9 +9,10 @@ import { PATHS } from "@/interface/interface";
 type PageErrorType = {
   errorTitle: string;
   errorAction?: () => void;
+  actionTitle?: string;
 };
 
-const PageError = ({ errorTitle, errorAction }: PageErrorType) => {
+const PageError = ({ errorTitle, errorAction, actionTitle }: PageErrorType) => {
   const t = useTranslations("PageError");
   const router = useRouter();
 
@@ -20,7 +21,7 @@ const PageError = ({ errorTitle, errorAction }: PageErrorType) => {
       <h6>{errorTitle}</h6>
       {Boolean(errorAction) && (
         <>
-          <p>{t("tryAgain")}</p>
+          <p>{actionTitle || t("tryAgain")}</p>
           <Button
             variant="outlined"
             color="primary"

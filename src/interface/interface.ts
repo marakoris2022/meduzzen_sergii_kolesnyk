@@ -46,6 +46,14 @@ type Pagination = {
   total_results: number;
 };
 
+export type CompanyIdProps = CompanyProps & {
+  company_description: string;
+  company_city: string;
+  company_phone: string;
+  company_links: string[];
+  company_owner: UserItem;
+};
+
 export type CompanyProps = {
   company_id: number;
   company_name: string;
