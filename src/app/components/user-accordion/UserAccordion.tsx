@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchUserDataById } from "@/state/users/usersSlice";
 import UserAvatar from "../user-avatar/UserAvatar";
+import { memo } from "react";
 
 type UserAccordionProps = {
   user: UserProps;
@@ -65,12 +66,12 @@ function AdditionalUserPropsCard({
   );
 }
 
-const UserAccordion = ({ user }: UserAccordionProps) => {
+const UserAccordion = memo(({ user }: UserAccordionProps) => {
   const t = useTranslations("UserAccordion");
-  const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   async function handleLoadData() {
-    dispath(fetchUserDataById(user.user_id));
+    dispatch(fetchUserDataById(user.user_id));
   }
 
   return (
@@ -111,6 +112,8 @@ const UserAccordion = ({ user }: UserAccordionProps) => {
       </AccordionDetails>
     </Accordion>
   );
-};
+});
+
+UserAccordion.displayName = "UserAccordion";
 
 export default UserAccordion;
