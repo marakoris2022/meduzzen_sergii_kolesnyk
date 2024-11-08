@@ -54,6 +54,11 @@ export type CompanyIdProps = CompanyProps & {
   company_owner: UserItem;
 };
 
+export type CompanyPropsInList = CompanyProps & {
+  action_id: number;
+  action: string;
+};
+
 export type CompanyProps = {
   company_id: number;
   company_name: string;

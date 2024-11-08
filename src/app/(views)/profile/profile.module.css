@@ -58,8 +58,13 @@
 
 .buttonWrapper {
   gap: 20px;
-  padding: 50px 0;
+  padding: 20px 0;
   margin: 0 auto;
+}
+
+.companiesTitle {
+  text-align: center;
+  padding: 20px 0;
 }
 
 @media screen and (max-width: 750px) {

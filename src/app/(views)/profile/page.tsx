@@ -1,11 +1,11 @@
 "use client";
 
-import { Button, Grid2 } from "@mui/material";
+import { Button } from "@mui/material";
 import styles from "./profile.module.css";
 import { useUserData } from "@/app/hooks/useUserData";
 import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
-import { PATHS, UserProps } from "@/interface/interface";
+import { PATHS } from "@/interface/interface";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
 import UniversalModal from "@/app/components/universal-modal/UniversalModal";
@@ -14,52 +14,13 @@ import { deleteUser } from "@/services/axios-api-methods/axiosDelete";
 import { useLogout } from "@/app/hooks/useLogout";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import ProfileCompanies from "@/app/components/profile-companies/ProfileCompanies";
+import UserDataTable from "@/app/components/UserDataTable";
 
 type ModalActionsProps = {
   handleDeleteUser: () => void;
   handleCloseModal: () => void;
 };
-
-function UserDataTable({ userData }: { userData: UserProps }) {
-  const t = useTranslations("ProfilePage");
-
-  if (!userData) return null;
-
-  const userStats = [
-    { label: t("status"), value: userData.user_status || t("none") },
-    { label: t("super"), value: userData.is_superuser ? t("yes") : t("no") },
-    { label: t("id"), value: userData.user_id || t("none") },
-    { label: t("city"), value: userData.user_city || t("none") },
-    { label: t("phone"), value: userData.user_phone || t("none") },
-  ];
-
-  return (
-    <Grid2 key={userData.user_id} container spacing={2} columns={12}>
-      {userStats.map((item) => (
-        <React.Fragment key={item.label}>
-          <Grid2 size={6}>{item.label}</Grid2>
-          <Grid2 size={6}>{item.value}</Grid2>
-        </React.Fragment>
-      ))}
-
-      {Boolean(userData.user_links.length) ? (
-        userData.user_links.map((link, index) => {
-          return (
-            <React.Fragment key={index}>
-              <Grid2 size={6}>{t("link")}</Grid2>
-              <Grid2 size={6}>{link}</Grid2>
-            </React.Fragment>
-          );
-        })
-      ) : (
-        <>
-          <Grid2 size={6}>{t("link")}</Grid2>
-          <Grid2 size={6}>{t("none")}</Grid2>
-        </>
-      )}
-    </Grid2>
-  );
-}
 
 function ModalActions({
   handleDeleteUser,
@@ -85,7 +46,7 @@ const ProfilePage = () => {
   const router = useRouter();
   const logout = useLogout();
 
-  if (isLoading) return <Loading />;
+  if (isLoading || !userData) return <Loading />;
 
   async function handleDeleteUser() {
     try {
@@ -159,6 +120,10 @@ const ProfilePage = () => {
             </Button>
           </div>
         </div>
+      </div>
+      <div className={styles.companiesWrapper}>
+        <h3 className={styles.companiesTitle}>Companies</h3>
+        <ProfileCompanies userId={userData.user_id} />
       </div>
     </main>
   );
