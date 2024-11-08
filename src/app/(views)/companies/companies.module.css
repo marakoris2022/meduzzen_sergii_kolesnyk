@@ -1,0 +1,16 @@
+.companyCardWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+
+  padding: 12px;
+  border: 1px solid darkmagenta;
+  border-radius: 12px;
+}
+
+.imgWrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}

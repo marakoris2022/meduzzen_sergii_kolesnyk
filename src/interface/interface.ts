@@ -45,3 +45,20 @@ type Pagination = {
   total_page: number;
   total_results: number;
 };
+
+export type CompanyProps = {
+  company_id: number;
+  company_name: string;
+  company_title: string;
+  company_avatar: string;
+  is_visible: boolean;
+};
+
+export type CompaniesProps = {
+  status_code: number;
+  detail: string;
+  result: {
+    companies: CompanyProps[];
+    pagination: Pagination;
+  };
+};
