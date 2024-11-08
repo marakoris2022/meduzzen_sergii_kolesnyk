@@ -1,0 +1,36 @@
+.companyCardWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+
+  overflow: hidden;
+
+  padding: 12px;
+  border: 1px solid darkmagenta;
+  border-radius: 12px;
+
+  max-width: fit-content;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+.companyName {
+  margin-bottom: 8px;
+}
+.textWrapper {
+  text-align: center;
+}
+
+@media screen and (max-width: 750px) {
+  .contentWrapper {
+    width: 180px;
+  }
+  .companyName {
+    font-size: 20px;
+  }
+}

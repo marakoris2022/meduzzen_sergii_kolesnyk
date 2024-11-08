@@ -227,5 +227,8 @@
     "cantFetch": "Can't fetch companies.",
     "noCompanies": "You don't have own companies.",
     "add": "Add Company"
+  },
+  "CompanyListCard": {
+    "open": "Open"
   }
 }

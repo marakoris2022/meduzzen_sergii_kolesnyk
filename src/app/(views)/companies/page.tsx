@@ -14,6 +14,7 @@ import { Button, Pagination } from "@mui/material";
 import { PATHS } from "@/interface/interface";
 import { useRouter } from "next/navigation";
 import CompanyAvatar from "@/app/components/company-avatar/CompanyAvatar";
+import CompanyListCard from "@/app/components/company-list-card/CompanyListCard";
 
 const CompaniesPage = () => {
   const t = useTranslations("CompaniesPage");
@@ -38,10 +39,6 @@ const CompaniesPage = () => {
     dispatch(setCompaniesPageNumber(chosenPage));
   }
 
-  function handleClick(id: number) {
-    router.push(`${PATHS.COMPANIES}/${id}`);
-  }
-
   return (
     <main className="container">
       <div className={styles.pageWrapper}>
@@ -51,28 +48,7 @@ const CompaniesPage = () => {
           {companiesData &&
             companiesData.map((company) => {
               return (
-                <div
-                  className={styles.companyCardWrapper}
-                  key={company.company_id}
-                >
-                  <CompanyAvatar avatarSrc={company.company_avatar} />
-                  <div className={styles.contentWrapper}>
-                    <div className={styles.textWrapper}>
-                      <h2 className={styles.companyName}>
-                        {company.company_name}
-                      </h2>
-                      <p className={styles.companyTitle}>
-                        {company.company_title}
-                      </p>
-                    </div>
-                    <Button
-                      variant="outlined"
-                      onClick={() => handleClick(company.company_id)}
-                    >
-                      {t("open")}
-                    </Button>
-                  </div>
-                </div>
+                <CompanyListCard key={company.company_id} company={company} />
               );
             })}
         </div>

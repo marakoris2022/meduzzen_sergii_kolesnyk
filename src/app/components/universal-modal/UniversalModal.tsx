@@ -5,7 +5,7 @@ import styles from "./universalModal.module.css";
 
 type UniversalModalProps = {
   open: boolean;
-  handleClose: () => void;
+  handleClose?: () => void;
   title?: string;
   description?: string;
   children?: ReactNode | JSX.Element;
