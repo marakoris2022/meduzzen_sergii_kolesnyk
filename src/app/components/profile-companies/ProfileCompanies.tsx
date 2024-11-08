@@ -36,8 +36,8 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
 
       <UniversalModal
         open={isModalDelete}
-        title="Delete Company?"
-        description="If you confirm, company will be deleted."
+        title={t("deleteTitle")}
+        description={t("deleteText")}
         handleClose={() => setIsModalDelete(false)}
       >
         <DeleteCompanyModalAction
@@ -73,7 +73,7 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
                       activeCompanyId.current = company.company_id;
                     }}
                   >
-                    Delete Company
+                    {t("delete")}
                   </Button>
                   <Button
                     endIcon={<SettingsOutlinedIcon />}
@@ -84,7 +84,7 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
                       activeCompanyId.current = company.company_id;
                     }}
                   >
-                    Edit Company
+                    {t("edit")}
                   </Button>
                 </div>
               </div>

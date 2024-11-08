@@ -95,7 +95,7 @@ const CompanyIdPage = () => {
         <Button
           variant="outlined"
           color="warning"
-          onClick={() => router.push(PATHS.COMPANIES)}
+          onClick={() => router.back()}
         >
           {t("back")}
         </Button>

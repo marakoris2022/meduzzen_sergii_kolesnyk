@@ -4,6 +4,7 @@ import { deleteCompany } from "@/services/axios-api-methods/axiosDelete";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 type DeleteCompanyModalActionProps = {
   companyId: number | null;
@@ -18,6 +19,7 @@ function DeleteCompanyModalAction({
 }: DeleteCompanyModalActionProps) {
   const [error, setError] = useState<string>("");
   const dispatch = useAppDispatch();
+  const t = useTranslations("ProfileCompanies");
 
   async function handleDeleteCompany() {
     if (companyId) {
@@ -26,7 +28,7 @@ function DeleteCompanyModalAction({
         dispatch(fetchUserCompanies(userId));
         closeModal();
       } catch {
-        setError("Deletion is failed.");
+        setError(t("delFailed"));
       }
     }
   }
@@ -35,7 +37,7 @@ function DeleteCompanyModalAction({
     <div className={styles.btnWrapper}>
       <p className={styles.errorText}>{error}</p>
       <Button variant="outlined" color="error" onClick={handleDeleteCompany}>
-        Delete
+        {t("delete2")}
       </Button>
     </div>
   );
