@@ -12,6 +12,7 @@ import CompanyListCard from "../company-list-card/CompanyListCard";
 import DeleteCompanyModalAction from "../delete-company-modal-action/DeleteCompanyModalAction";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import EditCompanyModalAction from "../edit-company-modal-action/EditCompanyModalAction";
 
 const ProfileCompanies = ({ userId }: { userId: number }) => {
   const t = useTranslations("ProfileCompanies");
@@ -51,7 +52,10 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
         open={isModalEdit}
         handleClose={() => setIsModalEdit(false)}
       >
-        <div>Edit Modal {activeCompanyId.current}</div>
+        <EditCompanyModalAction
+          userId={userId}
+          companyId={activeCompanyId.current}
+        />
       </UniversalModal>
 
       {companies.length ? (

@@ -80,3 +80,19 @@ export type CompaniesProps = {
     pagination: Pagination;
   };
 };
+
+export type BaseCompanyFormProps = {
+  company_name: string;
+  company_title: string;
+  company_description: string;
+  company_city: string;
+  company_phone: string;
+};
+
+export type RequestCompanyProps = BaseCompanyFormProps & {
+  company_links: string[];
+};
+
+export type FormCompanyProps = BaseCompanyFormProps & {
+  company_links: string;
+};

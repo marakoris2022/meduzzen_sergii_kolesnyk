@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 type DeleteCompanyModalActionProps = {
   companyId: number | null;
   userId: number;
-  closeModal: () => {};
+  closeModal: () => void;
 };
 
 function DeleteCompanyModalAction({

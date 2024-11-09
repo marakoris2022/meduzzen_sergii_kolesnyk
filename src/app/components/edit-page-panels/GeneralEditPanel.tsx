@@ -211,9 +211,11 @@ const General = () => {
           {t("social")}
         </Button>
       </div>
-      <p className={styles.updateText} style={{ color: updateStatus.color }}>
-        {updateStatus.text}
-      </p>
+      {updateStatus.text && (
+        <p className={styles.updateText} style={{ color: updateStatus.color }}>
+          {updateStatus.text}
+        </p>
+      )}
       <div className={styles.btnWrapper}>
         <Button type="submit" variant="outlined" color="success">
           {t("submit")}
