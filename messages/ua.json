@@ -235,5 +235,15 @@
   },
   "CompanyListCard": {
     "open": "Відкрити"
+  },
+  "EditCompanyModalAction": {
+    "required": "Поле обов'язкове.",
+    "onlyLatinSymbols": "Тільки латинські символи.",
+    "firstLetterUppercase": "Перша літера повинна бути великою.",
+    "statusMaxLength": "Максимальна довжина 100 символів.",
+    "cityMaxLength": "Максимальна довжина 50 символів.",
+    "phoneInvalid": "Неправильний формат номера телефону.",
+    "phoneMaxLength": "Максимальна довжина 15 символів.",
+    "invalidLink": "Неправильний формат посилання."
   }
 }

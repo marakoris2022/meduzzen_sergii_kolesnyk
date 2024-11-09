@@ -7,27 +7,35 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import PageError from "../users-page-error/PageError";
 import Loading from "../loading/Loading";
 import { getCompanyById } from "@/services/axios-api-methods/axiosGet";
-// import { updateCompanyData } from "@/services/axios-api-methods/axiosPut";
 import {
   BaseCompanyFormProps,
   CompanyIdProps,
   FormCompanyProps,
   RequestCompanyProps,
+  UpdateStatusType,
 } from "@/interface/interface";
 import styles from "./editCompanyModalAction.module.css";
 import { updateCompanyData } from "@/services/axios-api-methods/axiosPut";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
+import {
+  linksValidation,
+  nameValidation,
+  phoneValidation,
+  statusValidation,
+} from "@/constants/validationSchemas";
+import { useTranslations } from "next-intl";
 
 type EditCompanyModalActionProps = {
   companyId: number | null;
   userId: number;
 };
 
-type UpdateStatusType = {
-  text: string;
-  color: string;
-};
+type FromFieldProps = Array<{
+  name: string;
+  label: string;
+  validation: any;
+}>;
 
 const updateStatusInit: UpdateStatusType = {
   text: "",
@@ -38,15 +46,14 @@ const EditCompanyModalAction = ({
   companyId,
   userId,
 }: EditCompanyModalActionProps) => {
+  const t = useTranslations("EditCompanyModalAction");
   const dispatch = useAppDispatch();
   const [companyData, setCompanyData] = useState<null | CompanyIdProps>(null);
   const [error, setError] = useState<null | AxiosError>(null);
   const linksCount = useRef<number>(0);
   const [updateStatus, setUpdateStatus] =
     useState<UpdateStatusType>(updateStatusInit);
-  const [fieldList, setFieldList] = useState<
-    Array<{ name: string; label: string; validation: any }>
-  >([]);
+  const [fieldList, setFieldList] = useState<FromFieldProps>([]);
 
   const {
     register,
@@ -68,27 +75,27 @@ const EditCompanyModalAction = ({
             {
               name: "company_name",
               label: "Company Name",
-              validation: { required: "This field is required" },
+              validation: nameValidation,
             },
             {
               name: "company_title",
               label: "Company Title",
-              validation: { required: "This field is required" },
+              validation: nameValidation,
             },
             {
               name: "company_description",
               label: "Description",
-              validation: { required: "This field is required" },
+              validation: statusValidation,
             },
             {
               name: "company_city",
               label: "City",
-              validation: { required: "This field is required" },
+              validation: statusValidation,
             },
             {
               name: "company_phone",
               label: "Phone",
-              validation: { required: "This field is required" },
+              validation: phoneValidation,
             },
           ];
 
@@ -97,7 +104,7 @@ const EditCompanyModalAction = ({
             initialFields.push({
               name: linkFieldName,
               label: "Link",
-              validation: { required: "This field is required" },
+              validation: linksValidation,
             });
             setValue(linkFieldName as keyof FormCompanyProps, value);
           });
@@ -191,7 +198,7 @@ const EditCompanyModalAction = ({
           fullWidth
           key={name}
           error={!!errors[name as keyof FormCompanyProps]}
-          {...register(name as keyof FormCompanyProps, validation)}
+          {...register(name as keyof FormCompanyProps, validation(t))}
           label={label}
           helperText={errors[name as keyof FormCompanyProps]?.message || ""}
         />

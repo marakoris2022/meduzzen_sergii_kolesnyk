@@ -34,6 +34,12 @@ type FormProps = BaseUserProps & {
   user_links: string;
 };
 
+type FromFieldProps = Array<{
+  name: string;
+  label: string;
+  validation: ValidationProps;
+}>;
+
 type ValidationProps = (t: (key: string) => string) => {
   required?: string;
   pattern?: {
@@ -61,9 +67,7 @@ const General = () => {
   const dispatch = useAppDispatch();
   const { userData } = useUserData();
   const linksCount = useRef<number>(0);
-  const [fieldList, setFieldList] = useState<
-    Array<{ name: string; label: string; validation: ValidationProps }>
-  >([]);
+  const [fieldList, setFieldList] = useState<FromFieldProps>([]);
   const [updateStatus, setUpdateStatus] =
     useState<UpdateStatusType>(updateStatusInit);
 

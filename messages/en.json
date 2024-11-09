@@ -236,5 +236,15 @@
   },
   "CompanyListCard": {
     "open": "Open"
+  },
+  "EditCompanyModalAction": {
+    "required": "Field is required.",
+    "onlyLatinSymbols": "Only Latin symbols",
+    "firstLetterUppercase": "First letter must be uppercase.",
+    "statusMaxLength": "Maximum length is 100 symbols.",
+    "cityMaxLength": "Maximum length is 50 symbols.",
+    "phoneInvalid": "Wrongs phone number format.",
+    "phoneMaxLength": "Maximum length is 15 symbols.",
+    "invalidLink": "Wrong link format."
   }
 }
