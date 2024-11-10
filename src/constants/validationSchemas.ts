@@ -7,6 +7,22 @@ const phoneRegex = /^[+()0-9]+$/;
 const linkValidationRegex =
   /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
 
+const maxFileSize = 600000;
+const maxNameLength = 20;
+
+export const noImagePath = "/no_image.webp";
+export const accepterFileTypes = "image/png, image/jpeg, image/webp";
+
+export function validateFile(file: File, t: (key: string) => string) {
+  if (file.name.length > maxNameLength) {
+    return t("long");
+  }
+  if (file.size > maxFileSize) {
+    return t("size");
+  }
+  return false;
+}
+
 export const nameValidation = (t: (key: string) => string) => ({
   required: t("required"),
   pattern: {

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, TextField } from "@mui/material";
+import { Button, styled, TextField } from "@mui/material";
 import { AxiosError } from "axios";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -17,19 +17,23 @@ import {
 } from "@/interface/interface";
 import styles from "./editCompanyModalAction.module.css";
 import {
+  updateCompanyAvatar,
   updateCompanyData,
   updateCompanyVisible,
 } from "@/services/axios-api-methods/axiosPut";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
 import {
+  accepterFileTypes,
   linksValidation,
   nameValidation,
   phoneValidation,
   statusValidation,
+  validateFile,
 } from "@/constants/validationSchemas";
 import { useTranslations } from "next-intl";
 import CustomSwitch from "../custom-switch/CustomSwitch";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 type EditCompanyModalActionProps = {
   companyId: number | null;
@@ -47,6 +51,18 @@ const updateStatusInit: UpdateStatusType = {
   color: "green",
 };
 
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
+
 const EditCompanyModalAction = ({
   companyId,
   userId,
@@ -60,6 +76,8 @@ const EditCompanyModalAction = ({
     useState<UpdateStatusType>(updateStatusInit);
   const [fieldList, setFieldList] = useState<FromFieldProps>([]);
   const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [selectedFile, setSelectedFile] = useState<null | File>(null);
+  const [avatarError, setAvatarError] = useState<string>("");
 
   const {
     register,
@@ -71,66 +89,38 @@ const EditCompanyModalAction = ({
     formState: { errors },
   } = useForm<FormCompanyProps>();
 
-  useEffect(() => {
-    if (companyId) {
-      getCompanyById(companyId)
-        .then((data) => {
-          setCompanyData(data);
+  function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files && e.target.files[0]) {
+      const isValidationFailed = validateFile(e.target.files[0], t);
 
-          const initialFields = [
-            {
-              name: "company_name",
-              label: "Company Name",
-              validation: nameValidation,
-            },
-            {
-              name: "company_title",
-              label: "Company Title",
-              validation: nameValidation,
-            },
-            {
-              name: "company_description",
-              label: "Description",
-              validation: statusValidation,
-            },
-            {
-              name: "company_city",
-              label: "City",
-              validation: statusValidation,
-            },
-            {
-              name: "company_phone",
-              label: "Phone",
-              validation: phoneValidation,
-            },
-          ];
+      if (isValidationFailed) {
+        setAvatarError(isValidationFailed);
+        return;
+      }
 
-          const linkFields =
-            data.company_links?.map((value, index) => {
-              const linkFieldName = `company_link_${index + 1}`;
-              return {
-                name: linkFieldName,
-                label: "Link",
-                validation: linksValidation,
-              };
-            }) || [];
+      const file = e.target.files[0];
 
-          setFieldList([...initialFields, ...linkFields]);
-          linksCount.current = data.company_links?.length || 0;
-
-          initialFields.forEach((field) => {
-            const keyName = field.name as keyof BaseCompanyFormProps;
-            setValue(keyName, data[keyName]);
-          });
-
-          data.company_links?.forEach((value, index) => {
-            const linkFieldName = `company_link_${index + 1}`;
-            setValue(linkFieldName as keyof FormCompanyProps, value);
-          });
-        })
-        .catch((error) => setError(error as AxiosError));
+      setSelectedFile(file);
+      setAvatarError("");
     }
-  }, [companyId, setValue]);
+  }
+
+  async function handleSubmitAvatar() {
+    if (selectedFile && companyId) {
+      try {
+        await updateCompanyAvatar(selectedFile, companyId);
+        dispatch(fetchUserCompanies(userId));
+        setSelectedFile(null);
+        setAvatarError("");
+        setUpdateStatus({
+          text: t("avatarSelected"),
+          color: "green",
+        });
+      } catch (error) {
+        setAvatarError((error as AxiosError).message);
+      }
+    } else setAvatarError(t("choose"));
+  }
 
   async function submit(data: FormCompanyProps) {
     const {
@@ -162,11 +152,72 @@ const EditCompanyModalAction = ({
       await updateCompanyData(companyData!.company_id, requestData);
       await updateCompanyVisible(companyData!.company_id, !isVisible);
       dispatch(fetchUserCompanies(userId));
-      setUpdateStatus({ text: "Data updated successfully!", color: "green" });
+      setUpdateStatus({ text: t("dataUpdated"), color: "green" });
     } catch {
-      setUpdateStatus({ text: "Failed to update data.", color: "red" });
+      setUpdateStatus({ text: t("updateFailed"), color: "red" });
     }
   }
+
+  useEffect(() => {
+    if (companyId) {
+      getCompanyById(companyId)
+        .then((fetchedCompanyData) => {
+          setCompanyData(fetchedCompanyData);
+
+          const initialFields = [
+            {
+              name: "company_name",
+              label: t("companyName"),
+              validation: nameValidation,
+            },
+            {
+              name: "company_title",
+              label: t("companyTitle"),
+              validation: nameValidation,
+            },
+            {
+              name: "company_description",
+              label: t("description"),
+              validation: statusValidation,
+            },
+            {
+              name: "company_city",
+              label: t("city"),
+              validation: statusValidation,
+            },
+            {
+              name: "company_phone",
+              label: t("phone"),
+              validation: phoneValidation,
+            },
+          ];
+
+          const linkFields =
+            fetchedCompanyData.company_links?.map((_, index) => {
+              const linkFieldName = `company_link_${index + 1}`;
+              return {
+                name: linkFieldName,
+                label: t("link"),
+                validation: linksValidation,
+              };
+            }) || [];
+
+          setFieldList([...initialFields, ...linkFields]);
+          linksCount.current = fetchedCompanyData.company_links?.length || 0;
+
+          initialFields.forEach((field) => {
+            const keyName = field.name as keyof BaseCompanyFormProps;
+            setValue(keyName, fetchedCompanyData[keyName]);
+          });
+
+          fetchedCompanyData.company_links?.forEach((value, index) => {
+            const linkFieldName = `company_link_${index + 1}`;
+            setValue(linkFieldName as keyof FormCompanyProps, value);
+          });
+        })
+        .catch((error) => setError(error as AxiosError));
+    }
+  }, [companyId, setValue]);
 
   function handleReset() {
     clearErrors();
@@ -180,7 +231,7 @@ const EditCompanyModalAction = ({
       ...state,
       {
         name: `company_link_${linksCount.current}`,
-        label: "Link",
+        label: t("link"),
         validation: linksValidation,
       },
     ]);
@@ -196,13 +247,13 @@ const EditCompanyModalAction = ({
     }
   }
 
-  if (error) return <PageError errorTitle="Failed to fetch company data" />;
+  if (error) return <PageError errorTitle={t("fetchFailed")} />;
 
   if (!companyData) return <Loading />;
 
   return (
     <form className={styles.formWrapper} onSubmit={handleSubmit(submit)}>
-      <p className={styles.descriptionTitle}>Base Description</p>
+      <p className={styles.descriptionTitle}>{t("baseDescription")}</p>
       {fieldList.map(({ name, label, validation }) => (
         <TextField
           fullWidth
@@ -215,7 +266,7 @@ const EditCompanyModalAction = ({
       ))}
       <div className={styles.linksBtnWrapper}>
         <Button startIcon={<AddIcon />} size="small" onClick={addLinkField}>
-          Add Link
+          {t("add")}
         </Button>
         <Button
           startIcon={<RemoveIcon />}
@@ -223,7 +274,7 @@ const EditCompanyModalAction = ({
           onClick={removeLinkField}
           color="warning"
         >
-          Remove Link
+          {t("remove")}
         </Button>
       </div>
       {updateStatus.text && (
@@ -231,8 +282,8 @@ const EditCompanyModalAction = ({
           {updateStatus.text}
         </p>
       )}
+      <p className={styles.descriptionTitle}>{t("visible")}</p>
       <div className={styles.switchWrapper}>
-        <p>Company visible?</p>
         <CustomSwitch
           handleSwitch={() => setIsVisible((state) => !state)}
           isActive={isVisible}
@@ -240,10 +291,41 @@ const EditCompanyModalAction = ({
       </div>
       <div className={styles.btnWrapper}>
         <Button type="submit" variant="outlined" color="success">
-          Submit
+          {t("submit2")}
         </Button>
         <Button onClick={handleReset} variant="outlined" color="warning">
-          Clear
+          {t("clear")}
+        </Button>
+      </div>
+
+      <p className={styles.descriptionTitle}>{t("changeAvatar")}</p>
+
+      {selectedFile && (
+        <p>
+          {t("fileSelected")}
+          {selectedFile.name}
+        </p>
+      )}
+
+      {avatarError && <p className={styles.avatarErrorText}>{avatarError}</p>}
+
+      <div className={styles.avatarBtnWrapper}>
+        <Button
+          component="label"
+          role={undefined}
+          variant="contained"
+          tabIndex={-1}
+          startIcon={<AccountBoxIcon />}
+        >
+          {t("select")}
+          <VisuallyHiddenInput
+            type="file"
+            accept={accepterFileTypes}
+            onChange={handleFileChange}
+          />
+        </Button>
+        <Button onClick={handleSubmitAvatar} variant="outlined" color="success">
+          {t("submit")}
         </Button>
       </div>
     </form>

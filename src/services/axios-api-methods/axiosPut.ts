@@ -62,3 +62,15 @@ export const updateCompanyVisible = async (
     is_visible,
   });
 };
+
+export const updateCompanyAvatar = async (file: File, company_id: number) => {
+  return await axiosInstance.put(
+    `/company/${company_id}/update_avatar/`,
+    { file },
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+};
