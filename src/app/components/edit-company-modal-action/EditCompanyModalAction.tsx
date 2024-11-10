@@ -100,23 +100,28 @@ const EditCompanyModalAction = ({
             },
           ];
 
-          data.company_links?.forEach((value, index) => {
-            const linkFieldName = `company_link_${index + 1}`;
-            initialFields.push({
-              name: linkFieldName,
-              label: "Link",
-              validation: linksValidation,
-            });
-            setValue(linkFieldName as keyof FormCompanyProps, value);
-          });
+          const linkFields =
+            data.company_links?.map((value, index) => {
+              const linkFieldName = `company_link_${index + 1}`;
+              return {
+                name: linkFieldName,
+                label: "Link",
+                validation: linksValidation,
+              };
+            }) || [];
+
+          setFieldList([...initialFields, ...linkFields]);
+          linksCount.current = data.company_links?.length || 0;
 
           initialFields.forEach((field) => {
             const keyName = field.name as keyof BaseCompanyFormProps;
             setValue(keyName, data[keyName]);
           });
 
-          setFieldList(initialFields);
-          linksCount.current = data.company_links?.length || 0;
+          data.company_links?.forEach((value, index) => {
+            const linkFieldName = `company_link_${index + 1}`;
+            setValue(linkFieldName as keyof FormCompanyProps, value);
+          });
         })
         .catch((error) => setError(error as AxiosError));
     }
@@ -185,10 +190,8 @@ const EditCompanyModalAction = ({
     }
   }
 
-  if (error) {
-    console.log(error);
-    return <PageError errorTitle="Failed to fetch company data" />;
-  }
+  if (error) return <PageError errorTitle="Failed to fetch company data" />;
+
   if (!companyData) return <Loading />;
 
   return (
