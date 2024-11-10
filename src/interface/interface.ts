@@ -96,3 +96,20 @@ export type RequestCompanyProps = BaseCompanyFormProps & {
 export type FormCompanyProps = BaseCompanyFormProps & {
   company_links: string;
 };
+
+export type ValidationProps = (t: (key: string) => string) => {
+  required?: string;
+  pattern?: {
+    value: RegExp;
+    message: string;
+  };
+  validate?: (value: string) => string | true;
+  minLength?: {
+    value: number;
+    message: string;
+  };
+  maxLength?: {
+    value: number;
+    message: string;
+  };
+};

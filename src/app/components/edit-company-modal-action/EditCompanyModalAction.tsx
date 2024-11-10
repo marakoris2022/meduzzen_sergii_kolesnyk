@@ -13,6 +13,7 @@ import {
   FormCompanyProps,
   RequestCompanyProps,
   UpdateStatusType,
+  ValidationProps,
 } from "@/interface/interface";
 import styles from "./editCompanyModalAction.module.css";
 import { updateCompanyData } from "@/services/axios-api-methods/axiosPut";
@@ -34,7 +35,7 @@ type EditCompanyModalActionProps = {
 type FromFieldProps = Array<{
   name: string;
   label: string;
-  validation: any;
+  validation: ValidationProps;
 }>;
 
 const updateStatusInit: UpdateStatusType = {
@@ -169,7 +170,7 @@ const EditCompanyModalAction = ({
       {
         name: `company_link_${linksCount.current}`,
         label: "Link",
-        validation: { required: "This field is required" },
+        validation: linksValidation,
       },
     ]);
   }

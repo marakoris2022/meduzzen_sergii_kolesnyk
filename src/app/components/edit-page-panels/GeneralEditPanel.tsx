@@ -16,7 +16,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { updateUserGeneralData } from "@/services/axios-api-methods/axiosPut";
 import { setUserData } from "@/state/user/userSlice";
-import { UpdateStatusType } from "@/interface/interface";
+import { UpdateStatusType, ValidationProps } from "@/interface/interface";
 
 type BaseUserProps = {
   user_firstname: string;
@@ -39,23 +39,6 @@ type FromFieldProps = Array<{
   label: string;
   validation: ValidationProps;
 }>;
-
-type ValidationProps = (t: (key: string) => string) => {
-  required?: string;
-  pattern?: {
-    value: RegExp;
-    message: string;
-  };
-  validate?: (value: string) => string | true;
-  minLength?: {
-    value: number;
-    message: string;
-  };
-  maxLength?: {
-    value: number;
-    message: string;
-  };
-};
 
 const updateStatusInit: UpdateStatusType = {
   text: "",

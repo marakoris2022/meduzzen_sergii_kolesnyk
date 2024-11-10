@@ -10,10 +10,7 @@ import {
 } from "@/state/companies/companiesSlice";
 import Loading from "@/app/components/loading/Loading";
 import PageError from "@/app/components/users-page-error/PageError";
-import { Button, Pagination } from "@mui/material";
-import { PATHS } from "@/interface/interface";
-import { useRouter } from "next/navigation";
-import CompanyAvatar from "@/app/components/company-avatar/CompanyAvatar";
+import { Pagination } from "@mui/material";
 import CompanyListCard from "@/app/components/company-list-card/CompanyListCard";
 
 const CompaniesPage = () => {
@@ -21,7 +18,6 @@ const CompaniesPage = () => {
   const { companiesData, pageCount, pageNumber, loading, error } =
     useAppSelector((state) => state.companies);
   const dispatch = useAppDispatch();
-  const router = useRouter();
 
   useEffect(() => {
     dispatch(fetchCompaniesData(pageNumber));
