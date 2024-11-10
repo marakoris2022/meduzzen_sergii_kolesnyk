@@ -16,7 +16,10 @@ import {
   ValidationProps,
 } from "@/interface/interface";
 import styles from "./editCompanyModalAction.module.css";
-import { updateCompanyData } from "@/services/axios-api-methods/axiosPut";
+import {
+  updateCompanyData,
+  updateCompanyVisible,
+} from "@/services/axios-api-methods/axiosPut";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
 import {
@@ -26,6 +29,7 @@ import {
   statusValidation,
 } from "@/constants/validationSchemas";
 import { useTranslations } from "next-intl";
+import CustomSwitch from "../custom-switch/CustomSwitch";
 
 type EditCompanyModalActionProps = {
   companyId: number | null;
@@ -55,6 +59,7 @@ const EditCompanyModalAction = ({
   const [updateStatus, setUpdateStatus] =
     useState<UpdateStatusType>(updateStatusInit);
   const [fieldList, setFieldList] = useState<FromFieldProps>([]);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   const {
     register,
@@ -154,7 +159,8 @@ const EditCompanyModalAction = ({
         company_links: linksArray,
       };
 
-      await updateCompanyData(requestData, companyData!.company_id);
+      await updateCompanyData(companyData!.company_id, requestData);
+      await updateCompanyVisible(companyData!.company_id, !isVisible);
       dispatch(fetchUserCompanies(userId));
       setUpdateStatus({ text: "Data updated successfully!", color: "green" });
     } catch {
@@ -225,6 +231,13 @@ const EditCompanyModalAction = ({
           {updateStatus.text}
         </p>
       )}
+      <div className={styles.switchWrapper}>
+        <p>Company visible?</p>
+        <CustomSwitch
+          handleSwitch={() => setIsVisible((state) => !state)}
+          isActive={isVisible}
+        />
+      </div>
       <div className={styles.btnWrapper}>
         <Button type="submit" variant="outlined" color="success">
           Submit

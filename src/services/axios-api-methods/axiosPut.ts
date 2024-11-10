@@ -46,10 +46,19 @@ export const updateUserAvatar = async (file: File, userId: number) => {
 };
 
 export const updateCompanyData = async (
-  updatedData: RequestCompanyProps,
-  company_id: number
+  company_id: number,
+  updatedData: RequestCompanyProps
 ) => {
   return await axiosInstance.put(`/company/${company_id}/update_info/`, {
     ...updatedData,
+  });
+};
+
+export const updateCompanyVisible = async (
+  company_id: number,
+  is_visible: boolean
+) => {
+  return await axiosInstance.put(`/company/${company_id}/update_visible/`, {
+    is_visible,
   });
 };

@@ -24,3 +24,10 @@
   justify-content: center;
   gap: 12px;
 }
+
+.switchWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 12px;
+}

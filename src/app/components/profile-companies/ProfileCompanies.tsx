@@ -13,6 +13,8 @@ import DeleteCompanyModalAction from "../delete-company-modal-action/DeleteCompa
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import EditCompanyModalAction from "../edit-company-modal-action/EditCompanyModalAction";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 
 const ProfileCompanies = ({ userId }: { userId: number }) => {
   const t = useTranslations("ProfileCompanies");
@@ -66,6 +68,13 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
                 key={company.company_id}
                 className={styles.myCompanyCardWrapper}
               >
+                <div className={styles.companyVisibleWrapper}>
+                  {company.is_visible ? (
+                    <VisibilityOutlinedIcon color="success" />
+                  ) : (
+                    <VisibilityOffOutlinedIcon color="warning" />
+                  )}
+                </div>
                 <CompanyListCard company={company} />
                 <div className={styles.myCompanyBtnWrapper}>
                   <Button
