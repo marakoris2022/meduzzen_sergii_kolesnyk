@@ -6,8 +6,6 @@ import { Fragment } from "react";
 function UserDataTable({ userData }: { userData: UserProps }) {
   const t = useTranslations("ProfilePage");
 
-  if (!userData) return null;
-
   const userStats = [
     { label: t("status"), value: userData.user_status || t("none") },
     { label: t("super"), value: userData.is_superuser ? t("yes") : t("no") },

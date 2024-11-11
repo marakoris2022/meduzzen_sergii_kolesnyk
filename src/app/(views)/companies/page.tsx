@@ -12,6 +12,7 @@ import Loading from "@/app/components/loading/Loading";
 import PageError from "@/app/components/users-page-error/PageError";
 import { Pagination } from "@mui/material";
 import CompanyListCard from "@/app/components/company-list-card/CompanyListCard";
+import classNames from "classnames";
 
 const CompaniesPage = () => {
   const t = useTranslations("CompaniesPage");
@@ -23,41 +24,35 @@ const CompaniesPage = () => {
     dispatch(fetchCompaniesData(pageNumber));
   }, [dispatch, pageNumber]);
 
-  if (error) {
-    return <PageError errorTitle={t("error")} />;
-  }
+  if (error) return <PageError errorTitle={t("error")} />;
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
   function handleChange(chosenPage: number) {
     dispatch(setCompaniesPageNumber(chosenPage));
   }
 
   return (
-    <main className="container">
-      <div className={styles.pageWrapper}>
-        <h1>{t("companiesList")}</h1>
+    <main className={classNames("container", styles.pageWrapper)}>
+      <h1>{t("companiesList")}</h1>
 
-        <div className={styles.cardsListWrapper}>
-          {companiesData &&
-            companiesData.map((company) => {
-              return (
-                <CompanyListCard key={company.company_id} company={company} />
-              );
-            })}
-        </div>
+      <div className={styles.cardsListWrapper}>
+        {companiesData &&
+          companiesData.map((company) => {
+            return (
+              <CompanyListCard key={company.company_id} company={company} />
+            );
+          })}
+      </div>
 
-        <div className={styles.paginationWrapper}>
-          <Pagination
-            count={pageCount}
-            page={pageNumber}
-            variant="outlined"
-            color="secondary"
-            onChange={(_, b) => handleChange(b)}
-          />
-        </div>
+      <div className={styles.paginationWrapper}>
+        <Pagination
+          count={pageCount}
+          page={pageNumber}
+          variant="outlined"
+          color="secondary"
+          onChange={(_, b) => handleChange(b)}
+        />
       </div>
     </main>
   );

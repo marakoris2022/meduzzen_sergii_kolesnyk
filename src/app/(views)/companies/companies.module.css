@@ -1,17 +1,19 @@
-.pageWrapper h1 {
-  text-align: center;
-  padding: 20px 0;
-}
-
+.paginationWrapper,
 .cardsListWrapper {
   display: flex;
   justify-content: center;
+}
+
+.cardsListWrapper {
   flex-wrap: wrap;
   gap: 20px;
 }
 
 .paginationWrapper {
-  display: flex;
-  justify-content: center;
+  padding: 20px 0;
+}
+
+.pageWrapper h1 {
+  text-align: center;
   padding: 20px 0;
 }

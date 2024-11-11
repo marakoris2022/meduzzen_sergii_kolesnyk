@@ -1,3 +1,33 @@
+.myCompanyBtnWrapper,
+.cardListWrapper,
+.modalBtnsWrapper,
+.crateBtnWrapper {
+  display: flex;
+}
+
+.crateBtnWrapper {
+  justify-content: center;
+
+  padding: 20px 0;
+}
+
+.modalBtnsWrapper {
+  gap: 12px;
+}
+
+.cardListWrapper {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.myCompanyBtnWrapper {
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
 .myCompanyCardWrapper {
   position: relative;
 }
@@ -8,35 +38,8 @@
   right: 10px;
 }
 
-.crateBtnWrapper {
-  display: flex;
-  justify-content: center;
-
-  padding: 20px 0;
-}
-
 .emptyListNotice {
   text-align: center;
-}
-
-.modalBtnsWrapper {
-  display: flex;
-  gap: 12px;
-}
-
-.cardListWrapper {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.myCompanyBtnWrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 8px 0;
 }
 
 @media screen and (max-width: 750px) {
