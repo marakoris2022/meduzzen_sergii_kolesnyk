@@ -199,7 +199,7 @@
   "Avatar": {
     "avatarAlt": "Зображення аватара"
   },
-  "CompanyIdPage": {
+  "CompanyDetailsPage": {
     "fetchError": "Не вдається отримати дані за ідентифікатором компанії",
     "backToCompanies": "Назад до компаній",
     "companyAuthor": "Автор компанії",
@@ -213,7 +213,7 @@
     "link": "Посилання",
     "back": "Назад"
   },
-  "CreateCompanyBody": {
+  "CreateCompanyForm": {
     "newCompany": "Нова компанія",
     "nameLength": "Довжина назви компанії має бути від 3 до 15 символів",
     "create": "Компанію створено.",
@@ -226,17 +226,17 @@
     "cantFetch": "Не вдається отримати компанії.",
     "noCompanies": "У вас немає власних компаній.",
     "add": "Додати компанію",
-    "delete": "Видалити компанію",
+    "deleteCompany": "Видалити компанію",
     "edit": "Редагувати компанію",
     "deleteTitle": "Видалити компанію?",
     "deleteText": "Якщо ви підтвердите, компанія буде видалена.",
     "delFailed": "Не вдалося видалити.",
-    "delete2": "Видалити"
+    "confirmDeleteCompany": "Видалити"
   },
   "CompanyListCard": {
     "open": "Відкрити"
   },
-  "EditCompanyModalAction": {
+  "EditCompanyForm": {
     "required": "Поле обов'язкове.",
     "onlyLatinSymbols": "Тільки латинські символи.",
     "firstLetterUppercase": "Перша літера повинна бути великою.",

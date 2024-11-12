@@ -4,24 +4,24 @@ import PageError from "../users-page-error/PageError";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { Button } from "@mui/material";
 import UniversalModal from "../universal-modal/UniversalModal";
-import CreateCompanyBody from "../create-company-body/CreateCompanyBody";
+import CreateCompanyForm from "../create-company-form/CreateCompanyForm";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
 import { useTranslations } from "next-intl";
 import CompanyListCard from "../company-list-card/CompanyListCard";
-import DeleteCompanyModalAction from "../delete-company-modal-action/DeleteCompanyModalAction";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import EditCompanyModalAction from "../edit-company-modal-action/EditCompanyModalAction";
+import EditCompanyForm from "../edit-company-form/EditCompanyForm";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import ConfirmCompanyDeletion from "../confirm-company-deletion/ConfirmCompanyDeletion";
 
 const ProfileCompanies = ({ userId }: { userId: number }) => {
   const t = useTranslations("ProfileCompanies");
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isModalDelete, setIsModalDelete] = useState<boolean>(false);
   const [isModalEdit, setIsModalEdit] = useState<boolean>(false);
-  const activeCompanyId = useRef<null | number>(null);
+  const activeCompanyId = useRef<number>(0);
   const { companies, error } = useAppSelector((state) => state.userCompanies);
   const dispatch = useAppDispatch();
 
@@ -34,7 +34,7 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
   return (
     <>
       <UniversalModal open={isModal} handleClose={() => setIsModal(false)}>
-        <CreateCompanyBody userId={userId} />
+        <CreateCompanyForm userId={userId} />
       </UniversalModal>
 
       <UniversalModal
@@ -43,7 +43,7 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
         description={t("deleteText")}
         handleClose={() => setIsModalDelete(false)}
       >
-        <DeleteCompanyModalAction
+        <ConfirmCompanyDeletion
           companyId={activeCompanyId.current}
           userId={userId}
           closeModal={async () => setIsModalDelete(false)}
@@ -54,10 +54,7 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
         open={isModalEdit}
         handleClose={() => setIsModalEdit(false)}
       >
-        <EditCompanyModalAction
-          userId={userId}
-          companyId={activeCompanyId.current}
-        />
+        <EditCompanyForm userId={userId} companyId={activeCompanyId.current} />
       </UniversalModal>
 
       {companies.length ? (
@@ -86,7 +83,7 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
                       activeCompanyId.current = company.company_id;
                     }}
                   >
-                    {t("delete")}
+                    {t("deleteCompany")}
                   </Button>
                   <Button
                     endIcon={<SettingsOutlinedIcon />}

@@ -200,7 +200,7 @@
   "Avatar": {
     "avatarAlt": "Avatar Image"
   },
-  "CompanyIdPage": {
+  "CompanyDetailsPage": {
     "fetchError": "Can't fetch Data by Company Id",
     "backToCompanies": "Back to Companies",
     "companyAuthor": "Company Author",
@@ -214,7 +214,7 @@
     "link": "Link",
     "back": "Back"
   },
-  "CreateCompanyBody": {
+  "CreateCompanyForm": {
     "newCompany": "New Company",
     "nameLength": "Company name length need to be between 3 and 15 symbols",
     "create": "Company created.",
@@ -227,17 +227,17 @@
     "cantFetch": "Can't fetch companies.",
     "noCompanies": "You don't have own companies.",
     "add": "Add Company",
-    "delete": "Delete Company",
+    "deleteCompany": "Delete Company",
     "edit": "Edit Company",
     "deleteTitle": "Delete Company?",
     "deleteText": "If you confirm, company will be deleted.",
     "delFailed": "Deletion is failed.",
-    "delete2": "Delete"
+    "confirmDeleteCompany": "Delete"
   },
   "CompanyListCard": {
     "open": "Open"
   },
-  "EditCompanyModalAction": {
+  "EditCompanyForm": {
     "required": "Field is required.",
     "onlyLatinSymbols": "Only Latin symbols",
     "firstLetterUppercase": "First letter must be uppercase.",

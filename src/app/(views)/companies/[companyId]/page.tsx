@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from "next/navigation";
 import styles from "./companyId.module.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getCompanyById } from "@/services/axios-api-methods/axiosGet";
 import { CompanyIdProps, PATHS } from "@/interface/interface";
 import { AxiosError } from "axios";
@@ -13,8 +13,8 @@ import UserAvatar from "@/app/components/user-avatar/UserAvatar";
 import { Button, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 
-const CompanyIdPage = () => {
-  const t = useTranslations("CompanyIdPage");
+const CompanyDetailsPage = () => {
+  const t = useTranslations("CompanyDetailsPage");
   const router = useRouter();
   const { companyId } = useParams();
   const [error, setError] = useState<null | AxiosError>(null);
@@ -22,16 +22,19 @@ const CompanyIdPage = () => {
     null
   );
 
-  useEffect(() => {
-    const id = Number(companyId);
-    getCompanyById(id)
-      .then((data) => {
-        setCompanyIdData(data);
-      })
-      .catch((error) => {
-        setError(error as AxiosError);
-      });
+  const fetchCompanyData = useCallback(async () => {
+    try {
+      const id = Number(companyId);
+      const data = await getCompanyById(id);
+      setCompanyIdData(data);
+    } catch (error) {
+      setError(error as AxiosError);
+    }
   }, [companyId]);
+
+  useEffect(() => {
+    fetchCompanyData();
+  }, [companyId, fetchCompanyData]);
 
   if (error) {
     return (
@@ -104,4 +107,4 @@ const CompanyIdPage = () => {
   );
 };
 
-export default CompanyIdPage;
+export default CompanyDetailsPage;

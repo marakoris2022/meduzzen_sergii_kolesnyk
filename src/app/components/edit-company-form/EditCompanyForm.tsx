@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, styled, TextField } from "@mui/material";
 import { AxiosError } from "axios";
@@ -15,7 +15,7 @@ import {
   UpdateStatusType,
   ValidationProps,
 } from "@/interface/interface";
-import styles from "./editCompanyModalAction.module.css";
+import styles from "./editCompanyForm.module.css";
 import {
   updateCompanyAvatar,
   updateCompanyData,
@@ -34,11 +34,6 @@ import {
 import { useTranslations } from "next-intl";
 import CustomSwitch from "../custom-switch/CustomSwitch";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-
-type EditCompanyModalActionProps = {
-  companyId: number | null;
-  userId: number;
-};
 
 type FromFieldProps = Array<{
   name: string;
@@ -63,11 +58,13 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const EditCompanyModalAction = ({
-  companyId,
-  userId,
-}: EditCompanyModalActionProps) => {
-  const t = useTranslations("EditCompanyModalAction");
+type Props = {
+  companyId: number;
+  userId: number;
+};
+
+const EditCompanyForm = ({ companyId, userId }: Props) => {
+  const t = useTranslations("EditCompanyForm");
   const dispatch = useAppDispatch();
   const [companyData, setCompanyData] = useState<null | CompanyIdProps>(null);
   const [error, setError] = useState<null | AxiosError>(null);
@@ -106,7 +103,7 @@ const EditCompanyModalAction = ({
   }
 
   async function handleSubmitAvatar() {
-    if (selectedFile && companyId) {
+    if (selectedFile) {
       try {
         await updateCompanyAvatar(selectedFile, companyId);
         dispatch(fetchUserCompanies(userId));
@@ -158,66 +155,66 @@ const EditCompanyModalAction = ({
     }
   }
 
-  useEffect(() => {
-    if (companyId) {
-      getCompanyById(companyId)
-        .then((fetchedCompanyData) => {
-          setCompanyData(fetchedCompanyData);
+  const fetchAndSetCompanyData = useCallback(async () => {
+    try {
+      const fetchedCompanyData = await getCompanyById(companyId);
+      setCompanyData(fetchedCompanyData);
 
-          const initialFields = [
-            {
-              name: "company_name",
-              label: t("companyName"),
-              validation: nameValidation,
-            },
-            {
-              name: "company_title",
-              label: t("companyTitle"),
-              validation: nameValidation,
-            },
-            {
-              name: "company_description",
-              label: t("description"),
-              validation: statusValidation,
-            },
-            {
-              name: "company_city",
-              label: t("city"),
-              validation: statusValidation,
-            },
-            {
-              name: "company_phone",
-              label: t("phone"),
-              validation: phoneValidation,
-            },
-          ];
+      const initialFields = [
+        {
+          name: "company_name",
+          label: t("companyName"),
+          validation: nameValidation,
+        },
+        {
+          name: "company_title",
+          label: t("companyTitle"),
+          validation: nameValidation,
+        },
+        {
+          name: "company_description",
+          label: t("description"),
+          validation: statusValidation,
+        },
+        {
+          name: "company_city",
+          label: t("city"),
+          validation: statusValidation,
+        },
+        {
+          name: "company_phone",
+          label: t("phone"),
+          validation: phoneValidation,
+        },
+      ];
 
-          const linkFields =
-            fetchedCompanyData.company_links?.map((_, index) => {
-              const linkFieldName = `company_link_${index + 1}`;
-              return {
-                name: linkFieldName,
-                label: t("link"),
-                validation: linksValidation,
-              };
-            }) || [];
+      const linkFields =
+        fetchedCompanyData.company_links?.map((_, index) => ({
+          name: `company_link_${index + 1}`,
+          label: t("link"),
+          validation: linksValidation,
+        })) || [];
 
-          setFieldList([...initialFields, ...linkFields]);
-          linksCount.current = fetchedCompanyData.company_links?.length || 0;
+      setFieldList([...initialFields, ...linkFields]);
+      linksCount.current = fetchedCompanyData.company_links?.length || 0;
 
-          initialFields.forEach((field) => {
-            const keyName = field.name as keyof BaseCompanyFormProps;
-            setValue(keyName, fetchedCompanyData[keyName]);
-          });
+      initialFields.forEach((field) => {
+        const keyName = field.name as keyof BaseCompanyFormProps;
+        setValue(keyName, fetchedCompanyData[keyName]);
+      });
 
-          fetchedCompanyData.company_links?.forEach((value, index) => {
-            const linkFieldName = `company_link_${index + 1}`;
-            setValue(linkFieldName as keyof FormCompanyProps, value);
-          });
-        })
-        .catch((error) => setError(error as AxiosError));
+      fetchedCompanyData.company_links?.forEach((value, index) => {
+        const linkFieldName = `company_link_${index + 1}`;
+        setValue(linkFieldName as keyof FormCompanyProps, value);
+      });
+    } catch (error) {
+      setError(error as AxiosError);
     }
-  }, [companyId, setValue]);
+  }, [companyId, setValue, t]);
+
+  useEffect(() => {
+    fetchAndSetCompanyData();
+  }, [fetchAndSetCompanyData]);
 
   function handleReset() {
     clearErrors();
@@ -252,52 +249,59 @@ const EditCompanyModalAction = ({
   if (!companyData) return <Loading />;
 
   return (
-    <form className={styles.formWrapper} onSubmit={handleSubmit(submit)}>
-      <p className={styles.descriptionTitle}>{t("baseDescription")}</p>
-      {fieldList.map(({ name, label, validation }) => (
-        <TextField
-          fullWidth
-          key={name}
-          error={!!errors[name as keyof FormCompanyProps]}
-          {...register(name as keyof FormCompanyProps, validation(t))}
-          label={label}
-          helperText={errors[name as keyof FormCompanyProps]?.message || ""}
-        />
-      ))}
-      <div className={styles.linksBtnWrapper}>
-        <Button startIcon={<AddIcon />} size="small" onClick={addLinkField}>
-          {t("add")}
-        </Button>
-        <Button
-          startIcon={<RemoveIcon />}
-          size="small"
-          onClick={removeLinkField}
-          color="warning"
-        >
-          {t("remove")}
-        </Button>
-      </div>
-      {updateStatus.text && (
-        <p className={styles.updateText} style={{ color: updateStatus.color }}>
-          {updateStatus.text}
-        </p>
-      )}
-      <p className={styles.descriptionTitle}>{t("visible")}</p>
-      <div className={styles.switchWrapper}>
-        <CustomSwitch
-          handleSwitch={() => setIsVisible((state) => !state)}
-          isActive={isVisible}
-        />
-      </div>
-      <div className={styles.btnWrapper}>
-        <Button type="submit" variant="outlined" color="success">
-          {t("submit2")}
-        </Button>
-        <Button onClick={handleReset} variant="outlined" color="warning">
-          {t("clear")}
-        </Button>
-      </div>
-
+    <div className={styles.formWrapper}>
+      <form
+        className={styles.generalBLockWrapper}
+        onSubmit={handleSubmit(submit)}
+      >
+        <p className={styles.descriptionTitle}>{t("baseDescription")}</p>
+        {fieldList.map(({ name, label, validation }) => (
+          <TextField
+            fullWidth
+            key={name}
+            error={!!errors[name as keyof FormCompanyProps]}
+            {...register(name as keyof FormCompanyProps, validation(t))}
+            label={label}
+            helperText={errors[name as keyof FormCompanyProps]?.message || ""}
+          />
+        ))}
+        <div className={styles.linksBtnWrapper}>
+          <Button startIcon={<AddIcon />} size="small" onClick={addLinkField}>
+            {t("add")}
+          </Button>
+          <Button
+            startIcon={<RemoveIcon />}
+            size="small"
+            onClick={removeLinkField}
+            color="warning"
+          >
+            {t("remove")}
+          </Button>
+        </div>
+        {updateStatus.text && (
+          <p
+            className={styles.updateText}
+            style={{ color: updateStatus.color }}
+          >
+            {updateStatus.text}
+          </p>
+        )}
+        <p className={styles.descriptionTitle}>{t("visible")}</p>
+        <div className={styles.switchWrapper}>
+          <CustomSwitch
+            handleSwitch={() => setIsVisible((state) => !state)}
+            isActive={isVisible}
+          />
+        </div>
+        <div className={styles.btnWrapper}>
+          <Button type="submit" variant="outlined" color="success">
+            {t("submit2")}
+          </Button>
+          <Button onClick={handleReset} variant="outlined" color="warning">
+            {t("clear")}
+          </Button>
+        </div>
+      </form>
       <p className={styles.descriptionTitle}>{t("changeAvatar")}</p>
 
       {selectedFile && (
@@ -328,8 +332,8 @@ const EditCompanyModalAction = ({
           {t("submit")}
         </Button>
       </div>
-    </form>
+    </div>
   );
 };
 
-export default EditCompanyModalAction;
+export default EditCompanyForm;

@@ -10,9 +10,9 @@ import {
 } from "@/state/companies/companiesSlice";
 import Loading from "@/app/components/loading/Loading";
 import PageError from "@/app/components/users-page-error/PageError";
-import { Pagination } from "@mui/material";
 import CompanyListCard from "@/app/components/company-list-card/CompanyListCard";
 import classNames from "classnames";
+import PaginationCustom from "@/app/components/pagination-custom/PaginationCustom";
 
 const CompaniesPage = () => {
   const t = useTranslations("CompaniesPage");
@@ -45,15 +45,11 @@ const CompaniesPage = () => {
           })}
       </div>
 
-      <div className={styles.paginationWrapper}>
-        <Pagination
-          count={pageCount}
-          page={pageNumber}
-          variant="outlined"
-          color="secondary"
-          onChange={(_, b) => handleChange(b)}
-        />
-      </div>
+      <PaginationCustom
+        pageCount={pageCount}
+        currentPage={pageNumber}
+        onChange={handleChange}
+      />
     </main>
   );
 };

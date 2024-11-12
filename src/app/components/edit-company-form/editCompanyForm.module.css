@@ -1,4 +1,5 @@
-.formWrapper {
+.formWrapper,
+.generalBLockWrapper {
   width: 100%;
   text-align: center;
 
@@ -7,7 +8,9 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
 
+.formWrapper {
   overflow-y: scroll;
   scrollbar-color: purple transparent;
   scrollbar-width: thin;

@@ -1,15 +1,15 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import CustomSwitch from "../custom-switch/CustomSwitch";
-import styles from "./createCompanyBody.module.css";
 import { createCompany } from "@/services/axios-api-methods/axiosPost";
 import { UpdateStatusType } from "@/interface/interface";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
 import { useTranslations } from "next-intl";
+import styles from "./createCompanyForm.module.css";
 
-function CreateCompanyBody({ userId }: { userId: number }) {
-  const t = useTranslations("CreateCompanyBody");
+function CreateCompanyForm({ userId }: { userId: number }) {
+  const t = useTranslations("CreateCompanyForm");
   const [isVisible, setVisible] = useState<boolean>(true);
   const [companyName, setCompanyName] = useState<string>("");
   const [nameValidation, setNameValidation] = useState<string>("");
@@ -66,4 +66,4 @@ function CreateCompanyBody({ userId }: { userId: number }) {
   );
 }
 
-export default CreateCompanyBody;
+export default CreateCompanyForm;
