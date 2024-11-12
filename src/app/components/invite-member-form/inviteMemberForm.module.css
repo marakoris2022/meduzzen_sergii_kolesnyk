@@ -1,0 +1,19 @@
+.wrapper {
+  text-align: center;
+  padding: 20px 0;
+
+  width: 230px;
+}
+
+.companyWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid blanchedalmond;
+}
+
+.noticeMessage {
+  padding: 8px 0;
+}

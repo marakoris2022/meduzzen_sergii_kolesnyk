@@ -11,6 +11,8 @@ import Loading from "@/app/components/loading/Loading";
 import UserAvatar from "@/app/components/user-avatar/UserAvatar";
 import { Button, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
+import UniversalModal from "@/app/components/universal-modal/UniversalModal";
+import InviteMemberForm from "@/app/components/invite-member-form/InviteMemberForm";
 
 const UserProfilePage = () => {
   const t = useTranslations("UserProfilePage");
@@ -18,6 +20,7 @@ const UserProfilePage = () => {
   const { userId } = useParams();
   const [error, setError] = useState<null | AxiosError>(null);
   const [userData, setUserData] = useState<null | UserProps>(null);
+  const [isInviteModal, setIsInviteModal] = useState(false);
 
   const fetchUserData = useCallback(async () => {
     try {
@@ -47,6 +50,13 @@ const UserProfilePage = () => {
     <Loading />
   ) : (
     <main className="container">
+      <UniversalModal
+        open={isInviteModal}
+        handleClose={() => setIsInviteModal(false)}
+      >
+        <InviteMemberForm memberId={+userId} />
+      </UniversalModal>
+
       <h1
         className={styles.pageTitle}
       >{`${userData.user_firstname} ${userData.user_lastname}`}</h1>
@@ -94,6 +104,13 @@ const UserProfilePage = () => {
           onClick={() => router.back()}
         >
           {t("back")}
+        </Button>
+        <Button
+          variant="outlined"
+          color="success"
+          onClick={() => setIsInviteModal(true)}
+        >
+          Invite
         </Button>
       </div>
     </main>
