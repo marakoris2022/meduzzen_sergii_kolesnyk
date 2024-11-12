@@ -37,7 +37,8 @@
     "errorCompaniesData": "Oops! Can't get list of companies.",
     "companiesList": "List of Companies",
     "avatarAlt": "Company_Logo",
-    "open": "Open"
+    "open": "Open",
+    "errorPage": "Cant find this page"
   },
 
   "UsersPage": {

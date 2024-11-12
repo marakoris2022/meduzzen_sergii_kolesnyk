@@ -37,7 +37,8 @@
     "errorCompaniesData": "На жаль! Не вдається отримати список компаній.",
     "companiesList": "Список компаній",
     "avatarAlt": "Логотип_компанії",
-    "open": "Відкрити"
+    "open": "Відкрити",
+    "errorPage": "Cant find this page"
   },
   "UsersPage": {
     "title": "Наші Користувачі",

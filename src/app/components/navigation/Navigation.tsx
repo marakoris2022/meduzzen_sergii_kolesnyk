@@ -47,8 +47,11 @@ const Navigation = () => {
       <>
         <MenuLinkItem path={PATHS.MAIN} title={t("main")} />
         <MenuLinkItem path={PATHS.PROFILE} title={t("profile")} />
-        <MenuLinkItem path={PATHS.USERS} title={t("users")} />
-        <MenuLinkItem path={PATHS.COMPANIES} title={t("companies")} />
+        <MenuLinkItem path={`${PATHS.USERS}?page=1`} title={t("users")} />
+        <MenuLinkItem
+          path={`${PATHS.COMPANIES}?page=1`}
+          title={t("companies")}
+        />
         <MenuLinkItem path={PATHS.ABOUT} title={t("about")} />
       </>
     );

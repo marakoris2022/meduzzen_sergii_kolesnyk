@@ -1,13 +1,42 @@
 .accordionWrapper,
 .accordionHeadingWrapper,
-.propsWrapper {
+.propsWrapper,
+.userProfileWrapper {
   display: flex;
   flex-direction: row;
   gap: 20px;
+}
+
+.propsWrapper {
+  flex-direction: column;
+  list-style: none;
 }
 
 .accordionHeadingWrapper {
   width: 100%;
   justify-content: space-between;
   padding: 0 40px;
+}
+
+.userProfileWrapper {
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media screen and (max-width: 750px) {
+  .propsWrapper {
+    gap: 8px;
+  }
+  .accordionWrapper,
+  .accordionHeadingWrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .accordionHeadingWrapper {
+    padding: 0 10px;
+  }
+  .propsWrapper {
+    padding: 0;
+  }
 }

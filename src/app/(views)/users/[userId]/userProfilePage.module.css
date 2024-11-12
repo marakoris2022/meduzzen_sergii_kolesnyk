@@ -1,0 +1,74 @@
+.pageWrapper,
+.asideWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.pageWrapper {
+  gap: 2rem;
+}
+
+.asideWrapper {
+  flex: 1;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userInfoWrapper {
+  padding: 1rem;
+  border-top: 1px solid #ddd;
+  width: 100%;
+  text-align: center;
+}
+
+.userInfoWrapper h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.sectionWrapper {
+  flex: 2;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.userTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.userInfoList {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.userInfoList li {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.backBtnWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.backBtnWrapper button {
+  font-weight: bold;
+}
+
+@media (min-width: 750px) {
+  .pageWrapper {
+    flex-direction: row;
+  }
+}

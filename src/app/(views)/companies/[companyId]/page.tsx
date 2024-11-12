@@ -41,7 +41,7 @@ const CompanyDetailsPage = () => {
       <PageError
         errorTitle={t("fetchError")}
         actionTitle={t("backToCompanies")}
-        errorAction={() => router.push(PATHS.COMPANIES)}
+        errorAction={() => router.push(`${PATHS.COMPANIES}?page=1`)}
       />
     );
   }
