@@ -117,7 +117,8 @@
     "Id": "Id",
     "name": "First Name",
     "firstName": "Last Name",
-    "loadData": "Load Data"
+    "loadData": "Load Data",
+    "profileBtn": "Profile"
   },
   "EditProfileGeneral": {
     "required": "Field is required.",
@@ -270,5 +271,23 @@
     "fileSelected": "File selected: ",
     "changeAvatar": "Change Avatar",
     "choose": "You need to choose file."
+  },
+  "UserProfilePage": {
+    "errorFetchingData": "Error fetching user data",
+    "backToUsers": "Back to Users",
+    "contactInfo": "Contact Information",
+    "email": "Email",
+    "phone": "Phone",
+    "notAvailable": "N/A",
+    "userDetails": "User Details",
+    "status": "Status",
+    "notProvided": "Not provided",
+    "city": "City",
+    "unknown": "Unknown",
+    "link": "Link",
+    "superuser": "Superuser",
+    "yes": "Yes",
+    "no": "No",
+    "back": "Back"
   }
 }

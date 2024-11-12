@@ -86,7 +86,7 @@ const UserAccordion = memo(({ user }: UserAccordionProps) => {
               variant="contained"
               color="info"
             >
-              Profile
+              {t("profileBtn")}
             </Button>
           </div>
           <AdditionalUserPropsCard

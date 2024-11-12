@@ -10,8 +10,10 @@ import PageError from "@/app/components/users-page-error/PageError";
 import Loading from "@/app/components/loading/Loading";
 import UserAvatar from "@/app/components/user-avatar/UserAvatar";
 import { Button, TextField } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 const UserProfilePage = () => {
+  const t = useTranslations("UserProfilePage");
   const router = useRouter();
   const { userId } = useParams();
   const [error, setError] = useState<null | AxiosError>(null);
@@ -34,8 +36,8 @@ const UserProfilePage = () => {
   if (error) {
     return (
       <PageError
-        errorTitle="Error fetching user data"
-        actionTitle="Back to Users"
+        errorTitle={t("errorFetchingData")}
+        actionTitle={t("backToUsers")}
         errorAction={() => router.push(PATHS.USERS)}
       />
     );
@@ -52,26 +54,36 @@ const UserProfilePage = () => {
         <aside className={styles.asideWrapper}>
           <UserAvatar avatarSrc={userData.user_avatar} />
           <div className={styles.userInfoWrapper}>
-            <h3>Contact Information</h3>
-            <p>Email: {userData.user_email}</p>
-            <p>Phone: {userData.user_phone || "N/A"}</p>
+            <h3>{t("contactInfo")}</h3>
+            <p>
+              {t("email")}: {userData.user_email}
+            </p>
+            <p>
+              {t("phone")}: {userData.user_phone || t("notAvailable")}
+            </p>
           </div>
         </aside>
         <section className={styles.sectionWrapper}>
-          <h4 className={styles.userTitle}>User Details</h4>
+          <h4 className={styles.userTitle}>{t("userDetails")}</h4>
           <TextField
-            label="Status"
+            label={t("status")}
             fullWidth
             disabled
-            defaultValue={userData.user_status || "Not provided"}
+            defaultValue={userData.user_status || t("notProvided")}
           />
           <ul className={styles.userInfoList}>
-            <li>City: {userData.user_city || "Unknown"}</li>
+            <li>
+              {t("city")}: {userData.user_city || t("unknown")}
+            </li>
             {userData.user_links &&
               userData.user_links.map((link) => (
-                <li key={link}>Link: {link}</li>
+                <li key={link}>
+                  {t("link")}: {link}
+                </li>
               ))}
-            <li>Superuser: {userData.is_superuser ? "Yes" : "No"}</li>
+            <li>
+              {t("superuser")}: {userData.is_superuser ? t("yes") : t("no")}
+            </li>
           </ul>
         </section>
       </div>
@@ -81,7 +93,7 @@ const UserProfilePage = () => {
           color="warning"
           onClick={() => router.back()}
         >
-          Back
+          {t("back")}
         </Button>
       </div>
     </main>

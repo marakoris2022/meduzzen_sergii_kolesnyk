@@ -116,7 +116,8 @@
     "Id": "Ідентифікатор",
     "name": "Ім'я",
     "firstName": "Прізвище",
-    "loadData": "Завантажити дані"
+    "loadData": "Завантажити дані",
+    "profileBtn": "Профіль"
   },
   "EditProfileGeneral": {
     "required": "Поле обов'язкове.",
@@ -269,5 +270,23 @@
     "fileSelected": "Вибрано файл: ",
     "changeAvatar": "Змінити аватар",
     "choose": "Вам потрібно вибрати файл."
+  },
+  "UserProfilePage": {
+    "errorFetchingData": "Помилка отримання даних користувача",
+    "backToUsers": "Назад до користувачів",
+    "contactInfo": "Контактна інформація",
+    "email": "Електронна пошта",
+    "phone": "Телефон",
+    "notAvailable": "Немає",
+    "userDetails": "Деталі користувача",
+    "status": "Статус",
+    "notProvided": "Не вказано",
+    "city": "Місто",
+    "unknown": "Невідомо",
+    "link": "Посилання",
+    "superuser": "Суперкористувач",
+    "yes": "Так",
+    "no": "Ні",
+    "back": "Назад"
   }
 }
