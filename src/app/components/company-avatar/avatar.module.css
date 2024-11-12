@@ -1,0 +1,15 @@
+.imgWrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  min-width: 200px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 750px) {
+  .imgWrapper {
+    min-width: 120px;
+    width: 120px;
+    height: 120px;
+  }
+}

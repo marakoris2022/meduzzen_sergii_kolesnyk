@@ -1,6 +1,5 @@
 "use client";
 
-import { Pagination } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import styles from "./users.module.css";
@@ -9,6 +8,7 @@ import UserAccordion from "@/app/components/user-accordion/UserAccordion";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { fetchUsersData, setPageNumber } from "@/state/users/usersSlice";
 import PageError from "@/app/components/users-page-error/PageError";
+import PaginationCustom from "@/app/components/pagination-custom/PaginationCustom";
 
 const UsersPage = () => {
   const t = useTranslations("UsersPage");
@@ -44,15 +44,11 @@ const UsersPage = () => {
                 return <UserAccordion key={user.user_id} user={user} />;
               })}
           </div>
-          <div className={styles.paginationWrapper}>
-            <Pagination
-              count={pageCount}
-              page={pageNumber}
-              variant="outlined"
-              color="secondary"
-              onChange={(_, b) => handleChange(b)}
-            />
-          </div>
+          <PaginationCustom
+            pageCount={pageCount}
+            currentPage={pageNumber}
+            onChange={handleChange}
+          />
         </div>
       )}
     </main>

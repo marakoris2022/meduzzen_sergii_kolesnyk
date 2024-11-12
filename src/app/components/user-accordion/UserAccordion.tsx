@@ -5,13 +5,13 @@ import {
   AccordionDetails,
   Chip,
 } from "@mui/material";
-import RandomAvatar from "../RandomAvatar/RandomAvatar";
-import Image from "next/image";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import styles from "./userAccordion.module.css";
 import { useTranslations } from "next-intl";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchUserDataById } from "@/state/users/usersSlice";
+import UserAvatar from "../user-avatar/UserAvatar";
+import { memo } from "react";
 
 type UserAccordionProps = {
   user: UserProps;
@@ -66,12 +66,12 @@ function AdditionalUserPropsCard({
   );
 }
 
-const UserAccordion = ({ user }: UserAccordionProps) => {
+const UserAccordion = memo(({ user }: UserAccordionProps) => {
   const t = useTranslations("UserAccordion");
-  const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   async function handleLoadData() {
-    dispath(fetchUserDataById(user.user_id));
+    dispatch(fetchUserDataById(user.user_id));
   }
 
   return (
@@ -92,18 +92,7 @@ const UserAccordion = ({ user }: UserAccordionProps) => {
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.accordionWrapper}>
-          <div>
-            {user.user_avatar ? (
-              <Image
-                src={user.user_avatar}
-                alt="Avatar"
-                height={120}
-                width={100}
-              />
-            ) : (
-              <RandomAvatar />
-            )}
-          </div>
+          <UserAvatar avatarSrc={user.user_avatar} />
           <div>
             <p>
               {t("name")}: {user.user_firstname}
@@ -123,6 +112,8 @@ const UserAccordion = ({ user }: UserAccordionProps) => {
       </AccordionDetails>
     </Accordion>
   );
-};
+});
+
+UserAccordion.displayName = "UserAccordion";
 
 export default UserAccordion;

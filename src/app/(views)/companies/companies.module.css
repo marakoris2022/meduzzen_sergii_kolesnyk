@@ -1,0 +1,14 @@
+.cardsListWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.cardsListWrapper {
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.pageWrapper h1 {
+  text-align: center;
+  padding: 20px 0;
+}

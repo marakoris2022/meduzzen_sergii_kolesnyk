@@ -16,6 +16,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { updateUserGeneralData } from "@/services/axios-api-methods/axiosPut";
 import { setUserData } from "@/state/user/userSlice";
+import { UpdateStatusType, ValidationProps } from "@/interface/interface";
 
 type BaseUserProps = {
   user_firstname: string;
@@ -33,27 +34,11 @@ type FormProps = BaseUserProps & {
   user_links: string;
 };
 
-type UpdateStatusType = {
-  text: string;
-  color: "green" | "red";
-};
-
-type ValidationProps = (t: (key: string) => string) => {
-  required?: string;
-  pattern?: {
-    value: RegExp;
-    message: string;
-  };
-  validate?: (value: string) => string | true;
-  minLength?: {
-    value: number;
-    message: string;
-  };
-  maxLength?: {
-    value: number;
-    message: string;
-  };
-};
+type FromFieldProps = Array<{
+  name: string;
+  label: string;
+  validation: ValidationProps;
+}>;
 
 const updateStatusInit: UpdateStatusType = {
   text: "",
@@ -65,9 +50,7 @@ const General = () => {
   const dispatch = useAppDispatch();
   const { userData } = useUserData();
   const linksCount = useRef<number>(0);
-  const [fieldList, setFieldList] = useState<
-    Array<{ name: string; label: string; validation: ValidationProps }>
-  >([]);
+  const [fieldList, setFieldList] = useState<FromFieldProps>([]);
   const [updateStatus, setUpdateStatus] =
     useState<UpdateStatusType>(updateStatusInit);
 
@@ -215,9 +198,11 @@ const General = () => {
           {t("social")}
         </Button>
       </div>
-      <p className={styles.updateText} style={{ color: updateStatus.color }}>
-        {updateStatus.text}
-      </p>
+      {updateStatus.text && (
+        <p className={styles.updateText} style={{ color: updateStatus.color }}>
+          {updateStatus.text}
+        </p>
+      )}
       <div className={styles.btnWrapper}>
         <Button type="submit" variant="outlined" color="success">
           {t("submit")}

@@ -1,3 +1,4 @@
+import { RequestCompanyProps } from "@/interface/interface";
 import { axiosInstance } from "../axiosInstance";
 
 export type UpdateUserGeneralProps = {
@@ -35,6 +36,36 @@ export const updateUserPassword = async (data: UpdateUserPasswordProps) => {
 export const updateUserAvatar = async (file: File, userId: number) => {
   return await axiosInstance.put(
     `/user/${userId}/update_avatar/`,
+    { file },
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+};
+
+export const updateCompanyData = async (
+  company_id: number,
+  updatedData: RequestCompanyProps
+) => {
+  return await axiosInstance.put(`/company/${company_id}/update_info/`, {
+    ...updatedData,
+  });
+};
+
+export const updateCompanyVisible = async (
+  company_id: number,
+  is_visible: boolean
+) => {
+  return await axiosInstance.put(`/company/${company_id}/update_visible/`, {
+    is_visible,
+  });
+};
+
+export const updateCompanyAvatar = async (file: File, company_id: number) => {
+  return await axiosInstance.put(
+    `/company/${company_id}/update_avatar/`,
     { file },
     {
       headers: {

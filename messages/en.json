@@ -33,7 +33,11 @@
     "about": "About"
   },
   "CompaniesPage": {
-    "companies": "Companies Page"
+    "companies": "Companies Page",
+    "errorCompaniesData": "Oops! Can't get list of companies.",
+    "companiesList": "List of Companies",
+    "avatarAlt": "Company_Logo",
+    "open": "Open"
   },
 
   "UsersPage": {
@@ -152,7 +156,8 @@
     "id": "User Id: ",
     "city": "City : ",
     "phone": "Phone: ",
-    "link": "Social Link:"
+    "link": "Social Link:",
+    "companies": "My Companies"
   },
   "ProfileEditPage": {
     "edit": "Edit Profile",
@@ -191,5 +196,78 @@
   "Error": {
     "title": "Something went wrong!",
     "button": "Try again"
+  },
+  "Avatar": {
+    "avatarAlt": "Avatar Image"
+  },
+  "CompanyDetailsPage": {
+    "fetchError": "Can't fetch Data by Company Id",
+    "backToCompanies": "Back to Companies",
+    "companyAuthor": "Company Author",
+    "company": "Company ",
+    "info": "Info",
+    "description": "Description:",
+    "notProvided": "Description is not provide.",
+    "city": "City",
+    "unknown": "unknown",
+    "phone": "Phone",
+    "link": "Link",
+    "back": "Back"
+  },
+  "CreateCompanyForm": {
+    "newCompany": "New Company",
+    "nameLength": "Company name length need to be between 3 and 15 symbols",
+    "create": "Company created.",
+    "failed": "Failed to create.",
+    "companyName": "Company Name",
+    "visible": "Company Visible ?",
+    "createBtn": "Create"
+  },
+  "ProfileCompanies": {
+    "cantFetch": "Can't fetch companies.",
+    "noCompanies": "You don't have own companies.",
+    "add": "Add Company",
+    "deleteCompany": "Delete Company",
+    "edit": "Edit Company",
+    "deleteTitle": "Delete Company?",
+    "deleteText": "If you confirm, company will be deleted.",
+    "delFailed": "Deletion is failed.",
+    "confirmDeleteCompany": "Delete"
+  },
+  "CompanyListCard": {
+    "open": "Open"
+  },
+  "EditCompanyForm": {
+    "required": "Field is required.",
+    "onlyLatinSymbols": "Only Latin symbols",
+    "firstLetterUppercase": "First letter must be uppercase.",
+    "statusMaxLength": "Maximum length is 100 symbols.",
+    "cityMaxLength": "Maximum length is 50 symbols.",
+    "phoneInvalid": "Wrongs phone number format.",
+    "phoneMaxLength": "Maximum length is 15 symbols.",
+    "invalidLink": "Wrong link format.",
+    "select": "Upload File",
+    "submit": "Submit File",
+    "long": "File name is to long. Maximum 20 letters.",
+    "size": "File size it to big. Maximum 600Kb.",
+    "avatarSelected": "Avatar successfully selected.",
+    "dataUpdated": "Data updated successfully!",
+    "updateFailed": "Failed to update data.",
+    "companyName": "Company Name",
+    "companyTitle": "Company Title",
+    "description": "Description",
+    "city": "City",
+    "phone": "Phone",
+    "link": "Link",
+    "fetchFailed": "Failed to fetch company data",
+    "baseDescription": "Base Description",
+    "add": "Add Link",
+    "remove": "Remove Link",
+    "visible": "Company visible?",
+    "submit2": "Submit",
+    "clear": "Clear",
+    "fileSelected": "File selected: ",
+    "changeAvatar": "Change Avatar",
+    "choose": "You need to choose file."
   }
 }

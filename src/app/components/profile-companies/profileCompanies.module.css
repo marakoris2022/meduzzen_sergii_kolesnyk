@@ -1,0 +1,49 @@
+.myCompanyBtnWrapper,
+.cardListWrapper,
+.modalBtnsWrapper,
+.crateBtnWrapper {
+  display: flex;
+}
+
+.crateBtnWrapper {
+  justify-content: center;
+
+  padding: 20px 0;
+}
+
+.modalBtnsWrapper {
+  gap: 12px;
+}
+
+.cardListWrapper {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.myCompanyBtnWrapper {
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.myCompanyCardWrapper {
+  position: relative;
+}
+
+.companyVisibleWrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.emptyListNotice {
+  text-align: center;
+}
+
+@media screen and (max-width: 750px) {
+  .myCompanyCardWrapper {
+    width: 340px;
+  }
+}

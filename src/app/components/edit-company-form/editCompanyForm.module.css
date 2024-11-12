@@ -1,0 +1,55 @@
+.formWrapper,
+.generalBLockWrapper {
+  width: 100%;
+  text-align: center;
+
+  padding-bottom: 18px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formWrapper {
+  overflow-y: scroll;
+  scrollbar-color: purple transparent;
+  scrollbar-width: thin;
+}
+
+.descriptionTitle {
+  padding: 8px 0;
+  border-top: 1px solid dimgray;
+  border-bottom: 1px solid dimgray;
+}
+
+.linksBtnWrapper,
+.btnWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 12px;
+}
+
+.switchWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 12px;
+}
+
+.avatarErrorText {
+  color: red;
+}
+
+.avatarBtnWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 10px;
+}
+
+@media screen and (max-width: 750px) {
+  .editBtn label {
+    font-size: 12px;
+  }
+}
