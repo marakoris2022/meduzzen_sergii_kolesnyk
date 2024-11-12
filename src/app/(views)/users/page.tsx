@@ -30,7 +30,7 @@ const UsersPage = () => {
     if (pageNumber) dispatch(fetchUsersData(+pageNumber));
   }, [dispatch, pageNumber]);
 
-  if (!usersData) <Loading />;
+  if (!usersData) return <Loading />;
 
   return (
     <main className="container">
