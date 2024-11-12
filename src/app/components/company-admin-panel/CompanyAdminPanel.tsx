@@ -100,24 +100,33 @@ const CompanyAdminPanel = ({
     }
   }
 
+  type Action = {
+    callback: () => void;
+    color: "primary" | "warning" | "error" | "success";
+    icon: JSX.Element;
+  };
+
   function MemberBadge({
     member,
-    actions: { callback, color },
+    actions,
   }: {
     member: UserItem & ActionProps;
-    actions: { callback: () => void; color: string }[];
+    actions: Action[];
   }) {
     return (
       <li key={member.user_id}>
         <span>{member.user_email}</span>
         <span> ({member.action})</span>
-        <IconButton
-          onClick={() => router.push(`${PATHS.USERS}/${member.user_id}`)}
-          size="small"
-          color="primary"
-        >
-          <OpenInNewIcon />
-        </IconButton>
+        {actions.map((action, index) => (
+          <IconButton
+            key={index}
+            onClick={action.callback}
+            size="small"
+            color={action.color}
+          >
+            {action.icon}
+          </IconButton>
+        ))}
       </li>
     );
   }
@@ -129,25 +138,30 @@ const CompanyAdminPanel = ({
       <ul>
         {companyLists.members.map((member) => (
           <>
-            <MemberBadge key={member.user_id} member={member} />
-            <IconButton
-              onClick={async () =>
-                await handleAction("leave", member.action_id)
-              }
-              size="small"
-              color="warning"
-            >
-              <MeetingRoomIcon />
-            </IconButton>
-            <IconButton
-              onClick={async () =>
-                await handleAction("block", member.action_id)
-              }
-              size="small"
-              color="error"
-            >
-              <DoNotDisturbIcon />
-            </IconButton>
+            <MemberBadge
+              key={member.user_id}
+              member={member}
+              actions={[
+                {
+                  callback: () =>
+                    router.push(`${PATHS.USERS}/${member.user_id}`),
+                  color: "primary",
+                  icon: <OpenInNewIcon />,
+                },
+                {
+                  callback: async () =>
+                    await handleAction("leave", member.action_id),
+                  color: "warning",
+                  icon: <MeetingRoomIcon />,
+                },
+                {
+                  callback: async () =>
+                    await handleAction("block", member.action_id),
+                  color: "error",
+                  icon: <DoNotDisturbIcon />,
+                },
+              ]}
+            />
           </>
         ))}
       </ul>
@@ -155,16 +169,18 @@ const CompanyAdminPanel = ({
       <ul>
         {companyLists.invites.map((member: UserItem & ActionProps) => (
           <>
-            <MemberBadge key={member.user_id} member={member} />
-            <IconButton
-              onClick={async () =>
-                await handleAction("decline", member.action_id)
-              }
-              size="small"
-              color="warning"
-            >
-              <ClearIcon />
-            </IconButton>
+            <MemberBadge
+              key={member.user_id}
+              member={member}
+              actions={[
+                {
+                  callback: async () =>
+                    await handleAction("decline", member.action_id),
+                  color: "warning",
+                  icon: <ClearIcon />,
+                },
+              ]}
+            />
           </>
         ))}
       </ul>
@@ -172,25 +188,24 @@ const CompanyAdminPanel = ({
       <ul>
         {companyLists.requests.map((member) => (
           <>
-            <MemberBadge key={member.user_id} member={member} />
-            <IconButton
-              onClick={async () =>
-                await handleAction("acceptRequest", member.action_id)
-              }
-              size="small"
-              color="success"
-            >
-              <DoneOutlineIcon />
-            </IconButton>
-            <IconButton
-              onClick={async () =>
-                await handleAction("decline", member.action_id)
-              }
-              size="small"
-              color="warning"
-            >
-              <ClearIcon />
-            </IconButton>
+            <MemberBadge
+              key={member.user_id}
+              member={member}
+              actions={[
+                {
+                  callback: async () =>
+                    await handleAction("acceptRequest", member.action_id),
+                  color: "success",
+                  icon: <DoneOutlineIcon />,
+                },
+                {
+                  callback: async () =>
+                    await handleAction("decline", member.action_id),
+                  color: "warning",
+                  icon: <ClearIcon />,
+                },
+              ]}
+            />
           </>
         ))}
       </ul>
@@ -198,16 +213,18 @@ const CompanyAdminPanel = ({
       <ul>
         {companyLists.blocked.map((member) => (
           <>
-            <MemberBadge key={member.user_id} member={member} />
-            <IconButton
-              onClick={async () =>
-                await handleAction("cancelBlock", member.action_id)
-              }
-              size="small"
-              color="success"
-            >
-              <ReplyIcon />
-            </IconButton>
+            <MemberBadge
+              key={member.user_id}
+              member={member}
+              actions={[
+                {
+                  callback: async () =>
+                    await handleAction("cancelBlock", member.action_id),
+                  color: "success",
+                  icon: <ReplyIcon />,
+                },
+              ]}
+            />
           </>
         ))}
       </ul>
