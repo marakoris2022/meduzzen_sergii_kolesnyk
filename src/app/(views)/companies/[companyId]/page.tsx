@@ -13,6 +13,7 @@ import UserAvatar from "@/app/components/user-avatar/UserAvatar";
 import { Button, IconButton, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import CompanyAdminPanel from "@/app/components/company-admin-panel/CompanyAdminPanel";
 
 const CompanyDetailsPage = () => {
   const t = useTranslations("CompanyDetailsPage");
@@ -104,6 +105,7 @@ const CompanyDetailsPage = () => {
                 );
               })}
           </ul>
+          <CompanyAdminPanel companyData={companyIdData} />
         </section>
       </div>
       <div className={styles.backBtnWrapper}>

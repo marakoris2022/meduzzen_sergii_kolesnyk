@@ -28,6 +28,11 @@ export type AdditionalUserPropsCardProps = {
   is_superuser: boolean;
 };
 
+export type ActionProps = {
+  action_id: 0;
+  action: string;
+};
+
 export type UserItem = {
   user_id: number;
   user_email: string;

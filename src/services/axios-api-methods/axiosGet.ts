@@ -1,7 +1,9 @@
 import {
+  ActionProps,
   CompaniesProps,
   CompanyIdProps,
   CompanyPropsInList,
+  UserItem,
   UserProps,
   UsersProps,
 } from "@/interface/interface";
@@ -47,4 +49,11 @@ export const getCompanyById = async (companyId: number) => {
 export const getCompanyListByUserId = async (user_id: number) => {
   const { data } = await axiosInstance.get(`/user/${user_id}/companies_list/`);
   return data.result.companies as CompanyPropsInList[];
+};
+
+export const getCompanyMembersList = async (company_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/company/${company_id}/members_list/`
+  );
+  return data.result.users as Array<UserItem & ActionProps>;
 };
