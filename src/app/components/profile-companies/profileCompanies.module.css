@@ -50,6 +50,10 @@
   padding-bottom: 12px;
 }
 
+.leaveError {
+  color: red;
+}
+
 @media screen and (max-width: 750px) {
   .myCompanyCardWrapper {
     width: 340px;

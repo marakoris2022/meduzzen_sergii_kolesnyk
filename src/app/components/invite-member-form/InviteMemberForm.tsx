@@ -6,8 +6,10 @@ import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import { IconButton } from "@mui/material";
 import { UpdateStatusType } from "@/interface/interface";
 import { inviteUserToCompany } from "@/services/axios-api-methods/axiosGet";
+import { useTranslations } from "next-intl";
 
 const InviteMemberForm = ({ memberId }: { memberId: number }) => {
+  const t = useTranslations("InviteMemberForm");
   const userCompanies = useAppSelector(
     (state) => state.userCompanies.companies
   );
@@ -27,9 +29,9 @@ const InviteMemberForm = ({ memberId }: { memberId: number }) => {
   async function handleCompanyInvite(companyId: number) {
     try {
       await inviteUserToCompany(companyId, memberId);
-      setInviteStatus({ color: "green", text: "Successfully invited." });
+      setInviteStatus({ color: "green", text: t("successInvited") });
     } catch {
-      setInviteStatus({ color: "red", text: "You can't invite this user." });
+      setInviteStatus({ color: "red", text: t("inviteFailed") });
     }
   }
 
@@ -59,7 +61,7 @@ const InviteMemberForm = ({ memberId }: { memberId: number }) => {
           ))}
         </>
       ) : (
-        <p>You dont have companies.</p>
+        <p>{t("noCompanies")}</p>
       )}
     </div>
   );

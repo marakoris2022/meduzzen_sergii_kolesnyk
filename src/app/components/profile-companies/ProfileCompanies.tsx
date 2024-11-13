@@ -23,6 +23,7 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
   const [isModalDelete, setIsModalDelete] = useState<boolean>(false);
   const [isModalEdit, setIsModalEdit] = useState<boolean>(false);
   const [isModalLeave, setIsModalLeave] = useState<boolean>(false);
+  const [leaveError, setLeaveError] = useState<string>("");
   const activeCompanyId = useRef<number>(0);
   const activeCompanyActionId = useRef<number>(0);
   const { companies, error } = useAppSelector((state) => state.userCompanies);
@@ -37,8 +38,10 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
   async function handleLeaveCompany(actionId: number) {
     try {
       await leaveCompany(actionId);
-    } catch (error) {
-      console.log(error);
+      setIsModalLeave(false);
+      dispatch(fetchUserCompanies(userId));
+    } catch {
+      setLeaveError(t("failToLeave"));
     }
   }
 
@@ -73,18 +76,17 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
         handleClose={() => setIsModalLeave(false)}
       >
         <div className={styles.leaveModalWrapper}>
-          <p>Are you sure you want to leave company?</p>
+          <p>{t("leaveText")}</p>
           <Button
             variant="outlined"
             color="error"
             onClick={() => {
               handleLeaveCompany(activeCompanyActionId.current);
-              setIsModalLeave(false);
-              dispatch(fetchUserCompanies(userId));
             }}
           >
-            Leave
+            {t("leaveConfirm")}
           </Button>
+          {leaveError && <p className={styles.leaveError}>{leaveError}</p>}
         </div>
       </UniversalModal>
 
@@ -140,7 +142,7 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
                         activeCompanyActionId.current = company.action_id;
                       }}
                     >
-                      Leave Company
+                      {t("leaveBtn")}
                     </Button>
                   )}
                 </div>
