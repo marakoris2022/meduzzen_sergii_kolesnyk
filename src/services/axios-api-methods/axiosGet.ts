@@ -85,14 +85,14 @@ export const inviteUserToCompany = async (
   const { data } = await axiosInstance.get(
     `/action/create_from_company/${company_id}/user/${user_id}/`
   );
-  return data.result as { action_id: number };
+  return data.result;
 };
 
 export const requestJoinToCompany = async (company_id: number) => {
   const { data } = await axiosInstance.get(
     `/action/create_from_user/company/${company_id}/`
   );
-  return data.result as { action_id: number };
+  return data.result;
 };
 
 export const acceptInvite = async (actionId: number) => {
@@ -145,4 +145,14 @@ export const leaveCompany = async (actionId: number) => {
     `/action/${actionId}/leave_company/`
   );
   return data.result;
+};
+
+export const fetchInviteList = async (user_id: number) => {
+  const { data } = await axiosInstance.get(`/user/${user_id}/invites_list/`);
+  return data.result.companies as CompanyPropsInList[];
+};
+
+export const fetchRequestsList = async (user_id: number) => {
+  const { data } = await axiosInstance.get(`/user/${user_id}/requests_list/`);
+  return data.result.companies as CompanyPropsInList[];
 };

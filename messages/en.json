@@ -159,7 +159,8 @@
     "city": "City : ",
     "phone": "Phone: ",
     "link": "Social Link:",
-    "companies": "My Companies"
+    "companies": "My Companies",
+    "myActions": "My Actions"
   },
   "ProfileEditPage": {
     "edit": "Edit Profile",
@@ -288,6 +289,40 @@
     "superuser": "Superuser",
     "yes": "Yes",
     "no": "No",
-    "back": "Back"
+    "back": "Back",
+    "invite": "Invite"
+  },
+  "CompanyActions": {
+    "failedDataFetching": "Failed to fetch admin data.",
+    "joinCompany": "Join Company",
+    "joinText": "Are you sure you want to join the company?",
+    "decline": "Decline",
+    "declineText": "Are you sure you want to decline the request?",
+    "expel": "Expel",
+    "expelText": "Are you sure you want to expel this user?",
+    "acceptRequest": "Accept",
+    "acceptText": "Are you sure you want to accept the request?",
+    "block": "Block",
+    "blockText": "Are you sure you want to block this user?",
+    "unblock": "Unblock",
+    "unblockText": "Are you sure you want to unblock this user?",
+    "adminPanel": "Company Admin Panel",
+    "membersTotal": "Members Total",
+    "invitesTotal": "Invites Total",
+    "requestsTotal": "Requests Total",
+    "blockedTotal": "Blocked Total"
+  },
+  "ProfileActions": {
+    "failedFetchActions": "Failed to fetch user Actions",
+    "refuse": "Refuse",
+    "refuseText": "Are you sure you want to remove this action?",
+    "accept": "Accept",
+    "acceptText": "Are you sure you want to accept this invite?",
+    "youInvited": "You have invited",
+    "times": "times",
+    "noInvites": "You have no invites at the moment.",
+    "haveSent": "You have sent",
+    "requests": "requests",
+    "noRequests": "You have no requests at this time."
   }
 }

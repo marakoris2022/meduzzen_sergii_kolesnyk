@@ -1,7 +1,8 @@
 .myCompanyBtnWrapper,
 .cardListWrapper,
 .modalBtnsWrapper,
-.crateBtnWrapper {
+.crateBtnWrapper,
+.leaveModalWrapper {
   display: flex;
 }
 
@@ -40,6 +41,13 @@
 
 .emptyListNotice {
   text-align: center;
+}
+
+.leaveModalWrapper {
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
 }
 
 @media screen and (max-width: 750px) {

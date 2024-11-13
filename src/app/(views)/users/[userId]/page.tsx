@@ -41,7 +41,7 @@ const UserProfilePage = () => {
       <PageError
         errorTitle={t("errorFetchingData")}
         actionTitle={t("backToUsers")}
-        errorAction={() => router.push(PATHS.USERS)}
+        errorAction={() => router.push(`${PATHS.USERS}?page=1`)}
       />
     );
   }
@@ -110,7 +110,7 @@ const UserProfilePage = () => {
           color="success"
           onClick={() => setIsInviteModal(true)}
         >
-          Invite
+          {t("invite")}
         </Button>
       </div>
     </main>

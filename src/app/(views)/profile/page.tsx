@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import ProfileCompanies from "@/app/components/profile-companies/ProfileCompanies";
 import UserDataTable from "@/app/components/UserDataTable";
+import ProfileActions from "@/app/components/profile-actions/ProfileActions";
 
 type ModalActionsProps = {
   handleDeleteUser: () => void;
@@ -120,6 +121,10 @@ const ProfilePage = () => {
             </Button>
           </div>
         </div>
+      </div>
+      <div className={styles.companiesWrapper}>
+        <h3 className={styles.companiesTitle}>{t("myActions")}</h3>
+        <ProfileActions userId={userData.user_id} />
       </div>
       <div className={styles.companiesWrapper}>
         <h3 className={styles.companiesTitle}>{t("companies")}</h3>
