@@ -30,8 +30,8 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchUserCompanies(userId));
-  }, [userId, companies]);
+    if (!companies.length) dispatch(fetchUserCompanies(userId));
+  }, [userId, companies, dispatch]);
 
   if (error) return <PageError errorTitle={t("cantFetch")} />;
 

@@ -65,8 +65,6 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
     setIsModalOpen(true);
   }
 
-  console.log("memberStatus", memberStatus);
-
   return (
     <>
       <UniversalModal
@@ -87,27 +85,26 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
       {memberStatus === "owner" && (
         <div className={styles.adminPanelWrapper}>
           <h3 className={styles.adminPanelTitle}>{t("adminPanel")}</h3>
-          <CompanyMembersList companyData={companyData} />
+          <CompanyMembersList
+            companyData={companyData}
+            myStatus={memberStatus}
+          />
           <CompanyInvitesList companyData={companyData} />
           <CompanyRequestsList companyData={companyData} />
           <CompanyBlockedList companyData={companyData} />
         </div>
       )}
-      {memberStatus === "admin" && (
+
+      {(memberStatus === "admin" || memberStatus === "member") && (
         <div className={styles.adminPanelWrapper}>
-          <h3 className={styles.adminPanelTitle}>{t("adminPanel")}</h3>
-          <CompanyMembersList companyData={companyData} />
-          <CompanyInvitesList companyData={companyData} />
-          <CompanyRequestsList companyData={companyData} />
-          <CompanyBlockedList companyData={companyData} />
+          <h3 className={styles.adminPanelTitle}>Company Member Panel</h3>
+          <CompanyMembersList
+            companyData={companyData}
+            myStatus={memberStatus}
+          />
         </div>
       )}
-      {memberStatus === "member" && (
-        <div className={styles.adminPanelWrapper}>
-          <h3 className={styles.adminPanelTitle}>Member Panel</h3>
-          <CompanyMembersList companyData={companyData} />
-        </div>
-      )}
+
       {!memberStatus && (
         <div className={styles.joinBtnWrapper}>
           <Button

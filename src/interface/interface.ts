@@ -133,3 +133,9 @@ export type CompanyActionsModalProps = {
   actionText: string;
   triggerRenderUpdate: () => Promise<void>;
 };
+
+export type MemberBadgeAction = {
+  callback: () => void;
+  color: ButtonColor;
+  icon: JSX.Element;
+};

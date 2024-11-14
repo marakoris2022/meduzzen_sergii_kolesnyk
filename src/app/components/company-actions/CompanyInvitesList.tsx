@@ -52,7 +52,7 @@ const CompanyInvitesList = ({
 
   useEffect(() => {
     fetchCompanyMembers(companyData.company_id);
-  }, [companyData.company_id]);
+  }, [companyData]);
 
   if (renderError) return <h3>{renderError}</h3>;
 

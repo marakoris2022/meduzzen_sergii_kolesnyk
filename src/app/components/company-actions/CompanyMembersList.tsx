@@ -3,12 +3,15 @@ import {
   ButtonColor,
   CompanyActionsModalProps,
   CompanyIdProps,
+  MemberBadgeAction,
   PATHS,
   UserItem,
 } from "@/interface/interface";
 import {
+  demoteFromAdmin,
   getCompanyMembersList,
   leaveCompany,
+  promoteToAdmin,
   unblockUser,
 } from "@/services/axios-api-methods/axiosGet";
 
@@ -23,11 +26,15 @@ import UniversalModal from "../universal-modal/UniversalModal";
 import ActionModalBody from "./ActionModalBody";
 import { useTranslations } from "next-intl";
 import ActionsMemberBadge from "./ActionsMemberBadge";
+import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 
 const CompanyMembersList = ({
   companyData,
+  myStatus,
 }: {
   companyData: CompanyIdProps;
+  myStatus: string;
 }) => {
   const t = useTranslations("CompanyActions");
   const router = useRouter();
@@ -36,7 +43,6 @@ const CompanyMembersList = ({
   const [membersList, setMembersList] = useState<Array<UserItem & ActionProps>>(
     []
   );
-
   const [modalBodyData, setModalBodyData] =
     useState<null | CompanyActionsModalProps>(null);
 
@@ -77,6 +83,84 @@ const CompanyMembersList = ({
     setIsModalOpen(true);
   }
 
+  async function handlePromoteToAdmin(action_id: number) {
+    setModalBodyData({
+      callback: () => promoteToAdmin(action_id),
+      onClose: () => setIsModalOpen(false),
+      actionName: "Promote",
+      actionText: "Are you sure you want to promote this user to Admin?",
+      triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
+    });
+    setIsModalOpen(true);
+  }
+
+  async function handleDemoteFromAdmin(action_id: number) {
+    setModalBodyData({
+      callback: () => demoteFromAdmin(action_id),
+      onClose: () => setIsModalOpen(false),
+      actionName: "Demote",
+      actionText: "Are you sure you want to demote this user to Member?",
+      triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
+    });
+    setIsModalOpen(true);
+  }
+
+  function initActions(myStatus: string, member: UserItem & ActionProps) {
+    const targetMemberStatus = member.action;
+
+    const actionsOpenProfile = {
+      callback: () => router.push(`${PATHS.USERS}/${member.user_id}`),
+      color: ButtonColor.Primary,
+      icon: <OpenInNewIcon />,
+    };
+    const actionsExpelMember = {
+      callback: async () => await handleExpel(member.action_id),
+      color: ButtonColor.Warning,
+      icon: <MeetingRoomIcon />,
+    };
+    const actionsBlockMember = {
+      callback: async () => await handleBlockMember(member.action_id),
+      color: ButtonColor.Error,
+      icon: <DoNotDisturbIcon />,
+    };
+    const actionsPromoteToAdmin = {
+      callback: async () => await handlePromoteToAdmin(member.action_id),
+      color: ButtonColor.Success,
+      icon: <ArrowCircleUpIcon />,
+    };
+    const actionsDemoteFromAdmin = {
+      callback: async () => await handleDemoteFromAdmin(member.action_id),
+      color: ButtonColor.Warning,
+      icon: <ArrowCircleDownIcon />,
+    };
+
+    let memberActions: MemberBadgeAction[] = [];
+
+    if (myStatus === "owner") {
+      if (targetMemberStatus === "owner")
+        return (memberActions = [actionsOpenProfile]);
+
+      memberActions = [
+        actionsOpenProfile,
+        actionsExpelMember,
+        actionsBlockMember,
+      ];
+
+      if (targetMemberStatus === "member")
+        memberActions.push(actionsPromoteToAdmin);
+      if (targetMemberStatus === "admin")
+        memberActions.push(actionsDemoteFromAdmin);
+    }
+
+    if (myStatus === "admin")
+      memberActions = [actionsOpenProfile, actionsExpelMember];
+
+    if (myStatus === "member")
+      memberActions = [actionsOpenProfile, actionsExpelMember];
+
+    return memberActions;
+  }
+
   return (
     <>
       <UniversalModal
@@ -102,23 +186,7 @@ const CompanyMembersList = ({
           <ActionsMemberBadge
             key={member.user_id}
             member={member}
-            actions={[
-              {
-                callback: () => router.push(`${PATHS.USERS}/${member.user_id}`),
-                color: ButtonColor.Primary,
-                icon: <OpenInNewIcon />,
-              },
-              {
-                callback: async () => await handleExpel(member.action_id),
-                color: ButtonColor.Warning,
-                icon: <MeetingRoomIcon />,
-              },
-              {
-                callback: async () => await handleBlockMember(member.action_id),
-                color: ButtonColor.Error,
-                icon: <DoNotDisturbIcon />,
-              },
-            ]}
+            actions={initActions(myStatus, member)}
           />
         ))}
       </ul>
