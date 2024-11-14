@@ -21,10 +21,10 @@ const CompaniesPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
-  const pageNumber = searchParams.get("page");
+  const pageNumber = Number(searchParams.get("page"));
 
   useEffect(() => {
-    if (pageNumber) dispatch(fetchCompaniesData(+pageNumber));
+    if (pageNumber) dispatch(fetchCompaniesData(pageNumber));
   }, [dispatch, pageNumber]);
 
   if (error || !pageNumber) return <PageError errorTitle={t("errorPage")} />;
@@ -50,7 +50,7 @@ const CompaniesPage = () => {
 
       <PaginationCustom
         pageCount={pageCount}
-        currentPage={+pageNumber}
+        currentPage={pageNumber}
         onChange={handleChange}
       />
     </main>

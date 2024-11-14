@@ -323,5 +323,10 @@
     "haveSent": "Ви надіслали",
     "requests": "запити",
     "noRequests": "Наразі у вас немає запитів."
+  },
+  "InviteMemberForm": {
+    "successInvited": "Успішно запрошено.",
+    "inviteFailed": "Ви не можете запросити цього користувача.",
+    "noCompanies": "У вас немає компаній."
   }
 }

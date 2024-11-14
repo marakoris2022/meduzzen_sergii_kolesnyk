@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from "next/navigation";
 import styles from "./userProfilePage.module.css";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getUserById } from "@/services/axios-api-methods/axiosGet";
 import { PATHS, UserProps } from "@/interface/interface";
 import { AxiosError } from "axios";
@@ -22,19 +22,18 @@ const UserProfilePage = () => {
   const [userData, setUserData] = useState<null | UserProps>(null);
   const [isInviteModal, setIsInviteModal] = useState(false);
 
-  const fetchUserData = useCallback(async () => {
+  const fetchUserData = async (id: number) => {
     try {
-      const id = Number(userId);
       const data = await getUserById(id);
       setUserData(data);
     } catch (error) {
       setError(error as AxiosError);
     }
-  }, [userId]);
+  };
 
   useEffect(() => {
-    fetchUserData();
-  }, [userId, fetchUserData]);
+    fetchUserData(Number(userId));
+  }, [userId]);
 
   if (error) {
     return (
@@ -49,7 +48,7 @@ const UserProfilePage = () => {
   return !userData ? (
     <Loading />
   ) : (
-    <main className="container">
+    <div className="container">
       <UniversalModal
         open={isInviteModal}
         handleClose={() => setIsInviteModal(false)}
@@ -113,7 +112,7 @@ const UserProfilePage = () => {
           {t("invite")}
         </Button>
       </div>
-    </main>
+    </div>
   );
 };
 

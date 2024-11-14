@@ -116,7 +116,7 @@ const ProfileActions = ({ userId }: { userId: number }) => {
           <h3>
             {t("haveSent")}: {requestList.length} {t("requests")}.
           </h3>
-          {Boolean(!requestList.length) && (
+          {requestList.length === 0 && (
             <p className={styles.actionNotice}>{t("noRequests")}</p>
           )}
           {requestList.map((company) => (

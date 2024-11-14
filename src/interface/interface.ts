@@ -118,3 +118,18 @@ export type ValidationProps = (t: (key: string) => string) => {
     message: string;
   };
 };
+
+export enum ButtonColor {
+  Primary = "primary",
+  Warning = "warning",
+  Error = "error",
+  Success = "success",
+}
+
+export type CompanyActionsModalProps = {
+  callback: () => Promise<void>;
+  onClose: () => void;
+  actionName: string;
+  actionText: string;
+  triggerRenderUpdate: () => Promise<void>;
+};

@@ -330,8 +330,8 @@
     "noRequests": "You have no requests at this time."
   },
   "InviteMemberForm": {
-    "successInvited": "Успішно запрошено.",
-    "inviteFailed": "Ви не можете запросити цього користувача.",
-    "noCompanies": "У вас немає компаній."
+    "successInvited": "Successfully invited.",
+    "inviteFailed": "You cannot invite this user.",
+    "noCompanies": "You have no companies."
   }
 }
