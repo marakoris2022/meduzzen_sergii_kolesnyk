@@ -84,7 +84,7 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
 
       {memberStatus === "owner" && (
         <div className={styles.adminPanelWrapper}>
-          <h3 className={styles.adminPanelTitle}>{t("adminPanel")}</h3>
+          <h3 className={styles.adminPanelTitle}>{t("ownerPanel")}</h3>
           <CompanyMembersList
             companyData={companyData}
             myStatus={memberStatus}
@@ -97,7 +97,7 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
 
       {(memberStatus === "admin" || memberStatus === "member") && (
         <div className={styles.adminPanelWrapper}>
-          <h3 className={styles.adminPanelTitle}>Company Member Panel</h3>
+          <h3 className={styles.adminPanelTitle}>{t("memberPanel")}</h3>
           <CompanyMembersList
             companyData={companyData}
             myStatus={memberStatus}

@@ -7,11 +7,11 @@ import {
   UserItem,
 } from "@/interface/interface";
 import {
-  blockUser,
   getCompanyBlockedList,
+  unblockUser,
 } from "@/services/axios-api-methods/axiosGet";
 import { useRouter } from "next/navigation";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ReplyIcon from "@mui/icons-material/Reply";
 import styles from "./companyActions.module.css";
@@ -20,13 +20,15 @@ import ActionModalBody from "./ActionModalBody";
 import { useTranslations } from "next-intl";
 import ActionsMemberBadge from "./ActionsMemberBadge";
 
-const CompanyBlockedList = ({ companyData }: { companyData: CompanyIdProps }) => {
+const CompanyBlockedList = ({
+  companyData,
+}: {
+  companyData: CompanyIdProps;
+}) => {
   const t = useTranslations("CompanyActions");
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
   const [renderError, setRenderError] = useState<string>("");
-
   const [blockedList, setBlockedList] = useState<Array<UserItem & ActionProps>>(
     []
   );
@@ -51,9 +53,9 @@ const CompanyBlockedList = ({ companyData }: { companyData: CompanyIdProps }) =>
 
   async function handleCancelBlockMember(action_id: number) {
     setModalBodyData({
-      callback: () => blockUser(action_id),
+      callback: () => unblockUser(action_id),
       onClose: () => setIsModalOpen(false),
-      actionName: t("block"),
+      actionName: t("unblock"),
       actionText: t("unblockText"),
       triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
     });

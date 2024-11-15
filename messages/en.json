@@ -310,11 +310,13 @@
     "blockText": "Are you sure you want to block this user?",
     "unblock": "Unblock",
     "unblockText": "Are you sure you want to unblock this user?",
-    "adminPanel": "Company Admin Panel",
+    "ownerPanel": "Company Admin Panel",
+    "memberPanel": "Company Member Panel",
     "membersTotal": "Members Total",
     "invitesTotal": "Invites Total",
     "requestsTotal": "Requests Total",
-    "blockedTotal": "Blocked Total"
+    "blockedTotal": "Blocked Total",
+    "operationFailed.": "Operation failed."
   },
   "ProfileActions": {
     "failedFetchActions": "Failed to fetch user Actions",

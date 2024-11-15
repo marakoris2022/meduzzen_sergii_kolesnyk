@@ -31,13 +31,10 @@ const CompanyInvitesList = ({
   const t = useTranslations("CompanyActions");
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
   const [renderError, setRenderError] = useState<string>("");
-
   const [invitesList, setInvitesList] = useState<Array<UserItem & ActionProps>>(
     []
   );
-
   const [modalBodyData, setModalBodyData] =
     useState<null | CompanyActionsModalProps>(null);
 

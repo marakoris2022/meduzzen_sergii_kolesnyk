@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./companyActions.module.css";
 import { Button } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 function ActionModalBody({
   callback,
@@ -16,6 +17,7 @@ function ActionModalBody({
   triggerRenderUpdate: () => Promise<void>;
 }) {
   const [modalError, setModalError] = useState<string>("");
+  const t = useTranslations("ProfileActions");
 
   async function handleClick() {
     try {
@@ -24,7 +26,7 @@ function ActionModalBody({
       setModalError("");
       onClose();
     } catch {
-      setModalError("Operation failed.");
+      setModalError(t("operationFailed"));
     }
   }
 

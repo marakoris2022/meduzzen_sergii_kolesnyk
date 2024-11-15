@@ -8,11 +8,11 @@ import {
   UserItem,
 } from "@/interface/interface";
 import {
+  blockUser,
   demoteFromAdmin,
   getCompanyMembersList,
   leaveCompany,
   promoteToAdmin,
-  unblockUser,
 } from "@/services/axios-api-methods/axiosGet";
 
 import { useRouter } from "next/navigation";
@@ -74,9 +74,9 @@ const CompanyMembersList = ({
 
   async function handleBlockMember(action_id: number) {
     setModalBodyData({
-      callback: () => unblockUser(action_id),
+      callback: () => blockUser(action_id),
       onClose: () => setIsModalOpen(false),
-      actionName: t("unblock"),
+      actionName: t("block"),
       actionText: t("blockText"),
       triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
     });
