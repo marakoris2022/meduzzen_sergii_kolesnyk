@@ -1,0 +1,75 @@
+.pageWrapper,
+.asideWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.pageWrapper {
+  gap: 32px;
+}
+
+.asideWrapper {
+  flex: 1;
+  align-items: center;
+  gap: 16px;
+}
+
+.userInfoWrapper {
+  padding: 16px;
+  border-top: 1px solid #ddd;
+  width: 100%;
+  text-align: center;
+}
+
+.userInfoWrapper h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sectionWrapper {
+  flex: 2;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.userTitle {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.userInfoList {
+  list-style-type: none;
+  padding: 0;
+  margin: 16px 0;
+}
+
+.userInfoList li {
+  margin: 4px 0;
+  padding: 4px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.backBtnWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  gap: 16px;
+}
+
+.backBtnWrapper button {
+  font-weight: bold;
+}
+
+@media (min-width: 750px) {
+  .pageWrapper {
+    flex-direction: row;
+  }
+}

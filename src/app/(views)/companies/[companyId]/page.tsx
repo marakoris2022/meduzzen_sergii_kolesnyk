@@ -10,8 +10,10 @@ import PageError from "@/app/components/users-page-error/PageError";
 import Loading from "@/app/components/loading/Loading";
 import CompanyAvatar from "@/app/components/company-avatar/CompanyAvatar";
 import UserAvatar from "@/app/components/user-avatar/UserAvatar";
-import { Button, TextField } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import CompanyActions from "@/app/components/company-actions/CompanyActions";
 
 const CompanyDetailsPage = () => {
   const t = useTranslations("CompanyDetailsPage");
@@ -41,7 +43,7 @@ const CompanyDetailsPage = () => {
       <PageError
         errorTitle={t("fetchError")}
         actionTitle={t("backToCompanies")}
-        errorAction={() => router.push(PATHS.COMPANIES)}
+        errorAction={() => router.push(`${PATHS.COMPANIES}?page=1`)}
       />
     );
   }
@@ -60,6 +62,17 @@ const CompanyDetailsPage = () => {
             <div className={styles.authorNameWrapper}>
               <p>{companyIdData.company_owner.user_firstname}</p>
               <p>{companyIdData.company_owner.user_lastname}</p>
+              <IconButton
+                onClick={() =>
+                  router.push(
+                    `${PATHS.USERS}/${companyIdData.company_owner.user_id}`
+                  )
+                }
+                size="small"
+                color="primary"
+              >
+                <OpenInNewIcon />
+              </IconButton>
             </div>
             <p>{companyIdData.company_owner.user_email}</p>
           </div>
@@ -92,6 +105,7 @@ const CompanyDetailsPage = () => {
                 );
               })}
           </ul>
+          <CompanyActions companyData={companyIdData} />
         </section>
       </div>
       <div className={styles.backBtnWrapper}>

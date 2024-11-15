@@ -94,18 +94,20 @@ const General = () => {
         { name: "user_phone", label: t("phone"), validation: phoneValidation },
       ];
 
-      userData.user_links.forEach((value, index) => {
-        const linkFieldName = `user_links_${index + 1}`;
-        initialFields.push({
-          name: linkFieldName,
-          label: t("links"),
-          validation: linksValidation,
+      if (userData.user_links) {
+        userData.user_links.forEach((value, index) => {
+          const linkFieldName = `user_links_${index + 1}`;
+          initialFields.push({
+            name: linkFieldName,
+            label: t("links"),
+            validation: linksValidation,
+          });
+          setValue(linkFieldName as keyof FormProps, value);
         });
-        setValue(linkFieldName as keyof FormProps, value);
-      });
+        linksCount.current = userData.user_links.length;
+      }
 
       setFieldList(initialFields);
-      linksCount.current = userData.user_links.length;
     }
   }, [userData, setValue, linksCount, t]);
 

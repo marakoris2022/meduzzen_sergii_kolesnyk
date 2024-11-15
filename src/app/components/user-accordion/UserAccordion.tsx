@@ -1,9 +1,13 @@
-import { AdditionalUserPropsCardProps, UserProps } from "@/interface/interface";
+import {
+  AdditionalUserPropsCardProps,
+  PATHS,
+  UserProps,
+} from "@/interface/interface";
 import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Chip,
+  Button,
 } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import styles from "./userAccordion.module.css";
@@ -12,6 +16,7 @@ import { useAppDispatch } from "@/state/hooks";
 import { fetchUserDataById } from "@/state/users/usersSlice";
 import UserAvatar from "../user-avatar/UserAvatar";
 import { memo } from "react";
+import { useRouter } from "next/navigation";
 
 type UserAccordionProps = {
   user: UserProps;
@@ -21,8 +26,6 @@ function AdditionalUserPropsCard({
   user_status,
   user_city,
   user_phone,
-  user_links,
-  is_superuser,
 }: AdditionalUserPropsCardProps) {
   const t = useTranslations("UserAccordion");
 
@@ -33,42 +36,20 @@ function AdditionalUserPropsCard({
   ];
 
   return (
-    <div className={styles.propsWrapper}>
-      <ul>
-        {userInfo.map((info) => (
-          <li key={info.label}>
-            <strong>{info.label}:</strong> {info.value || t("empty")}
-          </li>
-        ))}
-      </ul>
-      <p>
-        <strong>{t("links")}:</strong>
-      </p>
-      <ul>
-        {user_links ? (
-          user_links.map((link, index) => (
-            <li key={index}>
-              <p>{link}</p>
-            </li>
-          ))
-        ) : (
-          <p>
-            <strong>{t("empty")}</strong>
-          </p>
-        )}
-      </ul>
-      {is_superuser && (
-        <div>
-          <Chip label="Superuser" color="secondary" variant="outlined" />
-        </div>
-      )}
-    </div>
+    <ul className={styles.propsWrapper}>
+      {userInfo.map((info) => (
+        <li key={info.label}>
+          <strong>{info.label}:</strong> {info.value || t("empty")}
+        </li>
+      ))}
+    </ul>
   );
 }
 
 const UserAccordion = memo(({ user }: UserAccordionProps) => {
   const t = useTranslations("UserAccordion");
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   async function handleLoadData() {
     dispatch(fetchUserDataById(user.user_id));
@@ -93,13 +74,20 @@ const UserAccordion = memo(({ user }: UserAccordionProps) => {
       <AccordionDetails>
         <div className={styles.accordionWrapper}>
           <UserAvatar avatarSrc={user.user_avatar} />
-          <div>
+          <div className={styles.userProfileWrapper}>
             <p>
               {t("name")}: {user.user_firstname}
             </p>
             <p>
               {t("firstName")}: {user.user_lastname}
             </p>
+            <Button
+              onClick={() => router.push(`${PATHS.USERS}/${user.user_id}`)}
+              variant="contained"
+              color="info"
+            >
+              {t("profileBtn")}
+            </Button>
           </div>
           <AdditionalUserPropsCard
             user_status={user.user_status}

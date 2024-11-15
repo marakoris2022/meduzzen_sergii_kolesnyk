@@ -23,7 +23,7 @@ function UserDataTable({ userData }: { userData: UserProps }) {
         </Fragment>
       ))}
 
-      {Boolean(userData.user_links.length) ? (
+      {Boolean(userData.user_links) ? (
         userData.user_links.map((link, index) => {
           return (
             <Fragment key={index}>

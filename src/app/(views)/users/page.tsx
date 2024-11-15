@@ -6,34 +6,38 @@ import styles from "./users.module.css";
 import Loading from "@/app/components/loading/Loading";
 import UserAccordion from "@/app/components/user-accordion/UserAccordion";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
-import { fetchUsersData, setPageNumber } from "@/state/users/usersSlice";
+import { fetchUsersData } from "@/state/users/usersSlice";
 import PageError from "@/app/components/users-page-error/PageError";
 import PaginationCustom from "@/app/components/pagination-custom/PaginationCustom";
+import { useRouter, useSearchParams } from "next/navigation";
+import { PATHS } from "@/interface/interface";
 
 const UsersPage = () => {
   const t = useTranslations("UsersPage");
-
-  const { usersData, pageCount, pageNumber, error } = useAppSelector(
+  const { usersData, pageCount, error } = useAppSelector(
     (state) => state.users
   );
   const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pageNumber = searchParams.get("page");
 
   function handleChange(currentPage: number) {
-    dispatch(setPageNumber(currentPage));
+    router.push(`${PATHS.USERS}?page=${currentPage}`);
   }
 
   useEffect(() => {
-    dispatch(fetchUsersData(pageNumber));
-  }, [pageNumber]);
+    if (pageNumber) dispatch(fetchUsersData(+pageNumber));
+  }, [dispatch, pageNumber]);
 
-  if (!usersData) <Loading />;
+  if (!usersData) return <Loading />;
 
   return (
     <main className="container">
-      {error ? (
+      {error || !pageNumber ? (
         <PageError
           errorTitle={t(error)}
-          errorAction={() => dispatch(fetchUsersData(pageNumber))}
+          errorAction={() => router.push(`${PATHS.USERS}?page=1`)}
         />
       ) : (
         <div className={styles.pageWrapper}>
@@ -46,7 +50,7 @@ const UsersPage = () => {
           </div>
           <PaginationCustom
             pageCount={pageCount}
-            currentPage={pageNumber}
+            currentPage={+pageNumber}
             onChange={handleChange}
           />
         </div>

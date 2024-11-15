@@ -37,7 +37,8 @@
     "errorCompaniesData": "Oops! Can't get list of companies.",
     "companiesList": "List of Companies",
     "avatarAlt": "Company_Logo",
-    "open": "Open"
+    "open": "Open",
+    "errorPage": "Cant find this page"
   },
 
   "UsersPage": {
@@ -116,7 +117,8 @@
     "Id": "Id",
     "name": "First Name",
     "firstName": "Last Name",
-    "loadData": "Load Data"
+    "loadData": "Load Data",
+    "profileBtn": "Profile"
   },
   "EditProfileGeneral": {
     "required": "Field is required.",
@@ -157,7 +159,8 @@
     "city": "City : ",
     "phone": "Phone: ",
     "link": "Social Link:",
-    "companies": "My Companies"
+    "companies": "My Companies",
+    "myActions": "My Actions"
   },
   "ProfileEditPage": {
     "edit": "Edit Profile",
@@ -232,7 +235,11 @@
     "deleteTitle": "Delete Company?",
     "deleteText": "If you confirm, company will be deleted.",
     "delFailed": "Deletion is failed.",
-    "confirmDeleteCompany": "Delete"
+    "confirmDeleteCompany": "Delete",
+    "failToLeave": "You failed to leave this company.",
+    "leaveText": "Are you sure you want to leave company?",
+    "leaveConfirm": "Leave",
+    "leaveBtn": "Leave Company"
   },
   "CompanyListCard": {
     "open": "Open"
@@ -269,5 +276,62 @@
     "fileSelected": "File selected: ",
     "changeAvatar": "Change Avatar",
     "choose": "You need to choose file."
+  },
+  "UserProfilePage": {
+    "errorFetchingData": "Error fetching user data",
+    "backToUsers": "Back to Users",
+    "contactInfo": "Contact Information",
+    "email": "Email",
+    "phone": "Phone",
+    "notAvailable": "N/A",
+    "userDetails": "User Details",
+    "status": "Status",
+    "notProvided": "Not provided",
+    "city": "City",
+    "unknown": "Unknown",
+    "link": "Link",
+    "superuser": "Superuser",
+    "yes": "Yes",
+    "no": "No",
+    "back": "Back",
+    "invite": "Invite"
+  },
+  "CompanyActions": {
+    "failedDataFetching": "Failed to fetch admin data.",
+    "joinCompany": "Join Company",
+    "joinText": "Are you sure you want to join the company?",
+    "decline": "Decline",
+    "declineText": "Are you sure you want to decline the request?",
+    "expel": "Expel",
+    "expelText": "Are you sure you want to expel this user?",
+    "acceptRequest": "Accept",
+    "acceptText": "Are you sure you want to accept the request?",
+    "block": "Block",
+    "blockText": "Are you sure you want to block this user?",
+    "unblock": "Unblock",
+    "unblockText": "Are you sure you want to unblock this user?",
+    "adminPanel": "Company Admin Panel",
+    "membersTotal": "Members Total",
+    "invitesTotal": "Invites Total",
+    "requestsTotal": "Requests Total",
+    "blockedTotal": "Blocked Total"
+  },
+  "ProfileActions": {
+    "failedFetchActions": "Failed to fetch user Actions",
+    "refuse": "Refuse",
+    "refuseText": "Are you sure you want to remove this action?",
+    "accept": "Accept",
+    "acceptText": "Are you sure you want to accept this invite?",
+    "youInvited": "You have invited",
+    "times": "times",
+    "noInvites": "You have no invites at the moment.",
+    "haveSent": "You have sent",
+    "requests": "requests",
+    "noRequests": "You have no requests at this time."
+  },
+  "InviteMemberForm": {
+    "successInvited": "Successfully invited.",
+    "inviteFailed": "You cannot invite this user.",
+    "noCompanies": "You have no companies."
   }
 }

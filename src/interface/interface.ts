@@ -28,6 +28,11 @@ export type AdditionalUserPropsCardProps = {
   is_superuser: boolean;
 };
 
+export type ActionProps = {
+  action_id: 0;
+  action: string;
+};
+
 export type UserItem = {
   user_id: number;
   user_email: string;
@@ -112,4 +117,19 @@ export type ValidationProps = (t: (key: string) => string) => {
     value: number;
     message: string;
   };
+};
+
+export enum ButtonColor {
+  Primary = "primary",
+  Warning = "warning",
+  Error = "error",
+  Success = "success",
+}
+
+export type CompanyActionsModalProps = {
+  callback: () => Promise<void>;
+  onClose: () => void;
+  actionName: string;
+  actionText: string;
+  triggerRenderUpdate: () => Promise<void>;
 };
