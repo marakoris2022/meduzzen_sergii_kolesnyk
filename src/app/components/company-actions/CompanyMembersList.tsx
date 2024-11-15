@@ -3,13 +3,15 @@ import {
   ButtonColor,
   CompanyActionsModalProps,
   CompanyIdProps,
+  MemberBadgeAction,
   PATHS,
   UserItem,
 } from "@/interface/interface";
 import {
-  getCompanyMembersList,
+  blockUser,
+  demoteFromAdmin,
   leaveCompany,
-  unblockUser,
+  promoteToAdmin,
 } from "@/services/axios-api-methods/axiosGet";
 
 import { useRouter } from "next/navigation";
@@ -23,37 +25,36 @@ import UniversalModal from "../universal-modal/UniversalModal";
 import ActionModalBody from "./ActionModalBody";
 import { useTranslations } from "next-intl";
 import ActionsMemberBadge from "./ActionsMemberBadge";
+import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
+import { useAppDispatch, useAppSelector } from "@/state/hooks";
+import {
+  fetchCompanyBlockedList,
+  fetchCompanyMembers,
+} from "@/state/company-by-id/companyByIdSlice";
 
 const CompanyMembersList = ({
   companyData,
+  myStatus,
 }: {
   companyData: CompanyIdProps;
+  myStatus: string;
 }) => {
   const t = useTranslations("CompanyActions");
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [renderError, setRenderError] = useState<string>("");
-  const [membersList, setMembersList] = useState<Array<UserItem & ActionProps>>(
-    []
-  );
-
   const [modalBodyData, setModalBodyData] =
     useState<null | CompanyActionsModalProps>(null);
-
-  const fetchCompanyMembers = async (company_id: number) => {
-    try {
-      const members = await getCompanyMembersList(company_id);
-      setMembersList(members);
-    } catch {
-      setRenderError(t("failedDataFetching"));
-    }
-  };
+  const dispatch = useAppDispatch();
+  const { companyMembers, companyMembersError } = useAppSelector(
+    (select) => select.companyById
+  );
 
   useEffect(() => {
-    fetchCompanyMembers(companyData.company_id);
+    dispatch(fetchCompanyMembers(companyData.company_id));
   }, [companyData.company_id]);
 
-  if (renderError) return <h3>{renderError}</h3>;
+  if (companyMembersError) return <h3>{t("failedDataFetching")}</h3>;
 
   async function handleExpel(action_id: number) {
     setModalBodyData({
@@ -61,20 +62,107 @@ const CompanyMembersList = ({
       onClose: () => setIsModalOpen(false),
       actionName: t("expel"),
       actionText: t("expelText"),
-      triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
+      triggerRenderUpdate: async () => {
+        dispatch(fetchCompanyMembers(companyData.company_id));
+      },
     });
     setIsModalOpen(true);
   }
 
   async function handleBlockMember(action_id: number) {
     setModalBodyData({
-      callback: () => unblockUser(action_id),
+      callback: () => blockUser(action_id),
       onClose: () => setIsModalOpen(false),
-      actionName: t("unblock"),
+      actionName: t("block"),
       actionText: t("blockText"),
-      triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
+      triggerRenderUpdate: async () => {
+        dispatch(fetchCompanyMembers(companyData.company_id));
+        dispatch(fetchCompanyBlockedList(companyData.company_id));
+      },
     });
     setIsModalOpen(true);
+  }
+
+  async function handlePromoteToAdmin(action_id: number) {
+    setModalBodyData({
+      callback: () => promoteToAdmin(action_id),
+      onClose: () => setIsModalOpen(false),
+      actionName: t("promoteAction"),
+      actionText: t("promoteDescription"),
+      triggerRenderUpdate: async () => {
+        dispatch(fetchCompanyMembers(companyData.company_id));
+      },
+    });
+    setIsModalOpen(true);
+  }
+
+  async function handleDemoteFromAdmin(action_id: number) {
+    setModalBodyData({
+      callback: () => demoteFromAdmin(action_id),
+      onClose: () => setIsModalOpen(false),
+      actionName: t("demoteAction"),
+      actionText: t("demoteDescription"),
+      triggerRenderUpdate: async () => {
+        dispatch(fetchCompanyMembers(companyData.company_id));
+      },
+    });
+    setIsModalOpen(true);
+  }
+
+  function initActions(myStatus: string, member: UserItem & ActionProps) {
+    const targetMemberStatus = member.action;
+
+    const actionsOpenProfile = {
+      callback: () => router.push(`${PATHS.USERS}/${member.user_id}`),
+      color: ButtonColor.Primary,
+      icon: <OpenInNewIcon />,
+    };
+    const actionsExpelMember = {
+      callback: async () => await handleExpel(member.action_id),
+      color: ButtonColor.Warning,
+      icon: <MeetingRoomIcon />,
+    };
+    const actionsBlockMember = {
+      callback: async () => await handleBlockMember(member.action_id),
+      color: ButtonColor.Error,
+      icon: <DoNotDisturbIcon />,
+    };
+    const actionsPromoteToAdmin = {
+      callback: async () => await handlePromoteToAdmin(member.action_id),
+      color: ButtonColor.Success,
+      icon: <ArrowCircleUpIcon />,
+    };
+    const actionsDemoteFromAdmin = {
+      callback: async () => await handleDemoteFromAdmin(member.action_id),
+      color: ButtonColor.Warning,
+      icon: <ArrowCircleDownIcon />,
+    };
+
+    let memberActions: MemberBadgeAction[] = [];
+
+    if (myStatus === "owner") {
+      if (targetMemberStatus === "owner")
+        return (memberActions = [actionsOpenProfile]);
+
+      memberActions = [
+        actionsOpenProfile,
+        actionsExpelMember,
+        actionsBlockMember,
+      ];
+
+      if (targetMemberStatus === "member")
+        memberActions.push(actionsPromoteToAdmin);
+      if (targetMemberStatus === "admin")
+        memberActions.push(actionsDemoteFromAdmin);
+    }
+
+    if (myStatus === "admin")
+      memberActions = [actionsOpenProfile, actionsExpelMember];
+
+    if (myStatus === "member")
+      memberActions = [actionsOpenProfile, actionsExpelMember];
+
+    return memberActions;
   }
 
   return (
@@ -95,30 +183,14 @@ const CompanyMembersList = ({
       </UniversalModal>
 
       <p className={styles.infoText}>
-        {t("membersTotal")}: {membersList.length}
+        {t("membersTotal")}: {companyMembers.length}
       </p>
       <ul>
-        {membersList.map((member) => (
+        {companyMembers.map((member) => (
           <ActionsMemberBadge
             key={member.user_id}
             member={member}
-            actions={[
-              {
-                callback: () => router.push(`${PATHS.USERS}/${member.user_id}`),
-                color: ButtonColor.Primary,
-                icon: <OpenInNewIcon />,
-              },
-              {
-                callback: async () => await handleExpel(member.action_id),
-                color: ButtonColor.Warning,
-                icon: <MeetingRoomIcon />,
-              },
-              {
-                callback: async () => await handleBlockMember(member.action_id),
-                color: ButtonColor.Error,
-                icon: <DoNotDisturbIcon />,
-              },
-            ]}
+            actions={initActions(myStatus, member)}
           />
         ))}
       </ul>

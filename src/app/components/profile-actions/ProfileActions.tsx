@@ -1,9 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import ClearIcon from "@mui/icons-material/Clear";
 import styles from "./profileActions.module.css";
-import { CompanyPropsInList, PATHS } from "@/interface/interface";
+import {
+  CompanyActionsModalProps,
+  CompanyPropsInList,
+  PATHS,
+} from "@/interface/interface";
 import {
   acceptInvite,
   declineAction,
@@ -23,12 +27,11 @@ const ProfileActions = ({ userId }: { userId: number }) => {
   const [requestList, setRequestList] = useState<CompanyPropsInList[]>([]);
   const [isModal, setIsModal] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [actionModalBody, setActionModalBody] = useState<null | JSX.Element>(
-    null
-  );
+  const [modalBodyData, setModalBodyData] =
+    useState<null | CompanyActionsModalProps>(null);
   const router = useRouter();
 
-  const fetchUserActions = useCallback(async () => {
+  const fetchUserActions = async (userId: number) => {
     try {
       const fetchedInvites = await fetchInviteList(userId);
       const fetchedRequests = await fetchRequestsList(userId);
@@ -37,34 +40,31 @@ const ProfileActions = ({ userId }: { userId: number }) => {
     } catch {
       setError(t("failedFetchActions"));
     }
-  }, [userId]);
+  };
 
   useEffect(() => {
-    fetchUserActions();
-  });
+    fetchUserActions(userId);
+  }, [userId]);
 
   async function handleDecline(actionId: number) {
-    setActionModalBody(
-      <ActionModalBody
-        callback={async () => await declineAction(actionId)}
-        onClose={() => setIsModal(false)}
-        actionName={t("refuse")}
-        actionText={t("refuseText")}
-        triggerRenderUpdate={() => fetchUserActions()}
-      />
-    );
+    setModalBodyData({
+      callback: async () => await declineAction(actionId),
+      onClose: () => setIsModal(false),
+      actionName: t("refuse"),
+      actionText: t("refuseText"),
+      triggerRenderUpdate: () => fetchUserActions(userId),
+    });
     setIsModal(true);
   }
+
   async function handleAcceptInvite(actionId: number) {
-    setActionModalBody(
-      <ActionModalBody
-        callback={async () => await acceptInvite(actionId)}
-        onClose={() => setIsModal(false)}
-        actionName={t("accept")}
-        actionText={t("acceptText")}
-        triggerRenderUpdate={() => fetchUserActions()}
-      />
-    );
+    setModalBodyData({
+      callback: () => acceptInvite(actionId),
+      onClose: () => setIsModal(false),
+      actionName: t("accept"),
+      actionText: t("acceptText"),
+      triggerRenderUpdate: () => fetchUserActions(userId),
+    });
     setIsModal(true);
   }
 
@@ -73,7 +73,15 @@ const ProfileActions = ({ userId }: { userId: number }) => {
   return (
     <>
       <UniversalModal open={isModal} handleClose={() => setIsModal(false)}>
-        {actionModalBody}
+        {modalBodyData && (
+          <ActionModalBody
+            callback={async () => await modalBodyData.callback()}
+            onClose={() => modalBodyData.onClose()}
+            actionName={modalBodyData.actionName}
+            actionText={modalBodyData.actionText}
+            triggerRenderUpdate={() => modalBodyData.triggerRenderUpdate()}
+          />
+        )}
       </UniversalModal>
       <div className={styles.userActionsWrapper}>
         <div className={styles.actionsWrapper}>

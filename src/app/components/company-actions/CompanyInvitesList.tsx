@@ -6,10 +6,7 @@ import {
   PATHS,
   UserItem,
 } from "@/interface/interface";
-import {
-  declineAction,
-  getCompanyInvitesList,
-} from "@/services/axios-api-methods/axiosGet";
+import { declineAction } from "@/services/axios-api-methods/axiosGet";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -22,6 +19,8 @@ import UniversalModal from "../universal-modal/UniversalModal";
 import ActionModalBody from "./ActionModalBody";
 import { useTranslations } from "next-intl";
 import ActionsMemberBadge from "./ActionsMemberBadge";
+import { useAppDispatch, useAppSelector } from "@/state/hooks";
+import { fetchCompanyInvites } from "@/state/company-by-id/companyByIdSlice";
 
 const CompanyInvitesList = ({
   companyData,
@@ -31,30 +30,19 @@ const CompanyInvitesList = ({
   const t = useTranslations("CompanyActions");
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const [renderError, setRenderError] = useState<string>("");
-
-  const [invitesList, setInvitesList] = useState<Array<UserItem & ActionProps>>(
-    []
-  );
-
   const [modalBodyData, setModalBodyData] =
     useState<null | CompanyActionsModalProps>(null);
 
-  const fetchCompanyMembers = async (company_id: number) => {
-    try {
-      const invites = await getCompanyInvitesList(company_id);
-      setInvitesList(invites);
-    } catch {
-      setRenderError(t("failedDataFetching"));
-    }
-  };
+  const dispatch = useAppDispatch();
+  const { companyInvites, companyInvitesError } = useAppSelector(
+    (selector) => selector.companyById
+  );
 
   useEffect(() => {
-    fetchCompanyMembers(companyData.company_id);
+    dispatch(fetchCompanyInvites(companyData.company_id));
   }, [companyData.company_id]);
 
-  if (renderError) return <h3>{renderError}</h3>;
+  if (companyInvitesError) return <h3>{t("failedDataFetching")}</h3>;
 
   async function handleDecline(action_id: number) {
     setModalBodyData({
@@ -62,7 +50,9 @@ const CompanyInvitesList = ({
       onClose: () => setIsModalOpen(false),
       actionName: t("decline"),
       actionText: t("declineText"),
-      triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
+      triggerRenderUpdate: async () => {
+        await dispatch(fetchCompanyInvites(companyData.company_id));
+      },
     });
     setIsModalOpen(true);
   }
@@ -84,10 +74,10 @@ const CompanyInvitesList = ({
         )}
       </UniversalModal>
       <p className={styles.infoText}>
-        {t("invitesTotal")}: {invitesList.length}
+        {t("invitesTotal")}: {companyInvites.length}
       </p>
       <ul>
-        {invitesList.map((member: UserItem & ActionProps) => (
+        {companyInvites.map((member: UserItem & ActionProps) => (
           <ActionsMemberBadge
             key={member.user_id}
             member={member}

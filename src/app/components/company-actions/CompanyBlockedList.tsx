@@ -1,17 +1,12 @@
 import {
-  ActionProps,
   ButtonColor,
   CompanyActionsModalProps,
   CompanyIdProps,
   PATHS,
-  UserItem,
 } from "@/interface/interface";
-import {
-  blockUser,
-  getCompanyBlockedList,
-} from "@/services/axios-api-methods/axiosGet";
+import { unblockUser } from "@/services/axios-api-methods/axiosGet";
 import { useRouter } from "next/navigation";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ReplyIcon from "@mui/icons-material/Reply";
 import styles from "./companyActions.module.css";
@@ -19,43 +14,45 @@ import UniversalModal from "../universal-modal/UniversalModal";
 import ActionModalBody from "./ActionModalBody";
 import { useTranslations } from "next-intl";
 import ActionsMemberBadge from "./ActionsMemberBadge";
+import { useAppDispatch, useAppSelector } from "@/state/hooks";
+import {
+  fetchCompanyBlockedList,
+  fetchCompanyMembers,
+} from "@/state/company-by-id/companyByIdSlice";
 
-const CompanyBlockedList = ({ companyData }: { companyData: CompanyIdProps }) => {
+const CompanyBlockedList = ({
+  companyData,
+}: {
+  companyData: CompanyIdProps;
+}) => {
   const t = useTranslations("CompanyActions");
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const [renderError, setRenderError] = useState<string>("");
-
-  const [blockedList, setBlockedList] = useState<Array<UserItem & ActionProps>>(
-    []
+  const dispatch = useAppDispatch();
+  const { companyBlockedList, companyBlockedListError } = useAppSelector(
+    (state) => state.companyById
   );
 
   const [modalBodyData, setModalBodyData] =
     useState<null | CompanyActionsModalProps>(null);
 
-  const fetchCompanyMembers = async (company_id: number) => {
-    try {
-      const blocked = await getCompanyBlockedList(company_id);
-      setBlockedList(blocked);
-    } catch {
-      setRenderError(t("failedDataFetching"));
-    }
-  };
-
   useEffect(() => {
-    fetchCompanyMembers(companyData.company_id);
+    dispatch(fetchCompanyBlockedList(companyData.company_id));
   }, [companyData.company_id]);
 
-  if (renderError) return <h3>{renderError}</h3>;
+  if (companyBlockedListError) return <h3>{t("failedDataFetching")}</h3>;
 
   async function handleCancelBlockMember(action_id: number) {
     setModalBodyData({
-      callback: () => blockUser(action_id),
+      callback: () => unblockUser(action_id),
       onClose: () => setIsModalOpen(false),
-      actionName: t("block"),
+      actionName: t("unblock"),
       actionText: t("unblockText"),
-      triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
+      triggerRenderUpdate: async () => {
+        await dispatch(fetchCompanyBlockedList(companyData.company_id));
+        await dispatch(fetchCompanyMembers(companyData.company_id));
+      },
     });
     setIsModalOpen(true);
   }
@@ -78,10 +75,10 @@ const CompanyBlockedList = ({ companyData }: { companyData: CompanyIdProps }) =>
       </UniversalModal>
 
       <p className={styles.infoText}>
-        {t("blockedTotal")}: {blockedList.length}
+        {t("blockedTotal")}: {companyBlockedList.length}
       </p>
       <ul>
-        {blockedList.map((member) => (
+        {companyBlockedList.map((member) => (
           <>
             <ActionsMemberBadge
               key={member.user_id}

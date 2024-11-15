@@ -2,10 +2,8 @@
 
 import { useParams, useRouter } from "next/navigation";
 import styles from "./companyId.module.css";
-import { useCallback, useEffect, useState } from "react";
-import { getCompanyById } from "@/services/axios-api-methods/axiosGet";
-import { CompanyIdProps, PATHS } from "@/interface/interface";
-import { AxiosError } from "axios";
+import { useEffect } from "react";
+import { PATHS } from "@/interface/interface";
 import PageError from "@/app/components/users-page-error/PageError";
 import Loading from "@/app/components/loading/Loading";
 import CompanyAvatar from "@/app/components/company-avatar/CompanyAvatar";
@@ -14,31 +12,25 @@ import { Button, IconButton, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CompanyActions from "@/app/components/company-actions/CompanyActions";
+import { useAppDispatch, useAppSelector } from "@/state/hooks";
+import { fetchCompanyById } from "@/state/company-by-id/companyByIdSlice";
 
 const CompanyDetailsPage = () => {
   const t = useTranslations("CompanyDetailsPage");
   const router = useRouter();
   const { companyId } = useParams();
-  const [error, setError] = useState<null | AxiosError>(null);
-  const [companyIdData, setCompanyIdData] = useState<null | CompanyIdProps>(
-    null
+
+  const dispatch = useAppDispatch();
+  const { company: companyIdData, companyError } = useAppSelector(
+    (state) => state.companyById
   );
 
-  const fetchCompanyData = useCallback(async () => {
-    try {
-      const id = Number(companyId);
-      const data = await getCompanyById(id);
-      setCompanyIdData(data);
-    } catch (error) {
-      setError(error as AxiosError);
-    }
+  useEffect(() => {
+    const id = Number(companyId);
+    dispatch(fetchCompanyById(id));
   }, [companyId]);
 
-  useEffect(() => {
-    fetchCompanyData();
-  }, [companyId, fetchCompanyData]);
-
-  if (error) {
+  if (companyError) {
     return (
       <PageError
         errorTitle={t("fetchError")}

@@ -310,11 +310,16 @@
     "blockText": "Are you sure you want to block this user?",
     "unblock": "Unblock",
     "unblockText": "Are you sure you want to unblock this user?",
-    "adminPanel": "Company Admin Panel",
+    "ownerPanel": "Company Admin Panel",
+    "memberPanel": "Company Member Panel",
     "membersTotal": "Members Total",
     "invitesTotal": "Invites Total",
     "requestsTotal": "Requests Total",
-    "blockedTotal": "Blocked Total"
+    "blockedTotal": "Blocked Total",
+    "promoteAction": "Promote",
+    "promoteDescription": "Are you sure you want to promote this user to Admin?",
+    "demoteAction": "Demote",
+    "demoteDescription": "Are you sure you want to demote this user to Member?"
   },
   "ProfileActions": {
     "failedFetchActions": "Failed to fetch user Actions",
@@ -327,7 +332,8 @@
     "noInvites": "You have no invites at the moment.",
     "haveSent": "You have sent",
     "requests": "requests",
-    "noRequests": "You have no requests at this time."
+    "noRequests": "You have no requests at this time.",
+    "operationFailed": "Operation failed."
   },
   "InviteMemberForm": {
     "successInvited": "Successfully invited.",

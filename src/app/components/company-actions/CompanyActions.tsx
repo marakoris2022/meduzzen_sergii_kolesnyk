@@ -17,32 +17,42 @@ import CompanyMembersList from "./CompanyMembersList";
 import CompanyInvitesList from "./CompanyInvitesList";
 import CompanyRequestsList from "./CompanyRequestsList";
 import CompanyBlockedList from "./CompanyBlockedList";
+import { useAppDispatch, useAppSelector } from "@/state/hooks";
+import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
 
 const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
   const t = useTranslations("CompanyActions");
+  const dispatch = useAppDispatch();
   const [renderError, setRenderError] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalBodyData, setModalBodyData] =
     useState<null | CompanyActionsModalProps>(null);
-  const [isOwner, setIsOwner] = useState<boolean>(false);
+  const { companies, error: companyFetchError } = useAppSelector(
+    (state) => state.userCompanies
+  );
+  const [memberStatus, setMemberStatus] = useState<string>("");
 
-  const checkMemberStatus = async (owner_id: number) => {
+  const checkMemberStatus = async () => {
     try {
       const user = await getMe();
-
-      if (user.user_id === owner_id) {
-        setIsOwner(true);
+      if (!companies.length) {
+        await dispatch(fetchUserCompanies(user.user_id));
       }
+
+      companies.forEach((company) => {
+        if (company.company_id === companyData.company_id)
+          setMemberStatus(company.action);
+      });
     } catch {
       setRenderError(t("failedDataFetching"));
     }
   };
 
   useEffect(() => {
-    checkMemberStatus(companyData.company_owner.user_id);
-  }, [companyData]);
+    checkMemberStatus();
+  }, [companies]);
 
-  if (renderError) return <h3>{renderError}</h3>;
+  if (renderError || companyFetchError) return <h3>{renderError}</h3>;
 
   async function handleJoinToCompany(company_id: number) {
     setModalBodyData({
@@ -50,8 +60,7 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
       onClose: () => setIsModalOpen(false),
       actionName: t("joinCompany"),
       actionText: t("joinText"),
-      triggerRenderUpdate: () =>
-        checkMemberStatus(companyData.company_owner.user_id),
+      triggerRenderUpdate: () => checkMemberStatus(),
     });
     setIsModalOpen(true);
   }
@@ -73,15 +82,30 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
         )}
       </UniversalModal>
 
-      {isOwner ? (
+      {memberStatus === "owner" && (
         <div className={styles.adminPanelWrapper}>
-          <h3 className={styles.adminPanelTitle}>{t("adminPanel")}</h3>
-          <CompanyMembersList companyData={companyData} />
+          <h3 className={styles.adminPanelTitle}>{t("ownerPanel")}</h3>
+          <CompanyMembersList
+            companyData={companyData}
+            myStatus={memberStatus}
+          />
           <CompanyInvitesList companyData={companyData} />
           <CompanyRequestsList companyData={companyData} />
           <CompanyBlockedList companyData={companyData} />
         </div>
-      ) : (
+      )}
+
+      {(memberStatus === "admin" || memberStatus === "member") && (
+        <div className={styles.adminPanelWrapper}>
+          <h3 className={styles.adminPanelTitle}>{t("memberPanel")}</h3>
+          <CompanyMembersList
+            companyData={companyData}
+            myStatus={memberStatus}
+          />
+        </div>
+      )}
+
+      {!memberStatus && (
         <div className={styles.joinBtnWrapper}>
           <Button
             onClick={async () =>

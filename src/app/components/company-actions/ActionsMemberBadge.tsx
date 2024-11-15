@@ -1,18 +1,16 @@
-import { ActionProps, ButtonColor, UserItem } from "@/interface/interface";
+import {
+  ActionProps,
+  MemberBadgeAction,
+  UserItem,
+} from "@/interface/interface";
 import { IconButton } from "@mui/material";
-
-export type Action = {
-  callback: () => void;
-  color: ButtonColor;
-  icon: JSX.Element;
-};
 
 function ActionsMemberBadge({
   member,
   actions,
 }: {
   member: UserItem & ActionProps;
-  actions: Action[];
+  actions: MemberBadgeAction[];
 }) {
   return (
     <li>

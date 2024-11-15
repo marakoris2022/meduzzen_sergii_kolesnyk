@@ -4,6 +4,7 @@ import userReducer from "./user/userSlice";
 import usersSlice from "./users/usersSlice";
 import companiesSlice from "./companies/companiesSlice";
 import userCompaniesSlice from "./user-companies/userCompaniesSlice";
+import companyByIdSlice from "./company-by-id/companyByIdSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -13,6 +14,7 @@ export const makeStore = () => {
       userCompanies: userCompaniesSlice,
       users: usersSlice,
       companies: companiesSlice,
+      companyById: companyByIdSlice,
     },
   });
 };
