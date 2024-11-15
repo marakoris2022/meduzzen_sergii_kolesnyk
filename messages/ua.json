@@ -314,7 +314,11 @@
     "membersTotal": "Усього учасників",
     "invitesTotal": "Загальна кількість запрошень",
     "requestsTotal": "Загальна кількість запитів",
-    "blockedTotal": "Усього заблоковано"
+    "blockedTotal": "Усього заблоковано",
+    "promoteAction": "Підвищити",
+    "promoteDescription": "Ви впевнені, що хочете підвищити цього користувача до адміністратора?",
+    "demoteAction": "Понизити",
+    "demoteDescription": "Ви впевнені, що хочете понизити цього користувача до члена?"
   },
   "ProfileActions": {
     "failedFetchActions": "Не вдалося отримати дії користувача",

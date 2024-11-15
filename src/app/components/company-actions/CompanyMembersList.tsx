@@ -45,7 +45,6 @@ const CompanyMembersList = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalBodyData, setModalBodyData] =
     useState<null | CompanyActionsModalProps>(null);
-
   const dispatch = useAppDispatch();
   const { companyMembers, companyMembersError } = useAppSelector(
     (select) => select.companyById
@@ -88,8 +87,8 @@ const CompanyMembersList = ({
     setModalBodyData({
       callback: () => promoteToAdmin(action_id),
       onClose: () => setIsModalOpen(false),
-      actionName: "Promote",
-      actionText: "Are you sure you want to promote this user to Admin?",
+      actionName: t("promoteAction"),
+      actionText: t("promoteDescription"),
       triggerRenderUpdate: async () => {
         dispatch(fetchCompanyMembers(companyData.company_id));
       },
@@ -101,8 +100,8 @@ const CompanyMembersList = ({
     setModalBodyData({
       callback: () => demoteFromAdmin(action_id),
       onClose: () => setIsModalOpen(false),
-      actionName: "Demote",
-      actionText: "Are you sure you want to demote this user to Member?",
+      actionName: t("demoteAction"),
+      actionText: t("demoteDescription"),
       triggerRenderUpdate: async () => {
         dispatch(fetchCompanyMembers(companyData.company_id));
       },
