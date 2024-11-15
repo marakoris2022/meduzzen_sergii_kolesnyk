@@ -315,8 +315,7 @@
     "membersTotal": "Members Total",
     "invitesTotal": "Invites Total",
     "requestsTotal": "Requests Total",
-    "blockedTotal": "Blocked Total",
-    "operationFailed.": "Operation failed."
+    "blockedTotal": "Blocked Total"
   },
   "ProfileActions": {
     "failedFetchActions": "Failed to fetch user Actions",
@@ -329,7 +328,8 @@
     "noInvites": "You have no invites at the moment.",
     "haveSent": "You have sent",
     "requests": "requests",
-    "noRequests": "You have no requests at this time."
+    "noRequests": "You have no requests at this time.",
+    "operationFailed.": "Operation failed."
   },
   "InviteMemberForm": {
     "successInvited": "Successfully invited.",

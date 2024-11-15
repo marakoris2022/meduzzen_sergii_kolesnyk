@@ -234,7 +234,11 @@
     "deleteTitle": "Видалити компанію?",
     "deleteText": "Якщо ви підтвердите, компанія буде видалена.",
     "delFailed": "Не вдалося видалити.",
-    "confirmDeleteCompany": "Видалити"
+    "confirmDeleteCompany": "Видалити",
+    "failToLeave": "Вам не вдалося покинути цю компанію.",
+    "leaveText": "Ви впевнені, що хочете залишити компанію?",
+    "leaveConfirm": "Залишити",
+    "leaveBtn": "Вийти з компанії"
   },
   "CompanyListCard": {
     "open": "Відкрити"
@@ -324,7 +328,7 @@
     "haveSent": "Ви надіслали",
     "requests": "запити",
     "noRequests": "Наразі у вас немає запитів.",
-    "operationFailed.": "Помилка операції."
+    "operationFailed": "Помилка операції."
   },
   "InviteMemberForm": {
     "successInvited": "Успішно запрошено.",

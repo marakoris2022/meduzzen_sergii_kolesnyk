@@ -10,7 +10,6 @@ import {
 import {
   blockUser,
   demoteFromAdmin,
-  getCompanyMembersList,
   leaveCompany,
   promoteToAdmin,
 } from "@/services/axios-api-methods/axiosGet";
@@ -28,6 +27,11 @@ import { useTranslations } from "next-intl";
 import ActionsMemberBadge from "./ActionsMemberBadge";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
+import { useAppDispatch, useAppSelector } from "@/state/hooks";
+import {
+  fetchCompanyBlockedList,
+  fetchCompanyMembers,
+} from "@/state/company-by-id/companyByIdSlice";
 
 const CompanyMembersList = ({
   companyData,
@@ -39,27 +43,19 @@ const CompanyMembersList = ({
   const t = useTranslations("CompanyActions");
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [renderError, setRenderError] = useState<string>("");
-  const [membersList, setMembersList] = useState<Array<UserItem & ActionProps>>(
-    []
-  );
   const [modalBodyData, setModalBodyData] =
     useState<null | CompanyActionsModalProps>(null);
 
-  const fetchCompanyMembers = async (company_id: number) => {
-    try {
-      const members = await getCompanyMembersList(company_id);
-      setMembersList(members);
-    } catch {
-      setRenderError(t("failedDataFetching"));
-    }
-  };
+  const dispatch = useAppDispatch();
+  const { companyMembers, companyMembersError } = useAppSelector(
+    (select) => select.companyById
+  );
 
   useEffect(() => {
-    fetchCompanyMembers(companyData.company_id);
+    dispatch(fetchCompanyMembers(companyData.company_id));
   }, [companyData.company_id]);
 
-  if (renderError) return <h3>{renderError}</h3>;
+  if (companyMembersError) return <h3>{t("failedDataFetching")}</h3>;
 
   async function handleExpel(action_id: number) {
     setModalBodyData({
@@ -67,7 +63,9 @@ const CompanyMembersList = ({
       onClose: () => setIsModalOpen(false),
       actionName: t("expel"),
       actionText: t("expelText"),
-      triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
+      triggerRenderUpdate: async () => {
+        dispatch(fetchCompanyMembers(companyData.company_id));
+      },
     });
     setIsModalOpen(true);
   }
@@ -78,7 +76,10 @@ const CompanyMembersList = ({
       onClose: () => setIsModalOpen(false),
       actionName: t("block"),
       actionText: t("blockText"),
-      triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
+      triggerRenderUpdate: async () => {
+        dispatch(fetchCompanyMembers(companyData.company_id));
+        dispatch(fetchCompanyBlockedList(companyData.company_id));
+      },
     });
     setIsModalOpen(true);
   }
@@ -89,7 +90,9 @@ const CompanyMembersList = ({
       onClose: () => setIsModalOpen(false),
       actionName: "Promote",
       actionText: "Are you sure you want to promote this user to Admin?",
-      triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
+      triggerRenderUpdate: async () => {
+        dispatch(fetchCompanyMembers(companyData.company_id));
+      },
     });
     setIsModalOpen(true);
   }
@@ -100,7 +103,9 @@ const CompanyMembersList = ({
       onClose: () => setIsModalOpen(false),
       actionName: "Demote",
       actionText: "Are you sure you want to demote this user to Member?",
-      triggerRenderUpdate: () => fetchCompanyMembers(companyData.company_id),
+      triggerRenderUpdate: async () => {
+        dispatch(fetchCompanyMembers(companyData.company_id));
+      },
     });
     setIsModalOpen(true);
   }
@@ -179,10 +184,10 @@ const CompanyMembersList = ({
       </UniversalModal>
 
       <p className={styles.infoText}>
-        {t("membersTotal")}: {membersList.length}
+        {t("membersTotal")}: {companyMembers.length}
       </p>
       <ul>
-        {membersList.map((member) => (
+        {companyMembers.map((member) => (
           <ActionsMemberBadge
             key={member.user_id}
             member={member}
