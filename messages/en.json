@@ -333,7 +333,7 @@
     "haveSent": "You have sent",
     "requests": "requests",
     "noRequests": "You have no requests at this time.",
-    "operationFailed.": "Operation failed."
+    "operationFailed": "Operation failed."
   },
   "InviteMemberForm": {
     "successInvited": "Successfully invited.",
