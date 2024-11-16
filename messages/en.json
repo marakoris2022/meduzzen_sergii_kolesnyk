@@ -339,5 +339,21 @@
     "successInvited": "Successfully invited.",
     "inviteFailed": "You cannot invite this user.",
     "noCompanies": "You have no companies."
+  },
+  "CreateQuizModalBody": {
+    "createQuizForm": "Create Quiz Form",
+    "quizName": "Quiz Name",
+    "quizNameRequired": "Quiz name is required.",
+    "quizFrequency": "Quiz Frequency (days)",
+    "question": "Question",
+    "questionRequired": "Question is required.",
+    "answerChoice": "Answer Choice",
+    "answerRequired": "Answer is required.",
+    "addAnswer": "Add Answer",
+    "correctAnswer": "Correct Answer",
+    "removeQuestion": "Remove Question",
+    "addQuestion": "Add Question",
+    "submitQuiz": "Submit Quiz",
+    "answer": "Answer"
   }
 }
