@@ -1,0 +1,28 @@
+.formWrapper,
+.accordionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formWrapper {
+  overflow-y: scroll;
+
+  min-height: 80vh;
+
+  padding: 8px;
+  margin-bottom: 12px;
+
+  scrollbar-color: purple transparent;
+  scrollbar-width: thin;
+
+  min-width: 340px;
+}
+
+.accordionWrapper {
+}
+
+.formWrapper {
+  text-align: center;
+  padding: 6px 0;
+}
