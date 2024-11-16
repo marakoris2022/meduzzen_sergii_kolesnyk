@@ -12,9 +12,23 @@ import AccordionCustom from "../accordion-custom/AccordionCustom";
 import { useState } from "react";
 import { CreateQuizProps } from "@/interface/interface";
 import { useTranslations } from "next-intl";
+import { createQuiz } from "@/services/axios-api-methods/axiosPost";
+import { useAppDispatch } from "@/state/hooks";
+import { fetchQuizzesData } from "@/state/quizzes/quizzesSlice";
 
-const CreateQuizModalBody = () => {
+const minQuestionsQuantity = 2;
+const minAnswersQuantity = 2;
+
+const CreateQuizModalBody = ({
+  handleCloseModal,
+  companyId,
+}: {
+  handleCloseModal: () => void;
+  companyId: number;
+}) => {
   const t = useTranslations("CreateQuizModalBody");
+  const dispatch = useAppDispatch();
+  const [submitError, setSubmitError] = useState<string>("");
   const [questions, setQuestions] = useState<Array<{ answers: string[] }>>([
     { answers: [""] },
   ]);
@@ -43,8 +57,36 @@ const CreateQuizModalBody = () => {
     name: "questions_list",
   });
 
-  const onSubmit = (data: CreateQuizProps) => {
-    console.log("Form Data:", data);
+  const onSubmit = async (formData: CreateQuizProps) => {
+    if (formData.questions_list.length < minQuestionsQuantity) {
+      setSubmitError(
+        `You must have minimum ${minQuestionsQuantity} questions.`
+      );
+      return;
+    }
+
+    for (let i = 0; i < formData.questions_list.length; i++) {
+      if (
+        formData.questions_list[i].question_answers.length < minAnswersQuantity
+      ) {
+        setSubmitError(
+          `You must have minimum ${minAnswersQuantity} answers in each Question.`
+        );
+        return;
+      }
+    }
+
+    try {
+      await createQuiz(formData, companyId);
+      setSubmitError("");
+      await dispatch(fetchQuizzesData(companyId));
+      handleCloseModal();
+    } catch (error) {
+      console.error(error);
+      console.log(formData);
+
+      setSubmitError("Submitting is failed.");
+    }
   };
 
   return (
@@ -57,6 +99,7 @@ const CreateQuizModalBody = () => {
         error={!!errors.quiz_name}
         helperText={errors.quiz_name ? errors.quiz_name.message : ""}
       />
+
       <TextField
         label={t("quizFrequency")}
         type="number"
@@ -169,6 +212,8 @@ const CreateQuizModalBody = () => {
       >
         {t("addQuestion")}
       </Button>
+
+      {submitError && <p className={styles.submitError}>{submitError}</p>}
 
       <Button color="success" type="submit" variant="outlined">
         {t("submitQuiz")}

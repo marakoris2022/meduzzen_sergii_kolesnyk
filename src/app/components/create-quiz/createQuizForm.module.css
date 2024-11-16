@@ -16,13 +16,21 @@
   scrollbar-color: purple transparent;
   scrollbar-width: thin;
 
-  min-width: 340px;
+  width: 460px;
 }
 
-.accordionWrapper {
-}
-
-.formWrapper {
+.formWrapper,
+.submitError {
   text-align: center;
   padding: 6px 0;
+}
+
+.submitError {
+  color: red;
+}
+
+@media screen and (max-width: 750px) {
+  .formWrapper {
+    width: 340px;
+  }
 }

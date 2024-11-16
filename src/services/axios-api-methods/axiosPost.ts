@@ -37,8 +37,12 @@ export const createCompany = async (
   return data;
 };
 
-export const createQuiz = async (requestData: CreateQuizProps) => {
+export const createQuiz = async (
+  requestData: CreateQuizProps,
+  companyId: number
+) => {
   return await axiosInstance.post("/quiz/", {
-    requestData,
+    ...requestData,
+    company_id: companyId,
   });
 };

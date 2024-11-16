@@ -25,7 +25,10 @@ const CreateQuiz = ({ companyId }: { companyId: number }) => {
   return (
     <>
       <UniversalModal open={isModal} handleClose={() => setIsModal(false)}>
-        <CreateQuizForm />
+        <CreateQuizForm
+          handleCloseModal={() => setIsModal(false)}
+          companyId={companyId}
+        />
       </UniversalModal>
 
       <div>
