@@ -14,6 +14,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import CompanyActions from "@/app/components/company-actions/CompanyActions";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { fetchCompanyById } from "@/state/company-by-id/companyByIdSlice";
+import AccordionCustom from "@/app/components/accordion-custom/AccordionCustom";
 
 const CompanyDetailsPage = () => {
   const t = useTranslations("CompanyDetailsPage");
@@ -70,33 +71,40 @@ const CompanyDetailsPage = () => {
           </div>
         </aside>
         <section className={styles.sectionWrapper}>
-          <h4 className={styles.companyTitle}>{`${
-            companyIdData.company_title || t("company")
-          } ${t("info")}`}</h4>
-          <TextField
-            label={t("description")}
-            multiline
-            fullWidth
-            disabled
-            rows={4}
-            defaultValue={companyIdData.company_description || t("notProvided")}
-          />
-          <ul className={styles.companyInfoWrapper}>
-            <li>
-              {t("city")}: {companyIdData.company_city || t("unknown")}
-            </li>
-            <li>
-              {t("phone")}: {companyIdData.company_phone || t("unknown")}
-            </li>
-            {companyIdData.company_links &&
-              companyIdData.company_links.map((link) => {
-                return (
-                  <li key={link}>
-                    {t("link")}: {link}
-                  </li>
-                );
-              })}
-          </ul>
+          <AccordionCustom title={t("info")} expanded={true}>
+            <>
+              <h4 className={styles.companyTitle}>
+                {companyIdData.company_title || t("company")}
+              </h4>
+              <TextField
+                label={t("description")}
+                multiline
+                fullWidth
+                disabled
+                rows={4}
+                defaultValue={
+                  companyIdData.company_description || t("notProvided")
+                }
+              />
+              <ul className={styles.companyInfoWrapper}>
+                <li>
+                  {t("city")}: {companyIdData.company_city || t("unknown")}
+                </li>
+                <li>
+                  {t("phone")}: {companyIdData.company_phone || t("unknown")}
+                </li>
+                {companyIdData.company_links &&
+                  companyIdData.company_links.map((link) => {
+                    return (
+                      <li key={link}>
+                        {t("link")}: {link}
+                      </li>
+                    );
+                  })}
+              </ul>
+            </>
+          </AccordionCustom>
+
           <CompanyActions companyData={companyIdData} />
         </section>
       </div>

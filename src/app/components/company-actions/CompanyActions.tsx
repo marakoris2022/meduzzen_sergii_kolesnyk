@@ -19,6 +19,7 @@ import CompanyRequestsList from "./CompanyRequestsList";
 import CompanyBlockedList from "./CompanyBlockedList";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
+import AccordionCustom from "../accordion-custom/AccordionCustom";
 
 const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
   const t = useTranslations("CompanyActions");
@@ -84,26 +85,42 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
       </UniversalModal>
 
       {memberStatus === "owner" && (
-        <div className={styles.adminPanelWrapper}>
-          <h3 className={styles.adminPanelTitle}>{t("ownerPanel")}</h3>
-          <CompanyMembersList
-            companyData={companyData}
-            myStatus={memberStatus}
-          />
-          <CompanyInvitesList companyData={companyData} />
-          <CompanyRequestsList companyData={companyData} />
-          <CompanyBlockedList companyData={companyData} />
-        </div>
+        <AccordionCustom title={t("ownerPanel")}>
+          <div className={styles.adminPanelWrapper}>
+            <CompanyMembersList
+              companyData={companyData}
+              myStatus={memberStatus}
+            />
+            <CompanyInvitesList companyData={companyData} />
+            <CompanyRequestsList companyData={companyData} />
+            <CompanyBlockedList companyData={companyData} />
+          </div>
+        </AccordionCustom>
       )}
 
       {(memberStatus === "admin" || memberStatus === "member") && (
-        <div className={styles.adminPanelWrapper}>
-          <h3 className={styles.adminPanelTitle}>{t("memberPanel")}</h3>
-          <CompanyMembersList
-            companyData={companyData}
-            myStatus={memberStatus}
-          />
-        </div>
+        <AccordionCustom title={t("memberPanel")}>
+          <div className={styles.adminPanelWrapper}>
+            <CompanyMembersList
+              companyData={companyData}
+              myStatus={memberStatus}
+            />
+          </div>
+        </AccordionCustom>
+      )}
+
+      {(memberStatus === "owner" || memberStatus === "admin") && (
+        <AccordionCustom title="Quiz Admin Panel">
+          <p>Quiz Admin Panel</p>
+        </AccordionCustom>
+      )}
+
+      {(memberStatus === "member" ||
+        memberStatus === "owner" ||
+        memberStatus === "admin") && (
+        <AccordionCustom title="Quizzes">
+          <p>Quizzes</p>
+        </AccordionCustom>
       )}
 
       {!memberStatus && (
