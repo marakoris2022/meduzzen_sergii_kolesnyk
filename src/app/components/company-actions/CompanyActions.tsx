@@ -35,14 +35,15 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
   const checkMemberStatus = async () => {
     try {
       const user = await getMe();
-      if (!companies.length) {
+
+      if (companies.length) {
+        companies.forEach((company) => {
+          if (company.company_id === companyData.company_id)
+            setMemberStatus(company.action);
+        });
+      } else {
         await dispatch(fetchUserCompanies(user.user_id));
       }
-
-      companies.forEach((company) => {
-        if (company.company_id === companyData.company_id)
-          setMemberStatus(company.action);
-      });
     } catch {
       setRenderError(t("failedDataFetching"));
     }
