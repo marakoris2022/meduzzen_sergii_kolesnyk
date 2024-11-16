@@ -354,6 +354,11 @@
     "removeQuestion": "Remove Question",
     "addQuestion": "Add Question",
     "submitQuiz": "Submit Quiz",
-    "answer": "Answer"
+    "answer": "Answer",
+    "minimumQuestionsPart1": "You must have at least",
+    "minimumQuestionsPart2": "questions.",
+    "minimumAnswersPart1": "You must have at least",
+    "minimumAnswersPart2": "answers in each Question.",
+    "submissionFailed": "Submitting is failed."
   }
 }

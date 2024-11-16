@@ -153,6 +153,11 @@ export const fetchInviteList = async (user_id: number) => {
   return data.result.companies as CompanyPropsInList[];
 };
 
+export const fetchRequestsList = async (user_id: number) => {
+  const { data } = await axiosInstance.get(`/user/${user_id}/requests_list/`);
+  return data.result.companies as CompanyPropsInList[];
+};
+
 export const fetchQuizList = async (company_id: number) => {
   const { data } = await axiosInstance.get(
     `/company/${company_id}/quizzes_list/`

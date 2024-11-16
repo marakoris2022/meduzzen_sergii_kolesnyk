@@ -60,7 +60,9 @@ const CreateQuizModalBody = ({
   const onSubmit = async (formData: CreateQuizProps) => {
     if (formData.questions_list.length < minQuestionsQuantity) {
       setSubmitError(
-        `You must have minimum ${minQuestionsQuantity} questions.`
+        `${t("minimumQuestionsPart1")} ${minQuestionsQuantity} ${t(
+          "minimumQuestionsPart2"
+        )}`
       );
       return;
     }
@@ -70,7 +72,9 @@ const CreateQuizModalBody = ({
         formData.questions_list[i].question_answers.length < minAnswersQuantity
       ) {
         setSubmitError(
-          `You must have minimum ${minAnswersQuantity} answers in each Question.`
+          `${t("minimumAnswersPart1")} ${minAnswersQuantity} ${t(
+            "minimumAnswersPart2"
+          )}`
         );
         return;
       }
@@ -81,11 +85,8 @@ const CreateQuizModalBody = ({
       setSubmitError("");
       await dispatch(fetchQuizzesData(companyId));
       handleCloseModal();
-    } catch (error) {
-      console.error(error);
-      console.log(formData);
-
-      setSubmitError("Submitting is failed.");
+    } catch {
+      setSubmitError(t("submissionFailed"));
     }
   };
 
