@@ -6,11 +6,12 @@ import Loading from "../loading/Loading";
 import PageError from "../users-page-error/PageError";
 import UniversalModal from "../universal-modal/UniversalModal";
 import CreateQuizForm from "./CreateQuizForm";
-import styles from "./createQuiz.module.css";
+import styles from "./quizAdminPanel.module.css";
 import DeleteQuizModal from "./DeleteQuizModal";
 import { QuizItem } from "@/interface/interface";
+import UpdateQuizModal from "./UpdateQuizModal";
 
-const CreateQuiz = ({ companyId }: { companyId: number }) => {
+const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
   const dispatch = useAppDispatch();
   const { quizList, loading, error } = useAppSelector((state) => state.quizzes);
   const [isCreateQuizModal, setIsCreateQuizModal] = useState<boolean>(false);
@@ -56,7 +57,11 @@ const CreateQuiz = ({ companyId }: { companyId: number }) => {
         open={isUpdateQuizModal}
         handleClose={() => setIsUpdateQuizModal(false)}
       >
-        <>Update Quiz</>
+        <UpdateQuizModal
+          handleClose={() => setIsDeleteQuizModal(false)}
+          quizData={activeQuizData}
+          companyId={companyId}
+        />
       </UniversalModal>
 
       <UniversalModal
@@ -121,4 +126,4 @@ const CreateQuiz = ({ companyId }: { companyId: number }) => {
   );
 };
 
-export default CreateQuiz;
+export default QuizAdminPanel;

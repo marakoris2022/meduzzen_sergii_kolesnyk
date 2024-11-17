@@ -360,5 +360,19 @@
     "minimumAnswersPart1": "You must have at least",
     "minimumAnswersPart2": "answers in each Question.",
     "submissionFailed": "Submitting is failed."
+  },
+  "UpdateQuizModal": {
+    "createQuizForm": "Update Quiz",
+    "quizName": "Quiz Name",
+    "quizTitle": "Quiz Title",
+    "quizDescription": "Quiz Description",
+    "quizFrequency": "Quiz Frequency",
+    "quizNameRequired": "Quiz name is required.",
+    "quizTitleRequired": "Quiz title is required.",
+    "quizDescriptionRequired": "Quiz description is required.",
+    "quizFrequencyRequired": "Quiz frequency is required.",
+    "quizFrequencyMinError": "Frequency must be at least 1.",
+    "submissionError": "Failed to update quiz data.",
+    "updateQuizButton": "Update Quiz"
   }
 }

@@ -1,0 +1,23 @@
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+
+  padding-bottom: 12px;
+  width: 340px;
+
+  text-align: center;
+
+  overflow-y: scroll;
+  scrollbar-color: purple transparent;
+  scrollbar-width: thin;
+}
+
+.formTitle {
+  padding-bottom: 8px;
+}
+
+.errorText {
+  color: red;
+}

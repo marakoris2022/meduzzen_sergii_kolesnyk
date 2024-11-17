@@ -359,5 +359,19 @@
     "minimumAnswersPart1": "Ви повинні мати щонайменше",
     "minimumAnswersPart2": "відповідей у кожному питанні.",
     "submissionFailed": "Відправка не вдалася."
+  },
+  "UpdateQuizModal": {
+    "createQuizForm": "Оновити вікторину",
+    "quizName": "Назва вікторини",
+    "quizTitle": "Заголовок вікторини",
+    "quizDescription": "Опис вікторини",
+    "quizFrequency": "Частота вікторини",
+    "quizNameRequired": "Назва вікторини є обов'язковою.",
+    "quizTitleRequired": "Заголовок вікторини є обов'язковим.",
+    "quizDescriptionRequired": "Опис вікторини є обов'язковим.",
+    "quizFrequencyRequired": "Частота вікторини є обов'язковою.",
+    "quizFrequencyMinError": "Частота повинна бути не менше 1.",
+    "submissionError": "Не вдалося оновити дані вікторини.",
+    "updateQuizButton": "Оновити вікторину"
   }
 }

@@ -20,7 +20,7 @@ import CompanyBlockedList from "./CompanyBlockedList";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
 import AccordionCustom from "../accordion-custom/AccordionCustom";
-import CreateQuiz from "../create-quiz/CreateQuiz";
+import QuizAdminPanel from "../create-quiz/QuizAdminPanel";
 
 const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
   const t = useTranslations("CompanyActions");
@@ -112,7 +112,7 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
 
       {(memberStatus === "owner" || memberStatus === "admin") && (
         <AccordionCustom title="Quiz Admin Panel">
-          <CreateQuiz companyId={companyData.company_id} />
+          <QuizAdminPanel companyId={companyData.company_id} />
         </AccordionCustom>
       )}
 
