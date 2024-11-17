@@ -1,0 +1,31 @@
+.formWrapper,
+.answersWrapper,
+.answerRow {
+  display: flex;
+}
+.formWrapper,
+.answersWrapper {
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.formWrapper {
+  padding-bottom: 12px;
+  width: 340px;
+
+  text-align: center;
+
+  overflow-y: scroll;
+  scrollbar-color: purple transparent;
+  scrollbar-width: thin;
+}
+
+.answersWrapper,
+.answerRow {
+  width: 100%;
+}
+
+.errorText {
+  color: red;
+}

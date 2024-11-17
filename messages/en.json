@@ -319,7 +319,9 @@
     "promoteAction": "Promote",
     "promoteDescription": "Are you sure you want to promote this user to Admin?",
     "demoteAction": "Demote",
-    "demoteDescription": "Are you sure you want to demote this user to Member?"
+    "demoteDescription": "Are you sure you want to demote this user to Member?",
+    "quizAdminPanel": "Quiz Admin Panel",
+    "quizzesList": "Company Quizzes"
   },
   "ProfileActions": {
     "failedFetchActions": "Failed to fetch user Actions",
@@ -374,5 +376,36 @@
     "quizFrequencyMinError": "Frequency must be at least 1.",
     "submissionError": "Failed to update quiz data.",
     "updateQuizButton": "Update Quiz"
+  },
+  "AddQuestionModal": {
+    "addQuestionFrom": "Add Question",
+    "questionText": "Question Text",
+    "questionTextRequired": "Question text is required",
+    "answersLabel": "Answers",
+    "answer": "Answer",
+    "answerRequired": "Answer is required",
+    "addAnswer": "Add Answer",
+    "correctAnswerIndex": "Correct Answer Index",
+    "correctAnswerRequired": "Correct answer index is required",
+    "correctAnswerInvalid": "Invalid correct answer index",
+    "createQuizButton": "Create Quiz",
+    "cancelButton": "Cancel",
+    "submissionError": "Error submitting the form. Please try again."
+  },
+  "DeleteQuizModal": {
+    "confirmationTitle": "Are you sure you want to delete",
+    "deleteError": "Failed to delete the Quiz",
+    "deleteButton": "Delete Quiz"
+  },
+  "QuizAdminPanel": {
+    "fetchError": "Failed to get Quiz List",
+    "quizCount": "You have already {count} quizzes.",
+    "addQuestionButton": "Add Question",
+    "updateQuizButton": "Update Quiz",
+    "deleteQuizButton": "Delete Quiz",
+    "createQuizButton": "Create Quiz"
+  },
+  "CompanyQuizList": {
+    "fetchError": "Failed to get Quiz List"
   }
 }

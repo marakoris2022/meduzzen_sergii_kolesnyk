@@ -5,6 +5,7 @@ import { useState } from "react";
 import { deleteQuiz } from "@/services/axios-api-methods/axiosDelete";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchQuizzesData } from "@/state/quizzes/quizzesSlice";
+import { useTranslations } from "next-intl";
 
 type Props = {
   quizData: QuizItem | null;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 const DeleteQuizModal = ({ quizData, handleClose, companyId }: Props) => {
+  const t = useTranslations("DeleteQuizModal");
   const [errorText, setErrorText] = useState<string>("");
   const dispatch = useAppDispatch();
 
@@ -22,9 +24,8 @@ const DeleteQuizModal = ({ quizData, handleClose, companyId }: Props) => {
       dispatch(fetchQuizzesData(companyId));
       setErrorText("");
       handleClose();
-    } catch (error) {
-      console.log(error);
-      setErrorText("Failed to delete the Quiz");
+    } catch {
+      setErrorText(t("deleteError"));
     }
   }
 
@@ -32,16 +33,16 @@ const DeleteQuizModal = ({ quizData, handleClose, companyId }: Props) => {
 
   return (
     <div className={styles.deleteModalWrapper}>
-      <h3>Are you sure, you want to delete</h3>
-      <p>{quizData.quiz_name} ?</p>
-      {errorText && <p className={styles.deleteError}>errorText</p>}
+      <h3>{t("confirmationTitle")}</h3>
+      <p>{quizData.quiz_name}</p>
+      {errorText && <p className={styles.deleteError}>{errorText}</p>}
       <Button
         className={styles.deleteBtn}
         variant="outlined"
         color={ButtonColor.Error}
         onClick={() => handleDeleteQuiz(quizData.quiz_id, companyId)}
       >
-        Delete Quiz
+        {t("deleteButton")}
       </Button>
     </div>
   );

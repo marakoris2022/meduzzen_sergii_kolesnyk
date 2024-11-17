@@ -10,8 +10,11 @@ import styles from "./quizAdminPanel.module.css";
 import DeleteQuizModal from "./DeleteQuizModal";
 import { QuizItem } from "@/interface/interface";
 import UpdateQuizModal from "./UpdateQuizModal";
+import AddQuestionModal from "./AddQuestionModal";
+import { useTranslations } from "next-intl";
 
 const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
+  const t = useTranslations("QuizAdminPanel");
   const dispatch = useAppDispatch();
   const { quizList, loading, error } = useAppSelector((state) => state.quizzes);
   const [isCreateQuizModal, setIsCreateQuizModal] = useState<boolean>(false);
@@ -28,7 +31,7 @@ const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
 
   if (loading) return <Loading />;
 
-  if (error) return <PageError errorTitle={"Failed to get Quiz List"} />;
+  if (error) return <PageError errorTitle={t("fetchError")} />;
 
   return (
     <>
@@ -58,7 +61,7 @@ const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
         handleClose={() => setIsUpdateQuizModal(false)}
       >
         <UpdateQuizModal
-          handleClose={() => setIsDeleteQuizModal(false)}
+          handleClose={() => setIsUpdateQuizModal(false)}
           quizData={activeQuizData}
           companyId={companyId}
         />
@@ -68,12 +71,15 @@ const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
         open={isAddQuestionModal}
         handleClose={() => setIsAddQuestionModal(false)}
       >
-        <>Add Quiz</>
+        <AddQuestionModal
+          handleClose={() => setIsAddQuestionModal(false)}
+          quizData={activeQuizData}
+        />
       </UniversalModal>
 
       <div className={styles.createQuizWrapper}>
         <p className={styles.quizQuantity}>
-          You have already {quizList.length} quizzes.
+          {t("quizCount", { count: quizList.length })}
         </p>
         {Boolean(quizList.length) && (
           <div>
@@ -90,7 +96,7 @@ const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
                       color="success"
                       size="small"
                     >
-                      Add Question
+                      {t("addQuestionButton")}
                     </Button>
                     <Button
                       onClick={() => {
@@ -100,7 +106,7 @@ const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
                       color="warning"
                       size="small"
                     >
-                      Update Quiz
+                      {t("updateQuizButton")}
                     </Button>
                     <Button
                       onClick={() => {
@@ -110,7 +116,7 @@ const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
                       color="error"
                       size="small"
                     >
-                      Delete Quiz
+                      {t("deleteQuizButton")}
                     </Button>
                   </div>
                 </div>
@@ -119,7 +125,7 @@ const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
           </div>
         )}
         <Button variant="outlined" onClick={() => setIsCreateQuizModal(true)}>
-          Create Quiz
+          {t("createQuizButton")}
         </Button>
       </div>
     </>

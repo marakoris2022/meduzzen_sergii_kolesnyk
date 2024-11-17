@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
 import AccordionCustom from "../accordion-custom/AccordionCustom";
 import QuizAdminPanel from "../create-quiz/QuizAdminPanel";
+import CompanyQuizList from "../company-quiz-list/CompanyQuizList";
 
 const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
   const t = useTranslations("CompanyActions");
@@ -111,7 +112,7 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
       )}
 
       {(memberStatus === "owner" || memberStatus === "admin") && (
-        <AccordionCustom title="Quiz Admin Panel">
+        <AccordionCustom title={t("quizAdminPanel")}>
           <QuizAdminPanel companyId={companyData.company_id} />
         </AccordionCustom>
       )}
@@ -119,8 +120,8 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
       {(memberStatus === "member" ||
         memberStatus === "owner" ||
         memberStatus === "admin") && (
-        <AccordionCustom title="Quizzes">
-          <p>Quizzes</p>
+        <AccordionCustom title={t("quizzesList")}>
+          <CompanyQuizList companyId={companyData.company_id} />
         </AccordionCustom>
       )}
 

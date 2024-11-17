@@ -318,7 +318,9 @@
     "promoteAction": "Підвищити",
     "promoteDescription": "Ви впевнені, що хочете підвищити цього користувача до адміністратора?",
     "demoteAction": "Понизити",
-    "demoteDescription": "Ви впевнені, що хочете понизити цього користувача до користувача?"
+    "demoteDescription": "Ви впевнені, що хочете понизити цього користувача до користувача?",
+    "quizAdminPanel": "Панель адміністратора тесту",
+    "quizzesList": "Вікторини компанії"
   },
   "ProfileActions": {
     "failedFetchActions": "Не вдалося отримати дії користувача",
@@ -373,5 +375,36 @@
     "quizFrequencyMinError": "Частота повинна бути не менше 1.",
     "submissionError": "Не вдалося оновити дані вікторини.",
     "updateQuizButton": "Оновити вікторину"
+  },
+  "AddQuestionModal": {
+    "addQuestionFrom": "Додати запитання",
+    "questionText": "Текст питання",
+    "questionTextRequired": "Текст питання обов'язковий",
+    "answersLabel": "Відповіді",
+    "answer": "Відповідь",
+    "answerRequired": "Відповідь обов'язкова",
+    "addAnswer": "Додати відповідь",
+    "correctAnswerIndex": "Індекс правильної відповіді",
+    "correctAnswerRequired": "Індекс правильної відповіді обов'язковий",
+    "correctAnswerInvalid": "Невірний індекс правильної відповіді",
+    "createQuizButton": "Створити тест",
+    "cancelButton": "Скасувати",
+    "submissionError": "Помилка під час відправки форми. Спробуйте ще раз."
+  },
+  "DeleteQuizModal": {
+    "confirmationTitle": "Ви впевнені, що хочете видалити",
+    "deleteError": "Не вдалося видалити вікторину",
+    "deleteButton": "Видалити вікторину"
+  },
+  "QuizAdminPanel": {
+    "fetchError": "Не вдалося отримати список вікторин",
+    "quizCount": "У вас вже є {count} вікторин.",
+    "addQuestionButton": "Додати питання",
+    "updateQuizButton": "Оновити вікторину",
+    "deleteQuizButton": "Видалити вікторину",
+    "createQuizButton": "Створити вікторину"
+  },
+  "CompanyQuizList": {
+    "fetchError": "Не вдалося отримати список вікторин"
   }
 }
