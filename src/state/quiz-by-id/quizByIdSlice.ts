@@ -14,13 +14,13 @@ const initialState: InitialStateProps = {
   error: "",
 };
 
-export const fetchQuizByIdData = createAsyncThunk(
-  "quizById/fetchQuizByIdData",
+export const fetchQuizById = createAsyncThunk(
+  "quizById/fetchQuizById",
   async (quizId: number, { rejectWithValue }) => {
     try {
       return await getQuizById(quizId);
     } catch {
-      return rejectWithValue("errorQuizByIdData");
+      return rejectWithValue("errorQuizById");
     }
   }
 );
@@ -28,23 +28,27 @@ export const fetchQuizByIdData = createAsyncThunk(
 const quizByIdSlice = createSlice({
   name: "quizById",
   initialState,
-  reducers: {},
+  reducers: {
+    clearQuizData: (state) => {
+      state.quiz = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchQuizByIdData.pending, (state) => {
+      .addCase(fetchQuizById.pending, (state) => {
         state.loading = true;
         state.error = "";
       })
-      .addCase(fetchQuizByIdData.fulfilled, (state, action) => {
+      .addCase(fetchQuizById.fulfilled, (state, action) => {
         state.loading = false;
         state.quiz = action.payload;
       })
-      .addCase(fetchQuizByIdData.rejected, (state, action) => {
+      .addCase(fetchQuizById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
   },
 });
 
-export const {} = quizByIdSlice.actions;
+export const { clearQuizData } = quizByIdSlice.actions;
 export default quizByIdSlice.reducer;

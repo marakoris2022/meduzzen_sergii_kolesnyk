@@ -1,0 +1,47 @@
+.pageWrapper,
+.questionBlock,
+.questionsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pageWrapper,
+.questionsWrapper {
+  gap: 18px;
+}
+
+.pageWrapper {
+  padding-bottom: 30px;
+}
+
+.quizTitle {
+  font-size: 24px;
+  padding: 12px 0;
+}
+
+.quizAuthor {
+  color: purple;
+  font-size: 14px;
+}
+
+.questionBlock {
+  width: 400px;
+
+  gap: 24px;
+  padding: 16px;
+
+  border: 1px solid purple;
+  border-radius: 16px;
+}
+
+.questionText {
+  align-self: center;
+
+  font-size: 24px;
+}
+
+@media screen and (max-width: 750px) {
+  .questionBlock {
+    width: 300px;
+  }
+}
