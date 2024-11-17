@@ -166,3 +166,13 @@ export type UpdateQuizProps = {
   quiz_name: string;
   quiz_title: string;
 };
+
+export type QuizByIdProps = QuizItem & {
+  quiz_frequency: number;
+  created_by: UserItem;
+  questions_list: {
+    question_id: number;
+    question_text: string;
+    question_answers: string[];
+  }[];
+};
