@@ -406,6 +406,18 @@
     "createQuizButton": "Create Quiz"
   },
   "CompanyQuizList": {
-    "fetchError": "Failed to get Quiz List"
+    "fetchError": "Failed to get Quiz List",
+    "playBtn": "Play"
+  },
+  "QuizGamePage": {
+    "fetchError": "Quiz id is wrong!",
+    "fetchFailed": "Failed to get quiz.",
+    "modalTitle": "Quiz Completed!",
+    "modalText": "Your score is:",
+    "quizDescription": "This is your awesome quiz",
+    "quizAuthor": "Created by:",
+    "errorSubmit": "You need to choose all answers.",
+    "buttonSubmit": "Submit your Quiz",
+    "buttonExit": "Exit"
   }
 }

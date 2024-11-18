@@ -11,8 +11,10 @@ import { fetchQuizById } from "@/state/quiz-by-id/quizByIdSlice";
 import { Button, Radio, RadioGroup, FormControlLabel } from "@mui/material";
 import { takeQuizAnswers } from "@/services/axios-api-methods/axiosPost";
 import UniversalModal from "@/app/components/universal-modal/UniversalModal";
+import { useTranslations } from "next-intl";
 
 const QuizGamePage = () => {
+  const t = useTranslations("QuizGamePage");
   const { quizId } = useParams();
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -29,12 +31,12 @@ const QuizGamePage = () => {
       if (typeof id === "number" && !isNaN(id)) {
         dispatch(fetchQuizById(id));
       } else {
-        throw new Error("Quiz id is wrong!");
+        throw new Error(t("fetchError"));
       }
     } catch (error) {
       setFetchError((error as Error).message);
     }
-  }, [dispatch, quizId]);
+  }, [dispatch, quizId, t]);
 
   const handleAnswerChange = (questionId: number, answer: string) => {
     setAnswers((prev) => ({
@@ -44,13 +46,13 @@ const QuizGamePage = () => {
   };
 
   if (error || fetchError)
-    return <PageError errorTitle={fetchError || "Failed to get quiz."} />;
+    return <PageError errorTitle={fetchError || t("fetchFailed")} />;
 
   if (!quiz || loading) return <Loading />;
 
   const handleSubmit = async () => {
     if (Object.keys(answers).length < quiz.questions_list.length) {
-      setErrorText("You need to choose all answers before submit!");
+      setErrorText(t("errorSubmit"));
       return;
     }
     try {
@@ -62,7 +64,7 @@ const QuizGamePage = () => {
       setErrorText("");
       setIsModal(true);
     } catch {
-      setErrorText("You cant submit this quiz.");
+      setErrorText(t("errorGeneral"));
     }
   };
 
@@ -70,20 +72,27 @@ const QuizGamePage = () => {
     <>
       <UniversalModal
         open={isModal}
-        footerActions={<Button onClick={() => router.back()}>Exit</Button>}
+        footerActions={
+          <Button onClick={() => router.back()}>{t("buttonExit")}</Button>
+        }
       >
         <div className={styles.modalWrapper}>
-          <h3 className={styles.modalTitle}>Quiz Complied!</h3>
-          <p className={styles.modalText}>Your score is: {quizResult}/100</p>
+          <h3 className={styles.modalTitle}>{t("modalTitle")}</h3>
+          <p className={styles.modalText}>
+            {t("modalText")}
+            {quizResult}/100.
+          </p>
         </div>
       </UniversalModal>
       <div className={classNames("container", styles.pageWrapper)}>
         <h4 className={styles.quizTitle}>
-          {quiz.quiz_name} {quiz.quiz_title && ` [${quiz.quiz_title}]`}
+          {quiz.quiz_name} {quiz.quiz_title && `[${quiz.quiz_title}]`}
         </h4>
-        <p className={styles.quizDescription}>{quiz.quiz_description}</p>
+        {quiz.quiz_description && (
+          <p className={styles.quizDescription}>{quiz.quiz_description}</p>
+        )}
         <p className={styles.quizAuthor}>
-          Created by: {quiz.created_by.user_firstname}
+          {t("quizAuthor")} {quiz.created_by.user_firstname}
           {quiz.created_by.user_lastname} ({quiz.created_by.user_email})
         </p>
 
@@ -117,7 +126,7 @@ const QuizGamePage = () => {
           onClick={handleSubmit}
           className={styles.submitButton}
         >
-          Submit Answers
+          {t("buttonSubmit")}
         </Button>
       </div>
     </>

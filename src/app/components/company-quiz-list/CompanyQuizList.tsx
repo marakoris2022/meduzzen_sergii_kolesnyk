@@ -35,7 +35,7 @@ const CompanyQuizList = ({ companyId }: { companyId: number }) => {
               <Button
                 onClick={() => router.push(`${PATHS.QUIZ}/${quiz.quiz_id}`)}
               >
-                Play
+                {t("playBtn")}
               </Button>
             </div>
           );
