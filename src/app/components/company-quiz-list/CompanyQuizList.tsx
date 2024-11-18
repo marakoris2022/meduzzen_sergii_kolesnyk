@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { PATHS } from "@/interface/interface";
+import styles from "./companyQuizList.module.css";
 
 const CompanyQuizList = ({ companyId }: { companyId: number }) => {
   const t = useTranslations("CompanyQuizList");
@@ -25,11 +26,11 @@ const CompanyQuizList = ({ companyId }: { companyId: number }) => {
   if (error) return <PageError errorTitle={t("fetchError")} />;
 
   return (
-    <div>
+    <div className={styles.quizListWrapper}>
       {Boolean(quizList.length) &&
         quizList.map((quiz) => {
           return (
-            <div key={quiz.quiz_id}>
+            <div className={styles.quizItemWrapper} key={quiz.quiz_id}>
               <p>{quiz.quiz_name}</p>
               <Button
                 onClick={() => router.push(`${PATHS.QUIZ}/${quiz.quiz_id}`)}
