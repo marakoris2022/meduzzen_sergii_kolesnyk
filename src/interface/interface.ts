@@ -177,3 +177,9 @@ export type QuizByIdProps = QuizItem & {
     question_answers: string[];
   }[];
 };
+
+export type QuizAnswersBody = {
+  answers: {
+    [key: string]: string;
+  };
+};

@@ -1,4 +1,8 @@
-import { CreateQuizProps, QuizQuestionsProps } from "@/interface/interface";
+import {
+  CreateQuizProps,
+  QuizAnswersBody,
+  QuizQuestionsProps,
+} from "@/interface/interface";
 import { axiosInstance } from "../axiosInstance";
 
 export const loginUser = async (email: string, password: string) => {
@@ -53,5 +57,14 @@ export const addQuizQuestion = async (
 ) => {
   return await axiosInstance.post(`/quiz/${quiz_id}/add_question/`, {
     ...requestData,
+  });
+};
+
+export const takeQuizAnswers = async (
+  answers: QuizAnswersBody,
+  quiz_id: number
+) => {
+  return await axiosInstance.post(`/quiz/${quiz_id}/take_quiz/`, {
+    ...answers,
   });
 };

@@ -9,6 +9,7 @@ import Loading from "@/app/components/loading/Loading";
 import PageError from "@/app/components/users-page-error/PageError";
 import { fetchQuizById } from "@/state/quiz-by-id/quizByIdSlice";
 import { Button, Radio, RadioGroup, FormControlLabel } from "@mui/material";
+import { takeQuizAnswers } from "@/services/axios-api-methods/axiosPost";
 
 const QuizGamePage = () => {
   const { quizId } = useParams();
@@ -37,8 +38,17 @@ const QuizGamePage = () => {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log("Selected answers:", answers);
+    try {
+      const id = Number(quizId);
+
+      const quizResult = await takeQuizAnswers({ answers: answers }, id);
+
+      console.log("quizResult:", quizResult);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (error || fetchError)
@@ -49,11 +59,11 @@ const QuizGamePage = () => {
   return (
     <div className={classNames("container", styles.pageWrapper)}>
       <h4 className={styles.quizTitle}>
-        {quiz.quiz_name} [{quiz.quiz_title}]
+        {quiz.quiz_name} {quiz.quiz_title && ` [${quiz.quiz_title}]`}
       </h4>
       <p className={styles.quizDescription}>{quiz.quiz_description}</p>
       <p className={styles.quizAuthor}>
-        Created by: {quiz.created_by.user_firstname}{" "}
+        Created by: {quiz.created_by.user_firstname}
         {quiz.created_by.user_lastname} ({quiz.created_by.user_email})
       </p>
 
