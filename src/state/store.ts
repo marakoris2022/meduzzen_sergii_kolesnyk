@@ -6,6 +6,7 @@ import companiesSlice from "./companies/companiesSlice";
 import userCompaniesSlice from "./user-companies/userCompaniesSlice";
 import companyByIdSlice from "./company-by-id/companyByIdSlice";
 import quizzesSlice from "./quizzes/quizzesSlice";
+import quizByIdSlice from "./quiz-by-id/quizByIdSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -17,6 +18,7 @@ export const makeStore = () => {
       companies: companiesSlice,
       companyById: companyByIdSlice,
       quizzes: quizzesSlice,
+      quizById: quizByIdSlice,
     },
   });
 };

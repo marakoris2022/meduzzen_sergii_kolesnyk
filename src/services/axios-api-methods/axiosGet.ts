@@ -3,6 +3,7 @@ import {
   CompaniesProps,
   CompanyIdProps,
   CompanyPropsInList,
+  QuizByIdProps,
   QuizItem,
   UserItem,
   UserProps,
@@ -163,4 +164,16 @@ export const fetchQuizList = async (company_id: number) => {
     `/company/${company_id}/quizzes_list/`
   );
   return data.result.quizzes as QuizItem[];
+};
+
+export const getQuizById = async (quiz_id: number) => {
+  const { data } = await axiosInstance.get(`/quiz/${quiz_id}/`);
+  return data.result as QuizByIdProps;
+};
+
+export const getLastAnswersList = async (company_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/company/${company_id}/last_answers_list/`
+  );
+  return data.result as QuizByIdProps;
 };

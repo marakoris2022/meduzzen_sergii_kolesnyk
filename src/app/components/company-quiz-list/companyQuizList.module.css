@@ -1,0 +1,19 @@
+.quizItemWrapper,
+.quizListWrapper {
+  display: flex;
+}
+.quizListWrapper {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quizItemWrapper {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 8px 12px;
+
+  border-bottom: 1px solid blue;
+  border-right: 1px solid blue;
+  border-radius: 12px;
+}

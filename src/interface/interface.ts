@@ -7,6 +7,7 @@ export enum PATHS {
   ABOUT = "/about",
   SIGNIN = "/signin",
   SIGNUP = "/signup",
+  QUIZ = "/quiz",
 }
 
 export enum TOKEN {
@@ -165,4 +166,20 @@ export type UpdateQuizProps = {
   quiz_frequency: number;
   quiz_name: string;
   quiz_title: string;
+};
+
+export type QuizByIdProps = QuizItem & {
+  quiz_frequency: number;
+  created_by: UserItem;
+  questions_list: {
+    question_id: number;
+    question_text: string;
+    question_answers: string[];
+  }[];
+};
+
+export type QuizAnswersBody = {
+  answers: {
+    [key: string]: string;
+  };
 };

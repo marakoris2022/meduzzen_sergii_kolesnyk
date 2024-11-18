@@ -4,10 +4,15 @@ import PageError from "../users-page-error/PageError";
 import { fetchQuizzesData } from "@/state/quizzes/quizzesSlice";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { Button } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { PATHS } from "@/interface/interface";
+import styles from "./companyQuizList.module.css";
 
 const CompanyQuizList = ({ companyId }: { companyId: number }) => {
   const t = useTranslations("CompanyQuizList");
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const { quizList, loading, error } = useAppSelector((state) => state.quizzes);
 
   useEffect(() => {
@@ -20,9 +25,23 @@ const CompanyQuizList = ({ companyId }: { companyId: number }) => {
 
   if (error) return <PageError errorTitle={t("fetchError")} />;
 
-  return <div>{Boolean(quizList.length) && quizList.map(quiz => {
-    return <p key={quiz.quiz_id}>{quiz.quiz_name}</p>
-  })}</div>;
+  return (
+    <div className={styles.quizListWrapper}>
+      {Boolean(quizList.length) &&
+        quizList.map((quiz) => {
+          return (
+            <div className={styles.quizItemWrapper} key={quiz.quiz_id}>
+              <p>{quiz.quiz_name}</p>
+              <Button
+                onClick={() => router.push(`${PATHS.QUIZ}/${quiz.quiz_id}`)}
+              >
+                {t("playBtn")}
+              </Button>
+            </div>
+          );
+        })}
+    </div>
+  );
 };
 
 export default CompanyQuizList;

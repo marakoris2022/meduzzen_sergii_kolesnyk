@@ -405,6 +405,18 @@
     "createQuizButton": "Створити вікторину"
   },
   "CompanyQuizList": {
-    "fetchError": "Не вдалося отримати список вікторин"
+    "fetchError": "Не вдалося отримати список вікторин",
+    "playBtn": "Грати"
+  },
+  "QuizGamePage": {
+    "fetchError": "Ідентифікатор вікторини неправильний!",
+    "fetchFailed": "Не вдалося отримати вікторину.",
+    "modalTitle": "Вікторина завершена!",
+    "modalText": "Ваш результат:",
+    "quizDescription": "Це ваша дивовижна вікторина",
+    "quizAuthor": "Створено:",
+    "errorSubmit": "Вам потрібно вибрати всі відповіді.",
+    "buttonSubmit": "Відправити Вікторину",
+    "buttonExit": "Вихід"
   }
 }
