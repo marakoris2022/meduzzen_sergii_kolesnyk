@@ -319,7 +319,9 @@
     "promoteAction": "Promote",
     "promoteDescription": "Are you sure you want to promote this user to Admin?",
     "demoteAction": "Demote",
-    "demoteDescription": "Are you sure you want to demote this user to Member?"
+    "demoteDescription": "Are you sure you want to demote this user to Member?",
+    "quizAdminPanel": "Quiz Admin Panel",
+    "quizzesList": "Company Quizzes"
   },
   "ProfileActions": {
     "failedFetchActions": "Failed to fetch user Actions",
@@ -339,5 +341,71 @@
     "successInvited": "Successfully invited.",
     "inviteFailed": "You cannot invite this user.",
     "noCompanies": "You have no companies."
+  },
+  "CreateQuizModalBody": {
+    "createQuizForm": "Create Quiz Form",
+    "quizName": "Quiz Name",
+    "quizNameRequired": "Quiz name is required.",
+    "quizFrequency": "Quiz Frequency (days)",
+    "question": "Question",
+    "questionRequired": "Question is required.",
+    "answerChoice": "Answer Choice",
+    "answerRequired": "Answer is required.",
+    "addAnswer": "Add Answer",
+    "correctAnswer": "Correct Answer",
+    "removeQuestion": "Remove Question",
+    "addQuestion": "Add Question",
+    "submitQuiz": "Submit Quiz",
+    "answer": "Answer",
+    "minimumQuestionsPart1": "You must have at least",
+    "minimumQuestionsPart2": "questions.",
+    "minimumAnswersPart1": "You must have at least",
+    "minimumAnswersPart2": "answers in each Question.",
+    "submissionFailed": "Submitting is failed."
+  },
+  "UpdateQuizModal": {
+    "createQuizForm": "Update Quiz",
+    "quizName": "Quiz Name",
+    "quizTitle": "Quiz Title",
+    "quizDescription": "Quiz Description",
+    "quizFrequency": "Quiz Frequency",
+    "quizNameRequired": "Quiz name is required.",
+    "quizTitleRequired": "Quiz title is required.",
+    "quizDescriptionRequired": "Quiz description is required.",
+    "quizFrequencyRequired": "Quiz frequency is required.",
+    "quizFrequencyMinError": "Frequency must be at least 1.",
+    "submissionError": "Failed to update quiz data.",
+    "updateQuizButton": "Update Quiz"
+  },
+  "AddQuestionModal": {
+    "addQuestionFrom": "Add Question",
+    "questionText": "Question Text",
+    "questionTextRequired": "Question text is required",
+    "answersLabel": "Answers",
+    "answer": "Answer",
+    "answerRequired": "Answer is required",
+    "addAnswer": "Add Answer",
+    "correctAnswerIndex": "Correct Answer Index",
+    "correctAnswerRequired": "Correct answer index is required",
+    "correctAnswerInvalid": "Invalid correct answer index",
+    "createQuizButton": "Create Quiz",
+    "cancelButton": "Cancel",
+    "submissionError": "Error submitting the form. Please try again."
+  },
+  "DeleteQuizModal": {
+    "confirmationTitle": "Are you sure you want to delete",
+    "deleteError": "Failed to delete the Quiz",
+    "deleteButton": "Delete Quiz"
+  },
+  "QuizAdminPanel": {
+    "fetchError": "Failed to get Quiz List",
+    "quizCount": "You have already {count} quizzes.",
+    "addQuestionButton": "Add Question",
+    "updateQuizButton": "Update Quiz",
+    "deleteQuizButton": "Delete Quiz",
+    "createQuizButton": "Create Quiz"
+  },
+  "CompanyQuizList": {
+    "fetchError": "Failed to get Quiz List"
   }
 }

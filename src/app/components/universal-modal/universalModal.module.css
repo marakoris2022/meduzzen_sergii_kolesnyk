@@ -10,8 +10,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
-  max-height: 80vh;
+  max-width: 600px;
+  max-height: 95vh;
+  overflow: hidden;
   border: 2px solid blanchedalmond;
   border-radius: 15px;
   box-shadow: 24;

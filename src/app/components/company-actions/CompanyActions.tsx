@@ -19,6 +19,9 @@ import CompanyRequestsList from "./CompanyRequestsList";
 import CompanyBlockedList from "./CompanyBlockedList";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
+import AccordionCustom from "../accordion-custom/AccordionCustom";
+import QuizAdminPanel from "../create-quiz/QuizAdminPanel";
+import CompanyQuizList from "../company-quiz-list/CompanyQuizList";
 
 const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
   const t = useTranslations("CompanyActions");
@@ -35,14 +38,15 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
   const checkMemberStatus = async () => {
     try {
       const user = await getMe();
-      if (!companies.length) {
+
+      if (companies.length) {
+        companies.forEach((company) => {
+          if (company.company_id === companyData.company_id)
+            setMemberStatus(company.action);
+        });
+      } else {
         await dispatch(fetchUserCompanies(user.user_id));
       }
-
-      companies.forEach((company) => {
-        if (company.company_id === companyData.company_id)
-          setMemberStatus(company.action);
-      });
     } catch {
       setRenderError(t("failedDataFetching"));
     }
@@ -83,26 +87,42 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
       </UniversalModal>
 
       {memberStatus === "owner" && (
-        <div className={styles.adminPanelWrapper}>
-          <h3 className={styles.adminPanelTitle}>{t("ownerPanel")}</h3>
-          <CompanyMembersList
-            companyData={companyData}
-            myStatus={memberStatus}
-          />
-          <CompanyInvitesList companyData={companyData} />
-          <CompanyRequestsList companyData={companyData} />
-          <CompanyBlockedList companyData={companyData} />
-        </div>
+        <AccordionCustom title={t("ownerPanel")}>
+          <div className={styles.adminPanelWrapper}>
+            <CompanyMembersList
+              companyData={companyData}
+              myStatus={memberStatus}
+            />
+            <CompanyInvitesList companyData={companyData} />
+            <CompanyRequestsList companyData={companyData} />
+            <CompanyBlockedList companyData={companyData} />
+          </div>
+        </AccordionCustom>
       )}
 
       {(memberStatus === "admin" || memberStatus === "member") && (
-        <div className={styles.adminPanelWrapper}>
-          <h3 className={styles.adminPanelTitle}>{t("memberPanel")}</h3>
-          <CompanyMembersList
-            companyData={companyData}
-            myStatus={memberStatus}
-          />
-        </div>
+        <AccordionCustom title={t("memberPanel")}>
+          <div className={styles.adminPanelWrapper}>
+            <CompanyMembersList
+              companyData={companyData}
+              myStatus={memberStatus}
+            />
+          </div>
+        </AccordionCustom>
+      )}
+
+      {(memberStatus === "owner" || memberStatus === "admin") && (
+        <AccordionCustom title={t("quizAdminPanel")}>
+          <QuizAdminPanel companyId={companyData.company_id} />
+        </AccordionCustom>
+      )}
+
+      {(memberStatus === "member" ||
+        memberStatus === "owner" ||
+        memberStatus === "admin") && (
+        <AccordionCustom title={t("quizzesList")}>
+          <CompanyQuizList companyId={companyData.company_id} />
+        </AccordionCustom>
       )}
 
       {!memberStatus && (

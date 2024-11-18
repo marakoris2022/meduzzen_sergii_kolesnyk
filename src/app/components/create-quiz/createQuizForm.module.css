@@ -1,0 +1,36 @@
+.formWrapper,
+.accordionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formWrapper {
+  overflow-y: scroll;
+
+  min-height: 80vh;
+
+  padding: 8px;
+  margin-bottom: 12px;
+
+  scrollbar-color: purple transparent;
+  scrollbar-width: thin;
+
+  width: 460px;
+}
+
+.formWrapper,
+.submitError {
+  text-align: center;
+  padding: 6px 0;
+}
+
+.submitError {
+  color: red;
+}
+
+@media screen and (max-width: 750px) {
+  .formWrapper {
+    width: 340px;
+  }
+}

@@ -1,4 +1,4 @@
-import { RequestCompanyProps } from "@/interface/interface";
+import { RequestCompanyProps, UpdateQuizProps } from "@/interface/interface";
 import { axiosInstance } from "../axiosInstance";
 
 export type UpdateUserGeneralProps = {
@@ -73,4 +73,13 @@ export const updateCompanyAvatar = async (file: File, company_id: number) => {
       },
     }
   );
+};
+
+export const updateQuizData = async (
+  quiz_id: number,
+  updateData: UpdateQuizProps
+) => {
+  return await axiosInstance.put(`/quiz/${quiz_id}/update_info/`, {
+    ...updateData,
+  });
 };

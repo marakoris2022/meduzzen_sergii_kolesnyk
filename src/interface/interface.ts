@@ -139,3 +139,30 @@ export type MemberBadgeAction = {
   color: ButtonColor;
   icon: JSX.Element;
 };
+
+export type QuizItem = {
+  quiz_id: number;
+  quiz_name: string;
+  quiz_title: string;
+  quiz_description: string;
+};
+
+export type QuizQuestionsProps = {
+  question_text: string;
+  question_answers: string[];
+  question_correct_answer: number;
+};
+
+export type CreateQuizProps = {
+  quiz_name: string;
+  quiz_frequency: number;
+  company_id: number;
+  questions_list: QuizQuestionsProps[];
+};
+
+export type UpdateQuizProps = {
+  quiz_description: string;
+  quiz_frequency: number;
+  quiz_name: string;
+  quiz_title: string;
+};

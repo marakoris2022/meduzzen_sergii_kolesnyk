@@ -3,7 +3,8 @@
 .asideWrapper,
 .authorNameWrapper,
 .companyInfoWrapper,
-.backBtnWrapper {
+.backBtnWrapper,
+.sectionWrapper {
   display: flex;
   flex-direction: column;
 }
@@ -42,6 +43,7 @@
 
 .sectionWrapper {
   width: 100%;
+  gap: 12px;
 }
 
 .backBtnWrapper {
@@ -52,7 +54,9 @@
 
 .companyTitle {
   text-align: center;
+  font-size: 24px;
   padding: 16px;
+  color: purple;
 }
 
 .companyInfoWrapper {

@@ -318,7 +318,9 @@
     "promoteAction": "Підвищити",
     "promoteDescription": "Ви впевнені, що хочете підвищити цього користувача до адміністратора?",
     "demoteAction": "Понизити",
-    "demoteDescription": "Ви впевнені, що хочете понизити цього користувача до члена?"
+    "demoteDescription": "Ви впевнені, що хочете понизити цього користувача до користувача?",
+    "quizAdminPanel": "Панель адміністратора тесту",
+    "quizzesList": "Вікторини компанії"
   },
   "ProfileActions": {
     "failedFetchActions": "Не вдалося отримати дії користувача",
@@ -338,5 +340,71 @@
     "successInvited": "Успішно запрошено.",
     "inviteFailed": "Ви не можете запросити цього користувача.",
     "noCompanies": "У вас немає компаній."
+  },
+  "CreateQuizModalBody": {
+    "createQuizForm": "Створити вікторину",
+    "quizName": "Назва вікторини",
+    "quizNameRequired": "Назва вікторини є обов'язковою.",
+    "quizFrequency": "Частота вікторини (днів)",
+    "question": "Питання",
+    "questionRequired": "Питання є обов'язковим.",
+    "answerChoice": "Варіант відповіді",
+    "answerRequired": "Відповідь є обов'язковою.",
+    "addAnswer": "Додати відповідь",
+    "correctAnswer": "Правильна відповідь",
+    "removeQuestion": "Видалити питання",
+    "addQuestion": "Додати питання",
+    "submitQuiz": "Надіслати вікторину",
+    "answer": "Відповідь",
+    "minimumQuestionsPart1": "Ви повинні мати щонайменше",
+    "minimumQuestionsPart2": "питань.",
+    "minimumAnswersPart1": "Ви повинні мати щонайменше",
+    "minimumAnswersPart2": "відповідей у кожному питанні.",
+    "submissionFailed": "Відправка не вдалася."
+  },
+  "UpdateQuizModal": {
+    "createQuizForm": "Оновити вікторину",
+    "quizName": "Назва вікторини",
+    "quizTitle": "Заголовок вікторини",
+    "quizDescription": "Опис вікторини",
+    "quizFrequency": "Частота вікторини",
+    "quizNameRequired": "Назва вікторини є обов'язковою.",
+    "quizTitleRequired": "Заголовок вікторини є обов'язковим.",
+    "quizDescriptionRequired": "Опис вікторини є обов'язковим.",
+    "quizFrequencyRequired": "Частота вікторини є обов'язковою.",
+    "quizFrequencyMinError": "Частота повинна бути не менше 1.",
+    "submissionError": "Не вдалося оновити дані вікторини.",
+    "updateQuizButton": "Оновити вікторину"
+  },
+  "AddQuestionModal": {
+    "addQuestionFrom": "Додати запитання",
+    "questionText": "Текст питання",
+    "questionTextRequired": "Текст питання обов'язковий",
+    "answersLabel": "Відповіді",
+    "answer": "Відповідь",
+    "answerRequired": "Відповідь обов'язкова",
+    "addAnswer": "Додати відповідь",
+    "correctAnswerIndex": "Індекс правильної відповіді",
+    "correctAnswerRequired": "Індекс правильної відповіді обов'язковий",
+    "correctAnswerInvalid": "Невірний індекс правильної відповіді",
+    "createQuizButton": "Створити тест",
+    "cancelButton": "Скасувати",
+    "submissionError": "Помилка під час відправки форми. Спробуйте ще раз."
+  },
+  "DeleteQuizModal": {
+    "confirmationTitle": "Ви впевнені, що хочете видалити",
+    "deleteError": "Не вдалося видалити вікторину",
+    "deleteButton": "Видалити вікторину"
+  },
+  "QuizAdminPanel": {
+    "fetchError": "Не вдалося отримати список вікторин",
+    "quizCount": "У вас вже є {count} вікторин.",
+    "addQuestionButton": "Додати питання",
+    "updateQuizButton": "Оновити вікторину",
+    "deleteQuizButton": "Видалити вікторину",
+    "createQuizButton": "Створити вікторину"
+  },
+  "CompanyQuizList": {
+    "fetchError": "Не вдалося отримати список вікторин"
   }
 }
