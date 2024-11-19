@@ -64,7 +64,7 @@ const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
         <p className={styles.quizQuantity}>
           {t("quizCount", { count: quizList.length })}
         </p>
-        {Boolean(quizList.length) && (
+        {quizList.length > 0 && (
           <div>
             {quizList.map((quizItem) => {
               return (
