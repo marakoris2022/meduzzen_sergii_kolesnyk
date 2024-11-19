@@ -183,3 +183,9 @@ export type QuizAnswersBody = {
     [key: string]: string;
   };
 };
+
+export enum STATUS {
+  OWNER = "owner",
+  ADMIN = "admin",
+  MEMBER = "member",
+}

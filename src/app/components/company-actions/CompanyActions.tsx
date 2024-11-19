@@ -1,6 +1,7 @@
 import {
   CompanyActionsModalProps,
   CompanyIdProps,
+  STATUS,
 } from "@/interface/interface";
 import {
   getMe,
@@ -86,7 +87,7 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
         )}
       </UniversalModal>
 
-      {memberStatus === "owner" && (
+      {memberStatus === STATUS.OWNER && (
         <AccordionCustom title={t("ownerPanel")}>
           <div className={styles.adminPanelWrapper}>
             <CompanyMembersList
@@ -100,7 +101,7 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
         </AccordionCustom>
       )}
 
-      {(memberStatus === "admin" || memberStatus === "member") && (
+      {(memberStatus === STATUS.ADMIN || memberStatus === STATUS.MEMBER) && (
         <AccordionCustom title={t("memberPanel")}>
           <div className={styles.adminPanelWrapper}>
             <CompanyMembersList
@@ -111,15 +112,15 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
         </AccordionCustom>
       )}
 
-      {(memberStatus === "owner" || memberStatus === "admin") && (
+      {(memberStatus === STATUS.OWNER || memberStatus === STATUS.ADMIN) && (
         <AccordionCustom title={t("quizAdminPanel")}>
           <QuizAdminPanel companyId={companyData.company_id} />
         </AccordionCustom>
       )}
 
-      {(memberStatus === "member" ||
-        memberStatus === "owner" ||
-        memberStatus === "admin") && (
+      {(memberStatus === STATUS.MEMBER ||
+        memberStatus === STATUS.OWNER ||
+        memberStatus === STATUS.ADMIN) && (
         <AccordionCustom title={t("quizzesList")}>
           <CompanyQuizList companyId={companyData.company_id} />
         </AccordionCustom>

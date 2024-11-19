@@ -5,6 +5,7 @@ import {
   CompanyIdProps,
   MemberBadgeAction,
   PATHS,
+  STATUS,
   UserItem,
 } from "@/interface/interface";
 import {
@@ -140,8 +141,8 @@ const CompanyMembersList = ({
 
     let memberActions: MemberBadgeAction[] = [];
 
-    if (myStatus === "owner") {
-      if (targetMemberStatus === "owner")
+    if (myStatus === STATUS.OWNER) {
+      if (targetMemberStatus === STATUS.OWNER)
         return (memberActions = [actionsOpenProfile]);
 
       memberActions = [
@@ -150,16 +151,16 @@ const CompanyMembersList = ({
         actionsBlockMember,
       ];
 
-      if (targetMemberStatus === "member")
+      if (targetMemberStatus === STATUS.MEMBER)
         memberActions.push(actionsPromoteToAdmin);
-      if (targetMemberStatus === "admin")
+      if (targetMemberStatus === STATUS.ADMIN)
         memberActions.push(actionsDemoteFromAdmin);
     }
 
-    if (myStatus === "admin")
+    if (myStatus === STATUS.ADMIN)
       memberActions = [actionsOpenProfile, actionsExpelMember];
 
-    if (myStatus === "member")
+    if (myStatus === STATUS.MEMBER)
       memberActions = [actionsOpenProfile, actionsExpelMember];
 
     return memberActions;

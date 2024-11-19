@@ -16,6 +16,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import ConfirmCompanyDeletion from "../confirm-company-deletion/ConfirmCompanyDeletion";
 import { leaveCompany } from "@/services/axios-api-methods/axiosGet";
+import { STATUS } from "@/interface/interface";
 
 const ProfileCompanies = ({ userId }: { userId: number }) => {
   const t = useTranslations("ProfileCompanies");
@@ -107,7 +108,7 @@ const ProfileCompanies = ({ userId }: { userId: number }) => {
                 </div>
                 <CompanyListCard company={company} />
                 <div className={styles.myCompanyBtnWrapper}>
-                  {company.action === "owner" ? (
+                  {company.action === STATUS.OWNER ? (
                     <>
                       <Button
                         startIcon={<DeleteForeverIcon />}
