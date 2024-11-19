@@ -1,21 +1,14 @@
 import { useForm, useFieldArray } from "react-hook-form";
-import {
-  TextField,
-  Button,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import styles from "./createQuizForm.module.css";
-import AccordionCustom from "../accordion-custom/AccordionCustom";
-import { useState } from "react";
 import { CreateQuizProps } from "@/interface/interface";
 import { useTranslations } from "next-intl";
 import { createQuiz } from "@/services/axios-api-methods/axiosPost";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchQuizzesData } from "@/state/quizzes/quizzesSlice";
 import UniversalModal from "../universal-modal/UniversalModal";
+import { QuestionInput } from "./QuestionInput";
+import { useState } from "react";
 
 const minQuestionsQuantity = 2;
 const minAnswersQuantity = 2;
@@ -40,6 +33,7 @@ const CreateQuizModalBody = ({
     control,
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<CreateQuizProps>({
     defaultValues: {
@@ -70,10 +64,8 @@ const CreateQuizModalBody = ({
       return;
     }
 
-    for (let i = 0; i < formData.questions_list.length; i++) {
-      if (
-        formData.questions_list[i].question_answers.length < minAnswersQuantity
-      ) {
+    for (const question of formData.questions_list) {
+      if (question.question_answers.length < minAnswersQuantity) {
         setSubmitError(
           `${t("minimumAnswersPart1")} ${minAnswersQuantity} ${t(
             "minimumAnswersPart2"
@@ -93,6 +85,11 @@ const CreateQuizModalBody = ({
     }
   };
 
+  function handleRemoveQuestion(questionIndex: number) {
+    remove(questionIndex);
+    setQuestions((prev) => prev.filter((_, i) => i !== questionIndex));
+  }
+
   return (
     <UniversalModal open={isOpen} handleClose={handleCloseModal}>
       <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
@@ -102,127 +99,43 @@ const CreateQuizModalBody = ({
           {...register("quiz_name", { required: t("quizNameRequired") })}
           fullWidth
           error={!!errors.quiz_name}
-          helperText={errors.quiz_name ? errors.quiz_name.message : ""}
+          helperText={errors.quiz_name?.message || ""}
         />
-
         <TextField
           label={t("quizFrequency")}
           type="number"
-          slotProps={{ htmlInput: { min: 1, max: 10 } }}
-          {...register("quiz_frequency", {
-            valueAsNumber: true,
-          })}
+          {...register("quiz_frequency", { valueAsNumber: true })}
           fullWidth
         />
-
         {fields.map((item, questionIndex) => (
-          <AccordionCustom
+          <QuestionInput
             key={item.id}
-            title={`${t("question")} ${questionIndex + 1}`}
-          >
-            <div className={styles.accordionWrapper}>
-              <TextField
-                label={`${t("question")} ${questionIndex + 1}`}
-                {...register(`questions_list.${questionIndex}.question_text`, {
-                  required: t("questionRequired"),
-                })}
-                fullWidth
-                error={
-                  errors.questions_list
-                    ? Boolean(errors.questions_list[questionIndex])
-                    : false
-                }
-                helperText={
-                  errors.questions_list
-                    ? errors.questions_list[questionIndex]?.message
-                    : ""
-                }
-              />
-
-              {questions[questionIndex].answers.map((_, answer) => (
-                <TextField
-                  key={answer}
-                  label={`${t("answerChoice")} ${answer + 1}`}
-                  {...register(
-                    `questions_list.${questionIndex}.question_answers.${answer}`,
-                    {
-                      required: t("answerRequired"),
-                    }
-                  )}
-                  fullWidth
-                />
-              ))}
-
-              <Button
-                onClick={() => {
-                  setQuestions((prevState) =>
-                    prevState.map((question, index) =>
-                      index === questionIndex
-                        ? { ...question, answers: [...question.answers, ""] }
-                        : question
-                    )
-                  );
-                }}
-              >
-                {t("addAnswer")}
-              </Button>
-
-              <FormControl fullWidth>
-                <InputLabel>{t("correctAnswer")}</InputLabel>
-                <Select
-                  defaultValue={0}
-                  label={t("correctAnswer")}
-                  {...register(
-                    `questions_list.${questionIndex}.question_correct_answer`,
-                    {
-                      valueAsNumber: true,
-                    }
-                  )}
-                >
-                  {questions[questionIndex].answers.map((_, index) => (
-                    <MenuItem key={index} value={index}>
-                      {`${t("answer")} ${index + 1}`}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-
-              <Button
-                variant="outlined"
-                color="error"
-                onClick={() => {
-                  remove(questionIndex);
-                  setQuestions((prevQuestions) =>
-                    prevQuestions.filter((_, index) => index !== questionIndex)
-                  );
-                }}
-              >
-                {t("removeQuestion")}
-              </Button>
-            </div>
-          </AccordionCustom>
+            questionIndex={questionIndex}
+            question={questions[questionIndex]}
+            register={register}
+            errors={errors}
+            setQuestions={setQuestions}
+            removeQuestion={() => handleRemoveQuestion(questionIndex)}
+          />
         ))}
-
         <Button
           variant="text"
-          color="warning"
           onClick={() => {
-            setQuestions((state) => [...state, { answers: [""] }]);
             append({
               question_text: "",
               question_answers: [""],
               question_correct_answer: 0,
             });
+            setQuestions((state) => [...state, { answers: [""] }]);
           }}
         >
           {t("addQuestion")}
         </Button>
-
         {submitError && <p className={styles.submitError}>{submitError}</p>}
-
-        <Button color="success" type="submit" variant="outlined">
+        <Button color="success" type="submit">
           {t("submitQuiz")}
         </Button>
+        <Button onClick={() => reset()}>{t("resetBtn")}</Button>
       </form>
     </UniversalModal>
   );

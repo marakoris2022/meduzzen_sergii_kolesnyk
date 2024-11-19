@@ -361,7 +361,8 @@
     "minimumQuestionsPart2": "questions.",
     "minimumAnswersPart1": "You must have at least",
     "minimumAnswersPart2": "answers in each Question.",
-    "submissionFailed": "Submitting is failed."
+    "submissionFailed": "Submitting is failed.",
+    "resetBtn": "Reset"
   },
   "UpdateQuizModal": {
     "createQuizForm": "Update Quiz",

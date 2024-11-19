@@ -360,7 +360,8 @@
     "minimumQuestionsPart2": "питань.",
     "minimumAnswersPart1": "Ви повинні мати щонайменше",
     "minimumAnswersPart2": "відповідей у кожному питанні.",
-    "submissionFailed": "Відправка не вдалася."
+    "submissionFailed": "Відправка не вдалася.",
+    "resetBtn": "Скинути"
   },
   "UpdateQuizModal": {
     "createQuizForm": "Оновити вікторину",
