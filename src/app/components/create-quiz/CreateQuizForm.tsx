@@ -15,6 +15,7 @@ import { useTranslations } from "next-intl";
 import { createQuiz } from "@/services/axios-api-methods/axiosPost";
 import { useAppDispatch } from "@/state/hooks";
 import { fetchQuizzesData } from "@/state/quizzes/quizzesSlice";
+import UniversalModal from "../universal-modal/UniversalModal";
 
 const minQuestionsQuantity = 2;
 const minAnswersQuantity = 2;
@@ -22,9 +23,11 @@ const minAnswersQuantity = 2;
 const CreateQuizModalBody = ({
   handleCloseModal,
   companyId,
+  isOpen,
 }: {
   handleCloseModal: () => void;
   companyId: number;
+  isOpen: boolean;
 }) => {
   const t = useTranslations("CreateQuizModalBody");
   const dispatch = useAppDispatch();
@@ -91,135 +94,137 @@ const CreateQuizModalBody = ({
   };
 
   return (
-    <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
-      <h3>{t("createQuizForm")}</h3>
-      <TextField
-        label={t("quizName")}
-        {...register("quiz_name", { required: t("quizNameRequired") })}
-        fullWidth
-        error={!!errors.quiz_name}
-        helperText={errors.quiz_name ? errors.quiz_name.message : ""}
-      />
+    <UniversalModal open={isOpen} handleClose={handleCloseModal}>
+      <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
+        <h3>{t("createQuizForm")}</h3>
+        <TextField
+          label={t("quizName")}
+          {...register("quiz_name", { required: t("quizNameRequired") })}
+          fullWidth
+          error={!!errors.quiz_name}
+          helperText={errors.quiz_name ? errors.quiz_name.message : ""}
+        />
 
-      <TextField
-        label={t("quizFrequency")}
-        type="number"
-        slotProps={{ htmlInput: { min: 1, max: 10 } }}
-        {...register("quiz_frequency", {
-          valueAsNumber: true,
-        })}
-        fullWidth
-      />
+        <TextField
+          label={t("quizFrequency")}
+          type="number"
+          slotProps={{ htmlInput: { min: 1, max: 10 } }}
+          {...register("quiz_frequency", {
+            valueAsNumber: true,
+          })}
+          fullWidth
+        />
 
-      {fields.map((item, questionIndex) => (
-        <AccordionCustom
-          key={item.id}
-          title={`${t("question")} ${questionIndex + 1}`}
-        >
-          <div className={styles.accordionWrapper}>
-            <TextField
-              label={`${t("question")} ${questionIndex + 1}`}
-              {...register(`questions_list.${questionIndex}.question_text`, {
-                required: t("questionRequired"),
-              })}
-              fullWidth
-              error={
-                errors.questions_list
-                  ? Boolean(errors.questions_list[questionIndex])
-                  : false
-              }
-              helperText={
-                errors.questions_list
-                  ? errors.questions_list[questionIndex]?.message
-                  : ""
-              }
-            />
-
-            {questions[questionIndex].answers.map((_, answer) => (
+        {fields.map((item, questionIndex) => (
+          <AccordionCustom
+            key={item.id}
+            title={`${t("question")} ${questionIndex + 1}`}
+          >
+            <div className={styles.accordionWrapper}>
               <TextField
-                key={answer}
-                label={`${t("answerChoice")} ${answer + 1}`}
-                {...register(
-                  `questions_list.${questionIndex}.question_answers.${answer}`,
-                  {
-                    required: t("answerRequired"),
-                  }
-                )}
+                label={`${t("question")} ${questionIndex + 1}`}
+                {...register(`questions_list.${questionIndex}.question_text`, {
+                  required: t("questionRequired"),
+                })}
                 fullWidth
+                error={
+                  errors.questions_list
+                    ? Boolean(errors.questions_list[questionIndex])
+                    : false
+                }
+                helperText={
+                  errors.questions_list
+                    ? errors.questions_list[questionIndex]?.message
+                    : ""
+                }
               />
-            ))}
 
-            <Button
-              onClick={() => {
-                setQuestions((prevState) =>
-                  prevState.map((question, index) =>
-                    index === questionIndex
-                      ? { ...question, answers: [...question.answers, ""] }
-                      : question
-                  )
-                );
-              }}
-            >
-              {t("addAnswer")}
-            </Button>
+              {questions[questionIndex].answers.map((_, answer) => (
+                <TextField
+                  key={answer}
+                  label={`${t("answerChoice")} ${answer + 1}`}
+                  {...register(
+                    `questions_list.${questionIndex}.question_answers.${answer}`,
+                    {
+                      required: t("answerRequired"),
+                    }
+                  )}
+                  fullWidth
+                />
+              ))}
 
-            <FormControl fullWidth>
-              <InputLabel>{t("correctAnswer")}</InputLabel>
-              <Select
-                defaultValue={0}
-                label={t("correctAnswer")}
-                {...register(
-                  `questions_list.${questionIndex}.question_correct_answer`,
-                  {
-                    valueAsNumber: true,
-                  }
-                )}
+              <Button
+                onClick={() => {
+                  setQuestions((prevState) =>
+                    prevState.map((question, index) =>
+                      index === questionIndex
+                        ? { ...question, answers: [...question.answers, ""] }
+                        : question
+                    )
+                  );
+                }}
               >
-                {questions[questionIndex].answers.map((_, index) => (
-                  <MenuItem key={index} value={index}>
-                    {`${t("answer")} ${index + 1}`}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                {t("addAnswer")}
+              </Button>
 
-            <Button
-              variant="outlined"
-              color="error"
-              onClick={() => {
-                remove(questionIndex);
-                setQuestions((prevQuestions) =>
-                  prevQuestions.filter((_, index) => index !== questionIndex)
-                );
-              }}
-            >
-              {t("removeQuestion")}
-            </Button>
-          </div>
-        </AccordionCustom>
-      ))}
+              <FormControl fullWidth>
+                <InputLabel>{t("correctAnswer")}</InputLabel>
+                <Select
+                  defaultValue={0}
+                  label={t("correctAnswer")}
+                  {...register(
+                    `questions_list.${questionIndex}.question_correct_answer`,
+                    {
+                      valueAsNumber: true,
+                    }
+                  )}
+                >
+                  {questions[questionIndex].answers.map((_, index) => (
+                    <MenuItem key={index} value={index}>
+                      {`${t("answer")} ${index + 1}`}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
-      <Button
-        variant="text"
-        color="warning"
-        onClick={() => {
-          setQuestions((state) => [...state, { answers: [""] }]);
-          append({
-            question_text: "",
-            question_answers: [""],
-            question_correct_answer: 0,
-          });
-        }}
-      >
-        {t("addQuestion")}
-      </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => {
+                  remove(questionIndex);
+                  setQuestions((prevQuestions) =>
+                    prevQuestions.filter((_, index) => index !== questionIndex)
+                  );
+                }}
+              >
+                {t("removeQuestion")}
+              </Button>
+            </div>
+          </AccordionCustom>
+        ))}
 
-      {submitError && <p className={styles.submitError}>{submitError}</p>}
+        <Button
+          variant="text"
+          color="warning"
+          onClick={() => {
+            setQuestions((state) => [...state, { answers: [""] }]);
+            append({
+              question_text: "",
+              question_answers: [""],
+              question_correct_answer: 0,
+            });
+          }}
+        >
+          {t("addQuestion")}
+        </Button>
 
-      <Button color="success" type="submit" variant="outlined">
-        {t("submitQuiz")}
-      </Button>
-    </form>
+        {submitError && <p className={styles.submitError}>{submitError}</p>}
+
+        <Button color="success" type="submit" variant="outlined">
+          {t("submitQuiz")}
+        </Button>
+      </form>
+    </UniversalModal>
   );
 };
 

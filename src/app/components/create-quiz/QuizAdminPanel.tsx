@@ -4,7 +4,6 @@ import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import Loading from "../loading/Loading";
 import PageError from "../users-page-error/PageError";
-import UniversalModal from "../universal-modal/UniversalModal";
 import CreateQuizForm from "./CreateQuizForm";
 import styles from "./quizAdminPanel.module.css";
 import DeleteQuizModal from "./DeleteQuizModal";
@@ -35,47 +34,31 @@ const QuizAdminPanel = ({ companyId }: { companyId: number }) => {
 
   return (
     <>
-      <UniversalModal
-        open={isCreateQuizModal}
-        handleClose={() => setIsCreateQuizModal(false)}
-      >
-        <CreateQuizForm
-          handleCloseModal={() => setIsCreateQuizModal(false)}
-          companyId={companyId}
-        />
-      </UniversalModal>
+      <CreateQuizForm
+        isOpen={isCreateQuizModal}
+        handleCloseModal={() => setIsCreateQuizModal(false)}
+        companyId={companyId}
+      />
 
-      <UniversalModal
-        open={isDeleteQuizModal}
-        handleClose={() => setIsDeleteQuizModal(false)}
-      >
-        <DeleteQuizModal
-          handleClose={() => setIsDeleteQuizModal(false)}
-          quizData={activeQuizData}
-          companyId={companyId}
-        />
-      </UniversalModal>
+      <DeleteQuizModal
+        isOpen={isDeleteQuizModal}
+        handleCloseModal={() => setIsDeleteQuizModal(false)}
+        quizData={activeQuizData}
+        companyId={companyId}
+      />
 
-      <UniversalModal
-        open={isUpdateQuizModal}
-        handleClose={() => setIsUpdateQuizModal(false)}
-      >
-        <UpdateQuizModal
-          handleClose={() => setIsUpdateQuizModal(false)}
-          quizData={activeQuizData}
-          companyId={companyId}
-        />
-      </UniversalModal>
+      <UpdateQuizModal
+        isOpen={isUpdateQuizModal}
+        handleCloseModal={() => setIsUpdateQuizModal(false)}
+        quizData={activeQuizData}
+        companyId={companyId}
+      />
 
-      <UniversalModal
-        open={isAddQuestionModal}
-        handleClose={() => setIsAddQuestionModal(false)}
-      >
-        <AddQuestionModal
-          handleClose={() => setIsAddQuestionModal(false)}
-          quizData={activeQuizData}
-        />
-      </UniversalModal>
+      <AddQuestionModal
+        isOpen={isAddQuestionModal}
+        handleCloseModal={() => setIsAddQuestionModal(false)}
+        quizData={activeQuizData}
+      />
 
       <div className={styles.createQuizWrapper}>
         <p className={styles.quizQuantity}>

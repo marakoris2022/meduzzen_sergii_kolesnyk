@@ -58,7 +58,7 @@ const QuizGamePage = () => {
     try {
       const id = Number(quizId);
 
-      const { data } = await takeQuizAnswers({ answers: answers }, id);
+      const { data } = await takeQuizAnswers({ answers }, id);
 
       setQuizResult(data.result.result_score);
       setErrorText("");
