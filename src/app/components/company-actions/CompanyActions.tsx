@@ -128,7 +128,7 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
       )}
 
       {(memberStatus === STATUS.OWNER || memberStatus === STATUS.ADMIN) && (
-        <AccordionCustom title="Analytics">
+        <AccordionCustom title={t("analytics")}>
           <AnalyticsChart companyId={companyData.company_id} />
         </AccordionCustom>
       )}

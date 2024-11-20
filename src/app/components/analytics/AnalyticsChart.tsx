@@ -9,10 +9,11 @@ import { ActionProps, UserItem } from "@/interface/interface";
 import UserQuizChart from "./UserQuizChart";
 import { Button } from "@mui/material";
 import styles from "./analyticsChart.module.css";
-
-const last10Labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+import { last10Labels } from "@/constants/analyticsConstants";
+import { useTranslations } from "next-intl";
 
 const AnalyticsChart = ({ companyId }: { companyId: number }) => {
+  const t = useTranslations("AnalyticsChart");
   const { companyMembers } = useAppSelector((state) => state.companyById);
   const [chartData, setChartData] = useState<LineChartData>({
     labels: [],
@@ -43,7 +44,7 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
 
       setChartData(dataForChart);
     } catch {
-      setError("Failed to fetch analytics data.");
+      setError(t("fetchError"));
     }
   }
 
@@ -55,17 +56,17 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
 
   return chartData.datasets.length > 0 ? (
     <div className={styles.analyticsWrapper}>
-      <h3 className={styles.analyticsTitle}>Overall Analytics</h3>
+      <h3 className={styles.analyticsTitle}>{t("overallAnalytics")}</h3>
       <LineChart chartData={chartData} />
       {companyMembers.length > 0 && (
         <div className={styles.membersListWrapper}>
-          <h3 className={styles.membersListTitle}>Members list:</h3>
+          <h3 className={styles.membersListTitle}>{t("membersList")}</h3>
           {companyMembers.map((member) => {
             return (
               <div key={member.user_id} className={styles.membersListItem}>
                 <p>{member.user_email}</p>
                 <Button onClick={() => setSelectedUser(member)}>
-                  Analytics
+                  {t("showAnalytics")}
                 </Button>
               </div>
             );
@@ -73,15 +74,21 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
         </div>
       )}
       {selectedUser && (
-        <UserQuizChart
-          companyId={companyId}
-          userId={selectedUser.user_id}
-          userEmail={selectedUser.user_email}
-        />
+        <>
+          <UserQuizChart
+            companyId={companyId}
+            userId={selectedUser.user_id}
+            userEmail={selectedUser.user_email}
+          />
+
+          <Button color="error" onClick={() => setSelectedUser(null)}>
+            {t("remove")}
+          </Button>
+        </>
       )}
     </div>
   ) : (
-    <p>No data to show Analytics</p>
+    <p className={styles.analyticsTitle}>{t("noData")}</p>
   );
 };
 

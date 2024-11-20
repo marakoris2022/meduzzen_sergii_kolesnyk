@@ -5,14 +5,14 @@ import { getRandomColor } from "@/utils/getRandomColor";
 import { useAppSelector } from "@/state/hooks";
 import { QuizItem } from "@/interface/interface";
 import styles from "./analyticsChart.module.css";
+import { last10Labels } from "@/constants/analyticsConstants";
+import { useTranslations } from "next-intl";
 
 type Props = {
   companyId: number;
   userId: number;
   userEmail: string;
 };
-
-const last10Labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
 function getQuizNameById(quizId: number, quizzes: QuizItem[]) {
   return (
@@ -22,6 +22,7 @@ function getQuizNameById(quizId: number, quizzes: QuizItem[]) {
 }
 
 const UserQuizChart = ({ companyId, userId, userEmail }: Props) => {
+  const t = useTranslations("UserQuizChart");
   const [chartData, setChartData] = useState<LineChartData>({
     labels: [],
     datasets: [],
@@ -51,7 +52,7 @@ const UserQuizChart = ({ companyId, userId, userEmail }: Props) => {
 
       setChartData(dataForChart);
     } catch {
-      setError("Failed to fetch user analytics data.");
+      setError(t("fetchError"));
     }
   }
 
@@ -62,12 +63,14 @@ const UserQuizChart = ({ companyId, userId, userEmail }: Props) => {
   if (error) return <p>{error}</p>;
 
   return chartData.datasets.length > 0 ? (
-    <div className={styles.memberChartTitle}>
-      <h3>Member: {userEmail}</h3>
+    <div>
+      <h3 className={styles.memberChartTitle}>
+        {t("memberTitle", { email: userEmail })}
+      </h3>
       <LineChart chartData={chartData} />
     </div>
   ) : (
-    <p>No data available for this user.</p>
+    <p className={styles.memberChartTitle}>{t("noData")}</p>
   );
 };
 

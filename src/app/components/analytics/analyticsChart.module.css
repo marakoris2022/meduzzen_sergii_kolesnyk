@@ -1,6 +1,11 @@
 .analyticsWrapper,
-.membersListWrapper {
+.membersListWrapper,
+.membersListItem {
   display: flex;
+}
+
+.analyticsWrapper,
+.membersListWrapper {
   flex-direction: column;
   gap: 24px;
 }
@@ -20,7 +25,6 @@
 }
 
 .membersListItem {
-  display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0px 20px;
