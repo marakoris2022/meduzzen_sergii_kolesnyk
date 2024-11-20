@@ -79,26 +79,23 @@ const CompanyBlockedList = ({
       </p>
       <ul>
         {companyBlockedList.map((member) => (
-          <>
-            <ActionsMemberBadge
-              key={member.user_id}
-              member={member}
-              actions={[
-                {
-                  callback: () =>
-                    router.push(`${PATHS.USERS}/${member.user_id}`),
-                  color: ButtonColor.Primary,
-                  icon: <OpenInNewIcon />,
-                },
-                {
-                  callback: async () =>
-                    await handleCancelBlockMember(member.action_id),
-                  color: ButtonColor.Success,
-                  icon: <ReplyIcon />,
-                },
-              ]}
-            />
-          </>
+          <ActionsMemberBadge
+            key={member.user_id}
+            member={member}
+            actions={[
+              {
+                callback: () => router.push(`${PATHS.USERS}/${member.user_id}`),
+                color: ButtonColor.Primary,
+                icon: <OpenInNewIcon />,
+              },
+              {
+                callback: async () =>
+                  await handleCancelBlockMember(member.action_id),
+                color: ButtonColor.Success,
+                icon: <ReplyIcon />,
+              },
+            ]}
+          />
         ))}
       </ul>
     </>

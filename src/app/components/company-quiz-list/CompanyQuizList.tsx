@@ -27,7 +27,7 @@ const CompanyQuizList = ({ companyId }: { companyId: number }) => {
 
   return (
     <div className={styles.quizListWrapper}>
-      {Boolean(quizList.length) &&
+      {quizList.length > 0 &&
         quizList.map((quiz) => {
           return (
             <div className={styles.quizItemWrapper} key={quiz.quiz_id}>

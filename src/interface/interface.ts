@@ -183,3 +183,38 @@ export type QuizAnswersBody = {
     [key: string]: string;
   };
 };
+
+export enum STATUS {
+  OWNER = "owner",
+  ADMIN = "admin",
+  MEMBER = "member",
+}
+
+export type AnalyticRatingItem = {
+  current_rating: number;
+  average_rating: number;
+  pass_at: string;
+};
+
+export type SummaryRatingAnalyticProps = {
+  rating: [
+    {
+      rating: AnalyticRatingItem[];
+      user_id: number;
+    }
+  ];
+};
+
+export type SummaryRatingAnalyticForUserProps = {
+  rating: [
+    {
+      rating: AnalyticRatingItem[];
+      quiz_id: number;
+    }
+  ];
+};
+
+export type UserLastQuiz = {
+  quiz_id: number;
+  last_quiz_pass_at: string;
+};

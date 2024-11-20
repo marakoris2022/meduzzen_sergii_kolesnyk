@@ -320,7 +320,8 @@
     "demoteAction": "Понизити",
     "demoteDescription": "Ви впевнені, що хочете понизити цього користувача до користувача?",
     "quizAdminPanel": "Панель адміністратора тесту",
-    "quizzesList": "Вікторини компанії"
+    "quizzesList": "Вікторини компанії",
+    "analytics": "Аналітика"
   },
   "ProfileActions": {
     "failedFetchActions": "Не вдалося отримати дії користувача",
@@ -360,7 +361,8 @@
     "minimumQuestionsPart2": "питань.",
     "minimumAnswersPart1": "Ви повинні мати щонайменше",
     "minimumAnswersPart2": "відповідей у кожному питанні.",
-    "submissionFailed": "Відправка не вдалася."
+    "submissionFailed": "Відправка не вдалася.",
+    "resetBtn": "Скинути"
   },
   "UpdateQuizModal": {
     "createQuizForm": "Оновити вікторину",
@@ -418,5 +420,25 @@
     "errorSubmit": "Вам потрібно вибрати всі відповіді.",
     "buttonSubmit": "Відправити Вікторину",
     "buttonExit": "Вихід"
+  },
+  "UserQuizChart": {
+    "fetchError": "Не вдалося отримати дані аналітики користувача.",
+    "memberTitle": "Учасник: {email}",
+    "noData": "Дані для цього користувача недоступні."
+  },
+  "AnalyticsChart": {
+    "fetchError": "Не вдалося отримати дані аналітики.",
+    "overallAnalytics": "Загальна аналітика",
+    "membersList": "Список учасників:",
+    "showAnalytics": "Показати аналітику",
+    "remove": "Видалити",
+    "noData": "Немає даних для відображення аналітики",
+    "lastTaken": "Останній тест виконаний о",
+    "noQuizses": "Жодних тестів"
+  },
+  "UserGlobalRating": {
+    "title": "Глобальний рейтинг вікторини:",
+    "noQuizses": "Ще немає завершених тестів.",
+    "fetchError": "Неможливо отримати ваш глобальний рейтинг."
   }
 }

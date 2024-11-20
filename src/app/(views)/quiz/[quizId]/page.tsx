@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { notFound, useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./quizGame.module.css";
 import classNames from "classnames";
@@ -18,7 +18,7 @@ const QuizGamePage = () => {
   const { quizId } = useParams();
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [fetchError, setFetchError] = useState<string>("");
+  const [fetchError] = useState<string>("");
   const { quiz, loading, error } = useAppSelector((state) => state.quizById);
   const [answers, setAnswers] = useState<{ [questionId: number]: string }>({});
   const [errorText, setErrorText] = useState<string>("");
@@ -26,15 +26,11 @@ const QuizGamePage = () => {
   const [quizResult, setQuizResult] = useState<number>(0);
 
   useEffect(() => {
-    try {
-      const id = Number(quizId);
-      if (typeof id === "number" && !isNaN(id)) {
-        dispatch(fetchQuizById(id));
-      } else {
-        throw new Error(t("fetchError"));
-      }
-    } catch (error) {
-      setFetchError((error as Error).message);
+    const id = Number(quizId);
+    if (isNaN(id)) {
+      notFound();
+    } else {
+      dispatch(fetchQuizById(id));
     }
   }, [dispatch, quizId, t]);
 
@@ -58,7 +54,7 @@ const QuizGamePage = () => {
     try {
       const id = Number(quizId);
 
-      const { data } = await takeQuizAnswers({ answers: answers }, id);
+      const { data } = await takeQuizAnswers({ answers }, id);
 
       setQuizResult(data.result.result_score);
       setErrorText("");

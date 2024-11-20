@@ -5,7 +5,10 @@ import {
   CompanyPropsInList,
   QuizByIdProps,
   QuizItem,
+  SummaryRatingAnalyticForUserProps,
+  SummaryRatingAnalyticProps,
   UserItem,
+  UserLastQuiz,
   UserProps,
   UsersProps,
 } from "@/interface/interface";
@@ -176,4 +179,42 @@ export const getLastAnswersList = async (company_id: number) => {
     `/company/${company_id}/last_answers_list/`
   );
   return data.result as QuizByIdProps;
+};
+
+export const getSummaryRatingAnalytic = async (company_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/company/${company_id}/summary_rating_analytic_for_users/`
+  );
+  return data.result as SummaryRatingAnalyticProps;
+};
+
+export const getSummaryRatingAnalyticForUser = async (
+  company_id: number,
+  user_id: number
+) => {
+  const { data } = await axiosInstance.get(
+    `/company/${company_id}/summary_rating_analytic_for_user/${user_id}/`
+  );
+  return data.result as SummaryRatingAnalyticForUserProps;
+};
+
+export const getUserLastQuiz = async (user_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/user/${user_id}/quizzes_last_pass/`
+  );
+  return data.result.quizzes as UserLastQuiz[];
+};
+
+export const getQuizzesLastPass = async (company_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/company/${company_id}/quizzes_last_pass/`
+  );
+  return data.result;
+};
+
+export const getUserGlobalRating = async (user_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/user/${user_id}/global_rating_analytic/`
+  );
+  return data.result;
 };

@@ -321,7 +321,8 @@
     "demoteAction": "Demote",
     "demoteDescription": "Are you sure you want to demote this user to Member?",
     "quizAdminPanel": "Quiz Admin Panel",
-    "quizzesList": "Company Quizzes"
+    "quizzesList": "Company Quizzes",
+    "analytics": "Analytics"
   },
   "ProfileActions": {
     "failedFetchActions": "Failed to fetch user Actions",
@@ -361,7 +362,8 @@
     "minimumQuestionsPart2": "questions.",
     "minimumAnswersPart1": "You must have at least",
     "minimumAnswersPart2": "answers in each Question.",
-    "submissionFailed": "Submitting is failed."
+    "submissionFailed": "Submitting is failed.",
+    "resetBtn": "Reset"
   },
   "UpdateQuizModal": {
     "createQuizForm": "Update Quiz",
@@ -419,5 +421,25 @@
     "errorSubmit": "You need to choose all answers.",
     "buttonSubmit": "Submit your Quiz",
     "buttonExit": "Exit"
+  },
+  "UserQuizChart": {
+    "fetchError": "Failed to fetch user analytics data.",
+    "memberTitle": "Member: {email}",
+    "noData": "No data available for this user."
+  },
+  "AnalyticsChart": {
+    "fetchError": "Failed to fetch analytics data.",
+    "overallAnalytics": "Overall Analytics",
+    "membersList": "Members list:",
+    "showAnalytics": "Show Analytics",
+    "remove": "Remove",
+    "noData": "No data to show Analytics",
+    "lastTaken": "Last quiz taken at",
+    "noQuizzes": "No quizzes taken"
+  },
+  "UserGlobalRating": {
+    "title": "Global Quiz Rating:",
+    "noQuizzes": "No quizzes have been completed.",
+    "fetchError": "Failed to fetch user global rating."
   }
 }

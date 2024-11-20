@@ -6,10 +6,12 @@ import styles from "./addQuestionModal.module.css";
 import { useTranslations } from "next-intl";
 import { QuizItem } from "@/interface/interface";
 import { addQuizQuestion } from "@/services/axios-api-methods/axiosPost";
+import UniversalModal from "../universal-modal/UniversalModal";
 
 type Props = {
-  handleClose: () => void;
+  handleCloseModal: () => void;
   quizData: QuizItem | null;
+  isOpen: boolean;
 };
 
 type QuestionsHookForm = {
@@ -20,7 +22,7 @@ type QuestionsHookForm = {
   question_correct_answer: number;
 };
 
-const AddQuestionModal = ({ handleClose, quizData }: Props) => {
+const AddQuestionModal = ({ handleCloseModal, quizData, isOpen }: Props) => {
   const t = useTranslations("AddQuestionModal");
   const [errorText, setErrorText] = useState<string>("");
 
@@ -57,85 +59,89 @@ const AddQuestionModal = ({ handleClose, quizData }: Props) => {
       const requestData = { ...quizFormData, question_answers };
 
       await addQuizQuestion(requestData, quizData.quiz_id);
-      handleClose();
+      handleCloseModal();
     } catch {
       setErrorText(t("submissionError"));
     }
   };
 
   return (
-    <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
-      <h3 className={styles.formTitle}>{t("addQuestionFrom")}</h3>
+    <UniversalModal open={isOpen} handleClose={handleCloseModal}>
+      <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
+        <h3 className={styles.formTitle}>{t("addQuestionFrom")}</h3>
 
-      <TextField
-        label={t("questionText")}
-        {...register("question_text", { required: t("questionTextRequired") })}
-        fullWidth
-        error={!!errors.question_text}
-        helperText={errors.question_text ? errors.question_text.message : ""}
-      />
+        <TextField
+          label={t("questionText")}
+          {...register("question_text", {
+            required: t("questionTextRequired"),
+          })}
+          fullWidth
+          error={!!errors.question_text}
+          helperText={errors.question_text ? errors.question_text.message : ""}
+        />
 
-      <div className={styles.answersWrapper}>
-        <h4>{t("answersLabel")}</h4>
-        {fields.map((field, index) => (
-          <div key={field.id} className={styles.answerRow}>
-            <TextField
-              label={`${t("answer")} ${index + 1}`}
-              {...register(`question_answers.${index}.value`, {
-                required: t("answerRequired"),
-              })}
-              fullWidth
-              error={!!errors.question_answers?.[index]}
-              helperText={
-                errors.question_answers?.[index]
-                  ? errors.question_answers[index]?.message
-                  : ""
-              }
-            />
-            <IconButton
-              color="error"
-              onClick={() => remove(index)}
-              disabled={fields.length === 1}
-            >
-              <Remove />
-            </IconButton>
-          </div>
-        ))}
-        <Button
-          onClick={() => append({ value: "" })}
-          variant="outlined"
-          startIcon={<Add />}
-        >
-          {t("addAnswer")}
+        <div className={styles.answersWrapper}>
+          <h4>{t("answersLabel")}</h4>
+          {fields.map((field, index) => (
+            <div key={field.id} className={styles.answerRow}>
+              <TextField
+                label={`${t("answer")} ${index + 1}`}
+                {...register(`question_answers.${index}.value`, {
+                  required: t("answerRequired"),
+                })}
+                fullWidth
+                error={!!errors.question_answers?.[index]}
+                helperText={
+                  errors.question_answers?.[index]
+                    ? errors.question_answers[index]?.message
+                    : ""
+                }
+              />
+              <IconButton
+                color="error"
+                onClick={() => remove(index)}
+                disabled={fields.length === 1}
+              >
+                <Remove />
+              </IconButton>
+            </div>
+          ))}
+          <Button
+            onClick={() => append({ value: "" })}
+            variant="outlined"
+            startIcon={<Add />}
+          >
+            {t("addAnswer")}
+          </Button>
+        </div>
+
+        <TextField
+          label={t("correctAnswerIndex")}
+          type="number"
+          {...register("question_correct_answer", {
+            required: t("correctAnswerRequired"),
+            valueAsNumber: true,
+            validate: (value) =>
+              value >= 0 && value < fields.length
+                ? true
+                : t("correctAnswerInvalid"),
+          })}
+          fullWidth
+          error={!!errors.question_correct_answer}
+          helperText={
+            errors.question_correct_answer
+              ? errors.question_correct_answer.message
+              : ""
+          }
+        />
+
+        {errorText && <p className={styles.errorText}>{errorText}</p>}
+
+        <Button type="submit" variant="outlined" color="primary">
+          {t("createQuizButton")}
         </Button>
-      </div>
-
-      <TextField
-        label={t("correctAnswerIndex")}
-        type="number"
-        {...register("question_correct_answer", {
-          required: t("correctAnswerRequired"),
-          valueAsNumber: true,
-          validate: (value) =>
-            value >= 0 && value < fields.length
-              ? true
-              : t("correctAnswerInvalid"),
-        })}
-        fullWidth
-        error={!!errors.question_correct_answer}
-        helperText={
-          errors.question_correct_answer
-            ? errors.question_correct_answer.message
-            : ""
-        }
-      />
-
-      {errorText && <p className={styles.errorText}>{errorText}</p>}
-
-      <Button type="submit" variant="outlined" color="primary">
-        {t("createQuizButton")}
-      </Button>
-    </form>
+      </form>
+    </UniversalModal>
   );
 };
 

@@ -7,6 +7,7 @@ import userCompaniesSlice from "./user-companies/userCompaniesSlice";
 import companyByIdSlice from "./company-by-id/companyByIdSlice";
 import quizzesSlice from "./quizzes/quizzesSlice";
 import quizByIdSlice from "./quiz-by-id/quizByIdSlice";
+import companySummaryAnalyticsSlice from "./company-summary-analytics/companySummaryAnalyticsSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -19,6 +20,7 @@ export const makeStore = () => {
       companyById: companyByIdSlice,
       quizzes: quizzesSlice,
       quizById: quizByIdSlice,
+      companySummaryAnalytics: companySummaryAnalyticsSlice,
     },
   });
 };
