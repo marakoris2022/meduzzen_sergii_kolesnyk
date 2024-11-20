@@ -436,5 +436,10 @@
     "noData": "No data to show Analytics",
     "lastTaken": "Last quiz taken at",
     "noQuizzes": "No quizzes taken"
+  },
+  "UserGlobalRating": {
+    "title": "Global Quiz Rating:",
+    "noQuizzes": "No quizzes have been completed.",
+    "fetchError": "Failed to fetch user global rating."
   }
 }

@@ -13,6 +13,7 @@ import { Button, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import UniversalModal from "@/app/components/universal-modal/UniversalModal";
 import InviteMemberForm from "@/app/components/invite-member-form/InviteMemberForm";
+import UserGlobalRating from "@/app/components/user-global-rating/UserGlobalRating";
 
 const UserProfilePage = () => {
   const t = useTranslations("UserProfilePage");
@@ -53,7 +54,7 @@ const UserProfilePage = () => {
         open={isInviteModal}
         handleClose={() => setIsInviteModal(false)}
       >
-        <InviteMemberForm memberId={+userId} />
+        <InviteMemberForm memberId={Number(userId)} />
       </UniversalModal>
 
       <h1
@@ -94,6 +95,7 @@ const UserProfilePage = () => {
               {t("superuser")}: {userData.is_superuser ? t("yes") : t("no")}
             </li>
           </ul>
+          <UserGlobalRating userId={Number(userId)} />
         </section>
       </div>
       <div className={styles.backBtnWrapper}>

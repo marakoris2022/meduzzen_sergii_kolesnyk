@@ -17,6 +17,7 @@ import { useTranslations } from "next-intl";
 import ProfileCompanies from "@/app/components/profile-companies/ProfileCompanies";
 import UserDataTable from "@/app/components/UserDataTable";
 import ProfileActions from "@/app/components/profile-actions/ProfileActions";
+import UserGlobalRating from "@/app/components/user-global-rating/UserGlobalRating";
 
 type ModalActionsProps = {
   handleDeleteUser: () => void;
@@ -121,6 +122,9 @@ const ProfilePage = () => {
             </Button>
           </div>
         </div>
+      </div>
+      <div className={styles.companiesWrapper}>
+        <UserGlobalRating userId={userData.user_id} />
       </div>
       <div className={styles.companiesWrapper}>
         <h3 className={styles.companiesTitle}>{t("myActions")}</h3>

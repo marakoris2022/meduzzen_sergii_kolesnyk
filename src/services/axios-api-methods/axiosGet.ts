@@ -211,3 +211,10 @@ export const getQuizzesLastPass = async (company_id: number) => {
   );
   return data.result;
 };
+
+export const getUserGlobalRating = async (user_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/user/${user_id}/global_rating_analytic/`
+  );
+  return data.result;
+};
