@@ -213,3 +213,8 @@ export type SummaryRatingAnalyticForUserProps = {
     }
   ];
 };
+
+export type UserLastQuiz = {
+  quiz_id: number;
+  last_quiz_pass_at: string;
+};

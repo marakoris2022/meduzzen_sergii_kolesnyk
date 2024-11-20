@@ -8,6 +8,7 @@ import {
   SummaryRatingAnalyticForUserProps,
   SummaryRatingAnalyticProps,
   UserItem,
+  UserLastQuiz,
   UserProps,
   UsersProps,
 } from "@/interface/interface";
@@ -195,4 +196,18 @@ export const getSummaryRatingAnalyticForUser = async (
     `/company/${company_id}/summary_rating_analytic_for_user/${user_id}/`
   );
   return data.result as SummaryRatingAnalyticForUserProps;
+};
+
+export const getUserLastQuiz = async (user_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/user/${user_id}/quizzes_last_pass/`
+  );
+  return data.result.quizzes as UserLastQuiz[];
+};
+
+export const getQuizzesLastPass = async (company_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/company/${company_id}/quizzes_last_pass/`
+  );
+  return data.result;
 };

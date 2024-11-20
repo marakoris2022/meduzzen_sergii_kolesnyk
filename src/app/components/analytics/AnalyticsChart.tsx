@@ -1,39 +1,48 @@
-import { getSummaryRatingAnalytic } from "@/services/axios-api-methods/axiosGet";
 import { useEffect, useState } from "react";
 import LineChart, { LineChartData } from "../charts/LineChart";
 import { getRandomColor } from "@/utils/getRandomColor";
-import { useAppSelector } from "@/state/hooks";
+import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import PageError from "../users-page-error/PageError";
 import { resolveMemberLabel } from "@/utils/resolveMemberLabel";
-import { ActionProps, UserItem } from "@/interface/interface";
+import {
+  ActionProps,
+  SummaryRatingAnalyticProps,
+  UserItem,
+} from "@/interface/interface";
 import UserQuizChart from "./UserQuizChart";
 import { Button } from "@mui/material";
 import styles from "./analyticsChart.module.css";
 import { last10Labels } from "@/constants/analyticsConstants";
 import { useTranslations } from "next-intl";
+import { fetchSummaryRatingAnalytic } from "@/state/company-summary-analytics/companySummaryAnalyticsSlice";
+import LastUserQuiz from "./LastUserQuiz";
 
 const AnalyticsChart = ({ companyId }: { companyId: number }) => {
   const t = useTranslations("AnalyticsChart");
+  const dispatch = useAppDispatch();
   const { companyMembers } = useAppSelector((state) => state.companyById);
+  const { error, companyAnalytics } = useAppSelector(
+    (state) => state.companySummaryAnalytics
+  );
   const [chartData, setChartData] = useState<LineChartData>({
     labels: [],
     datasets: [],
   });
-  const [error, setError] = useState<string>("");
   const [selectedUser, setSelectedUser] = useState<
     null | (UserItem & ActionProps)
   >(null);
 
   async function fetchAnalyticsData(
     companyId: number,
-    companyMembers: (UserItem & ActionProps)[]
+    companyMembers: (UserItem & ActionProps)[],
+    companyAnalytics: SummaryRatingAnalyticProps | null
   ) {
-    try {
-      const summary = await getSummaryRatingAnalytic(companyId);
+    await dispatch(fetchSummaryRatingAnalytic(companyId));
 
+    if (companyAnalytics) {
       const dataForChart: LineChartData = {
         labels: last10Labels,
-        datasets: summary.rating.map((memberRating) => {
+        datasets: companyAnalytics.rating.map((memberRating) => {
           return {
             label: resolveMemberLabel(memberRating.user_id, companyMembers),
             data: memberRating.rating.map((rating) => rating.average_rating),
@@ -43,13 +52,11 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
       };
 
       setChartData(dataForChart);
-    } catch {
-      setError(t("fetchError"));
     }
   }
 
   useEffect(() => {
-    fetchAnalyticsData(companyId, companyMembers);
+    fetchAnalyticsData(companyId, companyMembers, companyAnalytics);
   }, [companyId, companyMembers]);
 
   if (error) return <PageError errorTitle={error} />;
@@ -64,7 +71,15 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
           {companyMembers.map((member) => {
             return (
               <div key={member.user_id} className={styles.membersListItem}>
-                <p>{member.user_email}</p>
+                <div className={styles.memberTakeTimeWrapper}>
+                  <p>{member.user_email}</p>
+                  {companyAnalytics && (
+                    <LastUserQuiz
+                      memberId={member.user_id}
+                      companyAnalytics={companyAnalytics}
+                    />
+                  )}
+                </div>
                 <Button onClick={() => setSelectedUser(member)}>
                   {t("showAnalytics")}
                 </Button>

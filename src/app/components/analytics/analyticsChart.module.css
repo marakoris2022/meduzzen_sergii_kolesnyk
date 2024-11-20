@@ -1,13 +1,19 @@
 .analyticsWrapper,
 .membersListWrapper,
-.membersListItem {
+.membersListItem,
+.memberTakeTimeWrapper {
   display: flex;
 }
 
 .analyticsWrapper,
-.membersListWrapper {
+.membersListWrapper,
+.memberTakeTimeWrapper {
   flex-direction: column;
   gap: 24px;
+}
+
+.memberTakeTimeWrapper {
+  gap: 4px;
 }
 
 .membersListWrapper {

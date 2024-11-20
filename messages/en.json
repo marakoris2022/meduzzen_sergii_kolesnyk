@@ -433,6 +433,8 @@
     "membersList": "Members list:",
     "showAnalytics": "Show Analytics",
     "remove": "Remove",
-    "noData": "No data to show Analytics"
+    "noData": "No data to show Analytics",
+    "lastTaken": "Last quiz taken at",
+    "noQuizzes": "No quizzes taken"
   }
 }
