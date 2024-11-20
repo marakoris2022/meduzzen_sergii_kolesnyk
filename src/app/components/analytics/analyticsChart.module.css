@@ -1,0 +1,29 @@
+.analyticsWrapper,
+.membersListWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.membersListWrapper {
+  gap: 8px;
+}
+
+.analyticsTitle,
+.membersListTitle,
+.memberChartTitle {
+  text-align: center;
+  padding: 8px 0px;
+  color: purple;
+  text-decoration: underline;
+  text-decoration-color: rgba(128, 0, 128, 0.5);
+}
+
+.membersListItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 20px;
+
+  border-bottom: 1px solid green;
+}

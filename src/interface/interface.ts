@@ -189,3 +189,27 @@ export enum STATUS {
   ADMIN = "admin",
   MEMBER = "member",
 }
+
+export type AnalyticRatingItem = {
+  current_rating: number;
+  average_rating: number;
+  pass_at: string;
+};
+
+export type SummaryRatingAnalyticProps = {
+  rating: [
+    {
+      rating: AnalyticRatingItem[];
+      user_id: number;
+    }
+  ];
+};
+
+export type SummaryRatingAnalyticForUserProps = {
+  rating: [
+    {
+      rating: AnalyticRatingItem[];
+      quiz_id: number;
+    }
+  ];
+};
