@@ -23,6 +23,7 @@ import { fetchUserCompanies } from "@/state/user-companies/userCompaniesSlice";
 import AccordionCustom from "../accordion-custom/AccordionCustom";
 import QuizAdminPanel from "../create-quiz/QuizAdminPanel";
 import CompanyQuizList from "../company-quiz-list/CompanyQuizList";
+import AnalyticsChart from "../analytics/AnalyticsChart";
 
 const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
   const t = useTranslations("CompanyActions");
@@ -123,6 +124,12 @@ const CompanyActions = ({ companyData }: { companyData: CompanyIdProps }) => {
         memberStatus === STATUS.ADMIN) && (
         <AccordionCustom title={t("quizzesList")}>
           <CompanyQuizList companyId={companyData.company_id} />
+        </AccordionCustom>
+      )}
+
+      {(memberStatus === STATUS.OWNER || memberStatus === STATUS.ADMIN) && (
+        <AccordionCustom title="Analytics">
+          <AnalyticsChart companyId={companyData.company_id} />
         </AccordionCustom>
       )}
 

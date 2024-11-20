@@ -16,9 +16,9 @@ function ActionsMemberBadge({
     <li>
       <span>{member.user_email}</span>
       <span> ({member.action})</span>
-      {actions.map((action) => (
+      {actions.map((action, index) => (
         <IconButton
-          key={action.color}
+          key={index}
           onClick={action.callback}
           size="small"
           color={action.color}

@@ -177,3 +177,25 @@ export const getLastAnswersList = async (company_id: number) => {
   );
   return data.result as QuizByIdProps;
 };
+
+type SummaryRatingAnalyticProps = {
+  rating: [
+    {
+      rating: [
+        {
+          current_rating: number;
+          average_rating: number;
+          pass_at: string;
+        }
+      ];
+      user_id: number;
+    }
+  ];
+};
+
+export const getSummaryRatingAnalytic = async (company_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/company/${company_id}/summary_rating_analytic_for_users/`
+  );
+  return data.result as SummaryRatingAnalyticProps;
+};
