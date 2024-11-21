@@ -460,5 +460,9 @@
     "failedToLoadQuizzes": "Failed to load quizzes.",
     "failedToLoadAnalytics": "Failed to load analytics.",
     "downloadAnswers": "Download Last Answers"
+  },
+  "Notification": {
+    "newMessages": "New Messages",
+    "clearBtn": "Clear"
   }
 }

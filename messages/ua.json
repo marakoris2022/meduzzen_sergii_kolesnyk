@@ -459,5 +459,9 @@
     "failedToLoadQuizzes": "Не вдалося завантажити тести.",
     "failedToLoadAnalytics": "Не вдалося завантажити аналітику.",
     "downloadAnswers": "Завантажити останні відповіді"
+  },
+  "Notification": {
+    "newMessages": "Нові повідомлення",
+    "clearBtn": "Очистити"
   }
 }
