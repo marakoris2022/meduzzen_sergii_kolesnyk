@@ -17,7 +17,7 @@ export function middleware(request: NextRequest) {
     request.nextUrl.pathname !== PATHS.SIGNIN &&
     request.nextUrl.pathname !== PATHS.SIGNUP
   ) {
-    return NextResponse.redirect(new URL("/signin", request.url));
+    return NextResponse.redirect(new URL(PATHS.SIGNIN, request.url));
   }
 
   return NextResponse.next();
