@@ -437,7 +437,9 @@
     "noData": "No data to show Analytics",
     "lastTaken": "Last quiz taken at",
     "noQuizzes": "No quizzes taken",
-    "downloadAllAnswers": "Download All answers CSV"
+    "downloadAllAnswers": "Download All answers CSV",
+    "failedFetchUserCSV": "Failed to fetch user data for CSV file.",
+    "failedUsersCSV": "Failed to fetch users data for CSV file."
   },
   "UserGlobalRating": {
     "title": "Global Quiz Rating:",

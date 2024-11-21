@@ -62,7 +62,7 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
     try {
       await getUserAnswersFromCompanyCSV(companyId, userId);
     } catch {
-      setFetchError("Failed to fetch user data for CSV file.");
+      setFetchError(t("failedFetchUserCSV"));
     }
   }
 
@@ -70,7 +70,7 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
     try {
       await getAllQuizAnswersForCompanyCSV(companyId);
     } catch {
-      setFetchError("Failed to fetch users data for CSV file.");
+      setFetchError(t("failedUsersCSV"));
     }
   }
 
