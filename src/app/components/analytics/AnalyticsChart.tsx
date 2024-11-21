@@ -12,7 +12,6 @@ import {
 import UserQuizChart from "./UserQuizChart";
 import { Button } from "@mui/material";
 import styles from "./analyticsChart.module.css";
-import { last10Labels } from "@/constants/analyticsConstants";
 import { useTranslations } from "next-intl";
 import { fetchSummaryRatingAnalytic } from "@/state/company-summary-analytics/companySummaryAnalyticsSlice";
 import LastUserQuiz from "./LastUserQuiz";
@@ -25,7 +24,6 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
     (state) => state.companySummaryAnalytics
   );
   const [chartData, setChartData] = useState<LineChartData>({
-    labels: [],
     datasets: [],
   });
   const [selectedUser, setSelectedUser] = useState<
@@ -41,7 +39,6 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
 
     if (companyAnalytics) {
       const dataForChart: LineChartData = {
-        labels: last10Labels,
         datasets: companyAnalytics.rating.map((memberRating) => {
           return {
             label: resolveMemberLabel(memberRating.user_id, companyMembers),

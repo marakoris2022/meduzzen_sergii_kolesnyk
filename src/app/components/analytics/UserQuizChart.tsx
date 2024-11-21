@@ -5,7 +5,6 @@ import { getRandomColor } from "@/utils/getRandomColor";
 import { useAppSelector } from "@/state/hooks";
 import { QuizItem } from "@/interface/interface";
 import styles from "./analyticsChart.module.css";
-import { last10Labels } from "@/constants/analyticsConstants";
 import { useTranslations } from "next-intl";
 
 type Props = {
@@ -24,7 +23,6 @@ function getQuizNameById(quizId: number, quizzes: QuizItem[]) {
 const UserQuizChart = ({ companyId, userId, userEmail }: Props) => {
   const t = useTranslations("UserQuizChart");
   const [chartData, setChartData] = useState<LineChartData>({
-    labels: [],
     datasets: [],
   });
   const [error, setError] = useState<string>("");
@@ -39,7 +37,6 @@ const UserQuizChart = ({ companyId, userId, userEmail }: Props) => {
       const summary = await getSummaryRatingAnalyticForUser(companyId, userId);
 
       const dataForChart: LineChartData = {
-        labels: last10Labels,
         datasets: summary.rating.map((quiz) => {
           const dataset: DatasetsProp = {
             label: getQuizNameById(quiz.quiz_id, quizList),

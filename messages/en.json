@@ -441,5 +441,11 @@
     "title": "Global Quiz Rating:",
     "noQuizzes": "No quizzes have been completed.",
     "fetchError": "Failed to fetch user global rating."
+  },
+  "LineChart": {
+    "quantityLabel": "Quizzes quantity",
+    "quiz": "Quiz",
+    "lastQuizTaken": "Last Quizzes Taken",
+    "rating": "Rating"
   }
 }
