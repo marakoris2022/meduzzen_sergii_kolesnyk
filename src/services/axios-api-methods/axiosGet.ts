@@ -5,6 +5,7 @@ import {
   CompanyPropsInList,
   QuizByIdProps,
   QuizItem,
+  SummaryRatingAnalyticForUser,
   SummaryRatingAnalyticForUserProps,
   SummaryRatingAnalyticProps,
   UserItem,
@@ -205,11 +206,21 @@ export const getUserLastQuiz = async (user_id: number) => {
   return data.result.quizzes as UserLastQuiz[];
 };
 
-export const getQuizzesLastPass = async (company_id: number) => {
+export const getUserLastQuizzes = async (user_id: number) => {
   const { data } = await axiosInstance.get(
-    `/company/${company_id}/quizzes_last_pass/`
+    `/user/${user_id}/quizzes_last_pass/`
   );
-  return data.result;
+  return data.result.quizzes as UserLastQuiz[];
+};
+
+export const getUserAnalyticForQuiz = async (
+  user_id: number,
+  quiz_id: number
+) => {
+  const { data } = await axiosInstance.get(
+    `/user/${user_id}/rating_analytic_for_quiz/${quiz_id}/`
+  );
+  return data.result as SummaryRatingAnalyticForUser;
 };
 
 export const getUserGlobalRating = async (user_id: number) => {

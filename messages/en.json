@@ -160,7 +160,8 @@
     "phone": "Phone: ",
     "link": "Social Link:",
     "companies": "My Companies",
-    "myActions": "My Actions"
+    "myActions": "My Actions",
+    "profileAnalytics": "Profile Analytics"
   },
   "ProfileEditPage": {
     "edit": "Edit Profile",
@@ -447,5 +448,13 @@
     "quiz": "Quiz",
     "lastQuizTaken": "Last Quizzes Taken",
     "rating": "Rating"
+  },
+  "ProfileAnalytics": {
+    "noQuizzesFound": "No quizzes found.",
+    "showAnalytics": "Show Analytics",
+    "lastAttempt": "Last Attempt",
+    "quizId": "Quiz ID",
+    "failedToLoadQuizzes": "Failed to load quizzes.",
+    "failedToLoadAnalytics": "Failed to load analytics."
   }
 }

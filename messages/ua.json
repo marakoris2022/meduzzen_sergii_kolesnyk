@@ -159,7 +159,8 @@
     "phone": "Телефон: ",
     "link": "Соціальне посилання:",
     "companies": "Мої компанії",
-    "myActions": "Мої дії"
+    "myActions": "Мої дії",
+    "profileAnalytics": "Аналітика профілю"
   },
   "ProfileEditPage": {
     "edit": "Редагувати профіль",
@@ -329,7 +330,7 @@
     "refuseText": "Ви впевнені, що хочете видалити цю дію?",
     "accept": "Прийняти",
     "acceptText": "Ви впевнені, що бажаєте прийняти це запрошення?",
-    "youInvited": "Ви запросили",
+    "youInvited": "Вас запросили",
     "times": "разів",
     "noInvites": "На даний момент у вас немає запрошень.",
     "haveSent": "Ви надіслали",
@@ -446,5 +447,13 @@
     "quiz": "Квіз",
     "lastQuizTaken": "Останні виконані квізи",
     "rating": "Рейтинг"
+  },
+  "ProfileAnalytics": {
+    "noQuizzesFound": "Тести не знайдено.",
+    "showAnalytics": "Показати аналітику",
+    "lastAttempt": "Остання спроба",
+    "quizId": "ID тесту",
+    "failedToLoadQuizzes": "Не вдалося завантажити тести.",
+    "failedToLoadAnalytics": "Не вдалося завантажити аналітику."
   }
 }
