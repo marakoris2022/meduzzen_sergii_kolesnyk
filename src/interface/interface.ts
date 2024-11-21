@@ -196,6 +196,10 @@ export type AnalyticRatingItem = {
   pass_at: string;
 };
 
+export type SummaryRatingAnalyticForUser = {
+  rating: AnalyticRatingItem[];
+};
+
 export type SummaryRatingAnalyticProps = {
   rating: [
     {

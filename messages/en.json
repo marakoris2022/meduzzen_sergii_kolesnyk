@@ -160,7 +160,8 @@
     "phone": "Phone: ",
     "link": "Social Link:",
     "companies": "My Companies",
-    "myActions": "My Actions"
+    "myActions": "My Actions",
+    "profileAnalytics": "Profile Analytics"
   },
   "ProfileEditPage": {
     "edit": "Edit Profile",
@@ -431,15 +432,33 @@
     "fetchError": "Failed to fetch analytics data.",
     "overallAnalytics": "Overall Analytics",
     "membersList": "Members list:",
-    "showAnalytics": "Show Analytics",
+    "showAnalytics": "Analytics",
     "remove": "Remove",
     "noData": "No data to show Analytics",
     "lastTaken": "Last quiz taken at",
-    "noQuizzes": "No quizzes taken"
+    "noQuizzes": "No quizzes taken",
+    "downloadAllAnswers": "Download All answers CSV",
+    "failedFetchUserCSV": "Failed to fetch user data for CSV file.",
+    "failedUsersCSV": "Failed to fetch users data for CSV file."
   },
   "UserGlobalRating": {
     "title": "Global Quiz Rating:",
     "noQuizzes": "No quizzes have been completed.",
     "fetchError": "Failed to fetch user global rating."
+  },
+  "LineChart": {
+    "quantityLabel": "Quizzes quantity",
+    "quiz": "Quiz",
+    "lastQuizTaken": "Last Quizzes Taken",
+    "rating": "Rating"
+  },
+  "ProfileAnalytics": {
+    "noQuizzesFound": "No quizzes found.",
+    "showAnalytics": "Analytics",
+    "lastAttempt": "Last Attempt",
+    "quizId": "Quiz ID",
+    "failedToLoadQuizzes": "Failed to load quizzes.",
+    "failedToLoadAnalytics": "Failed to load analytics.",
+    "downloadAnswers": "Download Last Answers"
   }
 }

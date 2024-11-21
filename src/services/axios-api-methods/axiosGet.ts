@@ -5,6 +5,7 @@ import {
   CompanyPropsInList,
   QuizByIdProps,
   QuizItem,
+  SummaryRatingAnalyticForUser,
   SummaryRatingAnalyticForUserProps,
   SummaryRatingAnalyticProps,
   UserItem,
@@ -13,6 +14,7 @@ import {
   UsersProps,
 } from "@/interface/interface";
 import { axiosInstance } from "../axiosInstance";
+import { downloadCSVFile } from "@/utils/downloadCSVFile";
 
 export const getHealthStatus = async () => {
   const { data } = await axiosInstance.get("/");
@@ -205,11 +207,21 @@ export const getUserLastQuiz = async (user_id: number) => {
   return data.result.quizzes as UserLastQuiz[];
 };
 
-export const getQuizzesLastPass = async (company_id: number) => {
+export const getUserLastQuizzes = async (user_id: number) => {
   const { data } = await axiosInstance.get(
-    `/company/${company_id}/quizzes_last_pass/`
+    `/user/${user_id}/quizzes_last_pass/`
   );
-  return data.result;
+  return data.result.quizzes as UserLastQuiz[];
+};
+
+export const getUserAnalyticForQuiz = async (
+  user_id: number,
+  quiz_id: number
+) => {
+  const { data } = await axiosInstance.get(
+    `/user/${user_id}/rating_analytic_for_quiz/${quiz_id}/`
+  );
+  return data.result as SummaryRatingAnalyticForUser;
 };
 
 export const getUserGlobalRating = async (user_id: number) => {
@@ -217,4 +229,62 @@ export const getUserGlobalRating = async (user_id: number) => {
     `/user/${user_id}/global_rating_analytic/`
   );
   return data.result;
+};
+
+export const getUserLastAnswers = async (user_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/user/${user_id}/last_answers_list/`
+  );
+  return data.result;
+};
+
+export const getLastAnswersCSV = async (user_id: number) => {
+  const response = await axiosInstance.get(
+    `/user/${user_id}/last_answers_csv/`,
+    {
+      responseType: "blob",
+    }
+  );
+
+  if (response.status === 200) {
+    const blob = new Blob([response.data], { type: "text/csv" });
+    downloadCSVFile(blob, String(user_id));
+  } else {
+    throw new Error(`Failed to fetch CSV: ${response.statusText}`);
+  }
+};
+
+export const getUserAnswersFromCompanyCSV = async (
+  company_id: number,
+  user_id: number
+) => {
+  const response = await axiosInstance.get(
+    `/company/${company_id}/last_answers_csv_for_user/${user_id}/`,
+    {
+      responseType: "blob",
+    }
+  );
+
+  if (response.status === 200) {
+    const blob = new Blob([response.data], { type: "text/csv" });
+    downloadCSVFile(blob, String(user_id));
+  } else {
+    throw new Error(`Failed to fetch CSV: ${response.statusText}`);
+  }
+};
+
+export const getAllQuizAnswersForCompanyCSV = async (company_id: number) => {
+  const response = await axiosInstance.get(
+    `/company/${company_id}/last_answers_csv/`,
+    {
+      responseType: "blob",
+    }
+  );
+
+  if (response.status === 200) {
+    const blob = new Blob([response.data], { type: "text/csv" });
+    downloadCSVFile(blob, `all_users_${company_id}`);
+  } else {
+    throw new Error(`Failed to fetch CSV: ${response.statusText}`);
+  }
 };

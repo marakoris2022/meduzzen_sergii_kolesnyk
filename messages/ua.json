@@ -159,7 +159,8 @@
     "phone": "Телефон: ",
     "link": "Соціальне посилання:",
     "companies": "Мої компанії",
-    "myActions": "Мої дії"
+    "myActions": "Мої дії",
+    "profileAnalytics": "Аналітика профілю"
   },
   "ProfileEditPage": {
     "edit": "Редагувати профіль",
@@ -329,7 +330,7 @@
     "refuseText": "Ви впевнені, що хочете видалити цю дію?",
     "accept": "Прийняти",
     "acceptText": "Ви впевнені, що бажаєте прийняти це запрошення?",
-    "youInvited": "Ви запросили",
+    "youInvited": "Вас запросили",
     "times": "разів",
     "noInvites": "На даний момент у вас немає запрошень.",
     "haveSent": "Ви надіслали",
@@ -430,15 +431,33 @@
     "fetchError": "Не вдалося отримати дані аналітики.",
     "overallAnalytics": "Загальна аналітика",
     "membersList": "Список учасників:",
-    "showAnalytics": "Показати аналітику",
+    "showAnalytics": "Аналітика",
     "remove": "Видалити",
     "noData": "Немає даних для відображення аналітики",
     "lastTaken": "Останній тест виконаний о",
-    "noQuizses": "Жодних тестів"
+    "noQuizses": "Жодних тестів",
+    "downloadAllAnswers": "Завантажити всі відповіді CSV",
+    "failedFetchUserCSV": "Не вдалося отримати дані користувача для файлу CSV.",
+    "failedUsersCSV": "Не вдалося отримати дані користувачів для файлу CSV."
   },
   "UserGlobalRating": {
     "title": "Глобальний рейтинг вікторини:",
-    "noQuizses": "Ще немає завершених тестів.",
+    "noQuizzes": "Ще немає завершених тестів.",
     "fetchError": "Неможливо отримати ваш глобальний рейтинг."
+  },
+  "LineChart": {
+    "quantityLabel": "Кількість квізів",
+    "quiz": "Квіз",
+    "lastQuizTaken": "Останні виконані квізи",
+    "rating": "Рейтинг"
+  },
+  "ProfileAnalytics": {
+    "noQuizzesFound": "Тести не знайдено.",
+    "showAnalytics": "Аналітика",
+    "lastAttempt": "Остання спроба",
+    "quizId": "ID тесту",
+    "failedToLoadQuizzes": "Не вдалося завантажити тести.",
+    "failedToLoadAnalytics": "Не вдалося завантажити аналітику.",
+    "downloadAnswers": "Завантажити останні відповіді"
   }
 }

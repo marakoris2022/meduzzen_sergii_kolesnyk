@@ -18,6 +18,7 @@ import ProfileCompanies from "@/app/components/profile-companies/ProfileCompanie
 import UserDataTable from "@/app/components/UserDataTable";
 import ProfileActions from "@/app/components/profile-actions/ProfileActions";
 import UserGlobalRating from "@/app/components/user-global-rating/UserGlobalRating";
+import ProfileAnalytics from "@/app/components/profile-analytics/ProfileAnalytics";
 
 type ModalActionsProps = {
   handleDeleteUser: () => void;
@@ -133,6 +134,10 @@ const ProfilePage = () => {
       <div className={styles.companiesWrapper}>
         <h3 className={styles.companiesTitle}>{t("companies")}</h3>
         <ProfileCompanies userId={userData.user_id} />
+      </div>
+      <div className={styles.companiesWrapper}>
+        <h3 className={styles.companiesTitle}>{t("profileAnalytics")}</h3>
+        <ProfileAnalytics userId={userData.user_id} />
       </div>
     </main>
   );
