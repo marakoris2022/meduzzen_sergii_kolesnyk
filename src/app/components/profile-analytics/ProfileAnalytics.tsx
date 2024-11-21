@@ -3,6 +3,7 @@ import {
   getUserLastQuizzes,
   getUserAnalyticForQuiz,
   getQuizById,
+  getLastAnswersCSV,
 } from "@/services/axios-api-methods/axiosGet";
 import { useEffect, useState } from "react";
 import LineChart, { LineChartData } from "../charts/LineChart";
@@ -42,6 +43,14 @@ const ProfileAnalytics = ({ userId }: { userId: number }) => {
     }
   }
 
+  async function handleDownloadCSV(userId: number) {
+    try {
+      await getLastAnswersCSV(userId);
+    } catch {
+      setError("Failed to load data for CSV file.");
+    }
+  }
+
   async function fetchAnalytics(userId: number, quizId: number) {
     try {
       const userAnalyticData = await getUserAnalyticForQuiz(userId, quizId);
@@ -71,7 +80,7 @@ const ProfileAnalytics = ({ userId }: { userId: number }) => {
       {quizzes.length === 0 ? (
         <p>{t("noQuizzesFound")}</p>
       ) : (
-        <div>
+        <div className={styles.profileAnalyticsWrapper}>
           <ul className={styles.listWrapper}>
             {quizzes.map((quiz) => (
               <li className={styles.listItemWrapper} key={quiz.quiz_id}>
@@ -88,6 +97,13 @@ const ProfileAnalytics = ({ userId }: { userId: number }) => {
               </li>
             ))}
           </ul>
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={() => handleDownloadCSV(userId)}
+          >
+            {t("downloadAnswers")}
+          </Button>
           {chartData.datasets.length > 0 && <LineChart chartData={chartData} />}
         </div>
       )}

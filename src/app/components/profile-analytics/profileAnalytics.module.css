@@ -1,14 +1,21 @@
 .listWrapper,
-.listItemWrapper {
+.listItemWrapper,
+.profileAnalyticsWrapper {
   display: flex;
+  flex-direction: column;
+}
+
+.profileAnalyticsWrapper {
+  justify-content: center;
+  gap: 18px;
 }
 
 .listWrapper {
-  flex-direction: column;
   gap: 12px;
 }
 
 .listItemWrapper {
   align-items: center;
+  flex-direction: row;
   gap: 8px;
 }

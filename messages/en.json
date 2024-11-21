@@ -432,11 +432,12 @@
     "fetchError": "Failed to fetch analytics data.",
     "overallAnalytics": "Overall Analytics",
     "membersList": "Members list:",
-    "showAnalytics": "Show Analytics",
+    "showAnalytics": "Analytics",
     "remove": "Remove",
     "noData": "No data to show Analytics",
     "lastTaken": "Last quiz taken at",
-    "noQuizzes": "No quizzes taken"
+    "noQuizzes": "No quizzes taken",
+    "downloadAllAnswers": "Download All answers CSV"
   },
   "UserGlobalRating": {
     "title": "Global Quiz Rating:",
@@ -451,10 +452,11 @@
   },
   "ProfileAnalytics": {
     "noQuizzesFound": "No quizzes found.",
-    "showAnalytics": "Show Analytics",
+    "showAnalytics": "Analytics",
     "lastAttempt": "Last Attempt",
     "quizId": "Quiz ID",
     "failedToLoadQuizzes": "Failed to load quizzes.",
-    "failedToLoadAnalytics": "Failed to load analytics."
+    "failedToLoadAnalytics": "Failed to load analytics.",
+    "downloadAnswers": "Download Last Answers"
   }
 }

@@ -14,6 +14,7 @@ import {
   UsersProps,
 } from "@/interface/interface";
 import { axiosInstance } from "../axiosInstance";
+import { downloadCSVFile } from "@/utils/downloadCSVFile";
 
 export const getHealthStatus = async () => {
   const { data } = await axiosInstance.get("/");
@@ -228,4 +229,62 @@ export const getUserGlobalRating = async (user_id: number) => {
     `/user/${user_id}/global_rating_analytic/`
   );
   return data.result;
+};
+
+export const getUserLastAnswers = async (user_id: number) => {
+  const { data } = await axiosInstance.get(
+    `/user/${user_id}/last_answers_list/`
+  );
+  return data.result;
+};
+
+export const getLastAnswersCSV = async (user_id: number) => {
+  const response = await axiosInstance.get(
+    `/user/${user_id}/last_answers_csv/`,
+    {
+      responseType: "blob",
+    }
+  );
+
+  if (response.status === 200) {
+    const blob = new Blob([response.data], { type: "text/csv" });
+    downloadCSVFile(blob, String(user_id));
+  } else {
+    throw new Error(`Failed to fetch CSV: ${response.statusText}`);
+  }
+};
+
+export const getUserAnswersFromCompanyCSV = async (
+  company_id: number,
+  user_id: number
+) => {
+  const response = await axiosInstance.get(
+    `/company/${company_id}/last_answers_csv_for_user/${user_id}/`,
+    {
+      responseType: "blob",
+    }
+  );
+
+  if (response.status === 200) {
+    const blob = new Blob([response.data], { type: "text/csv" });
+    downloadCSVFile(blob, String(user_id));
+  } else {
+    throw new Error(`Failed to fetch CSV: ${response.statusText}`);
+  }
+};
+
+export const getAllQuizAnswersForCompanyCSV = async (company_id: number) => {
+  const response = await axiosInstance.get(
+    `/company/${company_id}/last_answers_csv/`,
+    {
+      responseType: "blob",
+    }
+  );
+
+  if (response.status === 200) {
+    const blob = new Blob([response.data], { type: "text/csv" });
+    downloadCSVFile(blob, `all_users_${company_id}`);
+  } else {
+    throw new Error(`Failed to fetch CSV: ${response.statusText}`);
+  }
 };

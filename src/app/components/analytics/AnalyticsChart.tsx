@@ -10,16 +10,22 @@ import {
   UserItem,
 } from "@/interface/interface";
 import UserQuizChart from "./UserQuizChart";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import styles from "./analyticsChart.module.css";
 import { useTranslations } from "next-intl";
 import { fetchSummaryRatingAnalytic } from "@/state/company-summary-analytics/companySummaryAnalyticsSlice";
 import LastUserQuiz from "./LastUserQuiz";
+import {
+  getAllQuizAnswersForCompanyCSV,
+  getUserAnswersFromCompanyCSV,
+} from "@/services/axios-api-methods/axiosGet";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 
 const AnalyticsChart = ({ companyId }: { companyId: number }) => {
   const t = useTranslations("AnalyticsChart");
   const dispatch = useAppDispatch();
   const { companyMembers } = useAppSelector((state) => state.companyById);
+  const [fetchError, setFetchError] = useState<string>("");
   const { error, companyAnalytics } = useAppSelector(
     (state) => state.companySummaryAnalytics
   );
@@ -52,11 +58,28 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
     }
   }
 
+  async function handleDownloadUserCSV(userId: number, companyId: number) {
+    try {
+      await getUserAnswersFromCompanyCSV(companyId, userId);
+    } catch {
+      setFetchError("Failed to fetch user data for CSV file.");
+    }
+  }
+
+  async function handleDownloadAllUsersCSV(companyId: number) {
+    try {
+      await getAllQuizAnswersForCompanyCSV(companyId);
+    } catch {
+      setFetchError("Failed to fetch users data for CSV file.");
+    }
+  }
+
   useEffect(() => {
     fetchAnalyticsData(companyId, companyMembers, companyAnalytics);
   }, [companyId, companyMembers]);
 
-  if (error) return <PageError errorTitle={error} />;
+  if (error || fetchError)
+    return <PageError errorTitle={error || fetchError} />;
 
   return chartData.datasets.length > 0 ? (
     <div className={styles.analyticsWrapper}>
@@ -77,12 +100,30 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
                     />
                   )}
                 </div>
-                <Button onClick={() => setSelectedUser(member)}>
-                  {t("showAnalytics")}
-                </Button>
+                <div>
+                  <Button onClick={() => setSelectedUser(member)}>
+                    {t("showAnalytics")}
+                  </Button>
+                  <IconButton
+                    onClick={() =>
+                      handleDownloadUserCSV(member.user_id, companyId)
+                    }
+                    size="small"
+                    color="primary"
+                  >
+                    <FileDownloadIcon />
+                  </IconButton>
+                </div>
               </div>
             );
           })}
+          <Button
+            onClick={() => handleDownloadAllUsersCSV(companyId)}
+            size="small"
+            color="primary"
+          >
+            {t("downloadAllAnswers")}
+          </Button>
         </div>
       )}
       {selectedUser && (

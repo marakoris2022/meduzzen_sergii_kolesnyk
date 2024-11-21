@@ -431,11 +431,12 @@
     "fetchError": "Не вдалося отримати дані аналітики.",
     "overallAnalytics": "Загальна аналітика",
     "membersList": "Список учасників:",
-    "showAnalytics": "Показати аналітику",
+    "showAnalytics": "Аналітика",
     "remove": "Видалити",
     "noData": "Немає даних для відображення аналітики",
     "lastTaken": "Останній тест виконаний о",
-    "noQuizses": "Жодних тестів"
+    "noQuizses": "Жодних тестів",
+    "downloadAllAnswers": "Завантажити всі відповіді CSV"
   },
   "UserGlobalRating": {
     "title": "Глобальний рейтинг вікторини:",
@@ -450,10 +451,11 @@
   },
   "ProfileAnalytics": {
     "noQuizzesFound": "Тести не знайдено.",
-    "showAnalytics": "Показати аналітику",
+    "showAnalytics": "Аналітика",
     "lastAttempt": "Остання спроба",
     "quizId": "ID тесту",
     "failedToLoadQuizzes": "Не вдалося завантажити тести.",
-    "failedToLoadAnalytics": "Не вдалося завантажити аналітику."
+    "failedToLoadAnalytics": "Не вдалося завантажити аналітику.",
+    "downloadAnswers": "Завантажити останні відповіді"
   }
 }
