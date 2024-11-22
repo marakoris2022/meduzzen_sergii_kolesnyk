@@ -29,9 +29,7 @@
   "UniversalModal": {
     "close": "Close"
   },
-  "AboutPage": {
-    "about": "About"
-  },
+
   "CompaniesPage": {
     "companies": "Companies Page",
     "errorCompaniesData": "Oops! Can't get list of companies.",
@@ -464,5 +462,12 @@
   "Notification": {
     "newMessages": "New Messages",
     "clearBtn": "Clear"
+  },
+  "AboutPage": {
+    "title": "About the Application",
+    "description": "This application implements a comprehensive system for managing users, companies, and quizzes. It includes authentication, CRUD operations, analytics, and data export features.",
+    "technologiesTitle": "Technologies Used",
+    "skillsTitle": "Skills Learned",
+    "skillsDescription": "During the development, I enhanced my knowledge of state management with Redux Toolkit, modular CSS, dynamic routing in Next.js, and integration of analytics and real-time data exchange using Chart.js and Socket.IO."
   }
 }

@@ -1,6 +1,5 @@
+import { FormEvent, useEffect, useState } from "react";
 import { Badge, Button, IconButton, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
 import MailIcon from "@mui/icons-material/Mail";
 import styles from "./notyfication.module.css";
 import UniversalModal from "../universal-modal/UniversalModal";
@@ -8,6 +7,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { useAppSelector } from "@/state/hooks";
 import { useTranslations } from "use-intl";
 import { ButtonColor } from "@/interface/interface";
+import { socket } from "@/services/wsInstance";
 
 type MessageItem = {
   time: number;
@@ -19,15 +19,11 @@ const Notification = () => {
   const [messages, setMessages] = useState<MessageItem[]>([]);
   const [myMessage, setMyMessage] = useState<string>("");
   const [messageCounter, setMessageCounter] = useState<number>(0);
-  const [socket, setSocket] = useState<null | Socket>(null);
   const [isModal, setIsModal] = useState<boolean>(false);
   const [notifyColor, setNotifyColor] = useState<ButtonColor>(
     ButtonColor.Primary
   );
   const { data: userData } = useAppSelector((state) => state.user);
-
-  const WS_URL = process.env.NEXT_PUBLIC_WS_URL;
-  const WS_PORT = process.env.NEXT_PUBLIC_WS_PORT;
 
   function addMessage(msg: string) {
     setMessages((state) => [
@@ -43,30 +39,28 @@ const Notification = () => {
   }
 
   useEffect(() => {
-    if (!socket) {
-      setSocket(io(`${WS_URL}:${WS_PORT}`));
-    } else {
-      socket.on("connect_error", () => {
-        setNotifyColor(ButtonColor.Error);
-      });
+    socket.connect();
 
-      socket.on("error", () => {
-        setNotifyColor(ButtonColor.Error);
-      });
+    socket.on("randomMessage", (msg: string) => {
+      addMessage(msg);
+    });
 
-      socket.on("randomMessage", (msg: string) => {
-        addMessage(msg);
-      });
+    socket.on("customMessage", (msg: string) => {
+      addMessage(msg);
+    });
 
-      socket.on("customMessage", (msg: string) => {
-        addMessage(msg);
-      });
-    }
+    socket.on("connect_error", () => {
+      setNotifyColor(ButtonColor.Error);
+    });
+
+    socket.on("error", () => {
+      setNotifyColor(ButtonColor.Error);
+    });
 
     return () => {
-      if (socket) socket.disconnect();
+      socket.disconnect();
     };
-  }, [WS_PORT, WS_URL, socket]);
+  }, []);
 
   function handleBadgeClick() {
     setIsModal(true);
@@ -81,9 +75,9 @@ const Notification = () => {
     setIsModal(false);
   }
 
-  function handleSendMessage(e: React.FormEvent<HTMLFormElement>) {
+  function handleSendMessage(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (socket && myMessage.length > 0 && userData) {
+    if (myMessage.length > 0 && userData) {
       socket.emit("customMessage", ` ${userData.user_email} : ${myMessage}`);
       setMyMessage("");
       setMessageCounter(0);
