@@ -1,0 +1,50 @@
+.badge {
+  cursor: pointer;
+}
+
+.modalWrapper,
+.formWrapper,
+.clearBtnWrapper {
+  display: flex;
+}
+
+.modalWrapper {
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 80vh;
+
+  margin-bottom: 12px;
+
+  width: 550px;
+}
+
+.formWrapper {
+  flex-direction: row;
+  padding: 8px;
+  gap: 8px;
+}
+
+.modalContent {
+  overflow-y: scroll;
+
+  scrollbar-color: purple transparent;
+  scrollbar-width: thin;
+
+  padding: 8px;
+}
+
+.modalTitle {
+  padding: 12px 0;
+  text-align: center;
+  color: purple;
+}
+
+.clearBtnWrapper {
+  justify-content: center;
+}
+
+@media screen and (max-width: 750px) {
+  .modalWrapper {
+    width: 360px;
+  }
+}

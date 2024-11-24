@@ -41,9 +41,9 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
     companyMembers: (UserItem & ActionProps)[],
     companyAnalytics: SummaryRatingAnalyticProps | null
   ) {
-    await dispatch(fetchSummaryRatingAnalytic(companyId));
-
-    if (companyAnalytics) {
+    if (!companyAnalytics) {
+      await dispatch(fetchSummaryRatingAnalytic(companyId));
+    } else {
       const dataForChart: LineChartData = {
         datasets: companyAnalytics.rating.map((memberRating) => {
           return {
@@ -76,7 +76,7 @@ const AnalyticsChart = ({ companyId }: { companyId: number }) => {
 
   useEffect(() => {
     fetchAnalyticsData(companyId, companyMembers, companyAnalytics);
-  }, [companyId, companyMembers]);
+  }, [companyId, companyMembers, companyAnalytics]);
 
   if (error || fetchError)
     return <PageError errorTitle={error || fetchError} />;

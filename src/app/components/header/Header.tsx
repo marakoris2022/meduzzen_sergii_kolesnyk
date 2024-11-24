@@ -9,6 +9,7 @@ import { PATHS } from "@/interface/interface";
 import styles from "./header.module.css";
 import ExitButton from "../exit-button/ExitButton";
 import { useUserData } from "@/app/hooks/useUserData";
+import Notification from "../notification-ws/Notification";
 
 const Header = () => {
   const { userData } = useUserData();
@@ -28,6 +29,7 @@ const Header = () => {
         </Link>
         <LocaleSwitcher />
         <div className={styles.navigationWrapper}>
+          {userData && <Notification />}
           <Navigation />
           {userData && <ExitButton />}
         </div>

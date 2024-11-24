@@ -1,0 +1,23 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 800px;
+
+  gap: 24px;
+
+  padding-bottom: 24px;
+}
+
+.aboutTitle {
+  color: purple;
+}
+
+.aboutSubtitle {
+  color: azure;
+}
+
+.pageWrapper p {
+  text-indent: 16px;
+}

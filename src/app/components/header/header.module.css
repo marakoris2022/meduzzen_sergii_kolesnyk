@@ -1,11 +1,13 @@
 .headerWrapper,
 .navigationWrapper {
   display: flex;
+  align-items: center;
+
+  gap: 16px;
 }
 
 .headerWrapper {
   justify-content: space-between;
-  align-items: center;
 
   border: 1px solid;
   border-radius: 20px;
